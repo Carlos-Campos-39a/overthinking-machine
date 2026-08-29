@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  var API_PADRAO = "http://localhost:8000";   // ← troque no deploy
+  var API_PADRAO = "https://overthinking-machine-production.up.railway.app";
 
   // ── 1. Endereço da API ────────────────────────────────────────────────────
   var param = new URLSearchParams(window.location.search).get("api");
