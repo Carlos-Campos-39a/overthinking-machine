@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/overthinking-machine.html" }
+    { "source": "/", "destination": "/overthinking-machine" }
   ],
   "headers": [
     {
