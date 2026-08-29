@@ -1,0 +1,101 @@
+statement,label,lang,dataset
+A cidade de São Paulo não fica no Rio de Janeiro.,1,pt,neg_cidades_br
+A cidade de São Paulo não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Rio de Janeiro não fica em Goiás.,1,pt,neg_cidades_br
+A cidade de Rio de Janeiro não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Brasília não fica em Minas Gerais.,1,pt,neg_cidades_br
+A cidade de Brasília não fica no Distrito Federal.,0,pt,neg_cidades_br
+A cidade de Salvador não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Salvador não fica na Bahia.,0,pt,neg_cidades_br
+A cidade de Fortaleza não fica no Rio Grande do Sul.,1,pt,neg_cidades_br
+A cidade de Fortaleza não fica no Ceará.,0,pt,neg_cidades_br
+A cidade de Belo Horizonte não fica no Mato Grosso do Sul.,1,pt,neg_cidades_br
+A cidade de Belo Horizonte não fica em Minas Gerais.,0,pt,neg_cidades_br
+A cidade de Manaus não fica no Amapá.,1,pt,neg_cidades_br
+A cidade de Manaus não fica no Amazonas.,0,pt,neg_cidades_br
+A cidade de Curitiba não fica no Espírito Santo.,1,pt,neg_cidades_br
+A cidade de Curitiba não fica no Paraná.,0,pt,neg_cidades_br
+A cidade de Recife não fica em Minas Gerais.,1,pt,neg_cidades_br
+A cidade de Recife não fica em Pernambuco.,0,pt,neg_cidades_br
+A cidade de Porto Alegre não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Porto Alegre não fica no Rio Grande do Sul.,0,pt,neg_cidades_br
+A cidade de Belém não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Belém não fica no Pará.,0,pt,neg_cidades_br
+A cidade de Goiânia não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Goiânia não fica em Goiás.,0,pt,neg_cidades_br
+A cidade de Guarulhos não fica na Paraíba.,1,pt,neg_cidades_br
+A cidade de Guarulhos não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Campinas não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Campinas não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de São Luís não fica em Pernambuco.,1,pt,neg_cidades_br
+A cidade de São Luís não fica no Maranhão.,0,pt,neg_cidades_br
+A cidade de São Gonçalo não fica no Piauí.,1,pt,neg_cidades_br
+A cidade de São Gonçalo não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Maceió não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Maceió não fica em Alagoas.,0,pt,neg_cidades_br
+A cidade de Duque de Caxias não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Duque de Caxias não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Natal não fica em Minas Gerais.,1,pt,neg_cidades_br
+A cidade de Natal não fica no Rio Grande do Norte.,0,pt,neg_cidades_br
+A cidade de Teresina não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Teresina não fica no Piauí.,0,pt,neg_cidades_br
+A cidade de Campo Grande não fica no Rio Grande do Sul.,1,pt,neg_cidades_br
+A cidade de Campo Grande não fica no Mato Grosso do Sul.,0,pt,neg_cidades_br
+A cidade de Nova Iguaçu não fica no Mato Grosso do Sul.,1,pt,neg_cidades_br
+A cidade de Nova Iguaçu não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Santo André não fica no Rio de Janeiro.,1,pt,neg_cidades_br
+A cidade de Santo André não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de João Pessoa não fica em Rondônia.,1,pt,neg_cidades_br
+A cidade de João Pessoa não fica na Paraíba.,0,pt,neg_cidades_br
+A cidade de Osasco não fica em Alagoas.,1,pt,neg_cidades_br
+A cidade de Osasco não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de São Bernardo do Campo não fica em Minas Gerais.,1,pt,neg_cidades_br
+A cidade de São Bernardo do Campo não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Jaboatão dos Guararapes não fica no Maranhão.,1,pt,neg_cidades_br
+A cidade de Jaboatão dos Guararapes não fica em Pernambuco.,0,pt,neg_cidades_br
+A cidade de Ribeirão Preto não fica no Piauí.,1,pt,neg_cidades_br
+A cidade de Ribeirão Preto não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Uberlândia não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Uberlândia não fica em Minas Gerais.,0,pt,neg_cidades_br
+A cidade de Contagem não fica em Santa Catarina.,1,pt,neg_cidades_br
+A cidade de Contagem não fica em Minas Gerais.,0,pt,neg_cidades_br
+A cidade de Sorocaba não fica no Piauí.,1,pt,neg_cidades_br
+A cidade de Sorocaba não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Aracaju não fica na Bahia.,1,pt,neg_cidades_br
+A cidade de Aracaju não fica em Sergipe.,0,pt,neg_cidades_br
+A cidade de Feira de Santana não fica no Amazonas.,1,pt,neg_cidades_br
+A cidade de Feira de Santana não fica na Bahia.,0,pt,neg_cidades_br
+A cidade de Cuiabá não fica em Santa Catarina.,1,pt,neg_cidades_br
+A cidade de Cuiabá não fica no Mato Grosso.,0,pt,neg_cidades_br
+A cidade de Joinville não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Joinville não fica em Santa Catarina.,0,pt,neg_cidades_br
+A cidade de Juiz de Fora não fica no Rio Grande do Norte.,1,pt,neg_cidades_br
+A cidade de Juiz de Fora não fica em Minas Gerais.,0,pt,neg_cidades_br
+A cidade de Londrina não fica no Distrito Federal.,1,pt,neg_cidades_br
+A cidade de Londrina não fica no Paraná.,0,pt,neg_cidades_br
+A cidade de Ananindeua não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Ananindeua não fica no Pará.,0,pt,neg_cidades_br
+A cidade de Niterói não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Niterói não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Porto Velho não fica em Pernambuco.,1,pt,neg_cidades_br
+A cidade de Porto Velho não fica em Rondônia.,0,pt,neg_cidades_br
+A cidade de Macapá não fica em Santa Catarina.,1,pt,neg_cidades_br
+A cidade de Macapá não fica no Amapá.,0,pt,neg_cidades_br
+A cidade de Florianópolis não fica em Alagoas.,1,pt,neg_cidades_br
+A cidade de Florianópolis não fica em Santa Catarina.,0,pt,neg_cidades_br
+A cidade de Belford Roxo não fica em Goiás.,1,pt,neg_cidades_br
+A cidade de Belford Roxo não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Serra não fica em São Paulo.,1,pt,neg_cidades_br
+A cidade de Serra não fica no Espírito Santo.,0,pt,neg_cidades_br
+A cidade de Mogi das Cruzes não fica no Paraná.,1,pt,neg_cidades_br
+A cidade de Mogi das Cruzes não fica em São Paulo.,0,pt,neg_cidades_br
+A cidade de Vitória não fica em Minas Gerais.,1,pt,neg_cidades_br
+A cidade de Vitória não fica no Espírito Santo.,0,pt,neg_cidades_br
+A cidade de Caxias do Sul não fica no Rio de Janeiro.,1,pt,neg_cidades_br
+A cidade de Caxias do Sul não fica no Rio Grande do Sul.,0,pt,neg_cidades_br
+A cidade de São João de Meriti não fica em Sergipe.,1,pt,neg_cidades_br
+A cidade de São João de Meriti não fica no Rio de Janeiro.,0,pt,neg_cidades_br
+A cidade de Betim não fica em Rondônia.,1,pt,neg_cidades_br
+A cidade de Betim não fica em Minas Gerais.,0,pt,neg_cidades_br
+A cidade de Carapicuíba não fica no Rio de Janeiro.,1,pt,neg_cidades_br
+A cidade de Carapicuíba não fica em São Paulo.,0,pt,neg_cidades_br

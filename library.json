@@ -1,0 +1,102 @@
+[
+  {
+    "id": "run_20260421_143022_a1b2c3",
+    "name": "Hybrid + MCE · análise financeira",
+    "arch": "hybrid",
+    "harness": "mce",
+    "task": "finance_agent",
+    "accuracy": 0.871,
+    "tokens": 18200,
+    "score": 84,
+    "scores": [
+      0.91,
+      0.84,
+      0.88,
+      0.79,
+      0.92
+    ],
+    "timestamp": 1776867276514,
+    "real": false,
+    "isLast": false
+  },
+  {
+    "id": "run_20260421_120511_d4e5f6",
+    "name": "Centralized + ACE · classificação",
+    "arch": "centralized",
+    "harness": "ace",
+    "task": "text_classification",
+    "accuracy": 0.848,
+    "tokens": 9800,
+    "score": 82,
+    "scores": [
+      0.9,
+      0.82,
+      0.86,
+      0.78,
+      0.88
+    ],
+    "timestamp": 1776864036514,
+    "real": false,
+    "isLast": false
+  },
+  {
+    "id": "run_20260420_183344_g7h8i9",
+    "name": "Decentralized + MCE · financeiro",
+    "arch": "decentralized",
+    "harness": "mce",
+    "task": "finance_agent",
+    "accuracy": 0.823,
+    "tokens": 14600,
+    "score": 79,
+    "scores": [
+      0.85,
+      0.78,
+      0.84,
+      0.8,
+      0.82
+    ],
+    "timestamp": 1776857556514,
+    "real": false,
+    "isLast": false
+  },
+  {
+    "id": "run_20260420_103015_j0k1l2",
+    "name": "Independent + few_shot · baseline",
+    "arch": "independent",
+    "harness": "few_shot",
+    "task": "text_classification",
+    "accuracy": 0.762,
+    "tokens": 5400,
+    "score": 74,
+    "scores": [
+      0.8,
+      0.74,
+      0.76,
+      0.72,
+      0.78
+    ],
+    "timestamp": 1776850356514,
+    "real": false,
+    "isLast": false
+  },
+  {
+    "id": "run_20260419_221800_m3n4o5",
+    "name": "SAS + zero_shot · controle",
+    "arch": "sas",
+    "harness": "zero_shot",
+    "task": "text_classification",
+    "accuracy": 0.651,
+    "tokens": 1450,
+    "score": 63,
+    "scores": [
+      0.7,
+      0.62,
+      0.68,
+      0.6,
+      0.66
+    ],
+    "timestamp": 1776839556514,
+    "real": false,
+    "isLast": true
+  }
+]

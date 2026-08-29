@@ -1,0 +1,40 @@
+# ── Segredos — NUNCA commitar ────────────────────────────────────────
+.env
+.env.*
+!.env.example
+.api_keys.json
+
+# ── Ambiente Python ──────────────────────────────────────────────────
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Estado de execução (gerado em runtime) ───────────────────────────
+runs/
+knowledge_base/
+pokedex/
+
+# ── Node / build ─────────────────────────────────────────────────────
+node_modules/
+.vercel/
+
+# Clone aninhado vazio (só .git, sem arquivos) — quebra o `git add` da raiz
+geometry-of-truth/geometry-of-truth/
+
+# ── Editor / SO ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.claude/
+
+# ── Fora do escopo desta plataforma ──────────────────────────────────
+# Projeto de crédito consignado, sem relação com a Overthinking Machine.
+# CONTÉM DADOS PESSOAIS REAIS (nomes, salários, score de crédito, CNPJ de
+# ~117 mil pessoas). Nunca deve ir para um repositório público.
+consignado/
+
+# Rascunhos do TCC e do projeto de pesquisa — material pessoal
+*.docx
+*.pdf

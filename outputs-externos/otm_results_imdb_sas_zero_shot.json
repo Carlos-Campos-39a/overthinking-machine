@@ -1,0 +1,5192 @@
+{
+  "n_instances": 40,
+  "n_correct": 25,
+  "n_incorrect": 15,
+  "agent_accuracy": 0.625,
+  "n_layers": 16,
+  "d_model": 2048,
+  "pca_layers": [
+    [
+      {
+        "x": 0.056102,
+        "y": -0.087917,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.02012,
+        "y": -0.03899,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -0.058128,
+        "y": 0.010833,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.020676,
+        "y": 0.025728,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.005718,
+        "y": -0.088189,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.058577,
+        "y": -0.122114,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.010149,
+        "y": -0.034069,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.017825,
+        "y": 0.050416,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.015429,
+        "y": -0.054052,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.206731,
+        "y": 0.077503,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": -0.004072,
+        "y": 0.024941,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.056604,
+        "y": 0.051352,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -0.003052,
+        "y": -0.004426,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 0.016467,
+        "y": 0.037488,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.012694,
+        "y": -0.043692,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.051885,
+        "y": 0.032941,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 0.0125,
+        "y": 0.022221,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.025041,
+        "y": 0.021242,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -0.033552,
+        "y": 0.043498,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -0.086296,
+        "y": 0.053957,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.000568,
+        "y": 0.003084,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.209801,
+        "y": 0.090072,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.022597,
+        "y": 0.006288,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 0.048071,
+        "y": -0.119418,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -0.043763,
+        "y": 0.054226,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.00512,
+        "y": -0.053439,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.018482,
+        "y": 0.002991,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.042329,
+        "y": -0.022814,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.028509,
+        "y": 0.053813,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -0.030904,
+        "y": 0.029218,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.047297,
+        "y": 0.036765,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.012606,
+        "y": -0.01439,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -0.0222,
+        "y": 0.060446,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.02886,
+        "y": -0.027235,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -0.049663,
+        "y": 0.061638,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.008258,
+        "y": -0.066596,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.048402,
+        "y": -0.003621,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.007356,
+        "y": 0.005206,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.006541,
+        "y": -0.019443,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -0.01219,
+        "y": -0.055465,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -0.162656,
+        "y": -0.115268,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -0.079336,
+        "y": -0.031466,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -0.002886,
+        "y": -0.013476,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.024187,
+        "y": 0.000374,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -0.047977,
+        "y": -0.066434,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.187309,
+        "y": -0.089351,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.123829,
+        "y": 0.153963,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.100324,
+        "y": -0.046094,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.091723,
+        "y": -0.018882,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.033084,
+        "y": 0.178001,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.030785,
+        "y": 0.145527,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.044934,
+        "y": 0.04324,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 0.026226,
+        "y": -0.159452,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 0.234383,
+        "y": -0.010159,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.12447,
+        "y": -0.009444,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.048649,
+        "y": 0.23816,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 0.135957,
+        "y": 0.013975,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.252227,
+        "y": -0.084057,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 0.013262,
+        "y": 0.033632,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -0.067515,
+        "y": 0.103465,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.029898,
+        "y": -0.030809,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.035231,
+        "y": 0.162878,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": 0.017765,
+        "y": 0.013597,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -0.131658,
+        "y": -0.122385,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 0.108132,
+        "y": 0.006221,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.078914,
+        "y": -0.019325,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.028937,
+        "y": -0.067203,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.006068,
+        "y": -0.025244,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.215416,
+        "y": -0.107908,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 0.072984,
+        "y": 0.006399,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.038324,
+        "y": 0.07607,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.075906,
+        "y": -0.010927,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 0.197523,
+        "y": -0.005414,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.067805,
+        "y": 0.018469,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 0.075219,
+        "y": 0.053942,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.124856,
+        "y": -0.083257,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.086705,
+        "y": -0.026574,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.026088,
+        "y": -0.034307,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.027302,
+        "y": 0.053021,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 0.041174,
+        "y": -0.123498,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 0.35333,
+        "y": -0.197394,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.253199,
+        "y": -0.116216,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 0.068925,
+        "y": -0.139657,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -0.044838,
+        "y": 0.127441,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.221425,
+        "y": 0.010156,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.151962,
+        "y": -0.217685,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.516241,
+        "y": -0.026357,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.273069,
+        "y": 0.111062,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.202348,
+        "y": -0.195642,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.478368,
+        "y": -0.068607,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": -0.5633,
+        "y": 0.083558,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.131674,
+        "y": -0.041397,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 0.455337,
+        "y": -0.067117,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 0.20995,
+        "y": 0.497365,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": 0.161878,
+        "y": -0.217676,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.608692,
+        "y": -0.047557,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -0.132737,
+        "y": 0.056956,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.219697,
+        "y": 0.433118,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -0.122728,
+        "y": 0.137492,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -0.393932,
+        "y": -0.13656,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.052227,
+        "y": -0.08377,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": -0.275932,
+        "y": 0.00219,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.04519,
+        "y": -0.047153,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 0.147483,
+        "y": -0.1319,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 0.115432,
+        "y": -0.015555,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 0.128053,
+        "y": -0.048284,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": 0.021142,
+        "y": -0.053857,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": 0.099139,
+        "y": -0.077257,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.094038,
+        "y": 0.414893,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 0.037733,
+        "y": 0.027685,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.266184,
+        "y": -0.032549,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.18163,
+        "y": -0.128645,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -0.081542,
+        "y": 0.269704,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.005961,
+        "y": -0.003466,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -0.086057,
+        "y": 0.119802,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.19266,
+        "y": -0.10211,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": 0.139865,
+        "y": -0.169756,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": 0.096741,
+        "y": -0.124261,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.148525,
+        "y": 0.005392,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 0.124551,
+        "y": 0.193615,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 0.560959,
+        "y": 0.095249,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.378619,
+        "y": 0.083238,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 0.069774,
+        "y": 0.180158,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -0.018321,
+        "y": -0.100592,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.304339,
+        "y": -0.146192,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.254674,
+        "y": 0.23046,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.690728,
+        "y": 0.057873,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.410344,
+        "y": -0.096467,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.25689,
+        "y": 0.285442,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.593009,
+        "y": 0.107651,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": -0.873161,
+        "y": -0.188613,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.096517,
+        "y": 0.145688,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 0.624144,
+        "y": 0.041456,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 0.164406,
+        "y": -0.636662,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": 0.207207,
+        "y": 0.213859,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.783058,
+        "y": 0.162889,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -0.304589,
+        "y": -0.042258,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.164564,
+        "y": -0.689451,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -0.092237,
+        "y": -0.154074,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -0.432826,
+        "y": 0.275518,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.072455,
+        "y": 0.153185,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": -0.29512,
+        "y": -0.002998,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.105518,
+        "y": 0.128902,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 0.21357,
+        "y": 0.170466,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 0.169012,
+        "y": 0.228504,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 0.097825,
+        "y": 0.155052,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": 0.04538,
+        "y": 0.046388,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": 0.140949,
+        "y": 0.052449,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.066597,
+        "y": -0.714961,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 0.054072,
+        "y": 0.158682,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.307255,
+        "y": 0.0917,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.145082,
+        "y": 0.208726,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -0.197183,
+        "y": -0.393682,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.041336,
+        "y": 0.007512,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -0.13771,
+        "y": -0.05732,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.358932,
+        "y": 0.041304,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": 0.273846,
+        "y": 0.098347,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": 0.197549,
+        "y": 0.237595,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.223201,
+        "y": 0.014093,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 0.057711,
+        "y": -0.449118,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -0.57031,
+        "y": 0.071534,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -0.445228,
+        "y": -0.082958,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -0.000198,
+        "y": -0.466083,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.017903,
+        "y": 0.206462,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -0.319249,
+        "y": 0.251645,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.380739,
+        "y": 0.0441,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.705252,
+        "y": 0.331893,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.436685,
+        "y": -0.212123,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.254994,
+        "y": -0.165381,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.658705,
+        "y": 0.088473,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 1.040011,
+        "y": 0.168229,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.050787,
+        "y": -0.463698,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -0.659424,
+        "y": -0.000965,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": -0.134538,
+        "y": 0.455234,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.265272,
+        "y": -0.225887,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.859297,
+        "y": 0.088093,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 0.579924,
+        "y": -0.385436,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": -0.039789,
+        "y": 0.066829,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 0.08713,
+        "y": 0.235429,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": 0.490678,
+        "y": -0.314175,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.093778,
+        "y": -0.259006,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.293255,
+        "y": 0.181175,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": 0.007359,
+        "y": -0.188044,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -0.350156,
+        "y": 0.309842,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -0.118297,
+        "y": -0.389646,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.306734,
+        "y": 0.447289,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.093884,
+        "y": 0.018857,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.204307,
+        "y": -0.047145,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": -0.012729,
+        "y": 0.37949,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -0.095511,
+        "y": -0.491532,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": 0.364322,
+        "y": -0.123074,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": 0.02584,
+        "y": 0.123035,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 0.536559,
+        "y": -0.434141,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.002237,
+        "y": 0.523283,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 0.211136,
+        "y": 0.092213,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.521368,
+        "y": 0.123408,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.36315,
+        "y": -0.183656,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.287401,
+        "y": -0.376804,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 0.220846,
+        "y": 0.09852,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -0.09145,
+        "y": 0.504718,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -0.6204,
+        "y": -0.087824,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -0.351752,
+        "y": 0.275127,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 0.128837,
+        "y": 0.834229,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -0.002141,
+        "y": -0.195897,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -0.348878,
+        "y": -0.324205,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.45797,
+        "y": -0.014045,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.669378,
+        "y": -0.547734,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.445461,
+        "y": 0.212487,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.253959,
+        "y": 0.33499,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.834318,
+        "y": -0.31279,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.99198,
+        "y": -0.415964,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.120259,
+        "y": 0.463315,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -0.697617,
+        "y": -0.068957,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": -0.306924,
+        "y": -0.798804,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.176852,
+        "y": 0.455399,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.931277,
+        "y": -0.202979,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 0.917883,
+        "y": 0.350148,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.02491,
+        "y": -0.352776,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 0.032272,
+        "y": -0.265803,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": 0.51781,
+        "y": 0.344833,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.001078,
+        "y": 0.232607,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.418898,
+        "y": -0.326041,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.081823,
+        "y": 0.271409,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -0.527353,
+        "y": -0.26389,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -0.026035,
+        "y": 0.560209,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.551315,
+        "y": -0.291742,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.234288,
+        "y": 0.05567,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.232855,
+        "y": 0.084813,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": -0.191491,
+        "y": -0.618972,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 0.076288,
+        "y": 0.593103,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": 0.298603,
+        "y": 0.361296,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.120131,
+        "y": -0.036479,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 0.698086,
+        "y": 0.540142,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.124786,
+        "y": -0.731195,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 0.30112,
+        "y": -0.288415,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.632635,
+        "y": 0.117113,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.382848,
+        "y": 0.408336,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.205941,
+        "y": 0.51988,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 0.19571,
+        "y": -0.269288,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -0.185253,
+        "y": -0.601306,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 0.558913,
+        "y": -0.449191,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -0.117344,
+        "y": -0.373636,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -1.164602,
+        "y": -0.298182,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.065181,
+        "y": -0.003977,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.64738,
+        "y": -0.160812,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.335417,
+        "y": -0.372731,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.223433,
+        "y": 0.991887,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.068049,
+        "y": -0.582539,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.198342,
+        "y": -0.301054,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.009781,
+        "y": 1.040503,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.186235,
+        "y": 1.096822,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.446478,
+        "y": -0.039124,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 0.493213,
+        "y": -0.436679,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 1.00279,
+        "y": -0.025277,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.370386,
+        "y": -0.214633,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.168092,
+        "y": 1.017014,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -0.690648,
+        "y": 0.824543,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.423044,
+        "y": 0.162363,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 0.275512,
+        "y": 0.045259,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -0.773512,
+        "y": 0.066413,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.243042,
+        "y": 0.145173,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.089232,
+        "y": 0.673472,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.280161,
+        "y": -0.336672,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 0.442407,
+        "y": -0.304011,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -0.592545,
+        "y": -0.171657,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 0.489581,
+        "y": -0.525259,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.004261,
+        "y": -0.418908,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.02607,
+        "y": -0.175198,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.604522,
+        "y": -0.169818,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -0.719476,
+        "y": -0.089415,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.678258,
+        "y": -0.161206,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": 0.014562,
+        "y": -0.191505,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -0.837853,
+        "y": 0.32021,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 0.866488,
+        "y": 0.261061,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 0.353941,
+        "y": 0.48781,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.037173,
+        "y": -0.80317,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.334399,
+        "y": -0.532151,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.481683,
+        "y": -0.259386,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 0.332476,
+        "y": 0.231406,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 0.743917,
+        "y": 0.032257,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -0.969642,
+        "y": -0.217882,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.003899,
+        "y": -0.458536,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 1.300571,
+        "y": -0.645701,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.031029,
+        "y": -0.104186,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -0.620456,
+        "y": -0.009145,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.442585,
+        "y": -0.14967,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.022469,
+        "y": 1.066259,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.135051,
+        "y": -0.604018,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.104345,
+        "y": -0.325783,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.262816,
+        "y": 1.01513,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.069826,
+        "y": 1.166861,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.485739,
+        "y": -0.291793,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -0.669853,
+        "y": -0.255125,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": -0.868303,
+        "y": 0.15722,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": 0.163441,
+        "y": -0.312936,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.30371,
+        "y": 1.070349,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 1.02723,
+        "y": 0.790539,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": -0.327305,
+        "y": 0.205137,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -0.352976,
+        "y": -0.027869,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": 0.849862,
+        "y": -0.178837,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.410785,
+        "y": 0.07701,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.073248,
+        "y": 0.63834,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": 0.350337,
+        "y": -0.337364,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -0.672998,
+        "y": -0.17119,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 0.74871,
+        "y": -0.136384,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.833717,
+        "y": -0.467568,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.138856,
+        "y": -0.427452,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": 0.088208,
+        "y": -0.160465,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": -0.599178,
+        "y": -0.184594,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 0.727841,
+        "y": -0.266934,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": 0.613518,
+        "y": -0.38704,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.185758,
+        "y": -0.112562,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 1.028682,
+        "y": 0.106088,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -0.866728,
+        "y": 0.528423,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -0.299028,
+        "y": 0.628979,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.393455,
+        "y": -0.668782,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": 0.253453,
+        "y": -0.493775,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": 0.487483,
+        "y": -0.332571,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.240487,
+        "y": 0.159478,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -0.745888,
+        "y": 0.118351,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 1.028622,
+        "y": -0.233127,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.19159,
+        "y": -0.455707,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -1.756345,
+        "y": -0.597337,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -0.048062,
+        "y": -0.12195,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.745087,
+        "y": -0.215499,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.262064,
+        "y": -0.244351,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.145144,
+        "y": 1.230417,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.165122,
+        "y": -0.662384,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.026469,
+        "y": -0.317234,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.323906,
+        "y": 1.047098,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.06212,
+        "y": 1.215846,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.408174,
+        "y": -0.311548,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 0.763219,
+        "y": -0.429802,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 0.909384,
+        "y": -0.03788,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.163119,
+        "y": -0.296503,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.225096,
+        "y": 1.139001,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -1.233117,
+        "y": 0.821392,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.548686,
+        "y": 0.125783,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 0.444019,
+        "y": -0.154333,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -1.105909,
+        "y": -0.120372,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.617962,
+        "y": 0.171096,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": -0.024052,
+        "y": 0.651404,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -0.679162,
+        "y": -0.218438,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 1.006641,
+        "y": -0.133524,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -1.037538,
+        "y": -0.164173,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 0.939771,
+        "y": -0.564171,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": 0.175013,
+        "y": -0.399063,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.342306,
+        "y": -0.120401,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.641502,
+        "y": -0.195751,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -1.061639,
+        "y": -0.155409,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.680515,
+        "y": -0.47255,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": 0.322657,
+        "y": -0.074312,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -0.973926,
+        "y": 0.11302,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 0.998447,
+        "y": 0.660915,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 0.577846,
+        "y": 0.694794,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.434765,
+        "y": -0.613776,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.541073,
+        "y": -0.398456,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.585254,
+        "y": -0.299103,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 0.440946,
+        "y": 0.087193,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 1.030979,
+        "y": 0.049197,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -1.06816,
+        "y": -0.421908,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -0.230866,
+        "y": -0.562568,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 2.105859,
+        "y": -0.406959,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 0.208153,
+        "y": -0.170477,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -0.734338,
+        "y": -0.408511,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.094872,
+        "y": -0.214836,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.479287,
+        "y": 1.369007,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.068019,
+        "y": -0.824684,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.12859,
+        "y": -0.323756,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.029727,
+        "y": 1.215313,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": -0.486219,
+        "y": 1.336102,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.325216,
+        "y": -0.14525,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -0.684614,
+        "y": -0.648128,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": -0.958844,
+        "y": -0.319969,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": 0.215251,
+        "y": -0.272436,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.180314,
+        "y": 1.384306,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 1.283652,
+        "y": 1.065715,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": -0.784028,
+        "y": -0.105592,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -0.624788,
+        "y": -0.138937,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": 1.405637,
+        "y": 0.1293,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 0.581102,
+        "y": 0.263521,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": -0.49696,
+        "y": 0.663381,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": 0.905296,
+        "y": -0.133249,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -0.900942,
+        "y": -0.248415,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 1.181719,
+        "y": -0.093543,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -0.843273,
+        "y": -0.586308,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": 0.064349,
+        "y": -0.503031,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": 0.453441,
+        "y": -0.224289,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": -0.728279,
+        "y": -0.536313,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 1.208856,
+        "y": -0.050452,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": 0.845643,
+        "y": -0.342065,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.174476,
+        "y": -0.149151,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 1.12767,
+        "y": 0.482389,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -1.109109,
+        "y": 0.562552,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -0.989562,
+        "y": 0.67575,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.230016,
+        "y": -0.720767,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": 0.642151,
+        "y": -0.394141,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": 0.643882,
+        "y": -0.190128,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -0.635405,
+        "y": 0.073714,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -0.930406,
+        "y": -0.085189,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 1.339506,
+        "y": -0.477559,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.418985,
+        "y": -0.640581,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -2.40464,
+        "y": -0.286039,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -0.686356,
+        "y": -0.104657,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 0.929488,
+        "y": -0.441681,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.005305,
+        "y": -0.342608,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.454298,
+        "y": 1.491038,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.218892,
+        "y": -0.888738,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.171337,
+        "y": -0.348335,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.07902,
+        "y": 1.287454,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.637853,
+        "y": 1.469823,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.173851,
+        "y": -0.106005,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 1.077774,
+        "y": -0.764945,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 1.096963,
+        "y": -0.373891,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.145836,
+        "y": -0.415602,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.330199,
+        "y": 1.454277,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -1.452827,
+        "y": 1.051045,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 0.957997,
+        "y": -0.036006,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 1.033888,
+        "y": -0.077479,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -1.875359,
+        "y": 0.156829,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.585337,
+        "y": 0.178563,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 0.910657,
+        "y": 0.81646,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -1.381866,
+        "y": -0.019583,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 1.021923,
+        "y": -0.313008,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -1.364119,
+        "y": -0.128888,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 0.924469,
+        "y": -0.564168,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.304127,
+        "y": -0.395889,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.416185,
+        "y": -0.248907,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.767518,
+        "y": -0.623284,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -1.457491,
+        "y": -0.113751,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -0.93514,
+        "y": -0.390176,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.212375,
+        "y": -0.184059,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -1.266995,
+        "y": 0.575589,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 1.202369,
+        "y": 0.570855,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 1.428838,
+        "y": 0.648273,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.153066,
+        "y": -0.739226,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.752453,
+        "y": -0.418724,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.581389,
+        "y": -0.161963,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 0.857266,
+        "y": 0.070111,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 0.917235,
+        "y": -0.164566,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 1.581521,
+        "y": -0.351424,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.545008,
+        "y": -0.674358,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -2.806803,
+        "y": -0.244959,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -1.020293,
+        "y": -0.312916,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 1.098509,
+        "y": -0.415343,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.020393,
+        "y": -0.424584,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.51575,
+        "y": 1.501303,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.385973,
+        "y": -1.091237,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.219693,
+        "y": -0.35845,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.06305,
+        "y": 1.483963,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 0.933491,
+        "y": 1.555262,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.135773,
+        "y": -0.029358,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 1.2395,
+        "y": -0.795497,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 1.367266,
+        "y": -0.31621,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.105378,
+        "y": -0.513138,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.450093,
+        "y": 1.545053,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -1.794057,
+        "y": 1.541162,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 1.115365,
+        "y": 0.001514,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 1.20789,
+        "y": -0.108585,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -2.249766,
+        "y": -0.079481,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.591667,
+        "y": 0.166096,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 1.074368,
+        "y": 0.905419,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -1.819106,
+        "y": 0.006491,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 1.269464,
+        "y": -0.345354,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -1.588406,
+        "y": -0.116523,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 1.07715,
+        "y": -0.542707,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.465766,
+        "y": -0.230807,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.501634,
+        "y": -0.205951,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 0.867609,
+        "y": -0.797982,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -1.763453,
+        "y": -0.068828,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -1.034493,
+        "y": -0.506014,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.348427,
+        "y": -0.362883,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -1.5272,
+        "y": 0.760075,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 1.513868,
+        "y": 0.515244,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 1.755108,
+        "y": 0.522275,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.111235,
+        "y": -0.855315,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.769093,
+        "y": -0.473457,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.663301,
+        "y": -0.171759,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 1.064158,
+        "y": 0.042355,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 1.086371,
+        "y": -0.153092,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 1.908927,
+        "y": -0.303545,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 0.701423,
+        "y": -0.7609,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -3.24541,
+        "y": -0.184425,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -1.274594,
+        "y": -0.610064,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 1.369636,
+        "y": -0.471158,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.059265,
+        "y": -0.658593,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.529406,
+        "y": 1.739645,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.367852,
+        "y": -1.249264,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.265348,
+        "y": -0.390491,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.113452,
+        "y": 1.794694,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 1.238596,
+        "y": 1.915106,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.119285,
+        "y": 0.131671,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 1.445312,
+        "y": -0.950583,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 1.695741,
+        "y": -0.378255,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.07801,
+        "y": -0.645144,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.497901,
+        "y": 1.704981,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -2.431529,
+        "y": 2.050016,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 1.335586,
+        "y": 0.237414,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 1.41275,
+        "y": -0.148404,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -2.448512,
+        "y": -0.189015,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.638103,
+        "y": 0.031795,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 1.381537,
+        "y": 1.089211,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -2.199547,
+        "y": -0.067445,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 1.492241,
+        "y": -0.406637,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -1.897277,
+        "y": -0.160828,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 1.271337,
+        "y": -0.524776,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -0.918104,
+        "y": -0.365042,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.726383,
+        "y": -0.282079,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 1.192582,
+        "y": -0.751307,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -2.13477,
+        "y": 0.014711,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -1.12648,
+        "y": -0.765934,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.533165,
+        "y": -0.444501,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -1.892821,
+        "y": 0.863656,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 1.770618,
+        "y": 0.497666,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 2.16305,
+        "y": 0.570556,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.196135,
+        "y": -0.919186,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -0.949782,
+        "y": -0.688816,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.754285,
+        "y": -0.155634,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 1.31864,
+        "y": 0.006173,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 1.252551,
+        "y": -0.17527,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 2.465349,
+        "y": -0.332417,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 1.025438,
+        "y": -0.810287,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -3.937382,
+        "y": 0.328637,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -2.053148,
+        "y": -1.636364,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 1.707563,
+        "y": -0.529395,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -0.331014,
+        "y": -1.340223,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 0.732337,
+        "y": 1.729555,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -0.574813,
+        "y": -1.48828,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.249574,
+        "y": -0.303647,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.027558,
+        "y": 1.946908,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 1.732301,
+        "y": 2.17767,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.028004,
+        "y": 0.596233,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 1.75321,
+        "y": -1.103383,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 2.05932,
+        "y": -0.774217,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.060522,
+        "y": -0.69514,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.608734,
+        "y": 1.732422,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -2.609845,
+        "y": 2.763042,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 1.896832,
+        "y": 0.525957,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 1.783201,
+        "y": -0.456027,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -3.330509,
+        "y": -0.294968,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.905317,
+        "y": 0.181745,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 1.920745,
+        "y": 1.4006,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -2.80699,
+        "y": -0.415658,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 1.927675,
+        "y": -0.394397,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -2.364323,
+        "y": -0.004284,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 1.725558,
+        "y": -0.486581,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -1.516361,
+        "y": -0.544472,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -0.805331,
+        "y": -0.228297,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 1.481288,
+        "y": -0.789044,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -2.431208,
+        "y": 0.445863,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -1.757938,
+        "y": -0.890447,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -0.771431,
+        "y": -0.614226,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -2.645344,
+        "y": 1.1819,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 2.182523,
+        "y": 0.394719,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 2.844943,
+        "y": 0.793157,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": 0.331935,
+        "y": -1.063035,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -1.229079,
+        "y": -0.755956,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.85616,
+        "y": 0.207355,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 1.498049,
+        "y": -0.144163,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 1.558842,
+        "y": -0.310856,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": -3.054743,
+        "y": -0.669975,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": -1.484337,
+        "y": -0.882091,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": 5.139929,
+        "y": 0.757265,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": 2.942853,
+        "y": -2.583984,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": -2.0415,
+        "y": -0.836033,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": 0.591426,
+        "y": -1.364442,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": -0.957036,
+        "y": 2.021517,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": 0.809246,
+        "y": -1.800489,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": 0.247026,
+        "y": -0.14868,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": -0.096783,
+        "y": 2.314522,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": -2.441078,
+        "y": 2.729536,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": -0.237754,
+        "y": 1.210762,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": -2.276148,
+        "y": -1.518101,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": -2.561342,
+        "y": -1.428747,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": 0.115758,
+        "y": -0.643699,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": -0.637792,
+        "y": 2.15822,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": 3.008312,
+        "y": 3.308923,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": -2.434951,
+        "y": 0.473703,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": -2.156761,
+        "y": -0.661571,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": 4.509776,
+        "y": -0.412912,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": 1.011993,
+        "y": 0.817222,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": -2.696809,
+        "y": 1.829026,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": 3.601748,
+        "y": -0.702192,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": -2.424949,
+        "y": -0.564292,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": 2.935711,
+        "y": 0.543183,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": -2.321681,
+        "y": -0.768309,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": 1.992287,
+        "y": -0.852897,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": 0.890329,
+        "y": -0.243296,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": -2.043393,
+        "y": -0.911148,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": 3.100907,
+        "y": 0.910098,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": 2.709775,
+        "y": -1.219519,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": 1.13181,
+        "y": -0.841226,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": 3.331595,
+        "y": 1.149649,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": -2.798143,
+        "y": 0.448351,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": -3.910537,
+        "y": 1.359605,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.349853,
+        "y": -1.907525,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": 1.6055,
+        "y": -0.965407,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": 0.962779,
+        "y": 1.005425,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": -1.855359,
+        "y": -0.281315,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": -1.857809,
+        "y": -0.829157,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ],
+    [
+      {
+        "x": 4.297956,
+        "y": -1.282635,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Beauty in Trouble (Kráska v nesnázích) is not a great title. All the description"
+      },
+      {
+        "x": 1.909278,
+        "y": -0.596571,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Combining serious drama with adequate comedy is touchy at the best of times. LOO"
+      },
+      {
+        "x": -6.95805,
+        "y": 1.425516,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I own all family guy seasons so far and i have to say Vol. 6 has been the bigges"
+      },
+      {
+        "x": -4.226873,
+        "y": -2.7542,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "When you think of golf movies, you think of Caddyshack, but what if there are ki"
+      },
+      {
+        "x": 2.462845,
+        "y": -0.890913,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Bottom-of-the-barrel stinker is so bad it's beyond funny. The \"plot\" is about an"
+      },
+      {
+        "x": -1.395202,
+        "y": -1.457636,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Now i have seen two movies by the director Chen Kaige, a very good one (Farewell"
+      },
+      {
+        "x": 1.672124,
+        "y": 2.004082,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This is a truly heartwarming film not just about love, but about learning about "
+      },
+      {
+        "x": -1.423547,
+        "y": -2.356802,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "John Carpenter's The Thing is hands down the best horror film ever made. Not onl"
+      },
+      {
+        "x": -0.607992,
+        "y": -0.445703,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Living in Edinburgh, and have a great thirst for history, I was very put off by "
+      },
+      {
+        "x": 0.403687,
+        "y": 2.687848,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is so lovingly made you want to be part of it forever. The flics are s"
+      },
+      {
+        "x": 3.857249,
+        "y": 2.815128,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "This movie had very few moments of real drama. After the opening minutes the fil"
+      },
+      {
+        "x": 0.743088,
+        "y": 1.916749,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I switched this on (from cable) on a whim and was treated to quite a surprise..."
+      },
+      {
+        "x": 2.207883,
+        "y": -2.598469,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Weak tale of an evil warlock who is searching for a centuries old satanic Bible "
+      },
+      {
+        "x": 2.791375,
+        "y": -1.939856,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Discovering something, the journey is so much more fun, so much more surreal and"
+      },
+      {
+        "x": -0.181167,
+        "y": -0.717343,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Not a terrible movie... But there are monster scenes where you will be rolling o"
+      },
+      {
+        "x": 0.606479,
+        "y": 3.010832,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This movie has all the qualities to be good, Stan -singing (?), dancing, falling"
+      },
+      {
+        "x": -3.629062,
+        "y": 4.361112,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I agree with all aforementioned comments. This show was a delight to watch. Funn"
+      },
+      {
+        "x": 3.988895,
+        "y": -0.100254,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "\"The Dresser\" is a small but absolutely wonderful film, brilliantly acted by Alb"
+      },
+      {
+        "x": 2.27188,
+        "y": -1.757823,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Okul\"The School\" is a result of a new trend in Turkish cinema. Having used the s"
+      },
+      {
+        "x": -5.597008,
+        "y": 0.140924,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Well,this movie is really \"PLUMPED\" HAHA Get it? Thats kinda like the attitude o"
+      },
+      {
+        "x": -0.956095,
+        "y": 0.903998,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I thought that this movie might be a good spoof, or at least a good independent "
+      },
+      {
+        "x": 4.57564,
+        "y": 2.715412,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "It is a surprising movie that gets you in your chair waiting for the last minute"
+      },
+      {
+        "x": -5.318715,
+        "y": -0.499537,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "First of all, let me say that I am in no way denying the importance of the subje"
+      },
+      {
+        "x": 2.83113,
+        "y": -0.386767,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Very literate, intelligent drama about a group of international travelers held v"
+      },
+      {
+        "x": -3.411359,
+        "y": 0.689706,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I watched this film when I was a kid, and I thought it was terrible then. Now th"
+      },
+      {
+        "x": 3.372534,
+        "y": -0.60461,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Jimmy (Heath Ledger) is given a simple job by Pando (Bryan Brown) a underworld k"
+      },
+      {
+        "x": -3.024439,
+        "y": -0.376953,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "OK, so I know better than to watch movies on SciFi . . . er, sorry . . . SyFy. O"
+      },
+      {
+        "x": -1.971954,
+        "y": -0.338059,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The depiction of Ichabod Crane's character was so terrifically unlikable, my wif"
+      },
+      {
+        "x": 3.329993,
+        "y": -2.068015,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "There have been many people that have tried to make a movie that was identical t"
+      },
+      {
+        "x": -3.674364,
+        "y": 1.235903,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "I thought this film was quite good and quite entertaining for a film heavy on em"
+      },
+      {
+        "x": -3.620324,
+        "y": -1.37944,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "Yes sure, this is a Friday the 13th rip off but I have no problem with it. It's "
+      },
+      {
+        "x": -1.677745,
+        "y": -1.117875,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "This film is a fun little private eye detective story like they aren't made any "
+      },
+      {
+        "x": -4.84212,
+        "y": 1.393565,
+        "correct": false,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Probably the best comedy in a long time. keeps you laughing nonstop! the acting "
+      },
+      {
+        "x": 3.858626,
+        "y": 0.480177,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The movie is about a day in the life of a woman who is going insane. To show tha"
+      },
+      {
+        "x": 5.896245,
+        "y": 2.601214,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I've seen this programme a few times and the more a see of it, the less I like i"
+      },
+      {
+        "x": -0.050761,
+        "y": -3.598481,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "Dirty Dancing follows the story of Frances 'Baby' Houseman (Jennifer Grey)and he"
+      },
+      {
+        "x": -2.430653,
+        "y": -1.226996,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "The premise of Bottom crossed with Fawlty Towers sounds great! However, Ade Edmo"
+      },
+      {
+        "x": -0.727923,
+        "y": 1.711,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "I starred as Eugene Morris Jerome in my high school adaptation of the play and t"
+      },
+      {
+        "x": 2.601965,
+        "y": -0.21792,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "In a way, you have to respect Arachnia. It's clearly meant as a tribute to the b"
+      },
+      {
+        "x": 2.046482,
+        "y": -1.380305,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "After cleaning up Dodge City (with a little help from Wyatt Earp) Bat Masterson "
+      }
+    ]
+  ],
+  "probe_accuracies": [
+    0.625,
+    0.8,
+    0.95,
+    0.95,
+    0.975,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "best_probe_layer": 5,
+  "best_probe_acc": 1.0,
+  "pc1_separation": 0.273,
+  "dataset": "imdb",
+  "arch": "sas_zero_shot",
+  "task": "sentimento",
+  "n_classes": 2,
+  "label_names": [
+    "Negative",
+    "Positive"
+  ],
+  "mode": "real"
+}

@@ -1,0 +1,20 @@
+# O Vercel serve apenas o frontend estático — o backend vai para o Railway
+*.py
+src/
+boilerplate/
+geometry-of-truth/
+consignado/
+outputs-externos/
+runs/
+knowledge_base/
+pokedex/
+.venv/
+__pycache__/
+requirements.txt
+Procfile
+*.docx
+*.pdf
+*.skill
+config.yaml
+library.json
+model_pricing.json

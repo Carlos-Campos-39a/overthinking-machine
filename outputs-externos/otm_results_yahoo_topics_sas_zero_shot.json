@@ -1,0 +1,5200 @@
+{
+  "n_instances": 40,
+  "n_correct": 7,
+  "n_incorrect": 33,
+  "agent_accuracy": 0.175,
+  "n_layers": 16,
+  "d_model": 2048,
+  "pca_layers": [
+    [
+      {
+        "x": 0.144552,
+        "y": 0.028794,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 0.058866,
+        "y": -0.035276,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": 0.03677,
+        "y": 0.035339,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": 0.12236,
+        "y": 0.024099,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": 0.010349,
+        "y": 0.048679,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": 0.106452,
+        "y": 0.025081,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -0.044056,
+        "y": -0.019088,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": -0.132526,
+        "y": -0.003521,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": 0.037217,
+        "y": 0.005368,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 0.013285,
+        "y": 0.020716,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -0.003924,
+        "y": -0.013548,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": 0.024131,
+        "y": -0.021505,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 0.027851,
+        "y": 0.020005,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -0.011255,
+        "y": 0.009851,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.038628,
+        "y": 0.022288,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": 0.080597,
+        "y": 0.018637,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 0.006678,
+        "y": -0.045327,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": -0.125971,
+        "y": 0.008527,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.077589,
+        "y": -0.020942,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.02786,
+        "y": -0.083989,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 0.068038,
+        "y": -0.04395,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": -0.082848,
+        "y": -0.04346,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": -0.083751,
+        "y": -0.032958,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -0.062216,
+        "y": 0.048654,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.040791,
+        "y": -0.107064,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.033026,
+        "y": 0.034209,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.033832,
+        "y": 0.020206,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": -0.024792,
+        "y": -0.007526,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -0.050483,
+        "y": 0.031151,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": 0.05904,
+        "y": -0.027435,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": -0.066467,
+        "y": 0.016079,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.07926,
+        "y": 0.012403,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -0.042474,
+        "y": 0.023941,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": -0.039873,
+        "y": 0.054975,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": -0.142294,
+        "y": 0.008227,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 0.064116,
+        "y": 0.007281,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.010403,
+        "y": -0.018635,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.024297,
+        "y": 0.047336,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": -0.056999,
+        "y": -0.016878,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.010633,
+        "y": -0.030745,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.18252,
+        "y": -0.10041,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.064466,
+        "y": -0.223602,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.103108,
+        "y": 0.12155,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.202914,
+        "y": -0.002409,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.049618,
+        "y": 0.184205,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.263769,
+        "y": 0.09556,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.073809,
+        "y": 0.011418,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.249469,
+        "y": 0.028222,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.133834,
+        "y": 0.056304,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.081807,
+        "y": 0.168802,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -0.03159,
+        "y": 0.112245,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.148173,
+        "y": 0.069901,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 0.007612,
+        "y": 0.041778,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.018665,
+        "y": 0.043671,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.011313,
+        "y": 0.169863,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.111283,
+        "y": -0.059644,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.082724,
+        "y": -0.02425,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.261845,
+        "y": -0.086969,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -0.051142,
+        "y": -0.307619,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": 0.048567,
+        "y": -0.173646,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.175094,
+        "y": -0.087657,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.21635,
+        "y": -0.069843,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.169251,
+        "y": 0.007087,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.102365,
+        "y": 0.155402,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.024971,
+        "y": -0.171117,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.057052,
+        "y": 0.133718,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 0.055482,
+        "y": 0.169336,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.057466,
+        "y": 0.022599,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.111355,
+        "y": 0.05136,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.225255,
+        "y": -0.061141,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.163838,
+        "y": 0.012791,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.137086,
+        "y": -0.121774,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.0786,
+        "y": 0.058401,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.096467,
+        "y": 0.038287,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.265412,
+        "y": 0.001389,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.18017,
+        "y": 0.109893,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.029904,
+        "y": -0.102165,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.006221,
+        "y": -0.090935,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.107303,
+        "y": 0.013357,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.083806,
+        "y": -0.193958,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": 0.065531,
+        "y": 0.481917,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 0.096178,
+        "y": 0.337733,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": 0.06884,
+        "y": 0.194975,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.452,
+        "y": 0.065198,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.309479,
+        "y": -0.158948,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.575546,
+        "y": 0.07604,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.322138,
+        "y": 0.052978,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.259463,
+        "y": -0.440515,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.501657,
+        "y": 0.05699,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.322573,
+        "y": -0.089138,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -0.309662,
+        "y": -0.157946,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.019523,
+        "y": 0.356374,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -0.224804,
+        "y": -0.130846,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.257836,
+        "y": 0.109603,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.265108,
+        "y": -0.19823,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.324021,
+        "y": 0.050369,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.07093,
+        "y": 0.099278,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.478445,
+        "y": -0.368325,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.117143,
+        "y": 0.434243,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.000485,
+        "y": -0.118138,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.373913,
+        "y": 0.050012,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.416105,
+        "y": -0.365649,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": -0.032883,
+        "y": -0.431054,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.360609,
+        "y": 0.075133,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.184512,
+        "y": -0.026825,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.191741,
+        "y": -0.309817,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.216845,
+        "y": -0.205661,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.119601,
+        "y": -0.215932,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.344372,
+        "y": 0.124452,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.444293,
+        "y": 0.10224,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.424418,
+        "y": -0.066303,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.044402,
+        "y": 0.453371,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.301813,
+        "y": 0.177676,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.247777,
+        "y": 0.020732,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.384582,
+        "y": -0.451229,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.464628,
+        "y": -0.068026,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.274013,
+        "y": 0.328085,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.26932,
+        "y": 0.215204,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.391382,
+        "y": 0.099458,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.040638,
+        "y": -0.159478,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.181459,
+        "y": -0.465681,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 0.005612,
+        "y": -0.571625,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.009022,
+        "y": -0.176855,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.568675,
+        "y": 0.061321,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.330224,
+        "y": 0.348831,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.746293,
+        "y": 0.10343,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.36309,
+        "y": -0.076698,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.516395,
+        "y": 0.391391,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.546561,
+        "y": 0.094044,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.327521,
+        "y": 0.200405,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -0.276974,
+        "y": 0.276809,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.190561,
+        "y": -0.393057,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -0.355481,
+        "y": 0.278141,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.251071,
+        "y": -0.036878,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.243589,
+        "y": 0.342109,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.462862,
+        "y": -0.041154,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.103761,
+        "y": -0.147612,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.743296,
+        "y": 0.143561,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.039806,
+        "y": -0.616804,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": 0.003962,
+        "y": -0.066748,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.456688,
+        "y": -0.026253,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.679877,
+        "y": 0.210094,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.1252,
+        "y": 0.440811,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.325997,
+        "y": 0.022498,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.139087,
+        "y": 0.017428,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.115332,
+        "y": 0.404585,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.138977,
+        "y": 0.350989,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.221773,
+        "y": 0.173377,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.286468,
+        "y": -0.100262,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.572922,
+        "y": -0.177336,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.564113,
+        "y": -0.002423,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.139847,
+        "y": -0.498396,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.263415,
+        "y": -0.159363,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.275542,
+        "y": -0.064995,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.693933,
+        "y": 0.352515,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.494269,
+        "y": 0.220169,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.150373,
+        "y": -0.417002,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.305164,
+        "y": -0.357703,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.456622,
+        "y": -0.105111,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.128396,
+        "y": 0.069447,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.359531,
+        "y": -0.336997,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.070569,
+        "y": -1.026315,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.083856,
+        "y": -0.076731,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -1.036218,
+        "y": 0.063963,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.216868,
+        "y": 0.586873,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.929043,
+        "y": 0.189632,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.367009,
+        "y": -0.026721,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.624535,
+        "y": 0.207017,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.437892,
+        "y": 0.119322,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.244773,
+        "y": 0.224787,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 0.003258,
+        "y": 0.588444,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.547198,
+        "y": -0.351846,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -0.342211,
+        "y": 0.521271,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.260323,
+        "y": 0.181201,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.012796,
+        "y": 0.513986,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.386312,
+        "y": -0.002815,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.32556,
+        "y": -0.122133,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.806885,
+        "y": -0.15228,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.014102,
+        "y": -0.758522,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.146281,
+        "y": -0.303299,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.441369,
+        "y": -0.028467,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.760991,
+        "y": -0.103011,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.194136,
+        "y": 0.458196,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.322347,
+        "y": 0.231011,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.075768,
+        "y": -0.04915,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.083651,
+        "y": 0.558414,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.01243,
+        "y": 0.473252,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.15655,
+        "y": 0.164297,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.244838,
+        "y": -0.061084,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.650205,
+        "y": -0.470262,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.679079,
+        "y": 0.044146,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.168133,
+        "y": -0.420271,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.275884,
+        "y": -0.044027,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.367127,
+        "y": -0.074937,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.904581,
+        "y": 0.002854,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.549009,
+        "y": 0.405408,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.034162,
+        "y": -0.441373,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.22708,
+        "y": -0.639885,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.657723,
+        "y": 0.020107,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.05176,
+        "y": -0.064054,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.365121,
+        "y": 0.234532,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.09978,
+        "y": 1.426622,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.260259,
+        "y": 0.158523,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -1.185187,
+        "y": -0.047657,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.36755,
+        "y": -0.780687,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.966393,
+        "y": -0.009587,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.428623,
+        "y": -0.010489,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.77917,
+        "y": -0.091357,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.449958,
+        "y": 0.073879,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.208508,
+        "y": -0.041256,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -0.010822,
+        "y": -0.728976,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.632513,
+        "y": 0.379508,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -0.422642,
+        "y": -0.701845,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.311641,
+        "y": -0.369267,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.023909,
+        "y": -0.601885,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.409272,
+        "y": -0.057766,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.364261,
+        "y": 0.129479,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.943092,
+        "y": 0.238678,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -0.037708,
+        "y": 0.813121,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.123307,
+        "y": 0.462379,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.367212,
+        "y": -0.019458,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.84972,
+        "y": 0.302242,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.148851,
+        "y": -0.527986,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.342063,
+        "y": -0.360891,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.031686,
+        "y": -0.005921,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.193728,
+        "y": -0.648147,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.084202,
+        "y": -0.639712,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.080831,
+        "y": -0.160109,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.187531,
+        "y": 0.00396,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.70105,
+        "y": 0.623729,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.726756,
+        "y": -0.195309,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.115615,
+        "y": 0.366707,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.283373,
+        "y": -0.10408,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.423569,
+        "y": 0.193393,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.983168,
+        "y": 0.071477,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.606831,
+        "y": -0.532897,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 0.07004,
+        "y": 0.426511,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.267219,
+        "y": 0.717289,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.631296,
+        "y": -0.168621,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.119742,
+        "y": 0.181876,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.597693,
+        "y": 0.143781,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.489373,
+        "y": 1.281528,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.544574,
+        "y": 0.060693,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -1.245967,
+        "y": -0.427315,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.286034,
+        "y": -1.012331,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.994216,
+        "y": -0.255287,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.43754,
+        "y": 0.127367,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.88201,
+        "y": 0.159728,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.351872,
+        "y": -0.084924,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -0.106994,
+        "y": -0.006191,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 0.308681,
+        "y": -0.609973,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.867472,
+        "y": 0.332845,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -0.177035,
+        "y": -0.744514,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.447551,
+        "y": -0.252209,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": 0.146105,
+        "y": -0.519765,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.544844,
+        "y": -0.243539,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.295184,
+        "y": 0.046592,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.942647,
+        "y": 0.50171,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -0.305982,
+        "y": 0.724338,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.166947,
+        "y": 0.552086,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.350884,
+        "y": -0.041261,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.792871,
+        "y": 0.464699,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.286806,
+        "y": -0.412225,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.572764,
+        "y": -0.275472,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.145373,
+        "y": -0.012028,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.467681,
+        "y": -0.520031,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 0.088591,
+        "y": -1.062395,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.134586,
+        "y": -0.060984,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 0.199673,
+        "y": 0.034445,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.914006,
+        "y": 0.606467,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.824441,
+        "y": 0.08026,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.227124,
+        "y": 0.243438,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 0.304264,
+        "y": -0.004346,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.205698,
+        "y": 0.297948,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 0.978949,
+        "y": 0.32253,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.298423,
+        "y": -0.718614,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -0.076117,
+        "y": 0.443219,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.01391,
+        "y": 0.863201,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.649237,
+        "y": -0.110505,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.039184,
+        "y": 0.087032,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.813149,
+        "y": -0.017158,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.73615,
+        "y": -1.289014,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.547432,
+        "y": -0.019061,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -1.069564,
+        "y": 0.755365,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.10024,
+        "y": 1.020815,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -0.842278,
+        "y": 0.541779,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 0.139333,
+        "y": -0.10238,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 1.082186,
+        "y": -0.344876,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.407255,
+        "y": 0.449052,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 0.086187,
+        "y": 0.07997,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 0.759321,
+        "y": 0.380728,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -1.080937,
+        "y": -0.247541,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 0.047563,
+        "y": 0.592601,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 0.183403,
+        "y": 0.348173,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": 0.134606,
+        "y": 0.50206,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.35296,
+        "y": 0.336847,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -0.111004,
+        "y": -0.08282,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 0.988277,
+        "y": -0.814391,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -0.369959,
+        "y": -1.125657,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.268026,
+        "y": -0.602601,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.24988,
+        "y": -0.124816,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.849003,
+        "y": -0.548585,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 0.446994,
+        "y": 0.309759,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 0.498357,
+        "y": 0.361673,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.393809,
+        "y": 0.068621,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.763234,
+        "y": 0.364055,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 0.079795,
+        "y": 1.307174,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.186278,
+        "y": 0.026876,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -0.184149,
+        "y": -0.003231,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -1.130052,
+        "y": -0.472899,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 0.922298,
+        "y": -0.324101,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.14395,
+        "y": -0.204717,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -0.048953,
+        "y": 0.0942,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.266284,
+        "y": -0.126336,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 1.212833,
+        "y": -0.552006,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -0.004661,
+        "y": 0.680557,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -0.510733,
+        "y": -0.356723,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.508267,
+        "y": -1.025812,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.359062,
+        "y": 0.025892,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 0.080775,
+        "y": 0.13853,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.918224,
+        "y": 0.744523,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 0.038071,
+        "y": 1.988871,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.786174,
+        "y": 0.213891,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -1.944486,
+        "y": -0.710088,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -1.051098,
+        "y": -1.090286,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -1.40825,
+        "y": -0.43983,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -0.460567,
+        "y": 0.38872,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.832132,
+        "y": -0.60391,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.921049,
+        "y": -0.725919,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 0.824868,
+        "y": 0.129871,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 1.291857,
+        "y": -0.550082,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.413815,
+        "y": 1.054908,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 0.728402,
+        "y": -0.354435,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -0.444161,
+        "y": -0.029624,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -0.812609,
+        "y": -0.486356,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": 0.162102,
+        "y": 0.090185,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 0.651511,
+        "y": 0.24918,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 1.279618,
+        "y": 0.060443,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.811669,
+        "y": 0.996519,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.108033,
+        "y": 0.886162,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 0.347699,
+        "y": 0.463882,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.950817,
+        "y": 0.058275,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 1.073586,
+        "y": -0.421338,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -0.498093,
+        "y": -0.886604,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 1.660205,
+        "y": -0.509278,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.475062,
+        "y": -1.020436,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.650686,
+        "y": -1.247748,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 0.778005,
+        "y": 0.073272,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -1.222483,
+        "y": 0.416451,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.787973,
+        "y": 1.49061,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 1.155987,
+        "y": -0.113658,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.290036,
+        "y": 0.208916,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -1.291287,
+        "y": -0.723028,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.079648,
+        "y": -0.041689,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 1.466366,
+        "y": -0.283175,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 0.448826,
+        "y": -0.710251,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -1.002855,
+        "y": 0.852852,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.195555,
+        "y": 1.209503,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.143635,
+        "y": 0.153963,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": -0.572703,
+        "y": -0.783263,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.624097,
+        "y": 1.177484,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.114275,
+        "y": 2.212218,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -1.335272,
+        "y": 0.412384,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.96539,
+        "y": -0.651092,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -0.970045,
+        "y": -1.609767,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -1.435471,
+        "y": -0.969908,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -0.92529,
+        "y": 0.516627,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.272176,
+        "y": -1.015706,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.770329,
+        "y": -1.370636,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 1.210993,
+        "y": 0.107015,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 2.29701,
+        "y": -0.349651,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.440872,
+        "y": 1.458105,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 1.831339,
+        "y": -0.0739,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -0.760488,
+        "y": -0.246869,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -1.313686,
+        "y": 0.448315,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": 0.476113,
+        "y": -0.134724,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 1.546705,
+        "y": 0.142009,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 1.09346,
+        "y": 0.018039,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 0.893041,
+        "y": 1.036752,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.583696,
+        "y": 0.75579,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 0.681491,
+        "y": 0.735805,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.590978,
+        "y": 0.240514,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 2.027777,
+        "y": -0.421702,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -0.933898,
+        "y": -1.455072,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.720425,
+        "y": -0.312103,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.115655,
+        "y": -1.306212,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -0.848403,
+        "y": -1.593714,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 1.679261,
+        "y": 0.135118,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -2.059281,
+        "y": 0.956525,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.459718,
+        "y": 1.867294,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 1.026585,
+        "y": -0.180549,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.546135,
+        "y": 0.265797,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -1.840646,
+        "y": -0.484999,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": -0.221487,
+        "y": -0.049159,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 1.61457,
+        "y": -0.128494,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 1.470829,
+        "y": -0.825014,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -1.433802,
+        "y": 1.382682,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.564189,
+        "y": 0.961987,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": -0.047849,
+        "y": 0.085354,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": -1.215049,
+        "y": -1.736543,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.599475,
+        "y": 1.565641,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.167659,
+        "y": 2.135968,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -1.798495,
+        "y": 0.213668,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.997766,
+        "y": -0.841765,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -1.03338,
+        "y": -1.321963,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -1.6079,
+        "y": -1.46446,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -1.829607,
+        "y": 0.510921,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 0.17962,
+        "y": -1.324949,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.603004,
+        "y": -1.542015,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 1.622972,
+        "y": 0.068793,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 2.659172,
+        "y": -0.130345,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.345946,
+        "y": 1.379098,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 2.243272,
+        "y": 0.200137,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -0.855803,
+        "y": -0.411685,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -1.800574,
+        "y": 1.402554,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": 0.559486,
+        "y": 0.02367,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 1.888475,
+        "y": 0.020442,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 1.554369,
+        "y": -0.28987,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 1.180754,
+        "y": 1.092051,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -1.021518,
+        "y": 0.551055,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 0.865409,
+        "y": 0.950056,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.692128,
+        "y": 0.220737,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 2.221913,
+        "y": -0.323215,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -1.270392,
+        "y": -2.085052,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.9651,
+        "y": -0.493464,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.165116,
+        "y": -1.40334,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -1.109043,
+        "y": -2.00682,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 1.962961,
+        "y": 0.024602,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -2.500768,
+        "y": 1.363212,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.431245,
+        "y": 1.968657,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 1.347359,
+        "y": -0.260858,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.583947,
+        "y": 0.205619,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -2.082701,
+        "y": -0.319874,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": -0.188324,
+        "y": 0.335731,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 2.067806,
+        "y": -0.25052,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 1.441772,
+        "y": -0.566617,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -1.884738,
+        "y": 1.545537,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.449796,
+        "y": 1.109591,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.217708,
+        "y": 0.215921,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": -1.510976,
+        "y": -2.06685,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -0.828122,
+        "y": 1.74953,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 0.345481,
+        "y": 2.461747,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -1.474919,
+        "y": 0.501351,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -0.96711,
+        "y": -0.720355,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -1.183035,
+        "y": -1.045859,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -1.420993,
+        "y": -1.527928,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -2.07814,
+        "y": 0.807552,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": -0.068882,
+        "y": -2.163952,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -0.715454,
+        "y": -1.932844,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 1.721778,
+        "y": -0.136335,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 2.930626,
+        "y": 0.045349,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -0.440697,
+        "y": 1.717927,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 2.979548,
+        "y": 0.679903,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -1.041511,
+        "y": -0.946902,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -2.539326,
+        "y": 1.685161,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": 0.50199,
+        "y": 0.084369,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 2.511709,
+        "y": 0.024419,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 1.58616,
+        "y": -0.527622,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 1.498343,
+        "y": 1.24486,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -0.997624,
+        "y": 0.668841,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 1.011965,
+        "y": 0.959927,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 0.722985,
+        "y": 0.280474,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 2.963587,
+        "y": 0.025533,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -1.335672,
+        "y": -3.088789,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.495247,
+        "y": -1.054977,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.333857,
+        "y": -1.82195,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": -1.312446,
+        "y": -2.221794,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 2.463013,
+        "y": 0.224113,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -3.495543,
+        "y": 1.804214,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.132444,
+        "y": 2.526214,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 1.092107,
+        "y": -0.583228,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 0.746109,
+        "y": 0.117013,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -2.508733,
+        "y": -0.071809,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": -0.087913,
+        "y": 0.515161,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 2.2255,
+        "y": -0.45133,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 2.139442,
+        "y": -0.211541,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -2.295393,
+        "y": 1.67651,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -0.799864,
+        "y": 0.958913,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": -0.415074,
+        "y": -0.052263,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": -1.462838,
+        "y": -2.199603,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": 1.060468,
+        "y": 2.200787,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -0.561374,
+        "y": 2.614269,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": 1.182288,
+        "y": 0.418172,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": 1.154894,
+        "y": -0.611002,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": 1.501608,
+        "y": -1.135839,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": 1.559261,
+        "y": -1.911242,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 2.661838,
+        "y": 0.908661,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": -0.065896,
+        "y": -2.792974,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": 1.104238,
+        "y": -2.069083,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -1.700154,
+        "y": -0.265614,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -3.49143,
+        "y": 0.138415,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": 0.514339,
+        "y": 2.132817,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -3.729206,
+        "y": 0.851453,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 1.442318,
+        "y": -0.987754,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": 3.143484,
+        "y": 2.440666,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.589726,
+        "y": 0.203437,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -3.13464,
+        "y": -0.114936,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": -1.84721,
+        "y": -0.931869,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -2.154301,
+        "y": 1.431291,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": 1.276416,
+        "y": 0.621258,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -1.192333,
+        "y": 1.160031,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": -1.031027,
+        "y": 0.219108,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": -4.007546,
+        "y": 0.084725,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 1.814532,
+        "y": -4.05159,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.14639,
+        "y": -0.962624,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.790271,
+        "y": -2.003703,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 1.380734,
+        "y": -3.02422,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": -3.199608,
+        "y": 0.226125,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 3.959254,
+        "y": 2.352162,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": 0.478728,
+        "y": 3.010635,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": -0.919295,
+        "y": -0.865442,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.80892,
+        "y": 0.211752,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 2.760813,
+        "y": 0.004236,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.346715,
+        "y": 0.700562,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": -2.539278,
+        "y": -0.547891,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -3.016427,
+        "y": -0.150214,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 2.889172,
+        "y": 2.024196,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 0.82831,
+        "y": 1.0862,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 0.532566,
+        "y": 0.079232,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 1.752514,
+        "y": -2.694194,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": 0.959796,
+        "y": 2.517296,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -1.133118,
+        "y": 3.172566,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": 0.230513,
+        "y": 0.395589,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": 0.831708,
+        "y": -1.025427,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": 1.406174,
+        "y": -2.465169,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": 1.186658,
+        "y": -3.421623,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 3.2925,
+        "y": 0.619631,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": -1.027339,
+        "y": -2.608875,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": 0.820209,
+        "y": -2.653133,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -2.416127,
+        "y": -0.02754,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -3.485027,
+        "y": 0.962973,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": 0.998411,
+        "y": 2.546806,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -3.535589,
+        "y": 1.634472,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 1.720594,
+        "y": -1.334433,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": 4.960112,
+        "y": 2.366344,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.89428,
+        "y": -0.00733,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -3.241421,
+        "y": 0.087523,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": -3.175435,
+        "y": -0.173549,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -2.782081,
+        "y": 2.046035,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": 1.024459,
+        "y": 0.775091,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -0.971322,
+        "y": 1.495789,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": -1.514722,
+        "y": 1.214525,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": -4.474869,
+        "y": 0.731907,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 1.980357,
+        "y": -5.558935,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -0.321117,
+        "y": -0.896293,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.539902,
+        "y": -3.142744,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 1.149661,
+        "y": -4.49043,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": -3.755466,
+        "y": 0.856185,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 7.344903,
+        "y": 3.982456,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": 0.1847,
+        "y": 3.319271,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": -1.720113,
+        "y": -0.57442,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -0.936008,
+        "y": 0.467,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 3.402505,
+        "y": 0.231651,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.077159,
+        "y": 0.493973,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": -3.468834,
+        "y": 0.108791,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -2.651477,
+        "y": -0.206147,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 4.553259,
+        "y": 2.109572,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 1.558898,
+        "y": 0.614312,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 1.898613,
+        "y": -0.425408,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 1.383255,
+        "y": -3.738302,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": 1.044371,
+        "y": 2.777189,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": -1.117612,
+        "y": 4.055724,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": -0.256561,
+        "y": 1.428612,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": 1.574178,
+        "y": -2.57971,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": 1.970874,
+        "y": -3.555288,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": 2.028816,
+        "y": -5.460828,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": 4.212366,
+        "y": 0.683016,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": -2.265889,
+        "y": -1.686627,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": 1.502343,
+        "y": -3.567538,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": -3.043197,
+        "y": -0.540125,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": -3.870054,
+        "y": 0.259912,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": 0.814582,
+        "y": 3.369132,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": -3.55699,
+        "y": 0.575475,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": 2.506813,
+        "y": -1.090014,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": 5.752033,
+        "y": 2.155097,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.688601,
+        "y": -0.749376,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": -3.896389,
+        "y": -0.546651,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": -5.958861,
+        "y": 1.653893,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": -3.684338,
+        "y": 2.683901,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": 0.882436,
+        "y": 1.499782,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": -1.147238,
+        "y": 1.598362,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": -2.882942,
+        "y": 2.43839,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": -5.285,
+        "y": 0.122426,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": 2.484606,
+        "y": -5.823809,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": 0.090162,
+        "y": -1.615712,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": 0.706111,
+        "y": -3.381171,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 1.508661,
+        "y": -5.078686,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": -4.445632,
+        "y": 0.523498,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": 8.851157,
+        "y": 6.284111,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": 0.126529,
+        "y": 3.389046,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": -3.201911,
+        "y": 0.604019,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": -1.035928,
+        "y": 0.532426,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": 4.067128,
+        "y": 1.267026,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.267994,
+        "y": 0.871307,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": -5.157631,
+        "y": 0.612615,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": -2.172632,
+        "y": -1.650471,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": 5.471901,
+        "y": 2.507823,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": 2.652725,
+        "y": 0.865884,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": 3.184229,
+        "y": -0.513183,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": 1.967392,
+        "y": -4.919477,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ],
+    [
+      {
+        "x": -1.083477,
+        "y": -0.908468,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "how do i get a boy to like me if i am a tom girl and if he kind of likes someone"
+      },
+      {
+        "x": 1.202914,
+        "y": -6.085949,
+        "correct": true,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "hi can anyone please e-mail me if they r from italy and can teach me italian?  g"
+      },
+      {
+        "x": 0.710524,
+        "y": -5.147675,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "extraV6.com, what happen why it was temporary closed?"
+      },
+      {
+        "x": -3.48183,
+        "y": 7.512589,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Despite many people doubting the success of \"Don\", the movie still did pretty we"
+      },
+      {
+        "x": -2.193808,
+        "y": 4.594554,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "What does it mean if your sweat is brown?"
+      },
+      {
+        "x": -2.88665,
+        "y": 6.314758,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "How is Guantanamo a U.S. Territory but it's in Cuba?  What is the history behind"
+      },
+      {
+        "x": -4.84354,
+        "y": -3.867798,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "where is job bank for new brunswick canada?"
+      },
+      {
+        "x": 4.103118,
+        "y": 1.014247,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "Ideal Gases?"
+      },
+      {
+        "x": -1.284977,
+        "y": 3.236512,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What is a nueter pronoun? What are also some examples of a nueter pronoun?"
+      },
+      {
+        "x": 4.03342,
+        "y": 2.342833,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "What are your opinions on abortion? for? against?"
+      },
+      {
+        "x": 3.868817,
+        "y": 3.646205,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Do you eat the skin/peel of a peach?"
+      },
+      {
+        "x": -1.868017,
+        "y": -3.458203,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "why i not got interview call on applying having 15 years of experience in inst. "
+      },
+      {
+        "x": 3.224131,
+        "y": 4.94873,
+        "correct": false,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "Should a person ever ask to be in your wedding?"
+      },
+      {
+        "x": -4.08932,
+        "y": 1.420618,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "when is the next solar eclipse in the uk?"
+      },
+      {
+        "x": -7.80967,
+        "y": -0.211783,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "How do you find repossed houses?"
+      },
+      {
+        "x": -0.504935,
+        "y": 5.138401,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "Kids experiment: What happens if you put 2 tomatoes in the center of a hamburger"
+      },
+      {
+        "x": 4.890918,
+        "y": 2.456695,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Americah: does latest Harvard Survey not reveal majority of americans are potent"
+      },
+      {
+        "x": 10.368765,
+        "y": -4.942169,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "Stocks!!!!?"
+      },
+      {
+        "x": 5.581899,
+        "y": -3.678904,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "ok I said no bout the last Qu?? I made him crie u think I wasa 2 harsh ?????"
+      },
+      {
+        "x": -1.731614,
+        "y": -4.093176,
+        "correct": true,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Can anybody tell me about Packard Bell Easynote MX45-201?"
+      },
+      {
+        "x": 0.729073,
+        "y": 1.182091,
+        "correct": true,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "My horse has a allergy to dust. Any suugestions besides try to keep her in a dus"
+      },
+      {
+        "x": 3.80928,
+        "y": -5.092267,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "Messenger for Windows 2000?"
+      },
+      {
+        "x": 5.576776,
+        "y": 4.651085,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Is Bill Cowher superstitious?"
+      },
+      {
+        "x": -0.332815,
+        "y": -0.833685,
+        "correct": false,
+        "label": 2,
+        "label_name": "Health",
+        "statement": "what is bipolar disorder?"
+      },
+      {
+        "x": -2.03541,
+        "y": 4.282772,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "What is the best movie of Harry Potter?  The 1st, 1nd 3rd or 4th?"
+      },
+      {
+        "x": -0.559821,
+        "y": 2.324375,
+        "correct": false,
+        "label": 7,
+        "label_name": "Entertainment",
+        "statement": "Where were the pencils inveted?"
+      },
+      {
+        "x": 1.32205,
+        "y": -4.46752,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "What does the abbreviation misc. stand for?"
+      },
+      {
+        "x": 5.247188,
+        "y": 2.511605,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "Australia has couple friendly sex shops, does America?"
+      },
+      {
+        "x": -12.359567,
+        "y": -4.327917,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "how can i check bad sectors?"
+      },
+      {
+        "x": -0.985973,
+        "y": 1.313591,
+        "correct": false,
+        "label": 3,
+        "label_name": "Education",
+        "statement": "I am a senior in high school and i would like to be a high school history teache"
+      },
+      {
+        "x": 5.925181,
+        "y": -4.297432,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "i cant find a sport?"
+      },
+      {
+        "x": 1.210128,
+        "y": -0.886049,
+        "correct": false,
+        "label": 0,
+        "label_name": "Society",
+        "statement": "can ahuman forgive the mistakes for another ahuman ? if so who forgive for the f"
+      },
+      {
+        "x": -5.956397,
+        "y": -6.1423,
+        "correct": false,
+        "label": 4,
+        "label_name": "Computers",
+        "statement": "what make exe file in microsoft access?"
+      },
+      {
+        "x": 0.831655,
+        "y": -3.136867,
+        "correct": true,
+        "label": 8,
+        "label_name": "Relationships",
+        "statement": "guys....what do u notice?"
+      },
+      {
+        "x": 7.994758,
+        "y": -2.537968,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Ur opinion?"
+      },
+      {
+        "x": 0.953316,
+        "y": 5.337912,
+        "correct": false,
+        "label": 9,
+        "label_name": "Politics",
+        "statement": "When deported, does that mean they can no longer ever return to the US?"
+      },
+      {
+        "x": -6.265803,
+        "y": -4.514072,
+        "correct": false,
+        "label": 6,
+        "label_name": "Business",
+        "statement": "how do i find united state broker who purcahse good leads for mortgage ?"
+      },
+      {
+        "x": -3.359713,
+        "y": -0.684584,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "word problem i cant figure out can some one help me?"
+      },
+      {
+        "x": -5.65827,
+        "y": 2.709305,
+        "correct": false,
+        "label": 1,
+        "label_name": "Science",
+        "statement": "find the degree of 4x?"
+      },
+      {
+        "x": -2.292302,
+        "y": 2.375907,
+        "correct": false,
+        "label": 5,
+        "label_name": "Sports",
+        "statement": "Give me a definition of \"Olympic Village\" please!?"
+      }
+    ]
+  ],
+  "probe_accuracies": [
+    0.825,
+    0.825,
+    0.875,
+    0.95,
+    0.975,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "best_probe_layer": 5,
+  "best_probe_acc": 1.0,
+  "pc1_separation": 0.1623,
+  "dataset": "yahoo_topics",
+  "arch": "sas_zero_shot",
+  "task": "topico",
+  "n_classes": 10,
+  "label_names": [
+    "Society",
+    "Science",
+    "Health",
+    "Education",
+    "Computers",
+    "Sports",
+    "Business",
+    "Entertainment",
+    "Relationships",
+    "Politics"
+  ],
+  "mode": "real"
+}

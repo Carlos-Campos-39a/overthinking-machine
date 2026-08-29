@@ -1,0 +1,4552 @@
+{
+  "n_instances": 40,
+  "n_correct": 25,
+  "n_incorrect": 15,
+  "agent_accuracy": 0.625,
+  "n_layers": 16,
+  "d_model": 2048,
+  "pca_layers": [
+    [
+      {
+        "x": -0.041642,
+        "y": 0.035635,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.051158,
+        "y": -0.014389,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.128421,
+        "y": -0.024259,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.025963,
+        "y": 0.043388,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -0.050849,
+        "y": -0.034588,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.046102,
+        "y": -0.050578,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -0.074881,
+        "y": -0.072373,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -0.070993,
+        "y": -0.064149,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.050507,
+        "y": 0.03689,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -0.065906,
+        "y": -0.041612,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.041359,
+        "y": 0.034446,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.046079,
+        "y": -0.005392,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.070084,
+        "y": -0.072387,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.052464,
+        "y": -0.028675,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.085453,
+        "y": -0.045163,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.046182,
+        "y": 0.065382,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.117845,
+        "y": 0.090607,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.036649,
+        "y": 0.027749,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.063636,
+        "y": -0.057727,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.108528,
+        "y": 0.105372,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.049566,
+        "y": 0.013763,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.095369,
+        "y": 0.022317,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.043472,
+        "y": 0.034338,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.122916,
+        "y": -0.059342,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.133052,
+        "y": -0.052647,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.048649,
+        "y": 0.046216,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.148041,
+        "y": -0.000425,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.03824,
+        "y": 0.08623,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.035491,
+        "y": 0.040125,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.056187,
+        "y": -0.014484,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.038897,
+        "y": 0.005727,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.013772,
+        "y": -0.05351,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.067421,
+        "y": -0.05139,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.03233,
+        "y": 0.12057,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.164822,
+        "y": -0.027007,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.065935,
+        "y": -0.020902,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.138309,
+        "y": -0.042444,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.130086,
+        "y": -0.008761,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.047179,
+        "y": 0.013191,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.028792,
+        "y": 0.020256,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.16218,
+        "y": 0.040098,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.16111,
+        "y": 0.008779,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.31972,
+        "y": 0.032212,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.095966,
+        "y": 0.001262,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -0.017764,
+        "y": -0.128661,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.020346,
+        "y": -0.107313,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.107153,
+        "y": -0.237347,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.072599,
+        "y": -0.199827,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.189636,
+        "y": 0.047534,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.081683,
+        "y": -0.195914,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.159442,
+        "y": 0.053197,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.134355,
+        "y": 0.015769,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.150257,
+        "y": -0.065332,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.123588,
+        "y": -0.050896,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.086714,
+        "y": 0.05706,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.176865,
+        "y": 0.043608,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.052939,
+        "y": 0.069111,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.040464,
+        "y": -0.023388,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.009613,
+        "y": -0.153334,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.183126,
+        "y": 0.099376,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.065938,
+        "y": -0.042718,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.017559,
+        "y": 0.155561,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.180059,
+        "y": 0.06038,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.33107,
+        "y": 0.12636,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.245393,
+        "y": 0.147267,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.139784,
+        "y": 0.031792,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.213097,
+        "y": 0.209268,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.118404,
+        "y": 0.074623,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.14385,
+        "y": 0.034842,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.15848,
+        "y": -0.015255,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.013267,
+        "y": -0.068378,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.325822,
+        "y": -0.368172,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.103931,
+        "y": -0.189883,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.180986,
+        "y": 0.113551,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.218224,
+        "y": 0.198572,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.095204,
+        "y": -0.060866,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.099647,
+        "y": 0.094307,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.234603,
+        "y": 0.16574,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.148278,
+        "y": 0.057021,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.007444,
+        "y": -0.030006,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.277385,
+        "y": -0.01348,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.265387,
+        "y": -0.023419,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.476125,
+        "y": 0.0484,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.127793,
+        "y": 0.053119,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.049508,
+        "y": -0.22718,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.129121,
+        "y": -0.295877,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.273415,
+        "y": -0.386144,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.228739,
+        "y": -0.363633,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.292556,
+        "y": 0.006974,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.195366,
+        "y": -0.304982,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.263797,
+        "y": 0.093601,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.227949,
+        "y": -0.007041,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.175411,
+        "y": -0.245161,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.157731,
+        "y": -0.166057,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.113312,
+        "y": 0.117157,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.294849,
+        "y": -0.002522,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.02732,
+        "y": 0.136033,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.071437,
+        "y": -0.001422,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.090692,
+        "y": -0.345025,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.254489,
+        "y": 0.287439,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.105686,
+        "y": -0.033737,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.000845,
+        "y": 0.161029,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.314456,
+        "y": 0.094199,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.416082,
+        "y": 0.276173,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.307773,
+        "y": 0.263465,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.238952,
+        "y": 0.091353,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.197807,
+        "y": 0.370838,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.237913,
+        "y": 0.176844,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.198115,
+        "y": -0.023023,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.227408,
+        "y": -0.120559,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.007594,
+        "y": -0.043595,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.540879,
+        "y": -0.184709,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.242664,
+        "y": -0.239231,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.328856,
+        "y": 0.234964,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.262394,
+        "y": 0.385134,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.100588,
+        "y": -0.168227,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.080686,
+        "y": 0.208894,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.265503,
+        "y": 0.190836,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.247373,
+        "y": -0.022328,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.008515,
+        "y": 0.020899,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.364442,
+        "y": -0.044846,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.343999,
+        "y": 0.014896,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.619467,
+        "y": 0.038117,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.194651,
+        "y": 0.16903,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.031026,
+        "y": -0.371921,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.194167,
+        "y": -0.424472,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.240793,
+        "y": -0.465076,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.24437,
+        "y": -0.463589,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.388955,
+        "y": 0.038583,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.217457,
+        "y": -0.40562,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.362436,
+        "y": 0.191618,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.296966,
+        "y": -0.006687,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.199576,
+        "y": -0.341217,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.173678,
+        "y": -0.25172,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.134476,
+        "y": 0.13075,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.387979,
+        "y": 0.065497,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.057779,
+        "y": 0.183057,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.127101,
+        "y": 0.059706,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.122257,
+        "y": -0.453132,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.330132,
+        "y": 0.222646,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.125597,
+        "y": -0.080785,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.215009,
+        "y": -0.004964,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.414689,
+        "y": 0.156592,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.608271,
+        "y": 0.348673,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.446666,
+        "y": 0.34318,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.246228,
+        "y": 0.173852,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.35824,
+        "y": 0.515937,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.377124,
+        "y": 0.35963,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.211932,
+        "y": -0.057421,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.263546,
+        "y": -0.126362,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.007987,
+        "y": -0.014303,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.469816,
+        "y": -0.240311,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.182946,
+        "y": -0.271078,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.428257,
+        "y": 0.376317,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.376416,
+        "y": 0.44966,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.157334,
+        "y": -0.160952,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.243673,
+        "y": 0.301568,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.377171,
+        "y": 0.140907,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.299424,
+        "y": -0.084147,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.017327,
+        "y": -0.011612,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.329675,
+        "y": -0.165628,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.370798,
+        "y": -0.107002,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.522092,
+        "y": 0.281403,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.29294,
+        "y": 0.108922,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.14561,
+        "y": -0.391414,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.395696,
+        "y": -0.503098,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.346203,
+        "y": -0.435534,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.400251,
+        "y": -0.467908,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.446678,
+        "y": -0.078282,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.283218,
+        "y": -0.321184,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.494042,
+        "y": 0.120136,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.25189,
+        "y": -0.157795,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.00244,
+        "y": -0.489528,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.009156,
+        "y": -0.336487,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.104151,
+        "y": 0.213967,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.414715,
+        "y": -0.027349,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.024131,
+        "y": 0.240886,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.152795,
+        "y": 0.109659,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.274082,
+        "y": -0.553862,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.385594,
+        "y": 0.329452,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.134945,
+        "y": -0.14773,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.244601,
+        "y": 0.138701,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.491638,
+        "y": 0.084148,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.443032,
+        "y": 0.525041,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.392072,
+        "y": 0.457938,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.294052,
+        "y": 0.132232,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.267638,
+        "y": 0.608901,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.652531,
+        "y": 0.406414,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.242809,
+        "y": -0.08762,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.150381,
+        "y": -0.27834,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.049059,
+        "y": 0.015185,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.441019,
+        "y": 0.054187,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.236425,
+        "y": -0.276829,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.615361,
+        "y": 0.317488,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.244609,
+        "y": 0.579266,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.11524,
+        "y": -0.244861,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.224353,
+        "y": 0.309177,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.334072,
+        "y": 0.217645,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.234506,
+        "y": -0.203451,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.013057,
+        "y": 0.023155,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": 0.205784,
+        "y": -0.309729,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 0.230343,
+        "y": -0.296601,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -0.204028,
+        "y": 0.378653,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": 0.3784,
+        "y": 0.001172,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -0.230659,
+        "y": -0.28276,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.804491,
+        "y": -0.326017,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -0.514322,
+        "y": -0.255578,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -0.642091,
+        "y": -0.312571,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.143033,
+        "y": -0.235633,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -0.287984,
+        "y": -0.251271,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.596955,
+        "y": -0.057042,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": 0.042934,
+        "y": -0.224667,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.372841,
+        "y": -0.364735,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.302862,
+        "y": -0.267286,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": -0.026848,
+        "y": 0.307643,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": 0.435909,
+        "y": -0.17211,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.459942,
+        "y": 0.172566,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 0.261998,
+        "y": -0.015465,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.602311,
+        "y": -0.434382,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.708527,
+        "y": 0.48352,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": 0.190694,
+        "y": -0.289306,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -0.383714,
+        "y": 0.32795,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 0.482894,
+        "y": -0.121713,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": -0.033705,
+        "y": 0.819111,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": -0.247784,
+        "y": 0.782342,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 0.427448,
+        "y": 0.092524,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.10863,
+        "y": 0.543619,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.925498,
+        "y": 0.04114,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 0.350772,
+        "y": -0.157513,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.00714,
+        "y": -0.264062,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.039006,
+        "y": -0.048987,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": -0.626394,
+        "y": 0.323519,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.356422,
+        "y": -0.14436,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": 0.621053,
+        "y": -0.114148,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.037884,
+        "y": 0.743613,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.044584,
+        "y": -0.268078,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.149255,
+        "y": 0.193392,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -0.047839,
+        "y": 0.252531,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": 0.096442,
+        "y": -0.220521,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.259673,
+        "y": -0.028761,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.296973,
+        "y": -0.271362,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.247522,
+        "y": -0.274773,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.18345,
+        "y": 0.305121,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.375171,
+        "y": 0.172672,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.045564,
+        "y": -0.310397,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.595995,
+        "y": -0.564266,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.275591,
+        "y": -0.377618,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.455271,
+        "y": -0.443925,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.127902,
+        "y": -0.247992,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.135303,
+        "y": -0.34969,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.647555,
+        "y": 0.069234,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.025202,
+        "y": -0.193424,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 0.262967,
+        "y": -0.404424,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": 0.222952,
+        "y": -0.349569,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.213796,
+        "y": 0.370428,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.51264,
+        "y": -0.065866,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.555077,
+        "y": 0.322828,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.37436,
+        "y": 0.065016,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.454068,
+        "y": -0.589861,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 0.97299,
+        "y": 0.300706,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.280593,
+        "y": -0.228138,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 0.801044,
+        "y": 0.207055,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.46541,
+        "y": 0.009811,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.310197,
+        "y": 0.803521,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.629422,
+        "y": 0.696841,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.388458,
+        "y": 0.233399,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": -0.030584,
+        "y": 0.530373,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.893111,
+        "y": 0.275525,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.436368,
+        "y": 0.012594,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.075525,
+        "y": -0.267483,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.033408,
+        "y": 0.018853,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.781724,
+        "y": 0.052919,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.188043,
+        "y": -0.28636,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.719055,
+        "y": -0.007141,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.304121,
+        "y": 0.68267,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.064444,
+        "y": -0.294635,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": -0.072589,
+        "y": 0.245105,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.208519,
+        "y": 0.222009,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.159175,
+        "y": -0.175499,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.259896,
+        "y": 0.105742,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": 0.172246,
+        "y": -0.153331,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 0.139966,
+        "y": -0.120113,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -0.046236,
+        "y": 0.111794,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": 0.363212,
+        "y": 0.287337,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -0.015789,
+        "y": -0.428341,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.394109,
+        "y": -0.686564,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -0.143763,
+        "y": -0.305026,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -0.36734,
+        "y": -0.401625,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.17436,
+        "y": -0.222642,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -0.091671,
+        "y": -0.433153,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.605415,
+        "y": 0.116246,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.06363,
+        "y": -0.142575,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.313278,
+        "y": -0.320842,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.18765,
+        "y": -0.419212,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": -0.182192,
+        "y": 0.418262,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": 0.48088,
+        "y": 0.098957,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.538751,
+        "y": 0.162975,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 0.357617,
+        "y": 0.067575,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.423221,
+        "y": -0.591588,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.922489,
+        "y": 0.201836,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": 0.273412,
+        "y": -0.274935,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -0.951119,
+        "y": 0.272714,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 0.500827,
+        "y": 0.024682,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": -0.334129,
+        "y": 0.651699,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": -0.652172,
+        "y": 0.52342,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 0.363563,
+        "y": 0.360841,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.098882,
+        "y": 0.408712,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.853538,
+        "y": 0.142455,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 0.288747,
+        "y": 0.139904,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.062884,
+        "y": -0.252129,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.094963,
+        "y": 0.023052,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": -0.725282,
+        "y": 0.051563,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.089215,
+        "y": -0.197022,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": 0.730184,
+        "y": -0.14792,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": -0.344757,
+        "y": 0.633338,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": 0.1244,
+        "y": -0.225578,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.077862,
+        "y": 0.160167,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -0.247873,
+        "y": 0.306307,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": 0.051462,
+        "y": 0.032325,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.268511,
+        "y": 0.126435,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.299419,
+        "y": -0.188107,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.19702,
+        "y": -0.101612,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.036131,
+        "y": 0.102254,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.30938,
+        "y": 0.365612,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.009031,
+        "y": -0.412558,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.244063,
+        "y": -0.641501,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.013996,
+        "y": -0.292875,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.310671,
+        "y": -0.583498,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.307698,
+        "y": 0.117905,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.02198,
+        "y": -0.450104,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.727773,
+        "y": 0.253546,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": 0.029372,
+        "y": -0.118745,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 0.261207,
+        "y": -0.258282,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": 0.138661,
+        "y": -0.426612,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.339695,
+        "y": 0.318473,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.627246,
+        "y": 0.15104,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.449695,
+        "y": 0.032576,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.353579,
+        "y": 0.00926,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.363232,
+        "y": -0.509912,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 1.052639,
+        "y": 0.325514,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.255797,
+        "y": -0.318387,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 1.039547,
+        "y": 0.167188,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.628988,
+        "y": 0.236569,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.4472,
+        "y": 0.561382,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.819835,
+        "y": 0.530655,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.207371,
+        "y": 0.27447,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": -0.064324,
+        "y": 0.382644,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.790841,
+        "y": 0.435086,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.131708,
+        "y": 0.200058,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 0.036128,
+        "y": -0.344483,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.01738,
+        "y": -0.105085,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.787704,
+        "y": 0.180878,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.05521,
+        "y": -0.163854,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -0.820818,
+        "y": 0.329012,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.532361,
+        "y": 0.542919,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.225045,
+        "y": -0.087517,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": -0.042238,
+        "y": -0.057012,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.192468,
+        "y": 0.050022,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.108417,
+        "y": -0.27837,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.201155,
+        "y": -0.228549,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": 0.73932,
+        "y": 0.4227,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -0.309329,
+        "y": -0.34982,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 0.298446,
+        "y": 0.028988,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": 0.219866,
+        "y": -0.214284,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 0.537097,
+        "y": 0.201721,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.025861,
+        "y": 0.233624,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.233467,
+        "y": 0.002683,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 0.384063,
+        "y": 0.857402,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.209064,
+        "y": -0.312003,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 0.687086,
+        "y": 0.464502,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.236993,
+        "y": -0.694588,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": 0.149148,
+        "y": 0.136852,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -0.482029,
+        "y": 0.079728,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": 0.083437,
+        "y": 0.187669,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": -0.731686,
+        "y": 0.076499,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": 0.580712,
+        "y": -0.174618,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 0.669572,
+        "y": -0.300329,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 0.34398,
+        "y": -0.408134,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.249202,
+        "y": 0.29687,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.36505,
+        "y": 0.834459,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": 0.398432,
+        "y": -0.016493,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -0.06185,
+        "y": 0.99625,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -0.232639,
+        "y": -0.758117,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": -0.491548,
+        "y": 0.143053,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": -0.403952,
+        "y": 0.452645,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -0.576839,
+        "y": -0.437715,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.183695,
+        "y": -0.404489,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.278377,
+        "y": -1.007376,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -0.856776,
+        "y": -0.554001,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 0.11781,
+        "y": 0.054492,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -0.780459,
+        "y": -0.124719,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": -0.716525,
+        "y": 0.216782,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.010684,
+        "y": 0.062495,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": 1.067413,
+        "y": -0.592379,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": -0.813297,
+        "y": 0.154258,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.059767,
+        "y": -0.260217,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": -0.423697,
+        "y": 0.034645,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 0.193328,
+        "y": 0.527719,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": 0.520072,
+        "y": 0.502794,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -0.540188,
+        "y": -0.359547,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -0.926713,
+        "y": -0.25006,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 0.355214,
+        "y": -0.078709,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -0.582063,
+        "y": -0.167416,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.199572,
+        "y": 0.014103,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -0.822569,
+        "y": 0.045469,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.398713,
+        "y": 0.68943,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -0.173885,
+        "y": 0.355577,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -0.684442,
+        "y": -0.287316,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -0.086635,
+        "y": 0.040213,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -0.952327,
+        "y": -0.472911,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.099062,
+        "y": 0.276417,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.164796,
+        "y": 0.232114,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 0.552746,
+        "y": 0.013594,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.280322,
+        "y": -0.024279,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.60155,
+        "y": -0.688526,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.504946,
+        "y": 0.307062,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.60005,
+        "y": 0.414766,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.13511,
+        "y": 1.039635,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.551046,
+        "y": 0.629145,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.179742,
+        "y": -0.660214,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.638603,
+        "y": 0.042196,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -0.532941,
+        "y": -0.230592,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 0.325011,
+        "y": -0.41173,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.678931,
+        "y": -0.044072,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.431011,
+        "y": 0.061049,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 0.512898,
+        "y": 0.01262,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": -0.07984,
+        "y": 0.096915,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.156992,
+        "y": 0.633027,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 1.026791,
+        "y": 0.397203,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 0.225557,
+        "y": 0.809651,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.678778,
+        "y": -0.85411,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.733265,
+        "y": 0.067615,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.282514,
+        "y": 0.617997,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -1.08174,
+        "y": 0.292387,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.718697,
+        "y": -0.815709,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": 0.330405,
+        "y": 0.81739,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.508628,
+        "y": -0.794511,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -0.523997,
+        "y": -0.611852,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -0.705357,
+        "y": -0.601288,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.687841,
+        "y": -0.912281,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -1.887183,
+        "y": -0.229432,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 0.495604,
+        "y": 0.456185,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -0.709528,
+        "y": 0.291646,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.251421,
+        "y": -0.049651,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -1.032349,
+        "y": 0.022118,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.688347,
+        "y": -0.989798,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.075352,
+        "y": -0.270045,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -1.248124,
+        "y": -0.324528,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.248008,
+        "y": 0.305956,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -1.744751,
+        "y": 0.212594,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.445125,
+        "y": -1.097073,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.119092,
+        "y": -0.396368,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 0.944557,
+        "y": 0.243684,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.386274,
+        "y": -0.008008,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 0.759987,
+        "y": 1.128959,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.484793,
+        "y": -0.729658,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.63592,
+        "y": -0.084695,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 0.129925,
+        "y": -1.238383,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.76034,
+        "y": -0.854909,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.493001,
+        "y": 0.86282,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -0.782566,
+        "y": 0.117298,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -0.84409,
+        "y": 0.166447,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 0.339427,
+        "y": 0.910317,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.914761,
+        "y": -0.330687,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.644498,
+        "y": -0.589698,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 0.872551,
+        "y": 0.159387,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.033599,
+        "y": 0.124621,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.381737,
+        "y": -0.299344,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 1.222161,
+        "y": 0.186933,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 0.699039,
+        "y": -1.674314,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 0.681873,
+        "y": 1.556606,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.83703,
+        "y": 0.218389,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.71559,
+        "y": -1.439141,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -1.145481,
+        "y": 0.019281,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 0.832706,
+        "y": 1.30066,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": 0.612353,
+        "y": -0.705054,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 0.604774,
+        "y": 1.184231,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -1.00802,
+        "y": 0.48919,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -1.766922,
+        "y": 0.013407,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 0.600174,
+        "y": 1.340057,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -1.795109,
+        "y": -0.193638,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 1.068904,
+        "y": -0.600242,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -1.2196,
+        "y": -0.470556,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -0.471593,
+        "y": 0.014202,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -1.396757,
+        "y": -0.322893,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 0.663534,
+        "y": 1.290205,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -0.067695,
+        "y": 0.361124,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -1.109041,
+        "y": 0.081188,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.585925,
+        "y": -0.412216,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -1.967017,
+        "y": -0.636326,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.112636,
+        "y": 1.503712,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.376198,
+        "y": 0.328444,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 1.565156,
+        "y": -0.203924,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.65068,
+        "y": -0.123686,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 1.218279,
+        "y": -1.183885,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -0.445052,
+        "y": 0.733615,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -0.928759,
+        "y": -0.027509,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.237682,
+        "y": 1.529743,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 0.660846,
+        "y": 1.21315,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -0.879869,
+        "y": -0.938945,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -1.346312,
+        "y": -0.45749,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -1.188131,
+        "y": -0.305724,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 0.747696,
+        "y": -0.992372,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 0.881443,
+        "y": 0.766454,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 0.566885,
+        "y": 0.966832,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 1.23765,
+        "y": -0.152997,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": -0.23612,
+        "y": -0.089321,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 0.348518,
+        "y": 0.436905,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 1.434605,
+        "y": 0.001741,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 0.52829,
+        "y": 2.285614,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 1.413157,
+        "y": -1.701505,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 0.818844,
+        "y": 0.079763,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 0.475803,
+        "y": 1.978786,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -1.663213,
+        "y": -0.159327,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 1.346752,
+        "y": -1.326296,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": 0.525852,
+        "y": 0.910735,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 1.166185,
+        "y": -1.320369,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -1.185225,
+        "y": -0.941007,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -1.683393,
+        "y": -0.395412,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 1.480486,
+        "y": -1.526572,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": 2.479665,
+        "y": -0.397542,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -2.432754,
+        "y": -1.097783,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 2.335234,
+        "y": -1.400904,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": 0.909899,
+        "y": -0.118806,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 2.327798,
+        "y": -1.073837,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -0.725819,
+        "y": 2.457323,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.472476,
+        "y": 0.292044,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 1.717413,
+        "y": 0.46267,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -1.078871,
+        "y": -0.604408,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 2.599742,
+        "y": -1.455459,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 0.018133,
+        "y": 2.142986,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": 0.762076,
+        "y": 0.683122,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -2.594199,
+        "y": 0.145063,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": 0.879681,
+        "y": -0.17393,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": -2.461879,
+        "y": -1.355962,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": 1.015993,
+        "y": 1.284459,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 2.022168,
+        "y": -0.54566,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 1.060519,
+        "y": 1.942499,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.529141,
+        "y": 2.390098,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 1.664442,
+        "y": -1.841094,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": 2.394421,
+        "y": -1.173723,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 2.133034,
+        "y": -0.809886,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -2.009826,
+        "y": -1.534338,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": -0.984101,
+        "y": 1.742961,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": -0.451875,
+        "y": 2.026654,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -2.285211,
+        "y": -0.321066,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.791712,
+        "y": -0.263144,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.368891,
+        "y": 0.639119,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -2.376824,
+        "y": 0.741445,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.476156,
+        "y": 3.475256,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -3.184535,
+        "y": -2.404869,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": -1.014495,
+        "y": 0.702239,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.292867,
+        "y": 2.981286,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": 2.767802,
+        "y": -1.09697,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": -2.749193,
+        "y": -1.848447,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.199305,
+        "y": 1.735311,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": -2.660427,
+        "y": -1.819714,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 1.229144,
+        "y": -1.882793,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": 2.12553,
+        "y": -0.734159,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -2.830511,
+        "y": -1.89004,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": 2.96405,
+        "y": 0.255411,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": -2.861013,
+        "y": 1.176618,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": 2.915566,
+        "y": 1.986877,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": 1.138312,
+        "y": 0.03142,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": 2.730447,
+        "y": 1.363666,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": -1.112104,
+        "y": -2.904465,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": 0.876156,
+        "y": -0.619769,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": 2.121385,
+        "y": -0.587919,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": -1.111827,
+        "y": 0.766097,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": 3.266792,
+        "y": 1.688489,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": -0.189789,
+        "y": -2.592046,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": 0.92354,
+        "y": -1.200936,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": -2.982471,
+        "y": -0.193379,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": 0.870752,
+        "y": -0.011502,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": -2.977624,
+        "y": 1.778974,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": 1.18927,
+        "y": -1.548414,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": 2.552773,
+        "y": 0.663061,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": 1.208911,
+        "y": -2.357661,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": -0.735809,
+        "y": -2.806697,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": 2.349723,
+        "y": 2.357123,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": 3.117496,
+        "y": 1.393316,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": 2.769843,
+        "y": 1.006193,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": -2.441328,
+        "y": 1.911112,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": -1.325017,
+        "y": -2.095633,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": -0.53173,
+        "y": -2.313549,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": -2.799516,
+        "y": 0.206743,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": 0.987676,
+        "y": 0.289676,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": -0.480637,
+        "y": -0.822946,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": -3.118618,
+        "y": -0.82057,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": -0.704727,
+        "y": -4.026748,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": -3.824263,
+        "y": 2.977699,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": -1.486126,
+        "y": -0.811743,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": -0.421627,
+        "y": -3.625238,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": 3.260688,
+        "y": 1.118784,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": -3.31671,
+        "y": 2.47289,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": -0.236824,
+        "y": -2.154453,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": -3.138641,
+        "y": 2.481623,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": 1.489982,
+        "y": 2.27809,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": 2.526524,
+        "y": 0.702751,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": -3.463484,
+        "y": 2.587054,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ],
+    [
+      {
+        "x": -4.586368,
+        "y": 2.32835,
+        "correct": true,
+        "label": 2,
+        "statement": "Stocks Lower as Oil Prices Steam Higher With the much-ballyhooed initial public "
+      },
+      {
+        "x": 2.620653,
+        "y": -1.161079,
+        "correct": true,
+        "label": 1,
+        "statement": "British athletics appoint psychologist for 2008 Olympics British athletics chief"
+      },
+      {
+        "x": -5.078577,
+        "y": -3.194569,
+        "correct": false,
+        "label": 3,
+        "statement": "Nokia says Intel won't replace TI ... yet Nokia Corp. has no immediate plans to "
+      },
+      {
+        "x": -1.541336,
+        "y": -0.036017,
+        "correct": true,
+        "label": 2,
+        "statement": "Qwest: The end of the beginning Thursday #39;s agreement between Qwest Communica"
+      },
+      {
+        "x": -4.578298,
+        "y": -1.333672,
+        "correct": false,
+        "label": 3,
+        "statement": "Barrett: Good business models vary widely BANGALORE, INDIA - Peer-to-peer (P2P) "
+      },
+      {
+        "x": 3.276402,
+        "y": 3.523134,
+        "correct": true,
+        "label": 0,
+        "statement": "French Hostage Transfer Sparks Release Hopes  PARIS (Reuters) - Hopes of a swift"
+      },
+      {
+        "x": -1.064305,
+        "y": 2.248718,
+        "correct": false,
+        "label": 3,
+        "statement": "Technical Hitch Delays Russia Space Station Launch (Reuters) Reuters - The launc"
+      },
+      {
+        "x": -3.624526,
+        "y": 3.112504,
+        "correct": false,
+        "label": 2,
+        "statement": "Oil Price Steadies After 5 Percent Slide  LONDON (Reuters) - Oil steadied on Thu"
+      },
+      {
+        "x": 0.191012,
+        "y": -0.630893,
+        "correct": true,
+        "label": 0,
+        "statement": "India seeks new TV bids The Indian Board re-opens the bidding for TV rights afte"
+      },
+      {
+        "x": -5.819098,
+        "y": -0.735203,
+        "correct": false,
+        "label": 3,
+        "statement": "Optimism Drives Google Shares to New Highs (Reuters) Reuters - Stock of Google I"
+      },
+      {
+        "x": 1.175062,
+        "y": 3.234624,
+        "correct": true,
+        "label": 0,
+        "statement": "Confident Bush Outlines Ambitious Plan for 2nd Term President Bush said he would"
+      },
+      {
+        "x": -0.989983,
+        "y": 4.183723,
+        "correct": false,
+        "label": 2,
+        "statement": "Yukos to vote on bankruptcy Yukos warned yesterday it could declare bankruptcy w"
+      },
+      {
+        "x": 3.937421,
+        "y": 0.943785,
+        "correct": false,
+        "label": 1,
+        "statement": "Egypt names former player Shehata as caretaker coach The Egyptian Football Assoc"
+      },
+      {
+        "x": -0.811538,
+        "y": 0.38606,
+        "correct": true,
+        "label": 2,
+        "statement": "US Airways Said to Plan to Ask Court for Pay Cuts S Airways plans to ask a feder"
+      },
+      {
+        "x": 3.82158,
+        "y": -3.436156,
+        "correct": true,
+        "label": 1,
+        "statement": "No temporary insanity here CLEVELAND -- As he stood on the sideline waiting for "
+      },
+      {
+        "x": -1.698218,
+        "y": 3.901643,
+        "correct": false,
+        "label": 2,
+        "statement": "OPEC Increases Oil Output The Organization of the Petroleum Exporting Countries "
+      },
+      {
+        "x": -3.358323,
+        "y": -1.338902,
+        "correct": false,
+        "label": 3,
+        "statement": "News: WLANs go feral in corporate undergrowth Frustrated employees are taking IT"
+      },
+      {
+        "x": -0.122788,
+        "y": 2.134164,
+        "correct": false,
+        "label": 3,
+        "statement": "U.S. Spies on Chat Rooms Could terrorists be plotting their next move online, ob"
+      },
+      {
+        "x": 2.512032,
+        "y": 2.833144,
+        "correct": true,
+        "label": 0,
+        "statement": "British Terror Suspects Make First Court Appearance  LONDON (Reuters) - British "
+      },
+      {
+        "x": -4.416408,
+        "y": -3.937997,
+        "correct": false,
+        "label": 3,
+        "statement": "This Just In - Sprint is Stupid \\\\Found this  via BoingBoing this morning:\\\\\"The"
+      },
+      {
+        "x": -4.364452,
+        "y": -2.431168,
+        "correct": true,
+        "label": 2,
+        "statement": "Motorola buys wireless network developer, eyes defense contracts CHICAGO - Motor"
+      },
+      {
+        "x": -4.640107,
+        "y": -0.348588,
+        "correct": false,
+        "label": 3,
+        "statement": "Tech Firms Keep Riding Chinese Tiger Microsoft watched a software deal with Chin"
+      },
+      {
+        "x": 2.605496,
+        "y": -3.334457,
+        "correct": true,
+        "label": 1,
+        "statement": "Jets, Pennington Talk The New York Jets and quarterback Chad Pennington are look"
+      },
+      {
+        "x": 3.169953,
+        "y": 1.382072,
+        "correct": true,
+        "label": 0,
+        "statement": "Thousands Hit NYC Streets; Cheney Arrives NEW YORK - Tens of thousands of demons"
+      },
+      {
+        "x": 1.141604,
+        "y": 3.240827,
+        "correct": true,
+        "label": 0,
+        "statement": "India #39;s Offer for Peace Talks on Kashmir Is Sweetened With Aid India #39;s p"
+      },
+      {
+        "x": 3.38612,
+        "y": -0.374012,
+        "correct": true,
+        "label": 1,
+        "statement": "USOC letter to FIG I write in response to your letter of August 26, 2004, which "
+      },
+      {
+        "x": -1.332164,
+        "y": -0.966779,
+        "correct": false,
+        "label": 2,
+        "statement": "(B)old new frontiers Northrop Grumman Corp. and Boeing Co. yesterday announced p"
+      },
+      {
+        "x": 1.363952,
+        "y": 0.185944,
+        "correct": false,
+        "label": 3,
+        "statement": "Socialites unite dolphin groups Dolphin groups, or \"pods\", rely on socialites to"
+      },
+      {
+        "x": 5.86588,
+        "y": -1.157723,
+        "correct": true,
+        "label": 1,
+        "statement": "Nebraska Player Charged With Assault An arrest warrant was issued Friday, Nov. 1"
+      },
+      {
+        "x": 2.948738,
+        "y": 5.910339,
+        "correct": true,
+        "label": 0,
+        "statement": "Putin backs veto for members of expanded Security Council Russian President Vlad"
+      },
+      {
+        "x": 4.669553,
+        "y": -4.867739,
+        "correct": true,
+        "label": 1,
+        "statement": "Cavaliers activate Wagner again CBC SPORTS ONLINE - The Cleveland Cavaliers acti"
+      },
+      {
+        "x": 3.589979,
+        "y": -1.134728,
+        "correct": true,
+        "label": 0,
+        "statement": "Mother of Jackson Accuser Testifies SANTA MARIA, Calif. - The mother of the boy "
+      },
+      {
+        "x": 1.975133,
+        "y": 5.348644,
+        "correct": true,
+        "label": 0,
+        "statement": "Bush Urges Putin Uphold Russian Democracy (Reuters) Reuters - President Bush on "
+      },
+      {
+        "x": -4.474917,
+        "y": -1.24212,
+        "correct": false,
+        "label": 3,
+        "statement": "Desktop Search Avalanche Set to Hit Yahoo, Ask Jeeves, and Microsoft all plan to"
+      },
+      {
+        "x": 3.433468,
+        "y": -4.564216,
+        "correct": true,
+        "label": 1,
+        "statement": "Schilling, Morris face tall task So what will Curt Schilling do for an encore to"
+      },
+      {
+        "x": 1.927545,
+        "y": 2.401702,
+        "correct": true,
+        "label": 0,
+        "statement": "US suspends helicopter flights after Japan crash (AFP) AFP - The United States s"
+      },
+      {
+        "x": 3.315553,
+        "y": -4.976553,
+        "correct": true,
+        "label": 1,
+        "statement": "Braves 6, Padres 5 Andruw Jones hit a two-run homer off Trevor Hoffman in the ni"
+      },
+      {
+        "x": -3.411552,
+        "y": -2.903906,
+        "correct": true,
+        "label": 2,
+        "statement": "Nike Profit Up 25 Pct. on Converse Boost Nike Inc. (NKE.N: Quote, Profile, Resea"
+      },
+      {
+        "x": -3.975575,
+        "y": 1.081083,
+        "correct": true,
+        "label": 2,
+        "statement": "Optimism raises markets Stocks bounded higher Wednesday as investors shrugged of"
+      },
+      {
+        "x": 2.961397,
+        "y": -4.273981,
+        "correct": true,
+        "label": 1,
+        "statement": "Four players shoot opening-round 66 SEMMES, Ala. -- Grace Park, looking to clinc"
+      }
+    ]
+  ],
+  "probe_accuracies": [
+    0.625,
+    0.75,
+    0.825,
+    0.9,
+    0.9,
+    0.95,
+    0.95,
+    0.95,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "best_probe_layer": 8,
+  "best_probe_acc": 1.0,
+  "pc1_separation": 0.0354,
+  "label_names": {
+    "0": "World",
+    "1": "Sports",
+    "2": "Business",
+    "3": "Sci/Tech"
+  },
+  "dataset": "ag_news",
+  "arch": "sas_zero_shot",
+  "mode": "real"
+}

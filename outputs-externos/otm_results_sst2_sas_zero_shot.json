@@ -1,0 +1,5192 @@
+{
+  "n_instances": 40,
+  "n_correct": 22,
+  "n_incorrect": 18,
+  "agent_accuracy": 0.55,
+  "n_layers": 16,
+  "d_model": 2048,
+  "pca_layers": [
+    [
+      {
+        "x": -0.007257,
+        "y": -0.010847,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.12749,
+        "y": -0.009765,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": 0.004022,
+        "y": -0.013333,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.064014,
+        "y": -0.008502,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 0.116751,
+        "y": -0.019916,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.047545,
+        "y": 0.00292,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.058431,
+        "y": 0.024574,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -0.065712,
+        "y": 0.018723,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.004021,
+        "y": -0.029045,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.053304,
+        "y": -0.016885,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.045486,
+        "y": 0.032536,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.103922,
+        "y": -0.013547,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.066646,
+        "y": 0.023939,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.021855,
+        "y": -0.011013,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 0.021967,
+        "y": 0.002305,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.052832,
+        "y": -0.00791,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.072065,
+        "y": 0.007189,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.083873,
+        "y": -0.037047,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.09233,
+        "y": -0.011548,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.049717,
+        "y": -0.05987,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.036175,
+        "y": 0.037551,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.030752,
+        "y": 0.019259,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.026513,
+        "y": -0.007458,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.070917,
+        "y": -0.027232,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.00157,
+        "y": -0.019645,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 0.003892,
+        "y": -0.006904,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.090381,
+        "y": 0.125027,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.047575,
+        "y": -0.021079,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.022522,
+        "y": -0.019092,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.027357,
+        "y": 0.034739,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.029588,
+        "y": 0.04974,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.037529,
+        "y": 0.043606,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.061343,
+        "y": -0.008704,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.068151,
+        "y": 0.056408,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.037323,
+        "y": -0.013979,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.031444,
+        "y": -0.015418,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.060398,
+        "y": -0.0241,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.052657,
+        "y": -0.045349,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.016054,
+        "y": -0.019136,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.085514,
+        "y": -0.001191,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": 0.010884,
+        "y": 0.076801,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": -0.214268,
+        "y": -0.012204,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.028839,
+        "y": 0.011049,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": 0.131913,
+        "y": -0.013454,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": -0.27013,
+        "y": -0.034336,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": 0.053682,
+        "y": -0.000211,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.124606,
+        "y": -0.03252,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.14363,
+        "y": -0.003663,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.026394,
+        "y": 0.094554,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": 0.083532,
+        "y": -0.002876,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.055881,
+        "y": -0.04331,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": 0.235269,
+        "y": -0.007995,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.154238,
+        "y": -0.089152,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.041744,
+        "y": 0.067999,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.073417,
+        "y": -0.001872,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": 0.124004,
+        "y": 0.052355,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": 0.13509,
+        "y": -0.038001,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.190109,
+        "y": 0.05213,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.207699,
+        "y": 0.015318,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.094068,
+        "y": 0.160247,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": 0.086298,
+        "y": -0.084871,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.08309,
+        "y": -0.075626,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.072123,
+        "y": 0.05658,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": 0.128911,
+        "y": 0.064225,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.016909,
+        "y": 0.012937,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.048463,
+        "y": 0.01744,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.143403,
+        "y": -0.120267,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": 0.133034,
+        "y": 0.016045,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.022772,
+        "y": -0.001793,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.049652,
+        "y": -0.09401,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": 0.147862,
+        "y": -0.104132,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.095777,
+        "y": -0.04304,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.140367,
+        "y": -0.000866,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.174336,
+        "y": -0.098972,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.085741,
+        "y": 0.031157,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": 0.086318,
+        "y": 0.032653,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": -0.106896,
+        "y": 0.079215,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": -0.155093,
+        "y": 0.05574,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": -0.058894,
+        "y": 0.008378,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.168461,
+        "y": -0.001649,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": 0.002079,
+        "y": 0.245305,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": -0.290137,
+        "y": 0.072689,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": 0.0267,
+        "y": -0.048352,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": 0.242086,
+        "y": -0.164985,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": -0.494473,
+        "y": -0.17865,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": 0.15172,
+        "y": -0.061814,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.147368,
+        "y": 0.102585,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.236945,
+        "y": -0.120334,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.009638,
+        "y": 0.178987,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": 0.24788,
+        "y": -0.189624,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.104323,
+        "y": -0.09169,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": 0.372343,
+        "y": -0.060215,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.228271,
+        "y": 0.050499,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.079102,
+        "y": -0.02422,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.130603,
+        "y": 0.049322,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": 0.241939,
+        "y": 0.018641,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": 0.251395,
+        "y": -0.097455,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.242136,
+        "y": 0.093605,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.289974,
+        "y": 0.155896,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.243309,
+        "y": 0.205687,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": 0.066253,
+        "y": 0.073945,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.136995,
+        "y": -0.41145,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.132106,
+        "y": 0.152915,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": 0.176045,
+        "y": -0.154508,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.094623,
+        "y": 0.022893,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.056292,
+        "y": 0.111317,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.243239,
+        "y": -0.17411,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": 0.143757,
+        "y": 0.116124,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.011061,
+        "y": 0.04006,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.093329,
+        "y": -0.052128,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": 0.216275,
+        "y": 0.025267,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.116746,
+        "y": -0.126805,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.141436,
+        "y": 0.042153,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.223047,
+        "y": 0.100856,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.16211,
+        "y": 0.023906,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": 0.145803,
+        "y": 0.054764,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": -0.135248,
+        "y": 0.168882,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": -0.275387,
+        "y": -0.1086,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": -0.189541,
+        "y": -0.125845,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.362139,
+        "y": 0.084489,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": 0.010649,
+        "y": 0.275711,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": -0.44112,
+        "y": 0.16371,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": 0.093875,
+        "y": -0.07204,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": 0.351854,
+        "y": -0.377922,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": -0.805737,
+        "y": -0.105959,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": 0.197908,
+        "y": -0.11487,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.224016,
+        "y": 0.03341,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.290294,
+        "y": -0.142885,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.109016,
+        "y": 0.266073,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": 0.403761,
+        "y": -0.314532,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.211057,
+        "y": -0.025759,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": 0.538599,
+        "y": -0.145681,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.302522,
+        "y": 0.100235,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.059496,
+        "y": 0.074623,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.252171,
+        "y": -0.003934,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": 0.436819,
+        "y": 0.084978,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": 0.408098,
+        "y": -0.169313,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.260127,
+        "y": 0.246394,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.380247,
+        "y": 0.142807,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.462036,
+        "y": 0.445324,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": 0.108811,
+        "y": 0.047532,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.353465,
+        "y": -0.473823,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.232223,
+        "y": 0.294726,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": 0.248518,
+        "y": -0.076409,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.205545,
+        "y": -0.02217,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.103664,
+        "y": 0.14818,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.422647,
+        "y": -0.200422,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": 0.238907,
+        "y": 0.075358,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.01889,
+        "y": -0.063848,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.071981,
+        "y": -0.141763,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": 0.431278,
+        "y": 0.042927,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.128519,
+        "y": -0.250921,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.184127,
+        "y": 0.00094,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.344368,
+        "y": 0.02178,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.25752,
+        "y": 0.072275,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": 0.254186,
+        "y": 0.098115,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": -0.168611,
+        "y": 0.228226,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": -0.468726,
+        "y": 0.053397,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": -0.373915,
+        "y": -0.197423,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.472903,
+        "y": -0.017047,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": 0.024196,
+        "y": 0.156044,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": -0.487452,
+        "y": 0.204554,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": 0.159239,
+        "y": 0.012679,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": 0.406417,
+        "y": -0.335166,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": -0.87379,
+        "y": -0.185389,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": 0.203925,
+        "y": -0.170303,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.225806,
+        "y": -0.071331,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.332979,
+        "y": -0.116747,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.056906,
+        "y": 0.215756,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": 0.447233,
+        "y": -0.24647,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.199746,
+        "y": 0.041583,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": 0.568222,
+        "y": -0.132326,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.366438,
+        "y": 0.064321,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.049242,
+        "y": 0.141417,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.249709,
+        "y": -0.059696,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": 0.449188,
+        "y": 0.192878,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": 0.519323,
+        "y": -0.17856,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.291767,
+        "y": 0.28782,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.430962,
+        "y": 0.148686,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.415757,
+        "y": 0.540718,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": 0.125736,
+        "y": -0.018271,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.320741,
+        "y": -0.290515,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.219767,
+        "y": 0.299278,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": 0.283666,
+        "y": -0.033099,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.252754,
+        "y": -0.108215,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.125937,
+        "y": 0.043497,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.421317,
+        "y": -0.123182,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": 0.294563,
+        "y": 0.064966,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.062714,
+        "y": -0.214621,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.028201,
+        "y": -0.196937,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": 0.424234,
+        "y": 0.044926,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.220998,
+        "y": -0.293115,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.24971,
+        "y": -0.033447,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.358895,
+        "y": -0.050645,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.23555,
+        "y": 0.187408,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": 0.225037,
+        "y": 0.111413,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": -0.127005,
+        "y": 0.419319,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": -0.550044,
+        "y": -0.149457,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": -0.336846,
+        "y": -0.080451,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.457049,
+        "y": -0.089317,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.08682,
+        "y": -0.000403,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.664836,
+        "y": -0.276048,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.167955,
+        "y": 0.214141,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.592713,
+        "y": 0.251855,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 1.068396,
+        "y": -0.030491,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.293604,
+        "y": 0.472149,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.324804,
+        "y": 0.141024,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -0.326475,
+        "y": 0.025893,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.024515,
+        "y": -0.207438,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.516378,
+        "y": 0.309719,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.162936,
+        "y": -0.059262,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.605994,
+        "y": -0.127328,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.469334,
+        "y": 0.009783,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.07238,
+        "y": -0.228848,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 0.199994,
+        "y": 0.152167,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.494833,
+        "y": -0.381351,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.794245,
+        "y": 0.26379,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.46181,
+        "y": -0.244088,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.551139,
+        "y": 0.003566,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.348147,
+        "y": -0.753918,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.211125,
+        "y": -0.032086,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.283768,
+        "y": 0.075344,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.170737,
+        "y": -0.359997,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.35514,
+        "y": -0.128827,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.286705,
+        "y": 0.208461,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 0.12137,
+        "y": 0.147792,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.449846,
+        "y": -0.024626,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.381427,
+        "y": -0.073686,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.053437,
+        "y": 0.313963,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.028039,
+        "y": 0.269481,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.538583,
+        "y": -0.177403,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.338844,
+        "y": 0.237101,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.296091,
+        "y": 0.341519,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.454985,
+        "y": -0.080339,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.337675,
+        "y": -0.316036,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.143161,
+        "y": -0.126674,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.218039,
+        "y": -0.41403,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.660269,
+        "y": 0.354569,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.358471,
+        "y": 0.18262,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.432999,
+        "y": 0.067942,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.162394,
+        "y": -0.251843,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.756176,
+        "y": -0.266334,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.148725,
+        "y": -0.048644,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.56684,
+        "y": 0.151581,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 1.206362,
+        "y": 0.722169,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.313733,
+        "y": 0.23504,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.347054,
+        "y": 0.047247,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -0.279789,
+        "y": 0.219923,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.050359,
+        "y": -0.206979,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.491193,
+        "y": 0.077498,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.249874,
+        "y": -0.170186,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.585355,
+        "y": 0.08079,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.506229,
+        "y": -0.182169,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 0.000997,
+        "y": -0.212294,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 0.242268,
+        "y": -0.20391,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.510873,
+        "y": 0.097836,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.761442,
+        "y": 0.255277,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.559057,
+        "y": -0.3707,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.569099,
+        "y": -0.098271,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.313479,
+        "y": -0.089732,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.256842,
+        "y": -0.05402,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.207555,
+        "y": -0.01921,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.26088,
+        "y": -0.077026,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.415923,
+        "y": -0.08177,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.245222,
+        "y": -0.077634,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 0.082487,
+        "y": 0.002824,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.458224,
+        "y": -0.002967,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.433173,
+        "y": -0.085978,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.023741,
+        "y": 0.076624,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.11153,
+        "y": 0.177368,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.507356,
+        "y": 0.095582,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.444179,
+        "y": 0.059077,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.313931,
+        "y": 0.070054,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.431363,
+        "y": 0.053601,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.385653,
+        "y": -0.47617,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.266761,
+        "y": -0.025914,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.343329,
+        "y": -0.34894,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.643718,
+        "y": 0.893627,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.382356,
+        "y": 0.133724,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.382242,
+        "y": -0.099153,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.157093,
+        "y": 0.35051,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.883362,
+        "y": 0.211766,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.180639,
+        "y": 0.01487,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.569369,
+        "y": -0.037703,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 1.290381,
+        "y": -0.649359,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.321368,
+        "y": -0.129305,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.344578,
+        "y": -0.00576,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -0.180675,
+        "y": -0.355102,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 0.060295,
+        "y": 0.194974,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.507459,
+        "y": -0.112564,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.289639,
+        "y": 0.342446,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.65007,
+        "y": -0.034489,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.534102,
+        "y": 0.258368,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.038015,
+        "y": 0.23285,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 0.234246,
+        "y": 0.207136,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.511172,
+        "y": -0.166372,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.819175,
+        "y": -0.278914,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.663911,
+        "y": 0.340834,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.657255,
+        "y": 0.167596,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.237946,
+        "y": -0.157593,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.363954,
+        "y": 0.177575,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.144537,
+        "y": 0.025469,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.382631,
+        "y": 0.044489,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.464531,
+        "y": 0.003482,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.248785,
+        "y": 0.206658,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 0.066889,
+        "y": -0.104919,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.383682,
+        "y": 0.02724,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.494822,
+        "y": 0.046438,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 0.027551,
+        "y": 0.036196,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.112257,
+        "y": -0.110231,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.545282,
+        "y": -0.083364,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.53371,
+        "y": -0.073874,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.286272,
+        "y": -0.222653,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.42456,
+        "y": 0.031221,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.455669,
+        "y": 0.528376,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.312876,
+        "y": 0.061676,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.52768,
+        "y": 0.138258,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.646014,
+        "y": -0.997852,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.472087,
+        "y": -0.330705,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.279827,
+        "y": 0.202328,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.259777,
+        "y": -0.082373,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.832872,
+        "y": -0.11916,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.151771,
+        "y": -0.191363,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.543808,
+        "y": 0.231355,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 2.225714,
+        "y": 1.308683,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.252084,
+        "y": 0.065037,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.360821,
+        "y": 0.166469,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -0.08559,
+        "y": 0.40659,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.055824,
+        "y": -0.343699,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.419676,
+        "y": 0.269044,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.139798,
+        "y": -0.311169,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.63628,
+        "y": 0.095847,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.262588,
+        "y": -0.65025,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.113302,
+        "y": -0.383431,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 0.172357,
+        "y": -0.240608,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.431497,
+        "y": 0.151035,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.788273,
+        "y": 0.744443,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.559103,
+        "y": -0.539626,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.452453,
+        "y": -0.650421,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.154725,
+        "y": 0.055147,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.446531,
+        "y": 0.075968,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.035704,
+        "y": -0.023022,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.383693,
+        "y": 0.040859,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.324272,
+        "y": 0.372875,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.206351,
+        "y": -0.284504,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 0.021569,
+        "y": -0.006282,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.259298,
+        "y": -0.299453,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.404179,
+        "y": 0.354449,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.024821,
+        "y": -0.172088,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.137297,
+        "y": 0.017321,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.58104,
+        "y": 0.376553,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.578324,
+        "y": 0.392084,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.316365,
+        "y": -0.233073,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.533812,
+        "y": 0.205595,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.283148,
+        "y": -0.576706,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.328365,
+        "y": -0.139489,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.663811,
+        "y": 0.058893,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.930324,
+        "y": 0.090052,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.589876,
+        "y": 0.199664,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.115837,
+        "y": -0.431247,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.316539,
+        "y": 0.134488,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.573365,
+        "y": -0.42639,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.281175,
+        "y": -0.135784,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.358403,
+        "y": 0.470375,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 3.290718,
+        "y": 0.984733,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.222812,
+        "y": 0.183843,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.177652,
+        "y": 0.244913,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.090877,
+        "y": 0.192183,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.107351,
+        "y": -0.200372,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.399913,
+        "y": 0.29472,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.011702,
+        "y": -0.200632,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.426881,
+        "y": 0.399637,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 0.012902,
+        "y": -0.517039,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.123348,
+        "y": -0.154427,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.02665,
+        "y": -0.317205,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.392137,
+        "y": 0.238931,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.489789,
+        "y": 0.795933,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.18302,
+        "y": -0.687628,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.23719,
+        "y": -0.538915,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.194107,
+        "y": 0.001096,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.288112,
+        "y": 0.220488,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.289966,
+        "y": -0.007145,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.335836,
+        "y": 0.207354,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.332487,
+        "y": 0.291586,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.161162,
+        "y": -0.29578,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.15246,
+        "y": -0.161747,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.13863,
+        "y": -0.415084,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.389382,
+        "y": 0.322612,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.130369,
+        "y": -0.129949,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.077685,
+        "y": 0.084912,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.359068,
+        "y": 0.441612,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.328052,
+        "y": 0.552893,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.123906,
+        "y": -0.496304,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.231635,
+        "y": 0.433981,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.196655,
+        "y": -0.395144,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.261326,
+        "y": 0.114371,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.422013,
+        "y": -0.423869,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.923547,
+        "y": -0.441308,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.3936,
+        "y": -0.422647,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.066154,
+        "y": -0.243291,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.299847,
+        "y": 0.104321,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.541979,
+        "y": -0.367975,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.2101,
+        "y": -0.062963,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.397808,
+        "y": 0.40339,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 3.799886,
+        "y": 0.670307,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.174503,
+        "y": 0.219937,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.131433,
+        "y": 0.280937,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.104641,
+        "y": 0.187662,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.306947,
+        "y": -0.303047,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.35209,
+        "y": 0.357188,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.133162,
+        "y": -0.322115,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.389176,
+        "y": 0.409747,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.028213,
+        "y": -0.497412,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.239712,
+        "y": -0.285209,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.070507,
+        "y": -0.301813,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.337694,
+        "y": 0.278232,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.326783,
+        "y": 0.938666,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.151971,
+        "y": -0.716977,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.165263,
+        "y": -0.495235,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.147657,
+        "y": 0.043684,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.352865,
+        "y": 0.153763,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.173245,
+        "y": 0.134578,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.320423,
+        "y": 0.213726,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.268561,
+        "y": 0.315206,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 0.004365,
+        "y": -0.37514,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.127406,
+        "y": -0.071717,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.001711,
+        "y": -0.445375,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.354701,
+        "y": 0.341744,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.337431,
+        "y": -0.22692,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.049837,
+        "y": 0.111842,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.387641,
+        "y": 0.429444,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.259012,
+        "y": 0.56562,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 0.034937,
+        "y": -0.440713,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.237644,
+        "y": 0.397349,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.16868,
+        "y": -0.456777,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.273698,
+        "y": 0.1199,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.326227,
+        "y": -0.402039,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.968633,
+        "y": -0.38705,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.465456,
+        "y": -0.35344,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.045653,
+        "y": -0.165326,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.308232,
+        "y": -0.177772,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.482253,
+        "y": 0.347757,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.272119,
+        "y": 0.078213,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.359501,
+        "y": -0.514168,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 4.43991,
+        "y": -0.561458,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.258014,
+        "y": -0.159674,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.107526,
+        "y": -0.297841,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.080584,
+        "y": 0.041762,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.361979,
+        "y": 0.287092,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.328173,
+        "y": -0.285991,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.124368,
+        "y": 0.213173,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.416104,
+        "y": -0.511652,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.088383,
+        "y": 0.326553,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.297566,
+        "y": 0.20968,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.061004,
+        "y": 0.398235,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.334299,
+        "y": -0.35287,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.28312,
+        "y": -0.948036,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 0.080607,
+        "y": 0.874161,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": 0.039061,
+        "y": 0.381938,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.095031,
+        "y": -0.042909,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.317472,
+        "y": -0.206256,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.113799,
+        "y": -0.392966,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.285002,
+        "y": -0.333601,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.204096,
+        "y": -0.251177,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.054996,
+        "y": 0.36279,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.114138,
+        "y": 0.17192,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.045437,
+        "y": 0.4457,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.32112,
+        "y": -0.160795,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.408551,
+        "y": 0.237891,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.016248,
+        "y": -0.174842,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.340618,
+        "y": -0.406922,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.209766,
+        "y": -0.604926,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.081804,
+        "y": 0.654194,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.202802,
+        "y": -0.482689,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.083783,
+        "y": 0.397361,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.29433,
+        "y": -0.343651,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.378061,
+        "y": 0.501371,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.874337,
+        "y": 0.511668,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.315149,
+        "y": 0.810664,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.06815,
+        "y": -0.041928,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.381663,
+        "y": 0.245964,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.730118,
+        "y": -0.404617,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.342231,
+        "y": -0.155719,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.350605,
+        "y": 0.618335,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 5.461696,
+        "y": 0.540817,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.258478,
+        "y": 0.117026,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.090449,
+        "y": 0.411988,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.166606,
+        "y": 0.118173,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.463055,
+        "y": -0.430605,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.339971,
+        "y": 0.343167,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.041444,
+        "y": -0.275492,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.55107,
+        "y": 0.60111,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.053775,
+        "y": -0.412617,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.465673,
+        "y": -0.3707,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.130479,
+        "y": -0.522356,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.367717,
+        "y": 0.411234,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.357133,
+        "y": 1.174096,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.062238,
+        "y": -1.131005,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.028224,
+        "y": -0.457311,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.021415,
+        "y": 0.060486,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.370043,
+        "y": 0.250941,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": -0.137174,
+        "y": 0.55725,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -0.259815,
+        "y": 0.507594,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.33455,
+        "y": 0.364569,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.101151,
+        "y": -0.50594,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.205617,
+        "y": -0.175798,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.11347,
+        "y": -0.568479,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.493012,
+        "y": 0.238712,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -0.541009,
+        "y": -0.389932,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.002928,
+        "y": 0.231754,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.320416,
+        "y": 0.535649,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -0.243718,
+        "y": 0.746502,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.165626,
+        "y": -0.7927,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -0.164576,
+        "y": 0.58893,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.029813,
+        "y": -0.524549,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.406058,
+        "y": 0.397446,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.488586,
+        "y": -0.533687,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 0.93559,
+        "y": -0.649511,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.392286,
+        "y": -0.873404,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.039912,
+        "y": 0.112678,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.473259,
+        "y": -0.221155,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 0.941438,
+        "y": 0.571596,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.617697,
+        "y": 0.100563,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.321908,
+        "y": -0.790963,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 7.797681,
+        "y": 0.187216,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.379327,
+        "y": -0.260115,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.086984,
+        "y": -0.595166,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.406281,
+        "y": -0.58274,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -0.950774,
+        "y": 0.732166,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.268055,
+        "y": -0.738475,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.158462,
+        "y": 0.462235,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.70611,
+        "y": -0.552312,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.1821,
+        "y": 0.521558,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -0.879589,
+        "y": 0.637839,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.460101,
+        "y": 0.826115,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.39064,
+        "y": -0.455942,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.202239,
+        "y": -1.845807,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -0.662094,
+        "y": 1.490859,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.172851,
+        "y": 0.383693,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.054484,
+        "y": 0.032301,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.424455,
+        "y": -0.57168,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.105317,
+        "y": -0.84643,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.049997,
+        "y": -0.652027,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.585093,
+        "y": -0.446432,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.416885,
+        "y": 0.840001,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.433205,
+        "y": 0.399818,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.37882,
+        "y": 0.726339,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -0.800848,
+        "y": -0.082712,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -1.080326,
+        "y": 0.683999,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.15401,
+        "y": -0.24613,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.272196,
+        "y": -0.667588,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.123209,
+        "y": -1.346482,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.467051,
+        "y": 1.051506,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.178945,
+        "y": -0.678448,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.24978,
+        "y": 0.700546,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.410983,
+        "y": -0.622659,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.616003,
+        "y": 0.476907,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 1.160573,
+        "y": 0.433706,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.294528,
+        "y": 1.086509,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.058474,
+        "y": -0.142209,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": -0.706438,
+        "y": 0.373779,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": 1.392537,
+        "y": -0.449085,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": -0.959259,
+        "y": -0.174519,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.260053,
+        "y": 1.220969,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": 10.72609,
+        "y": -0.893768,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": -0.481488,
+        "y": 0.277049,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": 0.25356,
+        "y": 0.790738,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": 0.734188,
+        "y": 0.872378,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": -1.397323,
+        "y": -0.876491,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": -0.324633,
+        "y": 0.756387,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": 0.088457,
+        "y": -0.419431,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": -0.903869,
+        "y": 0.507852,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": -0.526005,
+        "y": -0.663539,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": -1.542051,
+        "y": -1.038364,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": -0.795808,
+        "y": -1.107018,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": -0.628064,
+        "y": 0.591341,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": -0.219894,
+        "y": 2.193894,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": -1.111837,
+        "y": -1.960047,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.182594,
+        "y": -0.332019,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": 0.067561,
+        "y": -0.039389,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": -0.269509,
+        "y": 0.809769,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.119881,
+        "y": 0.935241,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": 0.606137,
+        "y": 1.369647,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": -0.750246,
+        "y": 0.341729,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": -0.643616,
+        "y": -1.086526,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": -0.613213,
+        "y": -0.614592,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": -0.671941,
+        "y": -0.969222,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": -1.158412,
+        "y": 0.063238,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": -1.666255,
+        "y": -1.069183,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": 0.260669,
+        "y": 0.20391,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": 0.115149,
+        "y": 1.053701,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": 0.426684,
+        "y": 2.107637,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": -0.783199,
+        "y": -1.413603,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": 0.513251,
+        "y": 0.966498,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": -0.382227,
+        "y": -0.773121,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": -0.542352,
+        "y": 0.538149,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": 0.688904,
+        "y": -0.575844,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": 1.301245,
+        "y": -0.486693,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": 0.257821,
+        "y": -1.263334,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": -0.031849,
+        "y": 0.231881,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ],
+    [
+      {
+        "x": 1.095647,
+        "y": -0.124918,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "vera 's three actors -- mollà , gil and bardem -- excel in insightful , empathet"
+      },
+      {
+        "x": -1.912719,
+        "y": -0.978332,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "my reaction in a word : disappointment . "
+      },
+      {
+        "x": 1.554522,
+        "y": 0.110565,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "though only 60 minutes long , the film is packed with information and impression"
+      },
+      {
+        "x": -0.268688,
+        "y": 1.755613,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "thanks to scott 's charismatic roger and eisenberg 's sweet nephew , roger dodge"
+      },
+      {
+        "x": -15.947807,
+        "y": -2.469702,
+        "correct": true,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "how do you spell cliché ? "
+      },
+      {
+        "x": 0.731284,
+        "y": 1.842824,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "while ( hill ) has learned new tricks , the tricks alone are not enough to salva"
+      },
+      {
+        "x": -0.38458,
+        "y": 0.590965,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "it 's so good that its relentless , polished wit can withstand not only inept sc"
+      },
+      {
+        "x": -1.472442,
+        "y": 1.225868,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "further proof that the epicenter of cool , beautiful , thought-provoking foreign"
+      },
+      {
+        "x": 2.144269,
+        "y": -1.581402,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "k-19 exploits our substantial collective fear of nuclear holocaust to generate c"
+      },
+      {
+        "x": 0.47051,
+        "y": 1.287923,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "although laced with humor and a few fanciful touches , the film is a refreshingl"
+      },
+      {
+        "x": -0.197869,
+        "y": -1.11581,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "verbinski implements every hack-artist trick to give us the ooky-spookies . "
+      },
+      {
+        "x": 1.277068,
+        "y": -0.385549,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the movie has an infectious exuberance that will engage anyone with a passing in"
+      },
+      {
+        "x": 1.071275,
+        "y": -0.911185,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "i had to look away - this was god awful . "
+      },
+      {
+        "x": 2.746941,
+        "y": -1.87864,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a literate presentation that wonderfully weaves a murderous event in 1873 with m"
+      },
+      {
+        "x": 1.180936,
+        "y": -2.026237,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's a cookie-cutter movie , a cut-and-paste job . "
+      },
+      {
+        "x": 0.823652,
+        "y": 0.1659,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "the fly-on-the-wall method used to document rural french school life is a refres"
+      },
+      {
+        "x": 0.255674,
+        "y": 4.497006,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "while its careful pace and seemingly opaque story may not satisfy every moviegoe"
+      },
+      {
+        "x": 1.799184,
+        "y": -2.872936,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a delightful coming-of-age story . "
+      },
+      {
+        "x": -0.100074,
+        "y": -0.889191,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "holden caulfield did it better . "
+      },
+      {
+        "x": -0.35044,
+        "y": -0.460916,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "this riveting world war ii moral suspense story deals with the shadow side of am"
+      },
+      {
+        "x": 0.272401,
+        "y": 1.001934,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "nothing 's at stake , just a twisty double-cross you can smell a mile away -- st"
+      },
+      {
+        "x": 0.271896,
+        "y": 1.369441,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "this is a good script , good dialogue , funny even for adults . "
+      },
+      {
+        "x": -2.110174,
+        "y": 3.399567,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "sticky sweet sentimentality , clumsy plotting and a rosily myopic view of life i"
+      },
+      {
+        "x": 1.405035,
+        "y": 0.221824,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a simple , but gritty and well-acted ensemble drama that encompasses a potent me"
+      },
+      {
+        "x": 1.105812,
+        "y": -1.305123,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "comes ... uncomfortably close to coasting in the treads of the bicycle thief . "
+      },
+      {
+        "x": 1.198183,
+        "y": -0.888447,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "not an objectionable or dull film ; it merely lacks everything except good inten"
+      },
+      {
+        "x": 0.991475,
+        "y": -1.314305,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it all feels like a monty python sketch gone horribly wrong . "
+      },
+      {
+        "x": 2.10095,
+        "y": 0.132018,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "an operatic , sprawling picture that 's entertainingly acted , magnificently sho"
+      },
+      {
+        "x": 2.981591,
+        "y": -1.350286,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "not since tom cruise in risky business has an actor made such a strong impressio"
+      },
+      {
+        "x": -0.027646,
+        "y": -0.120634,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it can not be enjoyed , even on the level that one enjoys a bad slasher flick , "
+      },
+      {
+        "x": -0.877219,
+        "y": 1.922102,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "very special effects , brilliantly bold colors and heightened reality ca n't hid"
+      },
+      {
+        "x": -1.395684,
+        "y": 4.312996,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "that dogged good will of the parents and ` vain ' jia 's defoliation of ego , ma"
+      },
+      {
+        "x": 1.64182,
+        "y": -1.122995,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "rarely has so much money delivered so little entertainment . "
+      },
+      {
+        "x": -1.170663,
+        "y": 0.946751,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "it 's not that kung pow is n't funny some of the time -- it just is n't any funn"
+      },
+      {
+        "x": 0.355174,
+        "y": -1.871729,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "a woman 's pic directed with resonance by ilya chaiken . "
+      },
+      {
+        "x": 0.781734,
+        "y": 0.345351,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "without non-stop techno or the existential overtones of a kieslowski morality ta"
+      },
+      {
+        "x": -1.019984,
+        "y": -0.473777,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "scores no points for originality , wit , or intelligence . "
+      },
+      {
+        "x": -1.637526,
+        "y": 0.378826,
+        "correct": false,
+        "label": 0,
+        "label_name": "Negative",
+        "statement": "why make a documentary about these marginal historical figures ? "
+      },
+      {
+        "x": -0.11883,
+        "y": -1.227398,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "puts a human face on a land most westerners are unfamiliar with . "
+      },
+      {
+        "x": 0.735312,
+        "y": -0.137964,
+        "correct": true,
+        "label": 1,
+        "label_name": "Positive",
+        "statement": "... routine , harmless diversion and little else . "
+      }
+    ]
+  ],
+  "probe_accuracies": [
+    0.575,
+    0.625,
+    0.975,
+    0.975,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "best_probe_layer": 4,
+  "best_probe_acc": 1.0,
+  "pc1_separation": 0.1051,
+  "dataset": "sst2",
+  "arch": "sas_zero_shot",
+  "task": "sentimento",
+  "n_classes": 2,
+  "label_names": [
+    "Negative",
+    "Positive"
+  ],
+  "mode": "real"
+}

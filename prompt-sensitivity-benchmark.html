@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Sensitivity Analysis · Overthinking Machine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variáveis ──────────────────────────────────────────────── */
+    :root {
+      --branco: #FFFFFF;
+      --azul-sereno: #AEC6CF;
+      --roxo-lavanda: #E6E6FA;
+      --roxo-profundo: #5D3FD3;
+      --roxo-mid: #7B5EA7;
+      --roxo-hover: #4b32b3;
+      --texto-principal: #1F1F2E;
+      --texto-secundario: #6B6B80;
+      --card-bg: #FAFAFE;
+      --card-border: #E8E8F5;
+      --term-bg: #080812;
+      --term-header: #0F0F22;
+      --term-green: #00E599;
+      --term-blue: #60B4FF;
+      --term-yellow: #FFD166;
+      --term-red: #FF6B6B;
+      --term-dim: #3A3A5C;
+      --term-text: #C8C8E8;
+      --shadow-card: 0 4px 20px rgba(93,63,211,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--branco); color:var(--texto-principal); overflow-x:hidden; }
+    ::selection { background:var(--roxo-lavanda); color:var(--roxo-profundo); }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 5%; background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(16px); border-bottom:1px solid rgba(93,63,211,0.08);
+      position:sticky; top:0; z-index:200;
+    }
+    .logo {
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.2rem;
+      color:var(--roxo-profundo); letter-spacing:-0.5px;
+      display:flex; align-items:center; gap:6px; text-decoration:none;
+    }
+    .logo span { color:var(--azul-sereno); }
+    .logo-dot { width:8px; height:8px; background:var(--term-green); border-radius:50%; animation:blink-dot 1.8s infinite; }
+    @keyframes blink-dot { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    nav { display:flex; gap:24px; align-items:center; }
+    nav a { font-size:0.85rem; font-weight:500; color:var(--texto-secundario); text-decoration:none; transition:color 0.2s; }
+    nav a:hover { color:var(--roxo-profundo); }
+    .nav-badge {
+      background:linear-gradient(135deg,#5D3FD3,#b3471f);
+      color:#fff; font-size:0.65rem; font-weight:700;
+      padding:3px 9px; border-radius:50px; letter-spacing:0.5px;
+    }
+    /* Toggle Mock / Real */
+    .mock-toggle {
+      display:flex; align-items:center; gap:7px;
+      background:rgba(93,63,211,0.07); border:1.5px solid rgba(93,63,211,0.18);
+      border-radius:50px; padding:5px 12px 5px 8px; cursor:pointer;
+      font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:700;
+      color:var(--texto-secundario); user-select:none; transition:all 0.2s;
+    }
+    .mock-toggle:hover { background:rgba(93,63,211,0.12); }
+    .mock-toggle.mock-on { background:rgba(93,63,211,0.1); border-color:var(--roxo-mid); color:var(--roxo-profundo); }
+    .mock-toggle.real-on { background:rgba(179,71,31,0.1); border-color:#b3471f; color:#b3471f; }
+    .mock-pip { width:28px; height:16px; border-radius:50px; background:#d0d0e0; position:relative; transition:background 0.2s; flex-shrink:0; }
+    .mock-pip::after {
+      content:''; position:absolute; width:12px; height:12px; border-radius:50%;
+      background:#fff; top:2px; left:2px; transition:transform 0.2s;
+      box-shadow:0 1px 3px rgba(0,0,0,0.25);
+    }
+    .mock-toggle.mock-on .mock-pip { background:var(--roxo-profundo); }
+    .mock-toggle.real-on .mock-pip { background:#b3471f; }
+    .mock-toggle.real-on .mock-pip::after { transform:translateX(12px); }
+    .api-note {
+      margin-top:10px; font-size:0.62rem; line-height:1.55; padding:8px 10px;
+      border-radius:7px; display:none;
+    }
+    .api-note.visible { display:block; }
+    .api-note.ok  { background:rgba(0,229,153,0.09); color:#0a7a5c; border:1px solid rgba(0,229,153,0.25); }
+    .api-note.err { background:rgba(255,107,107,0.1); color:#c0392b; border:1px solid rgba(255,107,107,0.3); }
+    .api-note code { font-family:'JetBrains Mono',monospace; }
+
+    /* ── Page Hero (compact) ─────────────────────────────────────── */
+    .page-hero {
+      padding:48px 5% 36px;
+      background:linear-gradient(160deg,#FFF3EC 0%,#FAF7FF 60%,#FAFAFE 100%);
+      border-bottom:1px solid var(--card-border);
+    }
+    .page-hero-inner { max-width:920px; }
+    .page-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      background:rgba(217,98,33,0.12); color:#b3471f;
+      font-size:0.72rem; font-weight:700; letter-spacing:1.2px;
+      text-transform:uppercase; padding:5px 14px; border-radius:50px; margin-bottom:20px;
+    }
+    .page-badge::before { content:''; width:6px; height:6px; background:#b3471f; border-radius:50%; animation:blink-dot 1.4s infinite; }
+    .page-title {
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:clamp(2rem,4vw,3.4rem); line-height:1.06;
+      color:var(--roxo-profundo); letter-spacing:-1.5px; margin-bottom:16px;
+    }
+    .page-title em { font-style:normal; color:transparent; -webkit-text-stroke:2px var(--roxo-profundo); }
+    .page-subtitle { font-size:0.97rem; color:var(--texto-secundario); line-height:1.75; max-width:660px; margin-bottom:28px; }
+    .hero-chips { display:flex; gap:10px; flex-wrap:wrap; }
+    .hero-chip {
+      display:flex; align-items:center; gap:6px;
+      background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:8px;
+      padding:7px 13px; font-size:0.72rem; font-weight:500; color:var(--texto-secundario);
+    }
+    .hero-chip strong { color:var(--texto-principal); }
+
+    /* ── Main Layout ─────────────────────────────────────────────── */
+    .main-layout {
+      display:grid;
+      grid-template-columns:320px 1fr;
+      grid-template-rows:auto 1fr;
+      min-height:calc(100vh - 200px);
+      max-width:1500px; margin:0 auto;
+      padding:28px 3% 0;
+      gap:20px;
+    }
+
+    /* ── Config Sidebar ──────────────────────────────────────────── */
+    .config-sidebar {
+      grid-column:1; grid-row:1/3;
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .config-card {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; padding:18px; box-shadow:var(--shadow-card);
+    }
+    .config-card-title {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.72rem;
+      text-transform:uppercase; letter-spacing:1px; color:var(--texto-secundario);
+      margin-bottom:14px; display:flex; align-items:center; gap:6px;
+    }
+    .config-label { font-size:0.72rem; font-weight:600; color:var(--texto-principal); margin-bottom:6px; }
+    .config-group { margin-bottom:14px; }
+    .config-group:last-child { margin-bottom:0; }
+
+    /* Pill selectors */
+    .pill-group { display:flex; flex-wrap:wrap; gap:5px; }
+    .pill-btn {
+      padding:5px 11px; border:1.5px solid var(--card-border); border-radius:50px;
+      font-size:0.68rem; font-weight:500; cursor:pointer; transition:all 0.15s;
+      background:var(--branco); color:var(--texto-secundario); font-family:'Inter',sans-serif;
+    }
+    .pill-btn:hover { border-color:rgba(93,63,211,0.35); color:var(--roxo-profundo); }
+    .pill-btn.active { background:var(--roxo-profundo); color:#fff; border-color:var(--roxo-profundo); }
+    .pill-btn.mode-pert.active { background:#7c2d12; border-color:#fb923c; color:#fb923c; }
+    .pill-btn.mode-reord.active { background:#0c1e14; border-color:#4ade80; color:#4ade80; }
+
+    /* Text source */
+    .text-source-tabs { display:flex; gap:4px; margin-bottom:10px; }
+    .ts-tab {
+      flex:1; padding:5px; border:1.5px solid var(--card-border); border-radius:7px;
+      font-size:0.62rem; font-weight:600; cursor:pointer; background:var(--branco);
+      color:var(--texto-secundario); text-align:center; transition:all 0.15s; font-family:'Inter',sans-serif;
+    }
+    .ts-tab.active { background:var(--roxo-profundo); color:#fff; border-color:var(--roxo-profundo); }
+    .text-preview {
+      background:var(--term-bg); border-radius:8px; padding:10px; font-family:'JetBrains Mono',monospace;
+      font-size:0.62rem; color:rgba(200,200,232,0.6); line-height:1.5; max-height:120px; overflow:hidden;
+      position:relative;
+    }
+    .text-preview::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:28px;
+      background:linear-gradient(transparent, var(--term-bg));
+    }
+    textarea.text-custom {
+      width:100%; background:var(--term-bg); border:1.5px solid var(--term-dim); border-radius:8px;
+      padding:10px; font-family:'JetBrains Mono',monospace; font-size:0.62rem;
+      color:var(--term-text); line-height:1.5; resize:vertical; min-height:90px; outline:none;
+    }
+    textarea.text-custom:focus { border-color:rgba(93,63,211,0.5); }
+
+    .chunk-info {
+      background:rgba(93,63,211,0.06); border:1px solid rgba(93,63,211,0.12);
+      border-radius:7px; padding:8px 10px; font-size:0.67rem; color:var(--texto-secundario);
+      display:flex; gap:12px;
+    }
+    .chunk-info strong { color:var(--roxo-profundo); font-weight:700; }
+
+    /* Seeds stepper */
+    .seed-stepper { display:flex; align-items:center; gap:10px; }
+    .seed-btn {
+      width:28px; height:28px; border-radius:7px; border:1.5px solid var(--card-border);
+      background:var(--branco); color:var(--roxo-profundo); font-weight:700; cursor:pointer;
+      font-size:0.85rem; display:flex; align-items:center; justify-content:center;
+    }
+    .seed-btn:hover { border-color:var(--roxo-profundo); }
+    .seed-val { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.95rem; color:var(--texto-principal); min-width:24px; text-align:center; }
+    .seed-note { font-size:0.62rem; color:var(--texto-secundario); margin-top:8px; line-height:1.5; }
+
+    /* Run button */
+    .run-btn-ld {
+      width:100%; padding:13px; border:none; border-radius:10px; cursor:pointer;
+      font-family:'Inter',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.3px;
+      transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .run-btn-single {
+      background:var(--roxo-profundo); color:#fff;
+      box-shadow:0 6px 20px rgba(93,63,211,0.3);
+    }
+    .run-btn-single:hover { background:var(--roxo-hover); transform:translateY(-2px); box-shadow:0 10px 28px rgba(93,63,211,0.4); }
+    .run-btn-bench {
+      background:linear-gradient(135deg,#5D3FD3,#b3471f); color:#fff;
+      box-shadow:0 6px 20px rgba(179,71,31,0.25);
+    }
+    .run-btn-bench:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(179,71,31,0.35); }
+    .run-btn-ld:disabled { opacity:0.5; cursor:not-allowed; transform:none !important; }
+    .run-btn-ld .spin { display:none; animation:spin 0.8s linear infinite; }
+    .run-btn-ld.running .spin { display:inline; }
+    .run-btn-ld.running .run-icon { display:none; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* ── Workspace ───────────────────────────────────────────────── */
+    .workspace { grid-column:2; display:flex; flex-direction:column; gap:16px; padding-bottom:60px; }
+
+    /* Progress strip */
+    .progress-strip {
+      background:var(--term-bg); border-radius:10px; padding:12px 16px;
+      display:flex; align-items:center; gap:16px; font-family:'JetBrains Mono',monospace;
+    }
+    .ps-label { font-size:0.7rem; color:var(--term-dim); white-space:nowrap; }
+    .ps-bar-track { flex:1; height:6px; background:rgba(58,58,92,0.6); border-radius:50px; overflow:hidden; }
+    .ps-bar-fill { height:100%; background:var(--term-green); border-radius:50px; width:0; transition:width 0.4s; }
+    .ps-status { font-size:0.68rem; color:var(--term-green); white-space:nowrap; }
+    .ps-count { font-size:0.68rem; color:rgba(200,200,232,0.5); white-space:nowrap; }
+
+    /* Panels container */
+    .panels-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; flex:1; min-height:460px; }
+
+    /* Terminal panel */
+    .term-panel {
+      background:var(--term-bg); border-radius:14px; overflow:hidden;
+      display:flex; flex-direction:column; min-height:460px;
+      box-shadow:0 4px 24px rgba(0,0,0,0.3);
+    }
+    .term-topbar { background:var(--term-header); padding:10px 14px; display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .term-dots { display:flex; gap:5px; }
+    .term-dot { width:10px; height:10px; border-radius:50%; }
+    .term-dot-r { background:#ff5f57; }
+    .term-dot-y { background:#febc2e; }
+    .term-dot-g { background:#28c840; }
+    .term-title { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(200,200,232,0.5); flex:1; text-align:center; }
+    .term-body {
+      flex:1; padding:14px 16px; overflow-y:auto; font-family:'JetBrains Mono',monospace;
+      font-size:0.67rem; line-height:1.65; color:var(--term-text);
+    }
+    .term-body::-webkit-scrollbar { width:4px; }
+    .term-body::-webkit-scrollbar-track { background:transparent; }
+    .term-body::-webkit-scrollbar-thumb { background:var(--term-dim); border-radius:2px; }
+
+    .tl { display:block; }
+    .tl-sys  { color:rgba(200,200,232,0.3); }
+    .tl-cmd  { color:var(--term-blue); }
+    .tl-ok   { color:var(--term-green); }
+    .tl-warn { color:var(--term-yellow); }
+    .tl-err  { color:var(--term-red); }
+    .tl-claim{ color:#e879f9; }
+    .tl-head { color:var(--term-blue); font-weight:700; }
+    .tl-dim  { color:var(--term-dim); }
+    .tl-hl   { color:var(--term-text); }
+
+    /* ── Sensitivity Ranking Panel (substitui o notebook do long_doc) ── */
+    .sens-panel {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
+      box-shadow:var(--shadow-card);
+    }
+    .sens-topbar { background:var(--term-header); padding:10px 14px; display:flex; align-items:center; gap:8px; }
+    .sens-title { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(200,200,232,0.5); }
+    .sens-live-dot { width:6px; height:6px; background:var(--term-green); border-radius:50%; animation:blink-dot 1s infinite; margin-left:auto; }
+    .sens-live-dot.idle { background:var(--term-dim); animation:none; }
+    .sens-body { flex:1; padding:14px; overflow-y:auto; display:flex; flex-direction:column; gap:7px; }
+    .sens-body::-webkit-scrollbar { width:4px; }
+    .sens-body::-webkit-scrollbar-thumb { background:var(--card-border); border-radius:2px; }
+    .sens-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--texto-secundario); gap:8px; opacity:0.5; }
+    .sens-empty-icon { font-size:2rem; }
+
+    .sens-row {
+      display:flex; align-items:center; gap:8px; padding:7px 9px; border-radius:8px;
+      background:rgba(93,63,211,0.04); border:1px solid transparent; transition:all 0.2s;
+    }
+    .sens-row.new-item { background:rgba(93,63,211,0.12); animation:flash-item 0.7s ease; }
+    @keyframes flash-item { 0%{background:rgba(93,63,211,0.35)} 100%{background:rgba(93,63,211,0.04)} }
+    .sens-conf { font-size:0.7rem; width:13px; flex-shrink:0; text-align:center; }
+    .sens-type {
+      flex-shrink:0; width:74px; font-size:0.56rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.4px; border-radius:5px; padding:3px 5px; text-align:center;
+      font-family:'JetBrains Mono',monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .sens-bar-wrap { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .sens-clause-text { font-size:0.63rem; color:var(--texto-secundario); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sens-bar-track { height:6px; background:var(--card-border); border-radius:50px; overflow:hidden; position:relative; }
+    .sens-bar-fill { height:100%; border-radius:50px; position:absolute; top:0; }
+    .sens-delta { font-family:'JetBrains Mono',monospace; font-size:0.66rem; font-weight:700; width:48px; text-align:right; flex-shrink:0; }
+    .sens-tok { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--texto-secundario); width:54px; text-align:right; flex-shrink:0; }
+    .sens-pos-flag { font-size:0.62rem; flex-shrink:0; cursor:help; }
+
+    /* ── Compressed Prompt Panel ──────────────────────────────────── */
+    .compressed-panel {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; padding:20px; box-shadow:var(--shadow-card); display:none;
+    }
+    .compressed-panel.visible { display:block; }
+    .cp-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.85rem; color:var(--texto-principal); margin-bottom:4px; }
+    .cp-sub { font-size:0.7rem; color:var(--texto-secundario); margin-bottom:16px; }
+    .cp-split { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .cp-col-label { font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--texto-secundario); margin-bottom:6px; }
+    .cp-box {
+      background:var(--term-bg); border-radius:10px; padding:12px;
+      font-family:'JetBrains Mono',monospace; font-size:0.64rem; line-height:1.7; color:var(--term-text);
+      max-height:280px; overflow-y:auto;
+    }
+    .cp-removed { color:var(--term-red); text-decoration:line-through; opacity:0.55; }
+    .cp-kept { color:var(--term-text); }
+    .cp-stats { display:flex; gap:18px; margin-top:14px; flex-wrap:wrap; }
+    .cp-stat-val { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.3rem; color:var(--roxo-profundo); }
+    .cp-stat-label { font-size:0.6rem; color:var(--texto-secundario); text-transform:uppercase; letter-spacing:0.6px; }
+
+    /* ── Interactions Panel ───────────────────────────────────────── */
+    .interactions-panel {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; padding:20px; box-shadow:var(--shadow-card); display:none;
+    }
+    .interactions-panel.visible { display:block; }
+    .int-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.85rem; color:var(--texto-principal); margin-bottom:12px; }
+    .int-card {
+      background:var(--term-bg); border-radius:10px; padding:12px 14px; margin-bottom:8px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .int-card:last-child { margin-bottom:0; }
+    .int-pair { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--term-blue); flex-shrink:0; }
+    .int-desc { font-size:0.66rem; color:rgba(200,200,232,0.7); line-height:1.5; flex:1; }
+    .int-effect { font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.72rem; flex-shrink:0; }
+    .int-effect.super { color:var(--term-yellow); }
+    .int-effect.sub { color:#60B4FF; }
+
+    /* ── Summary Cards ────────────────────────────────────────────── */
+    .result-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .rs-card { background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:12px; padding:14px 16px; text-align:center; }
+    .rs-val { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.5rem; color:var(--roxo-profundo); }
+    .rs-label { font-size:0.62rem; color:var(--texto-secundario); text-transform:uppercase; letter-spacing:0.8px; margin-top:3px; }
+    .rs-sub { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--roxo-mid); margin-top:4px; }
+
+    /* ── Fundamentação (papers) ───────────────────────────────────── */
+    .papers-section { max-width:1500px; margin:0 auto; padding:10px 3% 70px; }
+    .papers-head { margin-bottom:18px; }
+    .papers-head .section-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--texto-secundario); margin-bottom:6px; }
+    .papers-head h2 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.3rem; color:var(--texto-principal); }
+    .papers-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    .paper-card {
+      background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:14px;
+      padding:16px 18px; box-shadow:var(--shadow-card);
+    }
+    .paper-top { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
+    .paper-title { font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.85rem; color:var(--texto-principal); line-height:1.35; }
+    .paper-meta { font-size:0.66rem; color:var(--roxo-mid); font-weight:600; white-space:nowrap; flex-shrink:0; }
+    .paper-authors { font-size:0.68rem; color:var(--texto-secundario); margin-bottom:8px; }
+    .paper-why { font-size:0.7rem; color:var(--texto-secundario); line-height:1.55; }
+    .paper-link { display:inline-block; margin-top:9px; font-size:0.68rem; font-weight:600; color:var(--roxo-profundo); text-decoration:none; }
+    .paper-link:hover { text-decoration:underline; }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media(max-width:900px) {
+      .main-layout { grid-template-columns:1fr; }
+      .config-sidebar { grid-column:1; grid-row:auto; }
+      .workspace { grid-column:1; }
+      .panels-split { grid-template-columns:1fr; }
+      .result-summary { grid-template-columns:repeat(2,1fr); }
+      .cp-split { grid-template-columns:1fr; }
+      .papers-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────── -->
+<header>
+  <a class="logo" href="overthinking-machine.html">
+    <div class="logo-dot"></div>
+    overthinking<span>machine</span>
+  </a>
+  <nav>
+    <a href="overthinking-machine.html">← Voltar ao Lab</a>
+    <a href="overthinking-machine.html#modulos">Módulos</a>
+    <a href="pesquisa-avancada.html">Rede Neural</a>
+    <a href="model-benchmark.html">Modelos</a>
+    <button class="mock-toggle mock-on" id="mock-toggle" onclick="toggleMock()"
+      title="Mock: dados simulados. Real: roda a ablação de verdade via API em localhost:8000.">
+      <span class="mock-pip"></span>
+      <span id="mock-label">Mock</span>
+    </button>
+    <span class="nav-badge">módulo 3 · prompt_sensitivity</span>
+  </nav>
+</header>
+
+<!-- ── Page Hero ────────────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-badge">Harness Experimental</div>
+    <h1 class="page-title">Prompt Sensitivity <em>Analysis</em></h1>
+    <p class="page-subtitle">
+      Quebre o system prompt em cláusulas e descubra, por <strong>ablação empírica</strong> (não por atenção
+      ou autorrelato do modelo), quais partes realmente sustentam o score — e quais só consomem tokens.
+    </p>
+    <div class="hero-chips">
+      <div class="hero-chip"><span>✂️</span> <div><strong>Parser</strong> divide o prompt em cláusulas semânticas</div></div>
+      <div class="hero-chip"><span>🧪</span> <div><strong>Leave-one-out</strong> com múltiplos seeds por cláusula</div></div>
+      <div class="hero-chip"><span>🔗</span> <div><strong>Interações</strong> não-aditivas entre pares de cláusulas</div></div>
+      <div class="hero-chip"><span>📦</span> <div><strong>Compressor</strong> sugere prompt reduzido sem perda de score</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main Layout ───────────────────────────────────────────────────── -->
+<div class="main-layout">
+
+  <!-- ── Config Sidebar ──────────────────────────────────────────────── -->
+  <aside class="config-sidebar">
+
+    <!-- System prompt -->
+    <div class="config-card">
+      <div class="config-card-title">📝 System prompt</div>
+
+      <div class="text-source-tabs">
+        <button class="ts-tab active" onclick="selectPrompt(0,this)">Analista Financeiro</button>
+        <button class="ts-tab" onclick="selectPrompt(1,this)">Suporte ao Cliente</button>
+        <button class="ts-tab" onclick="selectPrompt(2,this)">Custom</button>
+      </div>
+
+      <div id="text-preview-box" class="text-preview"></div>
+      <textarea id="text-custom-area" class="text-custom" placeholder="Cole seu system prompt aqui…" style="display:none" oninput="onCustomPrompt()"></textarea>
+
+      <div class="chunk-info" id="clause-info" style="margin-top:10px">
+        <div>Cláusulas: <strong id="ci-clauses">—</strong></div>
+        <div>Tokens (~): <strong id="ci-tokens">—</strong></div>
+      </div>
+    </div>
+
+    <!-- Analysis mode -->
+    <div class="config-card">
+      <div class="config-card-title">🔬 Modo de análise</div>
+      <div class="pill-group">
+        <button class="pill-btn active" onclick="setConfig('mode','ablation',this)">ablation</button>
+        <button class="pill-btn mode-pert" onclick="setConfig('mode','perturbation',this)">perturbation</button>
+        <button class="pill-btn mode-reord" onclick="setConfig('mode','reorder',this)">reorder</button>
+      </div>
+      <div style="margin-top:8px;font-size:0.62rem;color:var(--texto-secundario);line-height:1.5" id="mode-desc">
+        Remove cada cláusula isoladamente e mede a queda de score (leave-one-out).
+      </div>
+    </div>
+
+    <!-- Seeds -->
+    <div class="config-card">
+      <div class="config-card-title">🎲 Seeds por cláusula</div>
+      <div class="seed-stepper">
+        <button class="seed-btn" onclick="changeSeeds(-1)">−</button>
+        <span class="seed-val" id="seed-val">5</span>
+        <button class="seed-btn" onclick="changeSeeds(1)">+</button>
+      </div>
+      <div class="seed-note">Múltiplos seeds são necessários porque a saída do LLM é estocástica — um único seed pode confundir ruído com efeito real (Min et al. 2022).</div>
+    </div>
+
+    <!-- Run buttons -->
+    <button class="run-btn-ld run-btn-single" id="run-single-btn" onclick="startRun('single')">
+      <span class="run-icon">▶</span>
+      <span class="spin">⟳</span>
+      <span id="run-single-label">Rodar ablação</span>
+    </button>
+    <button class="run-btn-ld run-btn-bench" id="run-bench-btn" onclick="startRun('full')">
+      <span class="run-icon">⊞</span>
+      <span class="spin">⟳</span>
+      <span id="run-bench-label">Full Report (3 modos + interações)</span>
+    </button>
+  </aside>
+
+  <!-- ── Workspace ─────────────────────────────────────────────────── -->
+  <div class="workspace">
+
+    <!-- Progress strip -->
+    <div class="progress-strip" id="progress-strip" style="display:none">
+      <span class="ps-label">processando</span>
+      <div class="ps-bar-track"><div class="ps-bar-fill" id="ps-fill"></div></div>
+      <span class="ps-count" id="ps-count">0 / 0</span>
+      <span class="ps-status" id="ps-status">idle</span>
+    </div>
+
+    <!-- Result summary cards -->
+    <div class="result-summary" id="result-summary" style="display:none">
+      <div class="rs-card">
+        <div class="rs-val" id="rs-clauses">—</div>
+        <div class="rs-label">Cláusulas testadas</div>
+        <div class="rs-sub" id="rs-mode">—</div>
+      </div>
+      <div class="rs-card">
+        <div class="rs-val" id="rs-removable">—</div>
+        <div class="rs-label">Removíveis com segurança</div>
+        <div class="rs-sub" id="rs-compression">—</div>
+      </div>
+      <div class="rs-card">
+        <div class="rs-val" id="rs-maxdelta">—</div>
+        <div class="rs-label">Maior impacto (Δ score)</div>
+        <div class="rs-sub" id="rs-maxclause">—</div>
+      </div>
+      <div class="rs-card">
+        <div class="rs-val" id="rs-interactions">—</div>
+        <div class="rs-label">Interações não-aditivas</div>
+        <div class="rs-sub" id="rs-seeds">—</div>
+      </div>
+    </div>
+
+    <!-- Terminal + Sensitivity ranking split -->
+    <div class="panels-split" id="panels-split">
+      <!-- Terminal -->
+      <div class="term-panel">
+        <div class="term-topbar">
+          <div class="term-dots">
+            <div class="term-dot term-dot-r"></div>
+            <div class="term-dot term-dot-y"></div>
+            <div class="term-dot term-dot-g"></div>
+          </div>
+          <div class="term-title">prompt_sensitivity_harness — terminal</div>
+        </div>
+        <div class="term-body" id="term-body">
+          <span class="tl tl-dim">$ overthinking-machine --harness prompt_sensitivity --mode ablation</span><br>
+          <span class="tl tl-dim">─────────────────────────────────────────────────</span><br>
+          <span class="tl tl-sys">Aguardando configuração e início do experimento…</span><br>
+          <span class="tl tl-dim">Escolha um system prompt e o modo de análise na</span><br>
+          <span class="tl tl-dim">barra lateral, então clique em ▶ para iniciar.</span><br>
+          <br>
+          <span class="tl tl-dim">📝 Prompts disponíveis: Analista Financeiro · Suporte · Custom</span><br>
+          <span class="tl tl-dim">🔬 Modos: ablation (leave-one-out) · perturbation (paráfrase) · reorder</span><br>
+          <span class="tl tl-dim">🎲 Cada cláusula é testada com N seeds para separar efeito de ruído</span><br>
+        </div>
+      </div>
+
+      <!-- Sensitivity Ranking -->
+      <div class="sens-panel">
+        <div class="sens-topbar">
+          <div class="term-dots">
+            <div class="term-dot" style="background:#3A3A5C"></div>
+            <div class="term-dot" style="background:#3A3A5C"></div>
+            <div class="term-dot" style="background:#3A3A5C"></div>
+          </div>
+          <div class="sens-title" style="margin-left:6px">📊 ranking de sensibilidade</div>
+          <div class="sens-live-dot idle" id="sens-live-dot"></div>
+        </div>
+        <div class="sens-body" id="sens-body">
+          <div class="sens-empty" id="sens-empty">
+            <div class="sens-empty-icon">📊</div>
+            <div style="font-size:0.75rem;font-weight:600">Nenhum resultado ainda</div>
+            <div style="font-size:0.68rem">Inicie um experimento para ver o impacto de cada cláusula em tempo real.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compressed Prompt Panel -->
+    <div class="compressed-panel" id="compressed-panel">
+      <div class="cp-title">📦 Prompt comprimido sugerido</div>
+      <div class="cp-sub">Cláusulas removidas: <span id="cp-removed-count">0</span> de <span id="cp-total-count">0</span> — apenas as com confiança alta/média e impacto ≤ 0.02 (ou negativo) são candidatas a corte.</div>
+      <div class="cp-split">
+        <div>
+          <div class="cp-col-label">Original</div>
+          <div class="cp-box" id="cp-original"></div>
+        </div>
+        <div>
+          <div class="cp-col-label">Comprimido</div>
+          <div class="cp-box" id="cp-compressed"></div>
+        </div>
+      </div>
+      <div class="cp-stats">
+        <div><div class="cp-stat-val" id="cp-stat-ratio">—</div><div class="cp-stat-label">tamanho final</div></div>
+        <div><div class="cp-stat-val" id="cp-stat-saved">—</div><div class="cp-stat-label">tokens economizados (~)</div></div>
+        <div><div class="cp-stat-val" id="cp-stat-deltaimpact">—</div><div class="cp-stat-label">impacto no score</div></div>
+      </div>
+    </div>
+
+    <!-- Interactions Panel -->
+    <div class="interactions-panel" id="interactions-panel">
+      <div class="int-title">🔗 Interações não-aditivas entre cláusulas</div>
+      <div id="int-list"></div>
+    </div>
+
+  </div><!-- /workspace -->
+</div><!-- /main-layout -->
+
+<!-- ── Fundamentação ─────────────────────────────────────────────────── -->
+<div class="papers-section">
+  <div class="papers-head">
+    <div class="section-label">Fundamentação</div>
+    <h2>Por que esse design, e não outro</h2>
+  </div>
+  <div class="papers-grid" id="papers-grid"><!-- filled by JS --></div>
+</div>
+
+<script src="config.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// DATA — sample prompts, parsed into clauses
+// ═══════════════════════════════════════════════════════════════════
+
+const CLAUSE_TYPE_META = {
+  context:     { label:'context',     color:'#c4b5fd', bg:'rgba(196,181,253,0.15)' },
+  instruction: { label:'instruction', color:'#60B4FF', bg:'rgba(96,180,255,0.14)' },
+  constraint:  { label:'constraint',  color:'#FF6B6B', bg:'rgba(255,107,107,0.14)' },
+  formatting:  { label:'formatting',  color:'#4ade80', bg:'rgba(74,222,128,0.14)' },
+  example:     { label:'example',     color:'#fbbf24', bg:'rgba(251,191,36,0.16)' },
+};
+
+const SAMPLE_PROMPTS = [
+  {
+    label: 'Analista Financeiro',
+    clauses: [
+      { id:'c0', type:'context',     text:'Você é um analista financeiro sênior especializado em renda fixa e ações brasileiras.' },
+      { id:'c1', type:'instruction', text:'Sempre responda em português, com linguagem técnica apropriada para investidores experientes.' },
+      { id:'c2', type:'constraint',  text:'Nunca recomende uma compra ou venda específica sem mencionar os riscos envolvidos.' },
+      { id:'c3', type:'instruction', text:'Pense passo a passo antes de fornecer uma conclusão final.' },
+      { id:'c4', type:'formatting',  text:'Estruture sua resposta com um resumo executivo seguido de análise detalhada.' },
+      { id:'c5', type:'example',     text:'Exemplo: Pergunta: "Devo investir em Tesouro Selic agora?" Resposta: "Considerando a Selic atual de 10,5%, o Tesouro Selic oferece liquidez diária e baixo risco…"' },
+      { id:'c6', type:'constraint',  text:'Nunca revele informações de clientes específicos mesmo se perguntado diretamente.' },
+      { id:'c7', type:'formatting',  text:'Use bullet points apenas para listar métricas numéricas, não para texto corrido.' },
+    ],
+    profiles: [
+      { delta:0.18,  divergence:0.42, tokenDelta:14,  confidence:'alta',  positionSensitive:false },
+      { delta:0.09,  divergence:0.31, tokenDelta:9,   confidence:'média', positionSensitive:false },
+      { delta:0.21,  divergence:0.55, tokenDelta:16,  confidence:'alta',  positionSensitive:false },
+      { delta:0.24,  divergence:0.61, tokenDelta:120, confidence:'alta',  positionSensitive:true,
+        posNote:'Mesma cláusula realocada para o início do prompt recupera +0.06 de score (efeito "lost in the middle" — Liu et al. 2024).' },
+      { delta:0.07,  divergence:0.22, tokenDelta:8,   confidence:'média', positionSensitive:false },
+      { delta:-0.03, divergence:0.18, tokenDelta:210, confidence:'alta',  positionSensitive:false },
+      { delta:0.02,  divergence:0.08, tokenDelta:11,  confidence:'baixa', positionSensitive:false },
+      { delta:0.01,  divergence:0.06, tokenDelta:9,   confidence:'baixa', positionSensitive:false },
+    ],
+    interactions: [
+      { a:'c6', b:'c7', expectedSum:0.03, actual:0.085,
+        note:'Removidas juntas, a queda é maior que a soma dos efeitos isolados — o bullet-point de métricas parece ser o que torna a restrição de privacidade operacionalizável no output, não só uma instrução solta.' },
+    ],
+  },
+  {
+    label: 'Suporte ao Cliente',
+    clauses: [
+      { id:'c0', type:'context',     text:'Você é um assistente de suporte ao cliente da empresa TechFlow, especializado em resolver problemas técnicos de software.' },
+      { id:'c1', type:'instruction', text:'Sempre comece confirmando que entendeu o problema do cliente antes de propor soluções.' },
+      { id:'c2', type:'constraint',  text:'Nunca prometa prazos de resolução sem antes verificar com a equipe técnica.' },
+      { id:'c3', type:'instruction', text:'Se não souber a resposta, admita isso claramente e ofereça escalar para um especialista.' },
+      { id:'c4', type:'formatting',  text:'Mantenha respostas curtas e diretas, no máximo 3 parágrafos.' },
+      { id:'c5', type:'example',     text:'Exemplo: Cliente: "meu app trava ao abrir" → Resposta: "Entendo a frustração. Pode confirmar a versão do app e o sistema operacional?"' },
+      { id:'c6', type:'constraint',  text:'Nunca peça senhas ou dados de cartão de crédito pelo chat.' },
+      { id:'c7', type:'context',     text:'O tom deve ser empático mas profissional, evitando jargão técnico excessivo.' },
+    ],
+    profiles: [
+      { delta:0.14,  divergence:0.35, tokenDelta:13,  confidence:'alta',  positionSensitive:false },
+      { delta:0.19,  divergence:0.48, tokenDelta:10,  confidence:'alta',  positionSensitive:false },
+      { delta:0.11,  divergence:0.29, tokenDelta:9,   confidence:'média', positionSensitive:false },
+      { delta:0.16,  divergence:0.39, tokenDelta:11,  confidence:'alta',  positionSensitive:true,
+        posNote:'No meio do prompt, essa instrução perde força; movida para o final, sobe +0.05 de score (Liu et al. 2024).' },
+      { delta:0.05,  divergence:0.15, tokenDelta:7,   confidence:'média', positionSensitive:false },
+      { delta:-0.02, divergence:0.12, tokenDelta:180, confidence:'alta',  positionSensitive:false },
+      { delta:0.01,  divergence:0.05, tokenDelta:10,  confidence:'baixa', positionSensitive:false },
+      { delta:0.08,  divergence:0.24, tokenDelta:8,   confidence:'baixa', positionSensitive:false },
+    ],
+    interactions: [
+      { a:'c6', b:'c7', expectedSum:0.09, actual:0.04,
+        note:'Removidas juntas, a queda é menor que a soma dos efeitos isolados — parte do efeito do tom empático parece redundante com o lembrete de segurança, sugerindo sobreposição funcional entre as duas cláusulas.' },
+    ],
+  },
+];
+
+const PAPERS = [
+  { title:'Benchmarking Prompt Sensitivity in Large Language Models', authors:'Mizrahi et al., 2025', venue:'arXiv 2502.06065',
+    url:'https://arxiv.org/html/2502.06065v1',
+    why:'Funda a premissa do harness: formaliza a tarefa de "Prompt Sensitivity Prediction" e mostra que variações de formulação mudam o desempenho de forma não-trivial — justifica medir isso sistematicamente em vez de tratar como ruído.' },
+  { title:'Attention is not Explanation', authors:'Jain & Wallace, 2019', venue:'NAACL',
+    url:'https://arxiv.org/abs/1902.10186',
+    why:'Justifica por que o harness não usa pesos de atenção como métrica de impacto — atenção alta não implica que a predição dependa causalmente daquela cláusula.' },
+  { title:'Language Models Don’t Always Say What They Think', authors:'Turpin, Michael, Perez & Bowman, 2023', venue:'NeurIPS',
+    url:'https://arxiv.org/abs/2305.04388',
+    why:'Justifica nunca usar o autorrelato do LLM como métrica de sensibilidade — explicações de chain-of-thought racionalizam respostas erradas sistematicamente, sem avisar.' },
+  { title:'Rethinking the Role of Demonstrations', authors:'Min et al., 2022', venue:'EMNLP',
+    url:'https://arxiv.org/abs/2202.12837',
+    why:'Base para exigir múltiplos seeds e ablação empírica em exemplos few-shot — o que parece importar (labels corretos) às vezes importa menos que o formato geral.' },
+  { title:'Axiomatic Attribution for Deep Networks', authors:'Sundararajan, Taly & Yan, 2017', venue:'ICML',
+    url:'https://arxiv.org/abs/1703.01365',
+    why:'Fundamenta o princípio geral de atribuição via comparação com um baseline contrafactual — a mesma lógica usada aqui em nível discreto (cláusula presente vs. ausente).' },
+  { title:'LLMLingua: Compressing Prompts for Accelerated Inference', authors:'Jiang et al., 2023', venue:'EMNLP · Microsoft Research',
+    url:'https://arxiv.org/abs/2310.05736',
+    why:'Sustenta o compressor de prompt: remover conteúdo de baixo impacto sem perder qualidade é viável, com compressões de até 20x reportadas na literatura.' },
+  { title:'Lost in the Middle: How Language Models Use Long Contexts', authors:'Liu et al., 2024 (arXiv 2023)', venue:'TACL',
+    url:'https://arxiv.org/abs/2307.03172',
+    why:'Sustenta o modo "reorder": a posição de uma cláusula no prompt pode alterar seu impacto tanto quanto seu conteúdo — informação no meio do contexto é sistematicamente subutilizada.' },
+];
+
+const MODE_DESCS = {
+  ablation:    'Remove cada cláusula isoladamente e mede a queda de score (leave-one-out).',
+  perturbation:'Substitui cada cláusula por uma paráfrase semanticamente equivalente e mede a divergência do output.',
+  reorder:     'Reordena cláusulas no prompt e mede se o impacto medido é do conteúdo ou da posição (efeito "lost in the middle").',
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════
+
+const state = { promptIdx:0, mode:'ablation', seeds:5, running:false, mock:true };
+
+const API_URL = window.OTM_API_URL || 'http://localhost:8000';
+
+// ═══════════════════════════════════════════════════════════════════
+// MODO REAL — ablação de verdade via backend (server.py)
+// ═══════════════════════════════════════════════════════════════════
+function apiNote(kind, html) {
+  let el = document.getElementById('api-note');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'api-note';
+    const card = document.getElementById('clause-info')?.closest('.config-card');
+    (card || document.querySelector('.config-sidebar')).appendChild(el);
+  }
+  el.className = 'api-note visible ' + kind;
+  el.innerHTML = html;
+}
+function hideApiNote() {
+  const el = document.getElementById('api-note');
+  if (el) el.className = 'api-note';
+}
+
+async function toggleMock() {
+  const btn = document.getElementById('mock-toggle');
+  const label = document.getElementById('mock-label');
+
+  if (state.mock) {
+    label.textContent = '...';
+    try {
+      const r = await fetch(`${API_URL}/api/health`, { signal: AbortSignal.timeout(4000) });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+    } catch {
+      apiNote('err', `<strong>API não encontrada.</strong> O modo real precisa do backend:<br><code>python -m uvicorn server:app --port 8000</code>`);
+      label.textContent = 'Mock';
+      return;
+    }
+    state.mock = false;
+    btn.classList.remove('mock-on'); btn.classList.add('real-on');
+    label.textContent = 'Real';
+    apiNote('ok', `<strong>Modo real.</strong> A ablação vai rodar a tarefa <code>text_classification</code> uma vez com o prompt completo e uma vez por cláusula removida — os Δscore passam a ser medidos, não simulados.`);
+  } else {
+    state.mock = true;
+    btn.classList.remove('real-on'); btn.classList.add('mock-on');
+    label.textContent = 'Mock';
+    hideApiNote();
+  }
+}
+
+/**
+ * Ablação real: envia o system prompt ao backend e consome o stream SSE,
+ * alimentando o mesmo painel usado pelo modo mock.
+ */
+async function runAblationReal(prompt) {
+  const text = prompt.clauses.map(c => c.text).join('\n');
+  const cfg = {
+    system_prompt: text,
+    model: 'google/gemini-2.5-flash',
+    architecture: 'sas',
+    harness: 'zero_shot',
+    task: 'text_classification',
+    evaluator: 'binary',
+    num_instances: 3,
+    reps: 1,
+    interactions: false,
+  };
+
+  termRaw(`<span class="tl tl-dim">$ POST ${API_URL}/api/prompt-sensitivity</span>`);
+  termRaw(`<span class="tl tl-dim">─────────────────────────────────────────────────</span>`);
+
+  let apiClauses = [], baseline = null, total = 0, done = 0;
+
+  try {
+    const resp = await fetch(`${API_URL}/api/prompt-sensitivity`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cfg),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${(await resp.text()).slice(0,200)}`);
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done: fin, value } = await reader.read();
+      if (fin) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let e; try { e = JSON.parse(line.slice(6)); } catch { continue; }
+
+        if (e.type === 'start') {
+          apiClauses = e.clauses;
+          total = e.clauses.length;
+          termLine('sys', `✂️ Parser: ${total} cláusulas · ${e.total_calls} chamadas de LLM previstas`);
+        } else if (e.type === 'phase') {
+          termLine('cmd', `── fase: ${e.phase} ──`);
+        } else if (e.type === 'baseline') {
+          baseline = e.score;
+          termLine('ok', `  baseline (prompt completo): score=${e.score.toFixed(3)}  ${e.tokens} tok  ${e.elapsed_s}s`);
+        } else if (e.type === 'log') {
+          if (/score=/.test(e.text)) termLine('dim', '    ' + e.text.trim());
+        } else if (e.type === 'clause_done') {
+          done++;
+          document.getElementById('ps-fill').style.width = Math.round(done / total * 100) + '%';
+          document.getElementById('ps-count').textContent = `${done} / ${total} cláusulas`;
+          document.getElementById('ps-status').textContent = `ablating ${e.id}`;
+
+          const sign = e.delta >= 0 ? '+' : '';
+          termLine(e.delta > 0.02 ? 'ok' : e.delta < -0.02 ? 'warn' : 'dim',
+            `  ✓ ${e.id} Δscore=${sign}${e.delta.toFixed(3)}  sem_ela=${e.score_without.toFixed(3)}  → ${e.verdict}`);
+
+          // Converte para o formato do painel (mesmo usado no modo mock).
+          // clause_type vem separado de type — este último é o tipo do EVENTO.
+          sensResults.push({
+            clause:  { id: e.id, type: e.clause_type || 'context', text: e.text },
+            profile: {
+              delta: e.delta,
+              divergence: 0,
+              tokenDelta: e.token_delta,
+              confidence: 'média',
+              positionSensitive: false,
+            },
+            isNew: true,
+          });
+          renderSensPanel(true);
+          setTimeout(() => { const l = sensResults[sensResults.length-1]; if (l) l.isNew = false; }, 600);
+        } else if (e.type === 'done') {
+          const c = e.compressed;
+          termLine('ok', `✓ Ablação concluída — ${e.profiles.length} cláusulas medidas`);
+          if (c.inconclusivo) {
+            termLine('warn', `  ⚠ ${c.aviso}`);
+          } else {
+            termLine('sys', `  comprimido: ${c.tokens_before} → ${c.tokens_after} tok (−${c.reduction_pct}%)`);
+          }
+          // devolve as cláusulas reais para o compressor da UI
+          prompt.clauses = apiClauses.map(x => ({ id:x.id, type:x.type, text:x.text }));
+        } else if (e.type === 'error') {
+          const q = /RESOURCE_EXHAUSTED|429/.test(e.message);
+          termLine('err', q ? '  ✗ cota da API excedida (429) — tente mais tarde ou troque de modelo'
+                            : '  ✗ ' + e.message.slice(0, 180));
+        }
+      }
+    }
+  } catch (err) {
+    termLine('err', `  ✗ erro de conexão: ${err.message}`);
+  }
+}
+let sensResults = []; // [{clause, profile}]
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+
+function init() {
+  selectPrompt(0, document.querySelector('.ts-tab'));
+  renderPapers();
+}
+
+function renderPapers() {
+  document.getElementById('papers-grid').innerHTML = PAPERS.map(p => `
+    <div class="paper-card">
+      <div class="paper-top">
+        <div class="paper-title">${escHtml(p.title)}</div>
+        <div class="paper-meta">${escHtml(p.venue)}</div>
+      </div>
+      <div class="paper-authors">${escHtml(p.authors)}</div>
+      <div class="paper-why">${escHtml(p.why)}</div>
+      <a class="paper-link" href="${p.url}" target="_blank" rel="noopener">Ler paper →</a>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// CONFIG HELPERS
+// ═══════════════════════════════════════════════════════════════════
+
+function setConfig(key, val, btn) {
+  if (btn) {
+    const grp = btn.parentElement;
+    grp.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  state[key] = val;
+  if (key === 'mode') document.getElementById('mode-desc').textContent = MODE_DESCS[val] || '';
+}
+
+function changeSeeds(delta) {
+  state.seeds = Math.min(20, Math.max(1, state.seeds + delta));
+  document.getElementById('seed-val').textContent = state.seeds;
+}
+
+function selectPrompt(idx, btn) {
+  if (btn) {
+    document.querySelectorAll('.ts-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  state.promptIdx = idx;
+  const preview = document.getElementById('text-preview-box');
+  const custom  = document.getElementById('text-custom-area');
+  if (idx === 2) {
+    preview.style.display = 'none';
+    custom.style.display  = 'block';
+    state.promptIdx = 'custom';
+  } else {
+    preview.style.display = 'block';
+    custom.style.display  = 'none';
+    preview.textContent   = SAMPLE_PROMPTS[idx].clauses.map(c => c.text).join(' ');
+    updateClauseInfo();
+  }
+}
+
+function onCustomPrompt() { updateClauseInfo(); }
+
+function getActivePrompt() {
+  if (state.promptIdx === 'custom') {
+    const raw = document.getElementById('text-custom-area').value || '';
+    const parts = raw.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+    return {
+      label: 'Custom',
+      clauses: parts.map((t,i) => ({ id:'cc'+i, type: i===0?'context':'instruction', text:t })),
+      profiles: parts.map(() => ({
+        delta: +((Math.random()*0.3)-0.04).toFixed(2),
+        divergence: +(Math.random()*0.5).toFixed(2),
+        tokenDelta: 8 + Math.floor(Math.random()*40),
+        confidence: ['alta','média','baixa'][Math.floor(Math.random()*3)],
+        positionSensitive: Math.random() < 0.15,
+      })),
+      interactions: [],
+    };
+  }
+  return SAMPLE_PROMPTS[state.promptIdx];
+}
+
+function estimateTokens(prompt) {
+  return prompt.clauses.reduce((sum,c) => sum + Math.ceil(c.text.split(/\s+/).length * 1.3), 0);
+}
+
+function updateClauseInfo() {
+  const prompt = getActivePrompt();
+  document.getElementById('ci-clauses').textContent = prompt.clauses.length || '—';
+  document.getElementById('ci-tokens').textContent  = prompt.clauses.length ? estimateTokens(prompt) : '—';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TERMINAL HELPERS
+// ═══════════════════════════════════════════════════════════════════
+
+function termAppend(html) {
+  const body = document.getElementById('term-body');
+  body.innerHTML += html;
+  body.scrollTop = body.scrollHeight;
+}
+function termLine(type, text) { termAppend(`<span class="tl tl-${type}">${escHtml(text)}</span><br>`); }
+function termRaw(html) { termAppend(html + '<br>'); }
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function termClear() { document.getElementById('term-body').innerHTML = ''; }
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ═══════════════════════════════════════════════════════════════════
+// SENSITIVITY RANKING RENDER
+// ═══════════════════════════════════════════════════════════════════
+
+function resetSensPanel() {
+  sensResults = [];
+  document.getElementById('sens-body').innerHTML =
+    '<div class="sens-empty" id="sens-empty"><div class="sens-empty-icon">📊</div><div style="font-size:0.75rem;font-weight:600">Nenhum resultado ainda</div></div>';
+  document.getElementById('sens-live-dot').className = 'sens-live-dot idle';
+}
+
+const CONF_ICON = { alta:'●', média:'◐', baixa:'○' };
+
+function renderSensPanel(isRunning) {
+  const body = document.getElementById('sens-body');
+  document.getElementById('sens-live-dot').className = isRunning ? 'sens-live-dot' : 'sens-live-dot idle';
+
+  const sorted = [...sensResults].sort((a,b) => Math.abs(b.profile.delta) - Math.abs(a.profile.delta));
+  const maxAbs = Math.max(0.05, ...sorted.map(r => Math.abs(r.profile.delta)));
+
+  body.innerHTML = sorted.map((r, idx) => {
+    const meta = CLAUSE_TYPE_META[r.clause.type];
+    const isPos = r.profile.delta >= 0;
+    const barPct = Math.min(100, (Math.abs(r.profile.delta) / maxAbs) * 100);
+    const barColor = isPos ? '#00E599' : '#FF6B6B';
+    const sign = isPos ? '+' : '';
+    const flag = r.profile.positionSensitive ? `<span class="sens-pos-flag" title="${escHtml(r.profile.posNote || 'Sensível à posição no prompt')}">📍</span>` : '';
+    return `
+      <div class="sens-row${r.isNew ? ' new-item' : ''}">
+        <span class="sens-conf" title="confiança: ${r.profile.confidence}">${CONF_ICON[r.profile.confidence]}</span>
+        <span class="sens-type" style="color:${meta.color};background:${meta.bg}">${meta.label}</span>
+        <div class="sens-bar-wrap">
+          <span class="sens-clause-text" title="${escHtml(r.clause.text)}">${escHtml(r.clause.text)}</span>
+          <div class="sens-bar-track"><div class="sens-bar-fill" style="width:${barPct}%;background:${barColor}"></div></div>
+        </div>
+        ${flag}
+        <span class="sens-delta" style="color:${barColor}">${sign}${r.profile.delta.toFixed(2)}</span>
+        <span class="sens-tok">+${r.profile.tokenDelta}tok</span>
+      </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// COMPRESSED PROMPT + INTERACTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+function buildCompressed(prompt) {
+  const totalTok = sensResults.reduce((s,r) => s + r.profile.tokenDelta, 0);
+  const removable = sensResults.filter(r => r.profile.confidence !== 'baixa' && r.profile.delta <= 0.02);
+  const removedIds = new Set(removable.map(r => r.clause.id));
+  const savedTok = removable.reduce((s,r) => s + r.profile.tokenDelta, 0);
+
+  const origHtml = prompt.clauses.map(c =>
+    `<span class="${removedIds.has(c.id) ? 'cp-removed' : 'cp-kept'}">${escHtml(c.text)}</span>`
+  ).join(' ');
+
+  const compHtml = prompt.clauses.filter(c => !removedIds.has(c.id))
+    .map(c => `<span class="cp-kept">${escHtml(c.text)}</span>`).join(' ');
+
+  document.getElementById('cp-original').innerHTML   = origHtml;
+  document.getElementById('cp-compressed').innerHTML = compHtml || '<span style="opacity:0.4">(nenhuma cláusula removida)</span>';
+  document.getElementById('cp-removed-count').textContent = removable.length;
+  document.getElementById('cp-total-count').textContent   = prompt.clauses.length;
+
+  const ratio = totalTok > 0 ? Math.round(((totalTok - savedTok) / totalTok) * 100) : 100;
+  document.getElementById('cp-stat-ratio').textContent = ratio + '%';
+  document.getElementById('cp-stat-saved').textContent = savedTok + ' tok';
+  const impactSum = removable.reduce((s,r) => s + r.profile.delta, 0);
+  document.getElementById('cp-stat-deltaimpact').textContent = (impactSum <= 0 ? '+' : '−') + Math.abs(impactSum).toFixed(2);
+
+  document.getElementById('compressed-panel').classList.add('visible');
+  return { removable, savedTok, ratio };
+}
+
+function buildInteractions(prompt) {
+  const panel = document.getElementById('interactions-panel');
+  const list  = document.getElementById('int-list');
+  if (!prompt.interactions || !prompt.interactions.length) {
+    panel.classList.remove('visible');
+    list.innerHTML = '';
+    return 0;
+  }
+  panel.classList.add('visible');
+  list.innerHTML = prompt.interactions.map(it => {
+    const diff = it.actual - it.expectedSum;
+    const isSuper = diff > 0;
+    return `
+      <div class="int-card">
+        <div class="int-pair">${it.a} × ${it.b}</div>
+        <div class="int-desc">${escHtml(it.note)}<br><span style="opacity:0.55">esperado (soma): ${it.expectedSum.toFixed(2)} · observado: ${it.actual.toFixed(2)}</span></div>
+        <div class="int-effect ${isSuper ? 'super' : 'sub'}">${isSuper ? '▲ super-aditivo' : '▼ sub-aditivo'} ${diff>=0?'+':''}${diff.toFixed(3)}</div>
+      </div>`;
+  }).join('');
+  return prompt.interactions.length;
+}
+
+function showResultSummary(prompt, removableInfo, interactionsCount) {
+  document.getElementById('result-summary').style.display = 'grid';
+  document.getElementById('rs-clauses').textContent = prompt.clauses.length;
+  document.getElementById('rs-mode').textContent = state.mode;
+  document.getElementById('rs-removable').textContent = removableInfo.removable.length;
+  document.getElementById('rs-compression').textContent = removableInfo.ratio + '% do tamanho original';
+
+  const maxRow = [...sensResults].sort((a,b) => Math.abs(b.profile.delta) - Math.abs(a.profile.delta))[0];
+  document.getElementById('rs-maxdelta').textContent = maxRow ? (maxRow.profile.delta>=0?'+':'') + maxRow.profile.delta.toFixed(2) : '—';
+  document.getElementById('rs-maxclause').textContent = maxRow ? maxRow.clause.type : '—';
+
+  document.getElementById('rs-interactions').textContent = interactionsCount;
+  document.getElementById('rs-seeds').textContent = state.seeds + ' seeds/cláusula';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RUN ENGINE
+// ═══════════════════════════════════════════════════════════════════
+
+function setRunning(flag) {
+  state.running = flag;
+  ['run-single-btn','run-bench-btn'].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.disabled = flag;
+    btn.classList.toggle('running', flag);
+  });
+}
+
+async function startRun(kind) {
+  if (state.running) return;
+  const prompt = getActivePrompt();
+  if (!prompt.clauses.length) { alert('Selecione ou cole um system prompt antes de rodar.'); return; }
+
+  setRunning(true);
+  termClear();
+  resetSensPanel();
+  document.getElementById('compressed-panel').classList.remove('visible');
+  document.getElementById('interactions-panel').classList.remove('visible');
+  document.getElementById('result-summary').style.display = 'none';
+  document.getElementById('progress-strip').style.display = 'flex';
+
+  if (!state.mock) {
+    // Modo real: só ablação (perturbação e reordenação ainda não têm backend)
+    await runAblationReal(prompt);
+  } else if (kind === 'single') {
+    await runAblation(prompt, state.mode);
+  } else {
+    await runAblation(prompt, 'ablation');
+    await runPerturbationPass(prompt);
+    await runReorderPass(prompt);
+  }
+
+  const removableInfo = buildCompressed(prompt);
+  // interações são simuladas — no modo real ainda não há backend para elas
+  const interactionsCount = state.mock ? buildInteractions(prompt) : 0;
+  showResultSummary(prompt, removableInfo, interactionsCount);
+
+  document.getElementById('ps-fill').style.width = '100%';
+  document.getElementById('ps-status').textContent = 'concluído ✓';
+
+  setRunning(false);
+}
+
+async function runAblation(prompt, mode) {
+  const total = prompt.clauses.length;
+  termRaw(`<span class="tl tl-dim">$ prompt_sensitivity_harness --mode ${mode} --seeds ${state.seeds} --prompt "${prompt.label}"</span>`);
+  termRaw(`<span class="tl tl-dim">─────────────────────────────────────────────────</span>`);
+  termLine('sys', `✂️ Parser: ${total} cláusulas detectadas no system prompt`);
+  termLine('dim', '');
+
+  for (let i = 0; i < total; i++) {
+    const clause  = prompt.clauses[i];
+    const profile = prompt.profiles[i];
+    const pct = Math.round((i / total) * 100);
+
+    document.getElementById('ps-fill').style.width = pct + '%';
+    document.getElementById('ps-count').textContent = `${i} / ${total} cláusulas`;
+    document.getElementById('ps-status').textContent = `ablating ${clause.id}`;
+
+    termRaw(`<span class="tl tl-head">── ${clause.id.toUpperCase()} [${CLAUSE_TYPE_META[clause.type].label}] ──</span>`);
+    termLine('dim', `  "${clause.text.substring(0,64)}${clause.text.length>64?'…':''}"`);
+    await delay(90 + Math.random()*90);
+    termLine('cmd', `  → removendo cláusula, rodando ${state.seeds} seeds…`);
+
+    for (let s = 0; s < Math.min(state.seeds, 4); s++) {
+      await delay(60 + Math.random()*70);
+      const jitter = (Math.random()-0.5) * 0.03;
+      termLine('dim', `    seed ${s}: score ${(0.78 + profile.delta + jitter).toFixed(3)}`);
+    }
+    if (state.seeds > 4) {
+      await delay(80);
+      termLine('dim', `    … +${state.seeds-4} seeds`);
+    }
+
+    const sign = profile.delta >= 0 ? '+' : '';
+    const verdict = profile.delta > 0.15 ? 'crítica' : profile.delta > 0.05 ? 'relevante' : profile.delta >= 0 ? 'marginal' : 'custosa sem ganho';
+    termLine(profile.delta > 0.15 ? 'ok' : profile.delta < 0 ? 'warn' : 'dim',
+      `  ✓ Δscore=${sign}${profile.delta.toFixed(2)}  divergência=${profile.divergence.toFixed(2)}  +${profile.tokenDelta}tok  conf=${profile.confidence}  → ${verdict}`);
+    if (profile.positionSensitive) {
+      termLine('warn', `  📍 sensível à posição: ${profile.posNote}`);
+    }
+    termLine('dim', '');
+
+    sensResults.push({ clause, profile, isNew:true });
+    renderSensPanel(true);
+    await delay(120);
+    sensResults[sensResults.length-1].isNew = false;
+  }
+
+  termLine('ok', `✓ Ablação completa: ${total}/${total} cláusulas testadas com ${state.seeds} seeds cada.`);
+}
+
+async function runPerturbationPass(prompt) {
+  termLine('dim', '');
+  termRaw(`<span class="tl tl-head">── PASSO 2: PERTURBATION (paráfrase) ──</span>`);
+  await delay(150);
+  termLine('cmd', '  → substituindo cada cláusula por paráfrase semanticamente equivalente…');
+  for (const clause of prompt.clauses) {
+    await delay(50 + Math.random()*60);
+    termLine('dim', `    ${clause.id}: divergência de output após paráfrase ≈ ${(Math.random()*0.15).toFixed(2)} (baixa — paráfrase não muda função da cláusula)`);
+  }
+  termLine('ok', '  ✓ Nenhuma cláusula mudou de função sob paráfrase — efeito medido é semântico, não lexical.');
+}
+
+async function runReorderPass(prompt) {
+  termLine('dim', '');
+  termRaw(`<span class="tl tl-head">── PASSO 3: REORDER (posição no prompt) ──</span>`);
+  await delay(150);
+  termLine('cmd', '  → testando cada cláusula no início, meio e fim do prompt…');
+  const flagged = prompt.profiles.filter(p => p.positionSensitive);
+  for (let i = 0; i < prompt.clauses.length; i++) {
+    await delay(50 + Math.random()*60);
+    const flag = prompt.profiles[i].positionSensitive;
+    termLine(flag ? 'warn' : 'dim', `    ${prompt.clauses[i].id}: ${flag ? '📍 sensível à posição' : 'estável entre posições'}`);
+  }
+  termLine(flagged.length ? 'warn' : 'ok',
+    `  ${flagged.length ? '⚠' : '✓'} ${flagged.length} cláusula(s) com sensibilidade de posição detectada (cf. Liu et al. 2024, "Lost in the Middle").`);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════════
+init();
+</script>
+</body>
+</html>

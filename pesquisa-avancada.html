@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa Avançada · Overthinking Machine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variáveis ──────────────────────────────────────────────────── */
+    :root {
+      --branco: #FFFFFF;
+      --azul-sereno: #AEC6CF;
+      --roxo-lavanda: #E6E6FA;
+      --roxo-profundo: #5D3FD3;
+      --roxo-mid: #7B5EA7;
+      --roxo-hover: #4b32b3;
+      --texto-principal: #1F1F2E;
+      --texto-secundario: #6B6B80;
+      --card-bg: #FAFAFE;
+      --card-border: #E8E8F5;
+      --term-bg: #080812;
+      --term-header: #0F0F22;
+      --term-green: #00E599;
+      --term-blue: #60B4FF;
+      --term-yellow: #FFD166;
+      --term-red: #FF6B6B;
+      --term-dim: #3A3A5C;
+      --term-text: #C8C8E8;
+      --shadow-card: 0 4px 20px rgba(93,63,211,0.08);
+      --shadow-card-hover: 0 8px 32px rgba(93,63,211,0.18);
+      --correct: #3B82F6;
+      --incorrect: #EF4444;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--branco);
+      color: var(--texto-principal);
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--roxo-lavanda); color: var(--roxo-profundo); }
+
+    /* ── Header ─────────────────────────────────────────────────────── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(93,63,211,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--roxo-profundo);
+      letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none;
+    }
+    .logo span { color: var(--azul-sereno); }
+    .logo-dot {
+      width: 8px; height: 8px;
+      background: var(--term-green);
+      border-radius: 50%;
+      animation: blink-dot 1.8s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes blink-dot { 0%,100%{ opacity:1; } 50%{ opacity:0.2; } }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--texto-secundario);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--roxo-profundo); }
+    .nav-btn {
+      background: var(--roxo-profundo);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-btn:hover { background: var(--roxo-hover) !important; transform: translateY(-1px); }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--texto-secundario);
+    }
+    .breadcrumb a { color: var(--roxo-profundo); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── Hero pesquisa ──────────────────────────────────────────────── */
+    .hero-pesq {
+      padding: 64px 5% 40px;
+      background: linear-gradient(135deg, #F8F7FF 0%, #EEF0FF 100%);
+      border-bottom: 1px solid rgba(93,63,211,0.1);
+    }
+    .hero-pesq .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(93,63,211,0.1);
+      color: var(--roxo-profundo);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 50px;
+      border: 1px solid rgba(93,63,211,0.2);
+      margin-bottom: 20px;
+    }
+    .hero-pesq h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--texto-principal);
+      margin-bottom: 18px;
+    }
+    .hero-pesq h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--roxo-profundo), #9B59B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-pesq p {
+      font-size: 1.05rem;
+      color: var(--texto-secundario);
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--texto-secundario);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .pill-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Layout principal ───────────────────────────────────────────── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 5%;
+      min-height: 80vh;
+    }
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Painel esquerdo (config + paper) ───────────────────────────── */
+    .left-panel { padding-right: 36px; }
+
+    /* ── Paper card ─────────────────────────────────────────────────── */
+    .paper-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .paper-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--roxo-profundo), #9B59B6, var(--azul-sereno));
+    }
+    .paper-label {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--roxo-mid); margin-bottom: 10px;
+    }
+    .paper-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      color: var(--texto-principal);
+      line-height: 1.3; margin-bottom: 6px;
+    }
+    .paper-authors {
+      font-size: 0.78rem; color: var(--texto-secundario);
+      margin-bottom: 14px;
+    }
+    .paper-abstract {
+      font-size: 0.82rem; line-height: 1.65;
+      color: var(--texto-secundario);
+      margin-bottom: 16px;
+    }
+    .paper-finding {
+      background: rgba(93,63,211,0.06);
+      border-left: 3px solid var(--roxo-profundo);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: var(--roxo-profundo);
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .paper-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--roxo-profundo);
+      text-decoration: none;
+      margin-top: 8px;
+    }
+    .paper-link:hover { text-decoration: underline; }
+
+    /* ── Adaptação card ─────────────────────────────────────────────── */
+    .adapt-card {
+      background: linear-gradient(135deg, rgba(93,63,211,0.05), rgba(155,89,182,0.05));
+      border: 1px solid rgba(93,63,211,0.15);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .adapt-title {
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--roxo-profundo); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .adapt-step {
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .adapt-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--roxo-profundo);
+      color: #fff; font-size: 0.68rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .adapt-text { font-size: 0.82rem; line-height: 1.55; color: var(--texto-secundario); }
+    .adapt-text strong { color: var(--texto-principal); font-weight: 600; }
+
+    /* ── Config card ────────────────────────────────────────────────── */
+    .config-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .config-title {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--texto-principal); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--texto-secundario); letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .form-select, .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--texto-principal);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B80' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; cursor: pointer; }
+    .form-select:focus, .form-input:focus {
+      border-color: var(--roxo-profundo);
+      box-shadow: 0 0 0 3px rgba(93,63,211,0.12);
+    }
+    .form-range-row { display: flex; align-items: center; gap: 10px; }
+    .form-range {
+      flex: 1; appearance: none; -webkit-appearance: none;
+      height: 4px; border-radius: 4px;
+      background: linear-gradient(to right, var(--roxo-profundo) 0%, var(--roxo-profundo) 50%, #E8E8F5 50%);
+      outline: none; cursor: pointer;
+    }
+    .form-range::-webkit-slider-thumb {
+      appearance: none; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--roxo-profundo);
+      box-shadow: 0 2px 6px rgba(93,63,211,0.4);
+    }
+    .range-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--roxo-profundo); min-width: 28px;
+      text-align: right;
+    }
+    .import-divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 14px 0 10px;
+      color: var(--texto-secundario); font-size: 0.72rem; font-weight: 500;
+    }
+    .import-divider::before, .import-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--card-border);
+    }
+    .import-btn {
+      width: 100%; padding: 10px;
+      background: #fff;
+      color: var(--roxo-profundo);
+      border: 1.5px dashed rgba(93,63,211,0.35);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .import-btn:hover { border-color: var(--roxo-profundo); background: rgba(93,63,211,0.04); }
+    .import-hint {
+      text-align: center; font-size: 0.68rem;
+      color: var(--texto-secundario); margin-top: 6px; line-height: 1.5;
+    }
+    /* ── Dataset selector ───────────────────────────────────────── */
+    .dataset-list {
+      display: flex; flex-direction: column; gap: 5px;
+      margin-top: 10px;
+    }
+    .dataset-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid var(--card-border);
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      font-size: 0.78rem;
+    }
+    .dataset-item:hover { border-color: var(--roxo-profundo); background: rgba(93,63,211,0.03); }
+    .dataset-item.active {
+      border-color: var(--roxo-profundo);
+      background: rgba(93,63,211,0.07);
+    }
+    .dataset-item .ds-icon { font-size: 1rem; flex-shrink: 0; }
+    .dataset-item .ds-info { flex: 1; min-width: 0; }
+    .dataset-item .ds-name {
+      font-weight: 600; color: var(--texto-principal);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .dataset-item .ds-meta {
+      font-size: 0.68rem; color: var(--texto-secundario); margin-top: 1px;
+    }
+    .dataset-item .ds-acc {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--roxo-profundo); flex-shrink: 0;
+    }
+    .dataset-item .ds-remove {
+      font-size: 0.75rem; color: var(--texto-secundario);
+      cursor: pointer; padding: 2px 4px; border-radius: 4px;
+      flex-shrink: 0; line-height: 1;
+    }
+    .dataset-item .ds-remove:hover { color: var(--incorrect); background: rgba(239,68,68,0.08); }
+    .run-btn {
+      width: 100%; padding: 13px;
+      background: linear-gradient(135deg, var(--roxo-profundo), #9B59B6);
+      color: #fff;
+      border: none; border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .run-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+    .run-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .run-btn .spinner {
+      width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.7s linear infinite; display: none;
+    }
+    .run-btn.loading .spinner { display: block; }
+    .run-btn.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Painel direito (resultados) ────────────────────────────────── */
+    .right-panel {
+      border-left: 1px solid var(--card-border);
+      padding-left: 36px;
+    }
+
+    /* ── Tabs ───────────────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex; gap: 4px;
+      background: rgba(93,63,211,0.06);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1; padding: 9px 12px;
+      background: none; border: none;
+      border-radius: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--texto-secundario);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: var(--roxo-profundo);
+      box-shadow: 0 2px 8px rgba(93,63,211,0.12);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Log terminal ───────────────────────────────────────────────── */
+    .log-box {
+      background: var(--term-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(93,63,211,0.2);
+    }
+    .log-header {
+      background: var(--term-header);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .log-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .log-header-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: rgba(200,200,232,0.5);
+      margin-left: auto;
+    }
+    .log-body {
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: var(--term-text);
+      height: 320px;
+      overflow-y: auto;
+    }
+    .log-body::-webkit-scrollbar { width: 4px; }
+    .log-body::-webkit-scrollbar-track { background: transparent; }
+    .log-body::-webkit-scrollbar-thumb { background: var(--term-dim); border-radius: 4px; }
+    .log-line { display: flex; gap: 8px; }
+    .log-ts { color: rgba(200,200,232,0.3); min-width: 72px; }
+    .log-ok { color: var(--term-green); }
+    .log-info { color: var(--term-blue); }
+    .log-warn { color: var(--term-yellow); }
+    .log-err { color: var(--term-red); }
+    .log-dim { color: rgba(200,200,232,0.4); }
+    .log-cursor {
+      display: inline-block; width: 7px; height: 13px;
+      background: var(--roxo-profundo);
+      animation: blink-cursor 1s steps(1) infinite;
+      vertical-align: middle; margin-left: 2px;
+    }
+    @keyframes blink-cursor { 50% { opacity: 0; } }
+
+    /* ── PCA viz ────────────────────────────────────────────────────── */
+    .viz-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .viz-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    }
+    .viz-title {
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--texto-principal);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .viz-legend {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--texto-secundario);
+    }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .color-toggle {
+      display: flex; border-radius: 20px; overflow: hidden;
+      border: 1.5px solid var(--card-border);
+      font-size: 0.68rem; font-weight: 700;
+    }
+    .color-toggle button {
+      padding: 4px 10px; border: none; background: transparent;
+      color: var(--texto-secundario); cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      font-family: inherit; font-size: inherit; font-weight: inherit;
+    }
+    .color-toggle button.active {
+      background: var(--roxo-profundo); color: #fff;
+    }
+    .layer-slider-row {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 16px;
+    }
+    .layer-label {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--texto-secundario); white-space: nowrap;
+    }
+    .layer-slider {
+      flex: 1; appearance: none; -webkit-appearance: none;
+      height: 4px; border-radius: 4px;
+      background: linear-gradient(to right, var(--roxo-profundo) 0%, var(--roxo-profundo) 0%, #E8E8F5 0%);
+      outline: none; cursor: pointer;
+    }
+    .layer-slider::-webkit-slider-thumb {
+      appearance: none; width: 18px; height: 18px;
+      border-radius: 50%; background: #fff;
+      border: 3px solid var(--roxo-profundo);
+      box-shadow: 0 2px 8px rgba(93,63,211,0.3);
+    }
+    .layer-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--roxo-profundo);
+      background: rgba(93,63,211,0.08);
+      padding: 4px 10px; border-radius: 6px;
+      min-width: 60px; text-align: center;
+    }
+    .pca-canvas-wrap {
+      position: relative;
+      background: #0C0C1E;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    #pca-canvas {
+      width: 100%; height: 100%; display: block;
+    }
+    .pca-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; color: rgba(200,200,232,0.3);
+    }
+    .pca-placeholder svg { opacity: 0.3; }
+    .pca-placeholder p { font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Métricas grid ──────────────────────────────────────────────── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .metric-card {
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .metric-val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--roxo-profundo);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .metric-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--texto-secundario);
+    }
+
+    /* ── Probe accuracy chart ───────────────────────────────────────── */
+    .probe-section {
+      margin-top: 24px;
+    }
+    .probe-title {
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--texto-principal); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .probe-bars { display: flex; flex-direction: column; gap: 8px; }
+    .probe-row { display: flex; align-items: center; gap: 10px; }
+    .probe-layer-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--texto-secundario);
+      min-width: 48px; text-align: right;
+    }
+    .probe-bar-track {
+      flex: 1; height: 8px; background: rgba(93,63,211,0.08);
+      border-radius: 4px; overflow: hidden;
+    }
+    .probe-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--roxo-profundo), #9B59B6);
+      transition: width 0.6s ease;
+    }
+    .probe-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--roxo-profundo);
+      min-width: 36px; text-align: right; font-weight: 500;
+    }
+
+    /* ── Estado inicial/vazio ───────────────────────────────────────── */
+    .empty-state {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 16px; padding: 60px 24px;
+      text-align: center;
+    }
+    .empty-icon {
+      width: 64px; height: 64px;
+      background: rgba(93,63,211,0.08);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .empty-title { font-size: 1rem; font-weight: 700; color: var(--texto-principal); }
+    .empty-sub { font-size: 0.82rem; color: var(--texto-secundario); max-width: 320px; line-height: 1.6; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      margin-top: 80px;
+      border-top: 1px solid var(--card-border);
+      padding: 28px 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: var(--texto-secundario);
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: var(--roxo-profundo); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Toast ──────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--texto-principal); color: #fff;
+      padding: 12px 24px; border-radius: 50px;
+      font-size: 0.82rem; font-weight: 500;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      z-index: 9999; white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.toast-ok { background: #1a7a4a; }
+    #toast.toast-err { background: #b53030; }
+
+    /* ── Progress bar ───────────────────────────────────────────────── */
+    .progress-bar-wrap {
+      height: 3px; background: rgba(93,63,211,0.08);
+      border-radius: 3px; overflow: hidden;
+      margin-top: 16px; display: none;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--roxo-profundo), #9B59B6);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header>
+  <a href="overthinking-machine.html" class="logo">
+    <span class="logo-dot"></span>
+    OVERTHINKING<span>MACHINE</span>
+  </a>
+  <nav>
+    <div class="breadcrumb">
+      <a href="overthinking-machine.html">Início</a>
+      <span>›</span>
+      <a href="overthinking-machine.html#modulos">Módulos</a>
+      <span>›</span>
+      <span>② Ativação de Rede Neural</span>
+    </div>
+    <a href="prompt-sensitivity-benchmark.html" class="nav-btn" style="background:linear-gradient(135deg,#5D3FD3,#b3471f);margin-right:4px">③ Prompt</a>
+    <a href="model-benchmark.html" class="nav-btn" style="background:linear-gradient(135deg,#5D3FD3,#0a7a5c);margin-right:4px">④ Modelos</a>
+    <a href="overthinking-machine.html" class="nav-btn">← Voltar</a>
+  </nav>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero-pesq">
+  <div class="badge">🔬 Research Preview · Geometria da Verdade</div>
+  <h1>A <em>Geometria</em> do<br>Acerto e do Erro</h1>
+  <p>
+    Inspirado em <strong>Marks &amp; Tegmark (COLM 2024)</strong>, investigamos se LLMs representam
+    linearmente o "saber correto" no espaço de ativações — mas aqui a pergunta é sobre
+    <strong>agentes classificadores</strong>: existe um padrão geométrico nos neurônios que separa
+    acertos de erros?
+  </p>
+  <div class="hero-pills">
+    <div class="pill"><span class="pill-dot" style="background:#3B82F6"></span> Acertos do agente → azul</div>
+    <div class="pill"><span class="pill-dot" style="background:#EF4444"></span> Erros do agente → vermelho</div>
+    <div class="pill"><span class="pill-dot" style="background:#00E599"></span> Llama-3.2-1B</div>
+    <div class="pill"><span class="pill-dot" style="background:#9B59B6"></span> PCA de ativações por camada</div>
+    <div class="pill"><span class="pill-dot" style="background:#FFD166"></span> Sonda linear por camada</div>
+  </div>
+</section>
+
+<!-- ═══════════ MAIN GRID ═══════════ -->
+<div class="main-grid">
+
+  <!-- ══ LEFT PANEL ══ -->
+  <div class="left-panel">
+
+    <!-- Paper card -->
+    <div class="paper-card">
+      <div class="paper-label">📄 Paper de Referência</div>
+      <div class="paper-title">The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets</div>
+      <div class="paper-authors">Samuel Marks &amp; Max Tegmark · COLM 2024 · MIT</div>
+      <div class="paper-abstract">
+        O paper demonstra que LLMs representam veracidade de forma <strong>linear</strong> no espaço de ativações.
+        Usando PCA nas ativações da última posição de token, verdadeiro e falso formam clusters
+        separáveis por uma direção linear chamada <em>"direção da verdade"</em>.
+        Experimentos de <em>patching</em> confirmam que essa direção é causalmente responsável pelas predições.
+      </div>
+      <div class="paper-finding">
+        💡 Achado central: a direção de primeiro componente principal (PC1) é altamente preditiva da veracidade
+        de uma afirmação — mesmo treinado em apenas um dataset e generalizado para outros.
+      </div>
+      <div class="paper-finding">
+        🔬 Adaptação aqui: em vez de frases verdadeiras/falsas, analisamos o estado interno do modelo
+        quando um agente SAS + zero-shot <strong>acerta ou erra</strong> uma tarefa de classificação.
+      </div>
+      <a class="paper-link" href="https://arxiv.org/abs/2310.06824" target="_blank">
+        📎 Ver paper original no arXiv ↗
+      </a>
+    </div>
+
+    <!-- Adaptação -->
+    <div class="adapt-card">
+      <div class="adapt-title">⚙️ Nossa Adaptação</div>
+      <div class="adapt-step">
+        <div class="adapt-num">1</div>
+        <div class="adapt-text">
+          <strong>Dataset de classificação:</strong> Usamos as afirmações verdadeiras/falsas dos datasets
+          (cidades, traduções, números) como entradas para um agente SAS + zero-shot.
+        </div>
+      </div>
+      <div class="adapt-step">
+        <div class="adapt-num">2</div>
+        <div class="adapt-text">
+          <strong>Execução do agente:</strong> O agente tenta classificar cada afirmação como
+          verdadeira ou falsa. Registramos acertos e erros.
+        </div>
+      </div>
+      <div class="adapt-step">
+        <div class="adapt-num">3</div>
+        <div class="adapt-text">
+          <strong>Extração de ativações:</strong> Para cada afirmação, capturamos os vetores
+          de ativação do Llama-3.2-1B em cada camada (residual stream).
+        </div>
+      </div>
+      <div class="adapt-step">
+        <div class="adapt-num">4</div>
+        <div class="adapt-text">
+          <strong>PCA por camada:</strong> Projetamos as ativações em 2D via PCA.
+          Colorimos <span style="color:var(--correct);font-weight:600">azul = acerto</span> e
+          <span style="color:var(--incorrect);font-weight:600">vermelho = erro</span>.
+          Medimos separabilidade com sonda linear.
+        </div>
+      </div>
+    </div>
+
+    <!-- Config -->
+    <div class="config-card">
+      <div class="config-title">
+        🧪 Configurar Experimento
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Dataset de Entrada</label>
+        <select class="form-select" id="cfg-dataset">
+          <option value="cities">Cidades (EN) — verdade geográfica</option>
+          <option value="neg_cities">Cidades Negadas (EN)</option>
+          <option value="larger_than">Números Maiores (EN)</option>
+          <option value="cidades_br" selected>Cidades Brasileiras (PT)</option>
+          <option value="neg_cidades_br">Cidades BR Negadas (PT)</option>
+          <option value="traducoes_en_pt">Traduções EN→PT</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Arquitetura do Agente</label>
+        <select class="form-select" id="cfg-arch">
+          <option value="sas_zero_shot" selected>SAS + Zero-Shot Classifier</option>
+          <option value="sas_few_shot">SAS + Few-Shot (3 exemplos)</option>
+          <option value="zero_shot_only">Zero-Shot Puro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Número de Instâncias</label>
+        <div class="form-range-row">
+          <input type="range" class="form-range" id="cfg-n" min="10" max="100" value="40" step="5"
+                 oninput="document.getElementById('cfg-n-val').textContent=this.value; updateRangeGrad(this)">
+          <span class="range-val" id="cfg-n-val">40</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Camada Principal (Llama — 0 a 15)</label>
+        <div class="form-range-row">
+          <input type="range" class="form-range" id="cfg-layer" min="0" max="15" value="8" step="1"
+                 oninput="document.getElementById('cfg-layer-val').textContent=this.value; updateRangeGrad(this)">
+          <span class="range-val" id="cfg-layer-val">8</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Modo de Execução</label>
+        <select class="form-select" id="cfg-mode">
+          <option value="simulate" selected>🔮 Simulação Realista (sem GPU)</option>
+          <option value="real">⚡ Modelo Real (Llama-3.2-1B — requer GPU)</option>
+        </select>
+      </div>
+
+      <div class="progress-bar-wrap" id="progress-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+
+      <button class="run-btn" id="run-btn" onclick="startExperiment()">
+        <span class="btn-text">▶ Executar Análise</span>
+        <span class="spinner"></span>
+      </button>
+
+      <div class="import-divider">ou importar do Kaggle / Colab</div>
+
+      <input type="file" id="import-file" accept=".json" multiple style="display:none" onchange="importResults(this)">
+      <button class="import-btn" onclick="document.getElementById('import-file').click()">
+        📂 Carregar arquivos otm_results.json
+      </button>
+      <div class="import-hint">Selecione um ou vários arquivos de uma vez</div>
+
+      <div class="dataset-list" id="dataset-list"></div>
+    </div>
+
+  </div>
+
+  <!-- ══ RIGHT PANEL ══ -->
+  <div class="right-panel">
+
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tab-pca" onclick="switchTab('pca')">📊 Espaço PCA</button>
+      <button class="tab-btn" id="tab-probe" onclick="switchTab('probe')">🎯 Sondas Lineares</button>
+      <button class="tab-btn" id="tab-log" onclick="switchTab('log')">🖥 Log de Execução</button>
+    </div>
+
+    <!-- Tab: PCA -->
+    <div class="tab-panel active" id="panel-pca">
+      <div class="viz-container">
+        <div class="viz-header">
+          <div class="viz-title">
+            Espaço de Ativações (PCA 2D)
+            <span id="layer-badge" style="background:rgba(93,63,211,0.1);color:var(--roxo-profundo);font-size:0.7rem;padding:3px 10px;border-radius:20px;font-weight:600;display:none">Camada 8</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div class="color-toggle">
+              <button id="toggle-correct" class="active" onclick="setColorMode('correct')">Acerto/Erro</button>
+              <button id="toggle-label" onclick="setColorMode('label')">Por Classe</button>
+            </div>
+            <div class="viz-legend" id="pca-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:var(--correct)"></div>
+                Acerto
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:var(--incorrect)"></div>
+                Erro
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="layer-slider-row" id="layer-slider-row" style="display:none">
+          <span class="layer-label">Camada</span>
+          <input type="range" class="layer-slider" id="layer-slider" min="0" max="15" value="8" step="1"
+                 oninput="onLayerChange(this.value)">
+          <span class="layer-val" id="layer-val">8 / 15</span>
+        </div>
+
+        <div class="pca-canvas-wrap">
+          <canvas id="pca-canvas"></canvas>
+          <div class="pca-placeholder" id="pca-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="#C8C8E8" stroke-width="2"/>
+              <circle cx="18" cy="20" r="3" fill="#3B82F6" opacity="0.6"/>
+              <circle cx="22" cy="26" r="3" fill="#3B82F6" opacity="0.6"/>
+              <circle cx="16" cy="28" r="3" fill="#3B82F6" opacity="0.6"/>
+              <circle cx="30" cy="18" r="3" fill="#EF4444" opacity="0.6"/>
+              <circle cx="34" cy="22" r="3" fill="#EF4444" opacity="0.6"/>
+              <circle cx="32" cy="28" r="3" fill="#EF4444" opacity="0.6"/>
+            </svg>
+            <p>Execute o experimento para ver o espaço de ativações</p>
+          </div>
+        </div>
+
+        <div class="metrics-grid" id="metrics-grid" style="display:none">
+          <div class="metric-card">
+            <div class="metric-val" id="m-accuracy">—</div>
+            <div class="metric-label">Acurácia Agente</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="m-probe">—</div>
+            <div class="metric-label">Sonda Linear</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="m-separation">—</div>
+            <div class="metric-label">Separação PC1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Sondas -->
+    <div class="tab-panel" id="panel-probe">
+      <div class="viz-container">
+        <div class="probe-title">
+          🎯 Acurácia da Sonda Linear por Camada
+          <span style="font-size:0.72rem;color:var(--texto-secundario);font-weight:400">
+            — quanto cada camada "sabe" se o agente vai acertar
+          </span>
+        </div>
+
+        <div id="probe-empty" class="empty-state">
+          <div class="empty-icon">🎯</div>
+          <div class="empty-title">Nenhum resultado ainda</div>
+          <div class="empty-sub">Execute o experimento para ver a acurácia da sonda linear em cada camada do Llama.</div>
+        </div>
+
+        <div class="probe-bars" id="probe-bars" style="display:none"></div>
+
+        <div id="probe-insight" style="display:none;margin-top:20px;padding:16px;background:rgba(93,63,211,0.06);border-radius:12px;border-left:3px solid var(--roxo-profundo)">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--roxo-profundo);margin-bottom:6px">💡 Interpretação</div>
+          <div id="probe-insight-text" style="font-size:0.8rem;color:var(--texto-secundario);line-height:1.6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Log -->
+    <div class="tab-panel" id="panel-log">
+      <div class="log-box">
+        <div class="log-header">
+          <div class="log-dot" style="background:#ff5f57"></div>
+          <div class="log-dot" style="background:#febc2e"></div>
+          <div class="log-dot" style="background:#28c840"></div>
+          <div class="log-header-title">geometry-of-truth · experiment runner</div>
+        </div>
+        <div class="log-body" id="log-body">
+          <div class="log-line">
+            <span class="log-ts">00:00:00</span>
+            <span class="log-dim">Sistema pronto. Configure o experimento e clique em Executar.</span>
+          </div>
+          <div class="log-line">
+            <span class="log-ts"></span>
+            <span><span class="log-cursor"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div>
+    <strong style="color:var(--texto-principal)">Overthinking Machine</strong> ·
+    TCC Research Preview · Abril 2026
+  </div>
+  <div>
+    Baseado em <a href="https://arxiv.org/abs/2310.06824" target="_blank">Marks &amp; Tegmark (COLM 2024)</a> ·
+    Modelo: <strong>Llama-3.2-1B</strong> via TransformerLens
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="config.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   ESTADO GLOBAL
+══════════════════════════════════════════════════════════════ */
+const API = window.OTM_API_URL || 'http://localhost:8000';
+let currentResults = null;   // resultados do último experimento
+let activeTab = 'pca';
+let running = false;
+let currentLayer = 8;
+let totalLayers = 16;
+
+/* ══════════════════════════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════════════════════════ */
+function $(id) { return document.getElementById(id); }
+function showToast(msg, type = '') {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'show' + (type ? ' toast-' + type : '');
+  setTimeout(() => { t.className = ''; }, 3500);
+}
+function now() {
+  return new Date().toTimeString().slice(0,8);
+}
+function logLine(text, cls = '') {
+  const body = $('log-body');
+  // Remove cursor temporariamente
+  const cursors = body.querySelectorAll('.log-cursor');
+  cursors.forEach(c => c.parentElement.parentElement.remove());
+
+  const line = document.createElement('div');
+  line.className = 'log-line';
+  const ts = document.createElement('span');
+  ts.className = 'log-ts';
+  ts.textContent = now();
+  const msg = document.createElement('span');
+  msg.className = cls;
+  msg.textContent = text;
+  line.appendChild(ts);
+  line.appendChild(msg);
+  body.appendChild(line);
+
+  // Re-adiciona cursor
+  const cursorLine = document.createElement('div');
+  cursorLine.className = 'log-line';
+  cursorLine.innerHTML = '<span></span><span><span class="log-cursor"></span></span>';
+  body.appendChild(cursorLine);
+
+  body.scrollTop = body.scrollHeight;
+}
+
+function updateRangeGrad(input) {
+  const pct = ((input.value - input.min) / (input.max - input.min)) * 100;
+  input.style.background = `linear-gradient(to right, var(--roxo-profundo) 0%, var(--roxo-profundo) ${pct}%, #E8E8F5 ${pct}%)`;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABS
+══════════════════════════════════════════════════════════════ */
+function switchTab(tab) {
+  activeTab = tab;
+  ['pca','probe','log'].forEach(t => {
+    $('tab-' + t).classList.toggle('active', t === tab);
+    $('panel-' + t).classList.toggle('active', t === tab);
+  });
+  if (tab === 'pca' && currentResults) drawPCA(currentLayer);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LAYER SLIDER
+══════════════════════════════════════════════════════════════ */
+function onLayerChange(val) {
+  val = parseInt(val);
+  currentLayer = val;
+  $('layer-val').textContent = val + ' / ' + (totalLayers - 1);
+  $('layer-badge').textContent = 'Camada ' + val;
+  // Update slider gradient
+  const slider = $('layer-slider');
+  const pct = ((val - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.background = `linear-gradient(to right, var(--roxo-profundo) 0%, var(--roxo-profundo) ${pct}%, #1a1a2e ${pct}%)`;
+  if (currentResults) drawPCA(val);
+  // Highlight probe bar
+  if (currentResults) highlightProbeBar(val);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EXECUTAR EXPERIMENTO
+══════════════════════════════════════════════════════════════ */
+async function startExperiment() {
+  if (running) return;
+  running = true;
+  currentResults = null;
+
+  const dataset = $('cfg-dataset').value;
+  const arch = $('cfg-arch').value;
+  const n = parseInt($('cfg-n').value);
+  const mode = $('cfg-mode').value;
+
+  // UI feedback
+  const btn = $('run-btn');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  $('progress-wrap').style.display = 'block';
+  $('progress-fill').style.width = '0%';
+
+  // Limpa visualizações anteriores
+  $('pca-placeholder').style.display = 'flex';
+  $('metrics-grid').style.display = 'none';
+  $('layer-slider-row').style.display = 'none';
+  $('layer-badge').style.display = 'none';
+  $('probe-bars').style.display = 'none';
+  $('probe-bars').innerHTML = '';
+  $('probe-empty').style.display = 'flex';
+  $('probe-insight').style.display = 'none';
+
+  // Muda para log
+  switchTab('log');
+
+  logLine('─'.repeat(56), 'log-dim');
+  logLine(`Iniciando experimento: ${dataset} · ${arch}`, 'log-info');
+  logLine(`Modo: ${mode === 'simulate' ? 'Simulação Realista' : 'Modelo Real'}  |  N=${n}`, 'log-info');
+  logLine('─'.repeat(56), 'log-dim');
+
+  try {
+    const resp = await fetch(`${API}/api/geometry/run`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dataset, arch, n_instances: n, mode })
+    });
+
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let processed = 0;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n\n');
+      buffer = lines.pop();
+
+      for (const chunk of lines) {
+        if (!chunk.startsWith('data:')) continue;
+        let evt;
+        try { evt = JSON.parse(chunk.slice(5).trim()); } catch { continue; }
+
+        switch (evt.type) {
+          case 'log':
+            logLine(evt.text);
+            break;
+          case 'progress':
+            processed = evt.processed;
+            const pct = Math.round((processed / n) * 100);
+            $('progress-fill').style.width = pct + '%';
+            break;
+          case 'done':
+            handleResults(evt.results, n);
+            break;
+          case 'error':
+            logLine('ERRO: ' + evt.message, 'log-err');
+            showToast('Erro no experimento', 'err');
+            break;
+        }
+      }
+    }
+  } catch (err) {
+    logLine('Falha ao conectar com o servidor: ' + err.message, 'log-err');
+    logLine('Verifique se o servidor está rodando em localhost:8000', 'log-warn');
+    showToast('Servidor indisponível', 'err');
+  } finally {
+    running = false;
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    $('progress-fill').style.width = '100%';
+    setTimeout(() => { $('progress-wrap').style.display = 'none'; }, 800);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROCESSAR RESULTADOS
+══════════════════════════════════════════════════════════════ */
+function handleResults(res, n) {
+  currentResults = res;
+  totalLayers = res.n_layers;
+  updateLegend();
+
+  logLine('─'.repeat(56), 'log-dim');
+  logLine(`Experimento concluído. ${res.n_correct} acertos, ${res.n_incorrect} erros.`, 'log-ok');
+  logLine(`Acurácia do agente: ${(res.agent_accuracy * 100).toFixed(1)}%`, 'log-ok');
+  logLine(`Melhor sonda linear: camada ${res.best_probe_layer} → ${(res.best_probe_acc * 100).toFixed(1)}%`, 'log-ok');
+  logLine(`Separação PC1 (camada ${res.best_probe_layer}): ${res.pc1_separation.toFixed(3)}`, 'log-ok');
+  logLine('─'.repeat(56), 'log-dim');
+
+  // Ajusta slider de camada — usa a camada escolhida no config, com clamp para o range real
+  const slider = $('layer-slider');
+  slider.max = totalLayers - 1;
+  const requestedLayer = parseInt($('cfg-layer').value);
+  slider.value = Math.min(requestedLayer, totalLayers - 1);
+  currentLayer = parseInt(slider.value);
+
+  $('layer-slider-row').style.display = 'flex';
+  $('layer-badge').style.display = 'inline-flex';
+  $('layer-badge').textContent = 'Camada ' + currentLayer;
+  onLayerChange(currentLayer);
+
+  // Métricas
+  $('m-accuracy').textContent = (res.agent_accuracy * 100).toFixed(0) + '%';
+  $('m-probe').textContent = (res.best_probe_acc * 100).toFixed(0) + '%';
+  $('m-separation').textContent = res.pc1_separation.toFixed(2);
+  $('metrics-grid').style.display = 'grid';
+
+  // Sondas
+  renderProbes(res.probe_accuracies, res.probe_accuracies_cv, res.cv_folds);
+
+  // Muda para aba PCA
+  switchTab('pca');
+  showToast('Análise concluída!', 'ok');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DESENHAR PCA
+══════════════════════════════════════════════════════════════ */
+// ── Paleta de cores por classe ────────────────────────────────────────────────
+const CLASS_COLORS = [
+  '#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFD166',
+  '#DDA0DD','#98D8C8','#F7DC6F','#BB8FCE','#85C1E9'
+];
+
+let colorMode = 'correct'; // 'correct' | 'label'
+
+function setColorMode(mode) {
+  colorMode = mode;
+  $('toggle-correct').classList.toggle('active', mode === 'correct');
+  $('toggle-label').classList.toggle('active', mode === 'label');
+  updateLegend();
+  if (currentResults) drawPCA(currentLayer);
+}
+
+function updateLegend() {
+  const legend = $('pca-legend');
+  legend.innerHTML = '';
+  if (colorMode === 'correct') {
+    legend.innerHTML = `
+      <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>Acerto</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Erro</div>`;
+  } else {
+    const names = (currentResults && currentResults.label_names) || [];
+    if (names.length === 0) {
+      legend.innerHTML = `<span style="font-size:0.7rem;color:var(--texto-secundario)">Sem nomes de classe</span>`;
+      return;
+    }
+    names.forEach((name, i) => {
+      const color = CLASS_COLORS[i % CLASS_COLORS.length];
+      legend.innerHTML += `
+        <div class="legend-item">
+          <div class="legend-dot" style="background:${color}"></div>
+          ${name}
+        </div>`;
+    });
+  }
+}
+
+function getPointColor(p) {
+  if (colorMode === 'correct') return p.correct ? '#3B82F6' : '#EF4444';
+  return CLASS_COLORS[(p.label || 0) % CLASS_COLORS.length];
+}
+
+function drawPCA(layerIdx) {
+  if (!currentResults) return;
+  const points = currentResults.pca_layers[layerIdx];
+  if (!points || points.length === 0) return;
+
+  $('pca-placeholder').style.display = 'none';
+
+  const canvas = $('pca-canvas');
+  const wrap = canvas.parentElement;
+  canvas.width = wrap.offsetWidth || 600;
+  canvas.height = Math.round(canvas.width * 0.75);
+
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+  const PAD = 48;
+
+  // Fundo
+  ctx.fillStyle = '#0C0C1E';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grade suave
+  ctx.strokeStyle = 'rgba(93,63,211,0.12)';
+  ctx.lineWidth = 1;
+  for (let x = PAD; x <= W - PAD; x += (W - PAD * 2) / 8) {
+    ctx.beginPath(); ctx.moveTo(x, PAD); ctx.lineTo(x, H - PAD); ctx.stroke();
+  }
+  for (let y = PAD; y <= H - PAD; y += (H - PAD * 2) / 6) {
+    ctx.beginPath(); ctx.moveTo(PAD, y); ctx.lineTo(W - PAD, y); ctx.stroke();
+  }
+
+  // Bounds
+  const xs = points.map(p => p.x);
+  const ys = points.map(p => p.y);
+  const xmin = Math.min(...xs), xmax = Math.max(...xs);
+  const ymin = Math.min(...ys), ymax = Math.max(...ys);
+  const xr = (xmax - xmin) || 1;
+  const yr = (ymax - ymin) || 1;
+
+  function toCanvas(px, py) {
+    return [
+      PAD + ((px - xmin) / xr) * (W - PAD * 2),
+      H - PAD - ((py - ymin) / yr) * (H - PAD * 2)
+    ];
+  }
+
+  // Eixos
+  ctx.strokeStyle = 'rgba(200,200,232,0.15)';
+  ctx.lineWidth = 1;
+  const [, zeroCy] = toCanvas(xmin, 0);
+  if (zeroCy > PAD && zeroCy < H - PAD) {
+    ctx.beginPath(); ctx.moveTo(PAD, zeroCy); ctx.lineTo(W - PAD, zeroCy); ctx.stroke();
+  }
+  const [zeroCx] = toCanvas(0, ymin);
+  if (zeroCx > PAD && zeroCx < W - PAD) {
+    ctx.beginPath(); ctx.moveTo(zeroCx, PAD); ctx.lineTo(zeroCx, H - PAD); ctx.stroke();
+  }
+
+  // Elipses de densidade agrupadas pela dimensão ativa
+  if (colorMode === 'correct') {
+    drawDensityEllipse(ctx, points.filter(p => p.correct),  toCanvas, '#3B82F6', W, H, PAD);
+    drawDensityEllipse(ctx, points.filter(p => !p.correct), toCanvas, '#EF4444', W, H, PAD);
+  } else {
+    const nClasses = (currentResults.label_names || []).length ||
+                     (Math.max(...points.map(p => p.label || 0)) + 1);
+    for (let c = 0; c < nClasses; c++) {
+      const grp = points.filter(p => (p.label || 0) === c);
+      if (grp.length >= 3) drawDensityEllipse(ctx, grp, toCanvas, CLASS_COLORS[c % CLASS_COLORS.length], W, H, PAD);
+    }
+  }
+
+  // Pontos
+  for (const p of points) {
+    const [cx, cy] = toCanvas(p.x, p.y);
+    const color = getPointColor(p);
+    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 10);
+    grd.addColorStop(0, color + '60');
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.arc(cx, cy, 4.5, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+
+  // Labels eixos
+  ctx.fillStyle = 'rgba(200,200,232,0.4)';
+  ctx.font = '500 11px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('PC1', W / 2, H - 10);
+  ctx.save(); ctx.translate(14, H / 2); ctx.rotate(-Math.PI / 2);
+  ctx.fillText('PC2', 0, 0); ctx.restore();
+
+  // Layer info
+  ctx.fillStyle = 'rgba(200,200,232,0.3)';
+  ctx.font = '500 10px JetBrains Mono, monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(`layer ${layerIdx}/${totalLayers - 1}`, PAD + 4, PAD - 8);
+
+  // Probe acc
+  if (currentResults.probe_accuracies && currentResults.probe_accuracies[layerIdx] !== undefined) {
+    const acc = (currentResults.probe_accuracies[layerIdx] * 100).toFixed(1);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#9B59B6';
+    ctx.fillText(`sonda: ${acc}%`, W - PAD - 4, PAD - 8);
+  }
+}
+
+function drawDensityEllipse(ctx, pts, toCanvas, color, W, H, PAD) {
+  if (pts.length < 3) return;
+  const xs = pts.map(p => p.x);
+  const ys = pts.map(p => p.y);
+  const mx = xs.reduce((a,b)=>a+b,0)/xs.length;
+  const my = ys.reduce((a,b)=>a+b,0)/ys.length;
+  const sdx = Math.sqrt(xs.map(x=>(x-mx)**2).reduce((a,b)=>a+b,0)/xs.length) * 1.5;
+  const sdy = Math.sqrt(ys.map(y=>(y-my)**2).reduce((a,b)=>a+b,0)/ys.length) * 1.5;
+  const [cx, cy] = toCanvas(mx, my);
+  const rx = (sdx / (Math.max(...xs) - Math.min(...xs) || 1)) * (W - PAD * 2) * 1.5;
+  const ry = (sdy / (Math.max(...ys) - Math.min(...ys) || 1)) * (H - PAD * 2) * 1.5;
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, Math.max(rx, 12), Math.max(ry, 12), 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 0.25;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.restore();
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SONDAS LINEARES
+══════════════════════════════════════════════════════════════ */
+function renderProbes(accuracies, accuracies_cv, cv_folds) {
+  if (!accuracies || !accuracies.length) return;
+  $('probe-empty').style.display = 'none';
+  const bars = $('probe-bars');
+  bars.innerHTML = '';
+  bars.style.display = 'flex';
+
+  const hasCV   = accuracies_cv && accuracies_cv.length === accuracies.length;
+  const primary = hasCV ? accuracies_cv : accuracies;
+  const bestAcc = Math.max(...primary);
+  const bestLayer = primary.indexOf(bestAcc);
+
+  // Legenda CV
+  if (hasCV) {
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:16px;margin-bottom:8px;font-size:0.72rem;color:var(--texto-secundario)';
+    legend.innerHTML = `
+      <span><span style="display:inline-block;width:28px;height:4px;background:var(--roxo-profundo);border-radius:2px;vertical-align:middle;margin-right:4px"></span>In-sample</span>
+      <span><span style="display:inline-block;width:28px;height:4px;background:#27ae60;border-radius:2px;vertical-align:middle;margin-right:4px;opacity:0.85"></span>Cross-val (${cv_folds || 5}-fold) ★</span>
+    `;
+    bars.appendChild(legend);
+  }
+
+  accuracies.forEach((acc_is, i) => {
+    const acc_cv  = hasCV ? accuracies_cv[i] : null;
+    const isBest  = i === bestLayer;
+    const row = document.createElement('div');
+    row.className = 'probe-row';
+    row.id = 'probe-row-' + i;
+
+    const isBar = `width:${acc_is*100}%;opacity:0.45`;
+    const cvBar = acc_cv != null
+      ? `<div class="probe-bar-fill" style="width:${acc_cv*100}%;position:absolute;top:0;left:0;height:100%;background:${isBest?'linear-gradient(90deg,#27ae60,#2ecc71)':'rgba(39,174,96,0.75)'}"></div>`
+      : '';
+    const pctLabel = acc_cv != null
+      ? `<span class="probe-pct" style="${isBest?'color:#27ae60':''}">
+           <span style="opacity:0.55;font-size:0.7em">${(acc_is*100).toFixed(0)}%/</span>${(acc_cv*100).toFixed(1)}%${isBest?' ★':''}
+         </span>`
+      : `<span class="probe-pct" style="${isBest?'color:#27ae60':''}">${(acc_is*100).toFixed(1)}%${isBest?' ★':''}</span>`;
+
+    row.innerHTML = `
+      <span class="probe-layer-label">${i < 10 ? '0' + i : i}</span>
+      <div class="probe-bar-track" style="position:relative">
+        <div class="probe-bar-fill" style="${isBar}"></div>
+        ${cvBar}
+      </div>
+      ${pctLabel}
+    `;
+    bars.appendChild(row);
+  });
+
+  // Insight automático baseado na métrica válida
+  const earlyAvg = primary.slice(0, Math.floor(primary.length/3)).reduce((a,b)=>a+b,0) / Math.ceil(primary.length/3);
+  const lateAvg  = primary.slice(-Math.floor(primary.length/3)).reduce((a,b)=>a+b,0) / Math.ceil(primary.length/3);
+  const trend = lateAvg > earlyAvg + 0.03 ? 'crescente' : lateAvg < earlyAvg - 0.03 ? 'decrescente' : 'estável';
+  const metricLabel = hasCV ? `${(cv_folds||5)}-fold CV` : 'in-sample';
+
+  let insight = `A camada <strong>${bestLayer}</strong> apresentou a maior separabilidade (${metricLabel}: ${(bestAcc*100).toFixed(1)}%), `;
+  if (hasCV) {
+    const overfit = Math.max(...accuracies) - bestAcc;
+    insight += `com estimativa de overfitting de <strong>${(overfit*100).toFixed(1)} p.p.</strong> (in-sample vs CV). `;
+  }
+  if (trend === 'crescente') {
+    insight += 'Tendência <strong>crescente</strong> por camada — representações mais profundas codificam mais informação sobre o acerto.';
+  } else if (trend === 'decrescente') {
+    insight += 'Tendência <strong>decrescente</strong> nas camadas finais — a informação de acerto/erro pode estar mais concentrada nas camadas intermediárias.';
+  } else {
+    insight += 'Acurácia <strong>estável</strong> entre camadas — o sinal está distribuído ao longo do residual stream.';
+  }
+
+  $('probe-insight-text').innerHTML = insight;
+  $('probe-insight').style.display = 'block';
+}
+
+function highlightProbeBar(layerIdx) {
+  document.querySelectorAll('.probe-row').forEach((row, i) => {
+    row.style.opacity = i === layerIdx ? '1' : '0.55';
+    row.style.transform = i === layerIdx ? 'scale(1.01)' : 'scale(1)';
+    row.style.transition = 'opacity 0.2s, transform 0.2s';
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   IMPORTAR RESULTADOS — MULTI-ARQUIVO
+══════════════════════════════════════════════════════════════ */
+
+const loadedDatasets = {};   // chave → { data, filename }
+let   activeDatasetKey = null;
+
+const TASK_ICONS = {
+  topico: '📰', sentimento: '💬', tipo_pergunta: '❓', veracidade: '✅'
+};
+
+function importResults(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+
+  const required = ['pca_layers', 'probe_accuracies', 'agent_accuracy',
+                    'n_correct', 'n_incorrect', 'n_layers'];
+  let loaded = 0;
+
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      let data;
+      try { data = JSON.parse(e.target.result); }
+      catch { showToast(`JSON inválido: ${file.name}`, 'err'); return; }
+
+      const missing = required.filter(k => !(k in data));
+      if (missing.length > 0) {
+        showToast(`Campos ausentes em ${file.name}: ${missing.join(', ')}`, 'err');
+        return;
+      }
+
+      const key = data.dataset
+        ? `${data.dataset}_${data.arch || 'default'}`
+        : file.name.replace('.json', '');
+
+      loadedDatasets[key] = { data, filename: file.name };
+      loaded++;
+      renderDatasetList();
+
+      // Ativa automaticamente o primeiro ou o recém-carregado
+      if (!activeDatasetKey || files.length === 1) selectDataset(key);
+
+      if (loaded === files.length) {
+        showToast(`${loaded} arquivo${loaded > 1 ? 's' : ''} carregado${loaded > 1 ? 's' : ''}!`, 'ok');
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  input.value = '';
+}
+
+function renderDatasetList() {
+  const list = document.getElementById('dataset-list');
+  list.innerHTML = '';
+
+  Object.entries(loadedDatasets).forEach(([key, { data, filename }]) => {
+    const icon = TASK_ICONS[data.task] || '📊';
+    const label = data.dataset
+      ? data.dataset.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase())
+      : filename;
+    const arch  = data.arch ? data.arch.replace('sas_', '').replace('_', '-') : '';
+    const acc   = (data.agent_accuracy * 100).toFixed(0) + '%';
+    const best  = (data.best_probe_acc * 100).toFixed(0) + '%';
+    const n_cls = data.n_classes ? `${data.n_classes} classes` : '';
+    const meta  = [arch, n_cls, `sonda ${best}`].filter(Boolean).join(' · ');
+
+    const item = document.createElement('div');
+    item.className = 'dataset-item' + (key === activeDatasetKey ? ' active' : '');
+    item.innerHTML = `
+      <span class="ds-icon">${icon}</span>
+      <div class="ds-info">
+        <div class="ds-name">${label}</div>
+        <div class="ds-meta">${meta}</div>
+      </div>
+      <span class="ds-acc">${acc}</span>
+      <span class="ds-remove" title="Remover" onclick="removeDataset('${key}', event)">✕</span>
+    `;
+    item.addEventListener('click', () => selectDataset(key));
+    list.appendChild(item);
+  });
+}
+
+function selectDataset(key) {
+  if (!loadedDatasets[key]) return;
+  activeDatasetKey = key;
+
+  const { data, filename } = loadedDatasets[key];
+
+  if (data.dataset) {
+    const sel = $('cfg-dataset');
+    for (const opt of sel.options) {
+      if (opt.value === data.dataset) { sel.value = data.dataset; break; }
+    }
+  }
+  if (data.arch) {
+    const sel = $('cfg-arch');
+    for (const opt of sel.options) {
+      if (opt.value === data.arch) { sel.value = data.arch; break; }
+    }
+  }
+
+  const n = data.n_correct + data.n_incorrect;
+  switchTab('log');
+  logLine('─'.repeat(56), 'log-dim');
+  logLine(`Dataset ativo: ${filename}`, 'log-info');
+  logLine(`Origem: ${data.mode === 'real' ? '⚡ Llama real' : '🔮 Simulação'}`, 'log-info');
+  logLine(`Dataset: ${data.dataset || '?'}  ·  Arch: ${data.arch || '?'}  ·  Classes: ${data.n_classes || 2}`, 'log-info');
+  logLine(`${n} instâncias · ${data.n_layers} camadas · sonda: ${(data.best_probe_acc*100).toFixed(0)}% (camada ${data.best_probe_layer})`, 'log-info');
+  logLine('─'.repeat(56), 'log-dim');
+
+  handleResults(data, n);
+  renderDatasetList();
+}
+
+function removeDataset(key, evt) {
+  evt.stopPropagation();
+  delete loadedDatasets[key];
+  if (activeDatasetKey === key) activeDatasetKey = null;
+  renderDatasetList();
+  showToast('Dataset removido', 'ok');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INICIALIZAÇÃO
+══════════════════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  updateRangeGrad($('cfg-n'));
+  updateRangeGrad($('cfg-layer'));
+});
+</script>
+</body>
+</html>

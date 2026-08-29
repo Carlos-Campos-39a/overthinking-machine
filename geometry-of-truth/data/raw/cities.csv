@@ -1,0 +1,103 @@
+statement,label,lang,dataset
+The city of Tokyo is in Japan.,1,en,cities
+The city of Tokyo is in Cuba.,0,en,cities
+The city of Beijing is in China.,1,en,cities
+The city of Beijing is in Bangladesh.,0,en,cities
+The city of Mumbai is in India.,1,en,cities
+The city of Mumbai is in China.,0,en,cities
+The city of São Paulo is in Brazil.,1,en,cities
+The city of São Paulo is in Poland.,0,en,cities
+The city of Cairo is in Egypt.,1,en,cities
+The city of Cairo is in Thailand.,0,en,cities
+The city of Lagos is in Nigeria.,1,en,cities
+The city of Lagos is in France.,0,en,cities
+The city of Mexico City is in Mexico.,1,en,cities
+The city of Mexico City is in United States.,0,en,cities
+The city of Buenos Aires is in Argentina.,1,en,cities
+The city of Buenos Aires is in Japan.,0,en,cities
+The city of Dhaka is in Bangladesh.,1,en,cities
+The city of Dhaka is in Poland.,0,en,cities
+The city of Osaka is in Japan.,1,en,cities
+The city of Osaka is in Argentina.,0,en,cities
+The city of Karachi is in Pakistan.,1,en,cities
+The city of Karachi is in Mexico.,0,en,cities
+The city of Istanbul is in Turkey.,1,en,cities
+The city of Istanbul is in Poland.,0,en,cities
+The city of Kinshasa is in DR Congo.,1,en,cities
+The city of Kinshasa is in Ethiopia.,0,en,cities
+The city of Jakarta is in Indonesia.,1,en,cities
+The city of Jakarta is in Nigeria.,0,en,cities
+The city of London is in United Kingdom.,1,en,cities
+The city of London is in Ghana.,0,en,cities
+The city of New York is in United States.,1,en,cities
+The city of New York is in South Africa.,0,en,cities
+The city of Paris is in France.,1,en,cities
+The city of Paris is in India.,0,en,cities
+The city of Moscow is in Russia.,1,en,cities
+The city of Moscow is in China.,0,en,cities
+The city of Bangkok is in Thailand.,1,en,cities
+The city of Bangkok is in Nigeria.,0,en,cities
+The city of Lima is in Peru.,1,en,cities
+The city of Lima is in Indonesia.,0,en,cities
+The city of Bogotá is in Colombia.,1,en,cities
+The city of Bogotá is in United Kingdom.,0,en,cities
+The city of Chicago is in United States.,1,en,cities
+The city of Chicago is in Algeria.,0,en,cities
+The city of Toronto is in Canada.,1,en,cities
+The city of Toronto is in Ivory Coast.,0,en,cities
+The city of Sydney is in Australia.,1,en,cities
+The city of Sydney is in China.,0,en,cities
+The city of Berlin is in Germany.,1,en,cities
+The city of Berlin is in Tanzania.,0,en,cities
+The city of Madrid is in Spain.,1,en,cities
+The city of Madrid is in DR Congo.,0,en,cities
+The city of Rome is in Italy.,1,en,cities
+The city of Rome is in Germany.,0,en,cities
+The city of Seoul is in South Korea.,1,en,cities
+The city of Seoul is in Cuba.,0,en,cities
+The city of Nairobi is in Kenya.,1,en,cities
+The city of Nairobi is in Spain.,0,en,cities
+The city of Johannesburg is in South Africa.,1,en,cities
+The city of Johannesburg is in Ethiopia.,0,en,cities
+The city of Riyadh is in Saudi Arabia.,1,en,cities
+The city of Riyadh is in Italy.,0,en,cities
+The city of Tehran is in Iran.,1,en,cities
+The city of Tehran is in United Kingdom.,0,en,cities
+The city of Baghdad is in Iraq.,1,en,cities
+The city of Baghdad is in Kenya.,0,en,cities
+The city of Casablanca is in Morocco.,1,en,cities
+The city of Casablanca is in Ghana.,0,en,cities
+The city of Algiers is in Algeria.,1,en,cities
+The city of Algiers is in Russia.,0,en,cities
+The city of Addis Ababa is in Ethiopia.,1,en,cities
+The city of Addis Ababa is in Japan.,0,en,cities
+The city of Dar es Salaam is in Tanzania.,1,en,cities
+The city of Dar es Salaam is in Ukraine.,0,en,cities
+The city of Khartoum is in Sudan.,1,en,cities
+The city of Khartoum is in Pakistan.,0,en,cities
+The city of Accra is in Ghana.,1,en,cities
+The city of Accra is in Spain.,0,en,cities
+The city of Abidjan is in Ivory Coast.,1,en,cities
+The city of Abidjan is in South Korea.,0,en,cities
+The city of Santiago is in Chile.,1,en,cities
+The city of Santiago is in United States.,0,en,cities
+The city of Caracas is in Venezuela.,1,en,cities
+The city of Caracas is in Russia.,0,en,cities
+The city of Havana is in Cuba.,1,en,cities
+The city of Havana is in Japan.,0,en,cities
+The city of Guadalajara is in Mexico.,1,en,cities
+The city of Guadalajara is in United Kingdom.,0,en,cities
+The city of Monterrey is in Mexico.,1,en,cities
+The city of Monterrey is in Canada.,0,en,cities
+The city of Barcelona is in Spain.,1,en,cities
+The city of Barcelona is in Mexico.,0,en,cities
+The city of Munich is in Germany.,1,en,cities
+The city of Munich is in Nigeria.,0,en,cities
+The city of Vienna is in Austria.,1,en,cities
+The city of Vienna is in Germany.,0,en,cities
+The city of Warsaw is in Poland.,1,en,cities
+The city of Warsaw is in Mexico.,0,en,cities
+The city of Kiev is in Ukraine.,1,en,cities
+The city of Kiev is in Canada.,0,en,cities
+The city of Bucharest is in Romania.,1,en,cities
+The city of Bucharest is in Canada.,0,en,cities

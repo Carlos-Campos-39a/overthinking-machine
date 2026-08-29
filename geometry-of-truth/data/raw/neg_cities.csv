@@ -1,0 +1,103 @@
+statement,label,lang,dataset
+The city of Tokyo is not in Chile.,1,en,neg_cities
+The city of Tokyo is not in Japan.,0,en,neg_cities
+The city of Beijing is not in Russia.,1,en,neg_cities
+The city of Beijing is not in China.,0,en,neg_cities
+The city of Mumbai is not in Brazil.,1,en,neg_cities
+The city of Mumbai is not in India.,0,en,neg_cities
+The city of São Paulo is not in Austria.,1,en,neg_cities
+The city of São Paulo is not in Brazil.,0,en,neg_cities
+The city of Cairo is not in Saudi Arabia.,1,en,neg_cities
+The city of Cairo is not in Egypt.,0,en,neg_cities
+The city of Lagos is not in Ethiopia.,1,en,neg_cities
+The city of Lagos is not in Nigeria.,0,en,neg_cities
+The city of Mexico City is not in Bangladesh.,1,en,neg_cities
+The city of Mexico City is not in Mexico.,0,en,neg_cities
+The city of Buenos Aires is not in Spain.,1,en,neg_cities
+The city of Buenos Aires is not in Argentina.,0,en,neg_cities
+The city of Dhaka is not in Nigeria.,1,en,neg_cities
+The city of Dhaka is not in Bangladesh.,0,en,neg_cities
+The city of Osaka is not in Sudan.,1,en,neg_cities
+The city of Osaka is not in Japan.,0,en,neg_cities
+The city of Karachi is not in Peru.,1,en,neg_cities
+The city of Karachi is not in Pakistan.,0,en,neg_cities
+The city of Istanbul is not in Venezuela.,1,en,neg_cities
+The city of Istanbul is not in Turkey.,0,en,neg_cities
+The city of Kinshasa is not in Chile.,1,en,neg_cities
+The city of Kinshasa is not in DR Congo.,0,en,neg_cities
+The city of Jakarta is not in Germany.,1,en,neg_cities
+The city of Jakarta is not in Indonesia.,0,en,neg_cities
+The city of London is not in Sudan.,1,en,neg_cities
+The city of London is not in United Kingdom.,0,en,neg_cities
+The city of New York is not in DR Congo.,1,en,neg_cities
+The city of New York is not in United States.,0,en,neg_cities
+The city of Paris is not in Germany.,1,en,neg_cities
+The city of Paris is not in France.,0,en,neg_cities
+The city of Moscow is not in Egypt.,1,en,neg_cities
+The city of Moscow is not in Russia.,0,en,neg_cities
+The city of Bangkok is not in India.,1,en,neg_cities
+The city of Bangkok is not in Thailand.,0,en,neg_cities
+The city of Lima is not in Mexico.,1,en,neg_cities
+The city of Lima is not in Peru.,0,en,neg_cities
+The city of Bogotá is not in United Kingdom.,1,en,neg_cities
+The city of Bogotá is not in Colombia.,0,en,neg_cities
+The city of Chicago is not in Peru.,1,en,neg_cities
+The city of Chicago is not in United States.,0,en,neg_cities
+The city of Toronto is not in Nigeria.,1,en,neg_cities
+The city of Toronto is not in Canada.,0,en,neg_cities
+The city of Sydney is not in United Kingdom.,1,en,neg_cities
+The city of Sydney is not in Australia.,0,en,neg_cities
+The city of Berlin is not in Mexico.,1,en,neg_cities
+The city of Berlin is not in Germany.,0,en,neg_cities
+The city of Madrid is not in Germany.,1,en,neg_cities
+The city of Madrid is not in Spain.,0,en,neg_cities
+The city of Rome is not in Russia.,1,en,neg_cities
+The city of Rome is not in Italy.,0,en,neg_cities
+The city of Seoul is not in Saudi Arabia.,1,en,neg_cities
+The city of Seoul is not in South Korea.,0,en,neg_cities
+The city of Nairobi is not in Venezuela.,1,en,neg_cities
+The city of Nairobi is not in Kenya.,0,en,neg_cities
+The city of Johannesburg is not in Australia.,1,en,neg_cities
+The city of Johannesburg is not in South Africa.,0,en,neg_cities
+The city of Riyadh is not in Pakistan.,1,en,neg_cities
+The city of Riyadh is not in Saudi Arabia.,0,en,neg_cities
+The city of Tehran is not in Australia.,1,en,neg_cities
+The city of Tehran is not in Iran.,0,en,neg_cities
+The city of Baghdad is not in Canada.,1,en,neg_cities
+The city of Baghdad is not in Iraq.,0,en,neg_cities
+The city of Casablanca is not in Indonesia.,1,en,neg_cities
+The city of Casablanca is not in Morocco.,0,en,neg_cities
+The city of Algiers is not in Mexico.,1,en,neg_cities
+The city of Algiers is not in Algeria.,0,en,neg_cities
+The city of Addis Ababa is not in Russia.,1,en,neg_cities
+The city of Addis Ababa is not in Ethiopia.,0,en,neg_cities
+The city of Dar es Salaam is not in Spain.,1,en,neg_cities
+The city of Dar es Salaam is not in Tanzania.,0,en,neg_cities
+The city of Khartoum is not in Mexico.,1,en,neg_cities
+The city of Khartoum is not in Sudan.,0,en,neg_cities
+The city of Accra is not in Cuba.,1,en,neg_cities
+The city of Accra is not in Ghana.,0,en,neg_cities
+The city of Abidjan is not in Egypt.,1,en,neg_cities
+The city of Abidjan is not in Ivory Coast.,0,en,neg_cities
+The city of Santiago is not in Ghana.,1,en,neg_cities
+The city of Santiago is not in Chile.,0,en,neg_cities
+The city of Caracas is not in Chile.,1,en,neg_cities
+The city of Caracas is not in Venezuela.,0,en,neg_cities
+The city of Havana is not in Pakistan.,1,en,neg_cities
+The city of Havana is not in Cuba.,0,en,neg_cities
+The city of Guadalajara is not in Ethiopia.,1,en,neg_cities
+The city of Guadalajara is not in Mexico.,0,en,neg_cities
+The city of Monterrey is not in Ukraine.,1,en,neg_cities
+The city of Monterrey is not in Mexico.,0,en,neg_cities
+The city of Barcelona is not in United States.,1,en,neg_cities
+The city of Barcelona is not in Spain.,0,en,neg_cities
+The city of Munich is not in Pakistan.,1,en,neg_cities
+The city of Munich is not in Germany.,0,en,neg_cities
+The city of Vienna is not in South Africa.,1,en,neg_cities
+The city of Vienna is not in Austria.,0,en,neg_cities
+The city of Warsaw is not in Germany.,1,en,neg_cities
+The city of Warsaw is not in Poland.,0,en,neg_cities
+The city of Kiev is not in Russia.,1,en,neg_cities
+The city of Kiev is not in Ukraine.,0,en,neg_cities
+The city of Bucharest is not in Chile.,1,en,neg_cities
+The city of Bucharest is not in Romania.,0,en,neg_cities

@@ -1,0 +1,101 @@
+statement,label,lang,dataset
+A cidade de São Paulo fica em São Paulo.,1,pt,cidades_br
+A cidade de São Paulo fica no Amazonas.,0,pt,cidades_br
+A cidade de Rio de Janeiro fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de Rio de Janeiro fica em São Paulo.,0,pt,cidades_br
+A cidade de Brasília fica no Distrito Federal.,1,pt,cidades_br
+A cidade de Brasília fica em Minas Gerais.,0,pt,cidades_br
+A cidade de Salvador fica na Bahia.,1,pt,cidades_br
+A cidade de Salvador fica no Amapá.,0,pt,cidades_br
+A cidade de Fortaleza fica no Ceará.,1,pt,cidades_br
+A cidade de Fortaleza fica em Minas Gerais.,0,pt,cidades_br
+A cidade de Belo Horizonte fica em Minas Gerais.,1,pt,cidades_br
+A cidade de Belo Horizonte fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Manaus fica no Amazonas.,1,pt,cidades_br
+A cidade de Manaus fica em Alagoas.,0,pt,cidades_br
+A cidade de Curitiba fica no Paraná.,1,pt,cidades_br
+A cidade de Curitiba fica em Pernambuco.,0,pt,cidades_br
+A cidade de Recife fica em Pernambuco.,1,pt,cidades_br
+A cidade de Recife fica no Paraná.,0,pt,cidades_br
+A cidade de Porto Alegre fica no Rio Grande do Sul.,1,pt,cidades_br
+A cidade de Porto Alegre fica no Pará.,0,pt,cidades_br
+A cidade de Belém fica no Pará.,1,pt,cidades_br
+A cidade de Belém fica em Alagoas.,0,pt,cidades_br
+A cidade de Goiânia fica em Goiás.,1,pt,cidades_br
+A cidade de Goiânia fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Guarulhos fica em São Paulo.,1,pt,cidades_br
+A cidade de Guarulhos fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Campinas fica em São Paulo.,1,pt,cidades_br
+A cidade de Campinas fica na Bahia.,0,pt,cidades_br
+A cidade de São Luís fica no Maranhão.,1,pt,cidades_br
+A cidade de São Luís fica no Amapá.,0,pt,cidades_br
+A cidade de São Gonçalo fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de São Gonçalo fica no Amazonas.,0,pt,cidades_br
+A cidade de Maceió fica em Alagoas.,1,pt,cidades_br
+A cidade de Maceió fica em São Paulo.,0,pt,cidades_br
+A cidade de Duque de Caxias fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de Duque de Caxias fica em São Paulo.,0,pt,cidades_br
+A cidade de Natal fica no Rio Grande do Norte.,1,pt,cidades_br
+A cidade de Natal fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Teresina fica no Piauí.,1,pt,cidades_br
+A cidade de Teresina fica no Pará.,0,pt,cidades_br
+A cidade de Campo Grande fica no Mato Grosso do Sul.,1,pt,cidades_br
+A cidade de Campo Grande fica em Santa Catarina.,0,pt,cidades_br
+A cidade de Nova Iguaçu fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de Nova Iguaçu fica em São Paulo.,0,pt,cidades_br
+A cidade de Santo André fica em São Paulo.,1,pt,cidades_br
+A cidade de Santo André fica no Piauí.,0,pt,cidades_br
+A cidade de João Pessoa fica na Paraíba.,1,pt,cidades_br
+A cidade de João Pessoa fica em São Paulo.,0,pt,cidades_br
+A cidade de Osasco fica em São Paulo.,1,pt,cidades_br
+A cidade de Osasco fica em Pernambuco.,0,pt,cidades_br
+A cidade de São Bernardo do Campo fica em São Paulo.,1,pt,cidades_br
+A cidade de São Bernardo do Campo fica no Rio Grande do Norte.,0,pt,cidades_br
+A cidade de Jaboatão dos Guararapes fica em Pernambuco.,1,pt,cidades_br
+A cidade de Jaboatão dos Guararapes fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Ribeirão Preto fica em São Paulo.,1,pt,cidades_br
+A cidade de Ribeirão Preto fica no Mato Grosso.,0,pt,cidades_br
+A cidade de Uberlândia fica em Minas Gerais.,1,pt,cidades_br
+A cidade de Uberlândia fica no Rio Grande do Sul.,0,pt,cidades_br
+A cidade de Contagem fica em Minas Gerais.,1,pt,cidades_br
+A cidade de Contagem fica no Rio Grande do Sul.,0,pt,cidades_br
+A cidade de Sorocaba fica em São Paulo.,1,pt,cidades_br
+A cidade de Sorocaba fica na Paraíba.,0,pt,cidades_br
+A cidade de Aracaju fica em Sergipe.,1,pt,cidades_br
+A cidade de Aracaju fica em Minas Gerais.,0,pt,cidades_br
+A cidade de Feira de Santana fica na Bahia.,1,pt,cidades_br
+A cidade de Feira de Santana fica no Rio de Janeiro.,0,pt,cidades_br
+A cidade de Cuiabá fica no Mato Grosso.,1,pt,cidades_br
+A cidade de Cuiabá fica em São Paulo.,0,pt,cidades_br
+A cidade de Joinville fica em Santa Catarina.,1,pt,cidades_br
+A cidade de Joinville fica no Ceará.,0,pt,cidades_br
+A cidade de Juiz de Fora fica em Minas Gerais.,1,pt,cidades_br
+A cidade de Juiz de Fora fica em São Paulo.,0,pt,cidades_br
+A cidade de Londrina fica no Paraná.,1,pt,cidades_br
+A cidade de Londrina fica em São Paulo.,0,pt,cidades_br
+A cidade de Ananindeua fica no Pará.,1,pt,cidades_br
+A cidade de Ananindeua fica em Santa Catarina.,0,pt,cidades_br
+A cidade de Niterói fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de Niterói fica em Santa Catarina.,0,pt,cidades_br
+A cidade de Porto Velho fica em Rondônia.,1,pt,cidades_br
+A cidade de Porto Velho fica no Amazonas.,0,pt,cidades_br
+A cidade de Macapá fica no Amapá.,1,pt,cidades_br
+A cidade de Macapá fica no Ceará.,0,pt,cidades_br
+A cidade de Florianópolis fica em Santa Catarina.,1,pt,cidades_br
+A cidade de Florianópolis fica em Minas Gerais.,0,pt,cidades_br
+A cidade de Belford Roxo fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de Belford Roxo fica no Maranhão.,0,pt,cidades_br
+A cidade de Serra fica no Espírito Santo.,1,pt,cidades_br
+A cidade de Serra fica na Bahia.,0,pt,cidades_br
+A cidade de Mogi das Cruzes fica em São Paulo.,1,pt,cidades_br
+A cidade de Mogi das Cruzes fica no Piauí.,0,pt,cidades_br
+A cidade de Vitória fica no Espírito Santo.,1,pt,cidades_br
+A cidade de Vitória fica em Pernambuco.,0,pt,cidades_br
+A cidade de Caxias do Sul fica no Rio Grande do Sul.,1,pt,cidades_br
+A cidade de Caxias do Sul fica na Paraíba.,0,pt,cidades_br
+A cidade de São João de Meriti fica no Rio de Janeiro.,1,pt,cidades_br
+A cidade de São João de Meriti fica em Minas Gerais.,0,pt,cidades_br
+A cidade de Betim fica em Minas Gerais.,1,pt,cidades_br
+A cidade de Betim fica em Alagoas.,0,pt,cidades_br
+A cidade de Carapicuíba fica em São Paulo.,1,pt,cidades_br
+A cidade de Carapicuíba fica em Sergipe.,0,pt,cidades_br

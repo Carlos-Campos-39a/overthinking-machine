@@ -1,0 +1,32 @@
+# Dependências do projeto TCC Agent Harness (Overthinking Machine)
+# Geradas/validadas em 2026-06-27 a partir dos imports reais de run.py, server.py e src/.
+# Versões testadas e confirmadas funcionais nesta sessão de validação.
+
+python-dotenv==1.2.2
+typer==0.24.1
+rich==15.0.0
+PyYAML==6.0.3
+pydantic==2.13.3
+
+# LangChain (core + integrações de provider usadas por src/llm_factory.py)
+langchain==1.2.15
+langchain-core==1.3.0
+langchain-openai==1.1.15
+langchain-anthropic==1.4.1
+langchain-google-genai==4.2.2
+
+# Servidor de ponte HTML <-> Python (server.py)
+fastapi==0.136.0
+uvicorn==0.45.0
+
+# Servidor MCP (mcp_server.py) — expõe a plataforma como ferramentas para
+# agentes externos. Suporta stdio (agente local) e streamable HTTP (publicado).
+mcp==2.0.0
+httpx==0.28.1
+
+# Opcional: necessário apenas para o modo "real" (não-simulado) dos endpoints
+# /api/geometry/* em server.py (Geometry-of-Truth). Não é necessário para
+# rodar run.py nem para o teste mínimo descrito em turnover.md.
+# datasets
+# transformer_lens
+# torch

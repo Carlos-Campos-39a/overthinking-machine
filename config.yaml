@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# config.yaml — Ponto de entrada único do experimento
+#
+# Uso:
+#   python run.py                                     # usa este arquivo
+#   python run.py --model openai/gpt-4o --harness mce
+#   python run.py --list-models
+#   python run.py --list-tasks
+#   python run.py --list-architectures
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Modelo ────────────────────────────────────────────────────────────────────
+# Formato: "provider/model-name"
+# Providers: openai, anthropic, google
+model: "google/gemini-2.5-flash"
+
+# ── Arquitetura de agentes ────────────────────────────────────────────────────
+# Opções: sas | independent | centralized | decentralized | hybrid
+architecture: "sas"
+
+# ── Harness ───────────────────────────────────────────────────────────────────
+# Opções: zero_shot | few_shot | ace | mce | meta_harness
+harness: "zero_shot"
+
+# ── Tarefa ────────────────────────────────────────────────────────────────────
+# Opções: finance_agent | text_classification
+task: "text_classification"
+
+# ── Avaliador ────────────────────────────────────────────────────────────────
+# Opções: binary | llm_judge
+# Recomendação: binary para text_classification, llm_judge para finance_agent
+evaluator: "binary"
+
+# ── Número de instâncias ──────────────────────────────────────────────────────
+num_instances: 10
+
+# ── Seed para reprodutibilidade ───────────────────────────────────────────────
+seed: 42
+
+# ── Parâmetros extras para arquiteturas MAS ──────────────────────────────────
+# Comentados por padrão (SAS não usa esses parâmetros)
+# agent_kwargs:
+#   n_workers: 3          # centralized, hybrid
+#   n_agents: 3           # independent, decentralized
+#   debate_rounds: 1      # decentralized
+#   peer_rounds: 1        # hybrid
+
+# ── Modelo juiz (opcional) ────────────────────────────────────────────────────
+# Se não especificado, usa o mesmo model acima
+# judge_model: "google/gemini-2.5-flash"
+
+# ── Meta-Harness (só usado se harness: meta_harness) ─────────────────────────
+# meta_budget: 5          # número de iterações de busca

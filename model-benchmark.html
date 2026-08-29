@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Benchmark · Overthinking Machine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variáveis ──────────────────────────────────────────────── */
+    :root {
+      --branco: #FFFFFF;
+      --azul-sereno: #AEC6CF;
+      --roxo-lavanda: #E6E6FA;
+      --roxo-profundo: #5D3FD3;
+      --roxo-mid: #7B5EA7;
+      --roxo-hover: #4b32b3;
+      --texto-principal: #1F1F2E;
+      --texto-secundario: #6B6B80;
+      --card-bg: #FAFAFE;
+      --card-border: #E8E8F5;
+      --term-bg: #080812;
+      --term-header: #0F0F22;
+      --term-green: #00E599;
+      --term-blue: #60B4FF;
+      --term-yellow: #FFD166;
+      --term-red: #FF6B6B;
+      --term-dim: #3A3A5C;
+      --term-text: #C8C8E8;
+      --oss: #0a7a5c;
+      --oss-light: rgba(10,122,92,0.12);
+      --shadow-card: 0 4px 20px rgba(93,63,211,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--branco); color:var(--texto-principal); overflow-x:hidden; }
+    ::selection { background:var(--roxo-lavanda); color:var(--roxo-profundo); }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 5%; background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(16px); border-bottom:1px solid rgba(93,63,211,0.08);
+      position:sticky; top:0; z-index:200;
+    }
+    .logo {
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.2rem;
+      color:var(--roxo-profundo); letter-spacing:-0.5px;
+      display:flex; align-items:center; gap:6px; text-decoration:none;
+    }
+    .logo span { color:var(--azul-sereno); }
+    .logo-dot { width:8px; height:8px; background:var(--term-green); border-radius:50%; animation:blink-dot 1.8s infinite; }
+    @keyframes blink-dot { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    nav { display:flex; gap:24px; align-items:center; }
+    nav a { font-size:0.85rem; font-weight:500; color:var(--texto-secundario); text-decoration:none; transition:color 0.2s; }
+    nav a:hover { color:var(--roxo-profundo); }
+    .nav-badge {
+      background:linear-gradient(135deg,#5D3FD3,var(--oss));
+      color:#fff; font-size:0.65rem; font-weight:700;
+      padding:3px 9px; border-radius:50px; letter-spacing:0.5px;
+    }
+    /* Toggle Mock / Real */
+    .mock-toggle {
+      display:flex; align-items:center; gap:7px;
+      background:rgba(93,63,211,0.07); border:1.5px solid rgba(93,63,211,0.18);
+      border-radius:50px; padding:5px 12px 5px 8px; cursor:pointer;
+      font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:700;
+      color:var(--texto-secundario); user-select:none; transition:all 0.2s;
+    }
+    .mock-toggle:hover { background:rgba(93,63,211,0.12); }
+    .mock-toggle.mock-on { background:rgba(93,63,211,0.1); border-color:var(--roxo-mid); color:var(--roxo-profundo); }
+    .mock-toggle.real-on { background:rgba(10,122,92,0.1); border-color:var(--oss); color:var(--oss); }
+    .mock-pip { width:28px; height:16px; border-radius:50px; background:#d0d0e0; position:relative; transition:background 0.2s; flex-shrink:0; }
+    .mock-pip::after {
+      content:''; position:absolute; width:12px; height:12px; border-radius:50%;
+      background:#fff; top:2px; left:2px; transition:transform 0.2s;
+      box-shadow:0 1px 3px rgba(0,0,0,0.25);
+    }
+    .mock-toggle.mock-on .mock-pip { background:var(--roxo-profundo); }
+    .mock-toggle.real-on .mock-pip { background:var(--oss); }
+    .mock-toggle.real-on .mock-pip::after { transform:translateX(12px); }
+    /* Status de conexão com a API */
+    .api-status {
+      margin-top:10px; font-size:0.62rem; line-height:1.55;
+      padding:8px 10px; border-radius:7px; display:none;
+    }
+    .api-status.visible { display:block; }
+    .api-status.ok   { background:rgba(10,122,92,0.08);  color:var(--oss); border:1px solid rgba(10,122,92,0.2); }
+    .api-status.warn { background:rgba(255,209,102,0.14); color:#9a6b00; border:1px solid rgba(255,209,102,0.4); }
+    .api-status.err  { background:rgba(255,107,107,0.1);  color:#c0392b; border:1px solid rgba(255,107,107,0.3); }
+    .api-status code { font-family:'JetBrains Mono',monospace; font-size:0.95em; }
+    .model-item.unavailable { opacity:0.5; }
+    .mi-tag.off { background:rgba(107,107,128,0.12); color:var(--texto-secundario); }
+
+    /* ── Page Hero ───────────────────────────────────────────────── */
+    .page-hero {
+      padding:48px 5% 36px;
+      background:linear-gradient(160deg,#ECFBF5 0%,#FAF7FF 60%,#FAFAFE 100%);
+      border-bottom:1px solid var(--card-border);
+    }
+    .page-hero-inner { max-width:920px; }
+    .page-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      background:var(--oss-light); color:var(--oss);
+      font-size:0.72rem; font-weight:700; letter-spacing:1.2px;
+      text-transform:uppercase; padding:5px 14px; border-radius:50px; margin-bottom:20px;
+    }
+    .page-badge::before { content:''; width:6px; height:6px; background:var(--oss); border-radius:50%; animation:blink-dot 1.4s infinite; }
+    .page-title {
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:clamp(2rem,4vw,3.4rem); line-height:1.06;
+      color:var(--roxo-profundo); letter-spacing:-1.5px; margin-bottom:16px;
+    }
+    .page-title em { font-style:normal; color:transparent; -webkit-text-stroke:2px var(--roxo-profundo); }
+    .page-subtitle { font-size:0.97rem; color:var(--texto-secundario); line-height:1.75; max-width:680px; margin-bottom:28px; }
+    .hero-chips { display:flex; gap:10px; flex-wrap:wrap; }
+    .hero-chip {
+      display:flex; align-items:center; gap:6px;
+      background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:8px;
+      padding:7px 13px; font-size:0.72rem; font-weight:500; color:var(--texto-secundario);
+    }
+    .hero-chip strong { color:var(--texto-principal); }
+
+    /* ── Main Layout ─────────────────────────────────────────────── */
+    .main-layout {
+      display:grid; grid-template-columns:330px 1fr; grid-template-rows:auto 1fr;
+      min-height:calc(100vh - 200px); max-width:1500px; margin:0 auto;
+      padding:28px 3% 0; gap:20px;
+    }
+    .config-sidebar { grid-column:1; grid-row:1/3; display:flex; flex-direction:column; gap:16px; }
+    .config-card {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; padding:18px; box-shadow:var(--shadow-card);
+    }
+    .config-card-title {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.72rem;
+      text-transform:uppercase; letter-spacing:1px; color:var(--texto-secundario);
+      margin-bottom:14px; display:flex; align-items:center; gap:6px;
+    }
+    .config-label { font-size:0.72rem; font-weight:600; color:var(--texto-principal); margin-bottom:6px; }
+    .config-group { margin-bottom:14px; }
+    .config-group:last-child { margin-bottom:0; }
+    .config-hint { font-size:0.62rem; color:var(--texto-secundario); line-height:1.5; margin-top:7px; }
+
+    /* Pills */
+    .pill-group { display:flex; flex-wrap:wrap; gap:5px; }
+    .pill-btn {
+      padding:5px 11px; border:1.5px solid var(--card-border); border-radius:50px;
+      font-size:0.68rem; font-weight:500; cursor:pointer; transition:all 0.15s;
+      background:var(--branco); color:var(--texto-secundario); font-family:'Inter',sans-serif;
+    }
+    .pill-btn:hover { border-color:rgba(93,63,211,0.35); color:var(--roxo-profundo); }
+    .pill-btn.active { background:var(--roxo-profundo); color:#fff; border-color:var(--roxo-profundo); }
+
+    /* Task tabs */
+    .ts-tabs { display:flex; gap:4px; margin-bottom:10px; }
+    .ts-tab {
+      flex:1; padding:5px; border:1.5px solid var(--card-border); border-radius:7px;
+      font-size:0.6rem; font-weight:600; cursor:pointer; background:var(--branco);
+      color:var(--texto-secundario); text-align:center; transition:all 0.15s; font-family:'Inter',sans-serif;
+    }
+    .ts-tab.active { background:var(--roxo-profundo); color:#fff; border-color:var(--roxo-profundo); }
+    .task-preview {
+      background:var(--term-bg); border-radius:8px; padding:10px;
+      font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+      color:rgba(200,200,232,0.65); line-height:1.6; max-height:130px; overflow:auto;
+    }
+    .task-preview::-webkit-scrollbar { width:4px; }
+    .task-preview::-webkit-scrollbar-thumb { background:var(--term-dim); border-radius:2px; }
+    textarea.task-custom {
+      width:100%; background:var(--term-bg); border:1.5px solid var(--term-dim); border-radius:8px;
+      padding:10px; font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+      color:var(--term-text); line-height:1.55; resize:vertical; min-height:96px; outline:none;
+    }
+    textarea.task-custom:focus { border-color:rgba(93,63,211,0.5); }
+    .task-info {
+      background:rgba(93,63,211,0.06); border:1px solid rgba(93,63,211,0.12);
+      border-radius:7px; padding:8px 10px; font-size:0.66rem; color:var(--texto-secundario);
+      display:flex; gap:14px; margin-top:10px;
+    }
+    .task-info strong { color:var(--roxo-profundo); font-weight:700; }
+
+    /* Model picker */
+    .model-filter-row { display:flex; gap:4px; margin-bottom:10px; }
+    .mf-btn {
+      flex:1; padding:5px 4px; border:1.5px solid var(--card-border); border-radius:7px;
+      font-size:0.58rem; font-weight:700; cursor:pointer; background:var(--branco);
+      color:var(--texto-secundario); text-align:center; transition:all 0.15s; font-family:'Inter',sans-serif;
+    }
+    .mf-btn.active { background:var(--oss); color:#fff; border-color:var(--oss); }
+    .mf-btn.all.active { background:var(--roxo-profundo); border-color:var(--roxo-profundo); }
+    .model-list { display:flex; flex-direction:column; gap:5px; max-height:330px; overflow-y:auto; padding-right:3px; }
+    .model-list::-webkit-scrollbar { width:4px; }
+    .model-list::-webkit-scrollbar-thumb { background:var(--card-border); border-radius:2px; }
+    .model-item {
+      display:flex; align-items:center; gap:8px; padding:7px 9px; border-radius:8px;
+      border:1.5px solid var(--card-border); background:var(--branco);
+      cursor:pointer; transition:all 0.15s;
+    }
+    .model-item:hover { border-color:rgba(93,63,211,0.3); }
+    .model-item.selected { border-color:var(--roxo-profundo); background:rgba(93,63,211,0.05); }
+    .mi-check {
+      width:15px; height:15px; border-radius:4px; border:1.5px solid var(--card-border);
+      flex-shrink:0; display:flex; align-items:center; justify-content:center;
+      font-size:0.6rem; color:#fff; background:var(--branco);
+    }
+    .model-item.selected .mi-check { background:var(--roxo-profundo); border-color:var(--roxo-profundo); }
+    .mi-main { flex:1; min-width:0; }
+    .mi-name {
+      font-family:'JetBrains Mono',monospace; font-size:0.64rem; font-weight:500;
+      color:var(--texto-principal); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .mi-meta { font-size:0.55rem; color:var(--texto-secundario); margin-top:1px; }
+    .mi-tag {
+      font-size:0.5rem; font-weight:800; padding:2px 5px; border-radius:4px;
+      letter-spacing:0.4px; flex-shrink:0; text-transform:uppercase;
+    }
+    .mi-tag.oss { background:var(--oss-light); color:var(--oss); }
+    .mi-tag.api { background:rgba(93,63,211,0.1); color:var(--roxo-mid); }
+
+    /* Run button */
+    .run-btn {
+      width:100%; padding:13px; border:none; border-radius:10px; cursor:pointer;
+      font-family:'Inter',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.3px;
+      transition:all 0.25s; display:flex; align-items:center; justify-content:center; gap:8px;
+      background:linear-gradient(135deg,#5D3FD3,var(--oss)); color:#fff;
+      box-shadow:0 6px 20px rgba(10,122,92,0.22);
+    }
+    .run-btn:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 10px 28px rgba(10,122,92,0.32); }
+    .run-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none !important; }
+    .run-btn .spin { display:none; animation:spin 0.8s linear infinite; }
+    .run-btn.running .spin { display:inline; }
+    .run-btn.running .run-icon { display:none; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .cost-preview {
+      margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+      color:var(--texto-secundario); text-align:center; line-height:1.6;
+    }
+    .cost-preview strong { color:var(--roxo-profundo); }
+
+    /* ── Workspace ───────────────────────────────────────────────── */
+    .workspace { grid-column:2; display:flex; flex-direction:column; gap:16px; padding-bottom:60px; }
+    .progress-strip {
+      background:var(--term-bg); border-radius:10px; padding:12px 16px;
+      display:flex; align-items:center; gap:16px; font-family:'JetBrains Mono',monospace;
+    }
+    .ps-label { font-size:0.7rem; color:var(--term-dim); white-space:nowrap; }
+    .ps-bar-track { flex:1; height:6px; background:rgba(58,58,92,0.6); border-radius:50px; overflow:hidden; }
+    .ps-bar-fill { height:100%; background:var(--term-green); border-radius:50px; width:0; transition:width 0.4s; }
+    .ps-status { font-size:0.68rem; color:var(--term-green); white-space:nowrap; }
+    .ps-count { font-size:0.68rem; color:rgba(200,200,232,0.5); white-space:nowrap; }
+
+    .panels-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; min-height:440px; }
+    .term-panel {
+      background:var(--term-bg); border-radius:14px; overflow:hidden;
+      display:flex; flex-direction:column; min-height:440px;
+      box-shadow:0 4px 24px rgba(0,0,0,0.3);
+    }
+    .term-topbar { background:var(--term-header); padding:10px 14px; display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .term-dots { display:flex; gap:5px; }
+    .term-dot { width:10px; height:10px; border-radius:50%; }
+    .term-dot-r { background:#ff5f57; } .term-dot-y { background:#febc2e; } .term-dot-g { background:#28c840; }
+    .term-title { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(200,200,232,0.5); flex:1; text-align:center; }
+    .term-body {
+      flex:1; padding:14px 16px; overflow-y:auto; font-family:'JetBrains Mono',monospace;
+      font-size:0.66rem; line-height:1.7; color:var(--term-text);
+    }
+    .term-body::-webkit-scrollbar { width:4px; }
+    .term-body::-webkit-scrollbar-thumb { background:var(--term-dim); border-radius:2px; }
+    .tl { display:block; }
+    .tl-sys{color:rgba(200,200,232,0.3)} .tl-cmd{color:var(--term-blue)} .tl-ok{color:var(--term-green)}
+    .tl-warn{color:var(--term-yellow)} .tl-err{color:var(--term-red)} .tl-dim{color:var(--term-dim)}
+    .tl-head{color:var(--term-blue);font-weight:700} .tl-oss{color:#34d399}
+
+    /* Leaderboard panel */
+    .lb-panel {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
+      box-shadow:var(--shadow-card); min-height:440px;
+    }
+    .lb-topbar { background:var(--term-header); padding:10px 14px; display:flex; align-items:center; gap:8px; }
+    .lb-title { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(200,200,232,0.5); }
+    .lb-live { width:6px; height:6px; background:var(--term-green); border-radius:50%; animation:blink-dot 1s infinite; margin-left:auto; }
+    .lb-live.idle { background:var(--term-dim); animation:none; }
+    .lb-sortbar { display:flex; gap:4px; padding:10px 12px 0; }
+    .lb-sort {
+      padding:4px 9px; border:1.5px solid var(--card-border); border-radius:50px;
+      font-size:0.58rem; font-weight:600; cursor:pointer; background:var(--branco);
+      color:var(--texto-secundario); font-family:'Inter',sans-serif; transition:all 0.15s;
+    }
+    .lb-sort.active { background:var(--roxo-profundo); color:#fff; border-color:var(--roxo-profundo); }
+    .lb-body { flex:1; padding:12px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; }
+    .lb-body::-webkit-scrollbar { width:4px; }
+    .lb-body::-webkit-scrollbar-thumb { background:var(--card-border); border-radius:2px; }
+    .lb-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--texto-secundario); gap:8px; opacity:0.5; }
+    .lb-empty-icon { font-size:2rem; }
+    .lb-row {
+      display:flex; align-items:center; gap:8px; padding:8px 9px; border-radius:9px;
+      background:rgba(93,63,211,0.04); border:1px solid transparent; transition:all 0.25s;
+    }
+    .lb-row.new-item { animation:flash-item 0.7s ease; }
+    @keyframes flash-item { 0%{background:rgba(10,122,92,0.3)} 100%{background:rgba(93,63,211,0.04)} }
+    .lb-row.winner { border-color:rgba(10,122,92,0.4); background:rgba(10,122,92,0.07); }
+    .lb-rank {
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:0.75rem;
+      color:var(--roxo-mid); width:20px; flex-shrink:0; text-align:center;
+    }
+    .lb-main { flex:1; min-width:0; }
+    .lb-name {
+      font-family:'JetBrains Mono',monospace; font-size:0.63rem; color:var(--texto-principal);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px;
+    }
+    .lb-bar-track { height:5px; background:var(--card-border); border-radius:50px; overflow:hidden; margin-top:4px; }
+    .lb-bar-fill { height:100%; border-radius:50px; transition:width 0.5s; }
+    .lb-metrics { display:flex; gap:9px; flex-shrink:0; }
+    .lb-metric { text-align:right; min-width:44px; }
+    .lb-mv { font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:700; color:var(--texto-principal); }
+    .lb-ml { font-size:0.5rem; color:var(--texto-secundario); text-transform:uppercase; letter-spacing:0.4px; }
+
+    /* Pareto chart */
+    .pareto-panel {
+      background:var(--card-bg); border:1.5px solid var(--card-border);
+      border-radius:14px; padding:20px; box-shadow:var(--shadow-card); display:none;
+    }
+    .pareto-panel.visible { display:block; }
+    .pp-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.85rem; color:var(--texto-principal); margin-bottom:4px; }
+    .pp-sub { font-size:0.7rem; color:var(--texto-secundario); margin-bottom:14px; }
+    #pareto-canvas { width:100%; height:320px; display:block; border-radius:10px; background:var(--term-bg); }
+    .pp-legend { display:flex; gap:16px; margin-top:12px; flex-wrap:wrap; font-size:0.63rem; color:var(--texto-secundario); }
+    .pp-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+
+    /* Recommendation */
+    .reco-panel {
+      background:linear-gradient(135deg,rgba(10,122,92,0.07),rgba(93,63,211,0.05));
+      border:1.5px solid rgba(10,122,92,0.25);
+      border-radius:14px; padding:20px; display:none;
+    }
+    .reco-panel.visible { display:block; }
+    .reco-label { font-size:0.62rem; font-weight:800; text-transform:uppercase; letter-spacing:1.2px; color:var(--oss); margin-bottom:8px; }
+    .reco-model { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.4rem; color:var(--texto-principal); margin-bottom:6px; }
+    .reco-why { font-size:0.75rem; color:var(--texto-secundario); line-height:1.7; }
+    .reco-why strong { color:var(--texto-principal); }
+
+    /* Summary cards */
+    .result-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .rs-card { background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:12px; padding:14px 16px; text-align:center; }
+    .rs-val { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.5rem; color:var(--roxo-profundo); }
+    .rs-label { font-size:0.62rem; color:var(--texto-secundario); text-transform:uppercase; letter-spacing:0.8px; margin-top:3px; }
+    .rs-sub { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--roxo-mid); margin-top:4px; }
+
+    /* Fundamentação */
+    .papers-section { max-width:1500px; margin:0 auto; padding:10px 3% 70px; }
+    .papers-head { margin-bottom:18px; }
+    .papers-head .section-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--texto-secundario); margin-bottom:6px; }
+    .papers-head h2 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.3rem; color:var(--texto-principal); }
+    .papers-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    .paper-card {
+      background:var(--card-bg); border:1.5px solid var(--card-border); border-radius:14px;
+      padding:16px 18px; box-shadow:var(--shadow-card);
+    }
+    .paper-top { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
+    .paper-title { font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.85rem; color:var(--texto-principal); line-height:1.35; }
+    .paper-meta { font-size:0.66rem; color:var(--roxo-mid); font-weight:600; white-space:nowrap; flex-shrink:0; }
+    .paper-why { font-size:0.7rem; color:var(--texto-secundario); line-height:1.55; }
+
+    @media(max-width:900px) {
+      .main-layout { grid-template-columns:1fr; }
+      .config-sidebar { grid-column:1; grid-row:auto; }
+      .workspace { grid-column:1; }
+      .panels-split { grid-template-columns:1fr; }
+      .result-summary { grid-template-columns:repeat(2,1fr); }
+      .papers-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────── -->
+<header>
+  <a class="logo" href="overthinking-machine.html">
+    <div class="logo-dot"></div>
+    overthinking<span>machine</span>
+  </a>
+  <nav>
+    <a href="overthinking-machine.html">← Voltar ao Lab</a>
+    <a href="overthinking-machine.html#modulos">Módulos</a>
+    <a href="pesquisa-avancada.html">Rede Neural</a>
+    <a href="prompt-sensitivity-benchmark.html">Prompt</a>
+    <button class="mock-toggle mock-on" id="mock-toggle" onclick="toggleMock()"
+      title="Mock: dados simulados. Real: roda o pipeline Python via API em localhost:8000.">
+      <span class="mock-pip"></span>
+      <span id="mock-label">Mock</span>
+    </button>
+    <span class="nav-badge">módulo 4 · model_benchmark</span>
+  </nav>
+</header>
+
+<!-- ── Page Hero ───────────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-badge">Módulo 4 · Open Source First</div>
+    <h1 class="page-title">Model <em>Benchmark</em></h1>
+    <p class="page-subtitle">
+      Benchmarks públicos medem capacidade genérica. Este módulo mede o que importa:
+      <strong>qual modelo resolve a <em>sua</em> tarefa</strong>, com o seu prompt, os seus dados e os seus critérios de avaliação —
+      priorizando modelos de peso aberto que você pode rodar na sua própria infraestrutura, sem lock-in de fornecedor.
+    </p>
+    <div class="hero-chips">
+      <div class="hero-chip"><span>🎯</span> <div><strong>Sua tarefa</strong>, não MMLU</div></div>
+      <div class="hero-chip"><span>🔓</span> <div><strong>Open-weight</strong> em primeiro lugar</div></div>
+      <div class="hero-chip"><span>⚖️</span> <div><strong>Fronteira de Pareto</strong> qualidade × custo</div></div>
+      <div class="hero-chip"><span>🏠</span> <div><strong>Local ou API</strong> — mesma métrica</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main Layout ─────────────────────────────────────────────────── -->
+<div class="main-layout">
+
+  <!-- ── Sidebar ───────────────────────────────────────────────────── -->
+  <aside class="config-sidebar">
+
+    <!-- Tarefa -->
+    <div class="config-card">
+      <div class="config-card-title">🎯 Sua tarefa</div>
+      <div class="ts-tabs">
+        <button class="ts-tab active" onclick="selectTask(0,this)">Classificação</button>
+        <button class="ts-tab" onclick="selectTask(1,this)">Análise Fin.</button>
+        <button class="ts-tab" onclick="selectTask(2,this)">Custom</button>
+      </div>
+      <div id="task-preview-box" class="task-preview"></div>
+      <textarea id="task-custom-area" class="task-custom" placeholder="Cole aqui exemplos da sua tarefa, um por linha, no formato:&#10;entrada  ->  saída esperada" style="display:none" oninput="onCustomTask()"></textarea>
+      <div class="task-info">
+        <div>Instâncias: <strong id="ti-n">—</strong></div>
+        <div>Avaliador: <strong id="ti-eval">—</strong></div>
+      </div>
+      <div class="config-hint" id="task-hint"></div>
+    </div>
+
+    <!-- Modelos -->
+    <div class="config-card">
+      <div class="config-card-title">🔓 Modelos candidatos</div>
+      <div class="model-filter-row">
+        <button class="mf-btn active oss-f" onclick="setFilter('oss',this)">Open-weight</button>
+        <button class="mf-btn" onclick="setFilter('api',this)">API fechada</button>
+        <button class="mf-btn all" onclick="setFilter('all',this)">Todos</button>
+      </div>
+      <div class="model-list" id="model-list"></div>
+      <div class="api-status" id="api-status"></div>
+      <div class="config-hint">
+        Modelos open-weight podem rodar localmente (Ollama, vLLM) ou via API hospedada — a métrica coletada é a mesma,
+        o que muda é o custo por token e a latência de rede.
+      </div>
+    </div>
+
+    <!-- Execução -->
+    <div class="config-card">
+      <div class="config-card-title">⚙️ Execução</div>
+      <div class="config-group">
+        <div class="config-label">Arquitetura de agente</div>
+        <div class="pill-group">
+          <button class="pill-btn active" onclick="setConfig('arch','sas',this)">sas</button>
+          <button class="pill-btn" onclick="setConfig('arch','centralized',this)">centralized</button>
+          <button class="pill-btn" onclick="setConfig('arch','hybrid',this)">hybrid</button>
+        </div>
+        <div class="config-hint">Fixa para todos os modelos — isola a variável “modelo”.</div>
+      </div>
+      <div class="config-group">
+        <div class="config-label">Harness</div>
+        <div class="pill-group">
+          <button class="pill-btn active" onclick="setConfig('harness','zero_shot',this)">zero_shot</button>
+          <button class="pill-btn" onclick="setConfig('harness','few_shot',this)">few_shot</button>
+          <button class="pill-btn" onclick="setConfig('harness','ace',this)">ace</button>
+        </div>
+      </div>
+      <div class="config-group">
+        <div class="config-label">Repetições por instância</div>
+        <div class="pill-group">
+          <button class="pill-btn" onclick="setConfig('reps',1,this)">1</button>
+          <button class="pill-btn active" onclick="setConfig('reps',3,this)">3</button>
+          <button class="pill-btn" onclick="setConfig('reps',5,this)">5</button>
+        </div>
+        <div class="config-hint">
+          &gt;1 repetição separa variância estocástica do modelo de diferença real entre modelos.
+        </div>
+      </div>
+    </div>
+
+    <!-- Run -->
+    <div class="config-card">
+      <button class="run-btn" id="run-btn" onclick="runBenchmark()">
+        <span class="run-icon">▶</span><span class="spin">⟳</span>
+        <span id="run-label">Rodar benchmark</span>
+      </button>
+      <div class="cost-preview" id="cost-preview"></div>
+    </div>
+
+  </aside>
+
+  <!-- ── Workspace ─────────────────────────────────────────────────── -->
+  <main class="workspace">
+
+    <div class="progress-strip">
+      <span class="ps-label">progresso</span>
+      <div class="ps-bar-track"><div class="ps-bar-fill" id="ps-fill"></div></div>
+      <span class="ps-status" id="ps-status">aguardando</span>
+      <span class="ps-count" id="ps-count">0/0</span>
+    </div>
+
+    <div class="panels-split">
+      <!-- Terminal -->
+      <div class="term-panel">
+        <div class="term-topbar">
+          <div class="term-dots"><div class="term-dot term-dot-r"></div><div class="term-dot term-dot-y"></div><div class="term-dot term-dot-g"></div></div>
+          <div class="term-title">model_benchmark — terminal</div>
+        </div>
+        <div class="term-body" id="term-body">
+          <span class="tl tl-dim">$ overthinking-machine --module model_benchmark</span>
+          <span class="tl tl-sys">carregando registro de modelos…</span>
+          <span class="tl tl-ok">✓ 11 modelos disponíveis (8 open-weight, 3 API fechada)</span>
+          <span class="tl tl-sys">&nbsp;</span>
+          <span class="tl tl-dim">selecione a tarefa e os modelos candidatos na barra lateral.</span>
+        </div>
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="lb-panel">
+        <div class="lb-topbar">
+          <div class="lb-title">leaderboard · sua tarefa</div>
+          <div class="lb-live idle" id="lb-live"></div>
+        </div>
+        <div class="lb-sortbar">
+          <button class="lb-sort active" onclick="setSort('score',this)">score</button>
+          <button class="lb-sort" onclick="setSort('efficiency',this)">score/custo</button>
+          <button class="lb-sort" onclick="setSort('latency',this)">latência</button>
+          <button class="lb-sort" onclick="setSort('cost',this)">custo</button>
+        </div>
+        <div class="lb-body" id="lb-body">
+          <div class="lb-empty">
+            <div class="lb-empty-icon">⚖️</div>
+            <div style="font-size:0.75rem">Nenhum benchmark executado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="result-summary" id="result-summary" style="display:none">
+      <div class="rs-card"><div class="rs-val" id="rs-best">—</div><div class="rs-label">Melhor score</div><div class="rs-sub" id="rs-best-sub">—</div></div>
+      <div class="rs-card"><div class="rs-val" id="rs-eff">—</div><div class="rs-label">Melhor custo-benefício</div><div class="rs-sub" id="rs-eff-sub">—</div></div>
+      <div class="rs-card"><div class="rs-val" id="rs-gap">—</div><div class="rs-label">Gap OSS vs. fechado</div><div class="rs-sub" id="rs-gap-sub">—</div></div>
+      <div class="rs-card"><div class="rs-val" id="rs-calls">—</div><div class="rs-label">Chamadas de LLM</div><div class="rs-sub" id="rs-calls-sub">—</div></div>
+    </div>
+
+    <!-- Recommendation -->
+    <div class="reco-panel" id="reco-panel">
+      <div class="reco-label">✓ Recomendação para a sua tarefa</div>
+      <div class="reco-model" id="reco-model">—</div>
+      <div class="reco-why" id="reco-why">—</div>
+    </div>
+
+    <!-- Pareto -->
+    <div class="pareto-panel" id="pareto-panel">
+      <div class="pp-title">Fronteira de Pareto — qualidade × custo</div>
+      <div class="pp-sub">
+        Cada ponto é um modelo. Modelos na fronteira (linha verde) são os que não são dominados: nenhum outro entrega
+        score maior a custo menor. Modelos abaixo da fronteira são escolhas dominadas — existe alternativa melhor e mais barata.
+      </div>
+      <canvas id="pareto-canvas"></canvas>
+      <div class="pp-legend">
+        <span><span class="pp-dot" style="background:#34d399"></span>open-weight</span>
+        <span><span class="pp-dot" style="background:#7B5EA7"></span>API fechada</span>
+        <span><span class="pp-dot" style="background:#FFD166"></span>na fronteira de Pareto</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── Fundamentação ───────────────────────────────────────────────── -->
+<div class="papers-section">
+  <div class="papers-head">
+    <div class="section-label">Fundamentação</div>
+    <h2>Por que benchmark próprio, e não ranking público</h2>
+  </div>
+  <div class="papers-grid">
+    <div class="paper-card">
+      <div class="paper-top">
+        <div class="paper-title">Towards a Science of Scaling Agent Systems</div>
+        <div class="paper-meta">Kim et al., 2025</div>
+      </div>
+      <div class="paper-why">
+        Mostra que o ganho de uma escolha arquitetural depende do nível de capacidade do modelo-base: acima de um
+        teto empírico (~45% de acurácia no baseline single-agent), coordenação multi-agente passa a ter retorno
+        decrescente. Ou seja — <strong>a escolha de modelo e a escolha de arquitetura não são independentes</strong>,
+        e precisam ser medidas juntas na sua tarefa.
+      </div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-top">
+        <div class="paper-title">Meta-Harness: End-to-End Optimization of Model Harnesses</div>
+        <div class="paper-meta">Lee et al., 2026</div>
+      </div>
+      <div class="paper-why">
+        Demonstra que o harness altera drasticamente o desempenho de um modelo fixo. A consequência prática:
+        comparar modelos com prompts diferentes mede o prompt, não o modelo. Este módulo <strong>congela
+        arquitetura e harness</strong> entre todos os candidatos, isolando a variável “modelo”.
+      </div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-top">
+        <div class="paper-title">Why Do Multi-Agent LLM Systems Fail?</div>
+        <div class="paper-meta">Cemri et al., 2025</div>
+      </div>
+      <div class="paper-why">
+        A taxonomia MAST mostra que boa parte das falhas em sistemas com LLM vem de especificação e verificação —
+        não de capacidade bruta do modelo. Um modelo menor com harness adequado pode superar um maior mal instruído,
+        o que só aparece em <strong>avaliação na tarefa real</strong>.
+      </div>
+    </div>
+    <div class="paper-card">
+      <div class="paper-top">
+        <div class="paper-title">Contaminação e validade de benchmarks públicos</div>
+        <div class="paper-meta">motivação de projeto</div>
+      </div>
+      <div class="paper-why">
+        Rankings genéricos (MMLU, LMArena) sofrem de contaminação de dados de treino e medem capacidade média em
+        tarefas que não são a sua. Para decisão de produção o que importa é o desempenho na sua distribuição de
+        entrada, com o seu critério de sucesso — <strong>exatamente o que este módulo mede</strong>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// REGISTRO DE MODELOS — foco em peso aberto
+// ═══════════════════════════════════════════════════════════════════
+const MODELS = [
+  // open-weight
+  { id:'llama-3.3-70b',      label:'Llama 3.3 70B Instruct',  org:'Meta',       oss:true,  params:70, costIn:0.23, costOut:0.40, base:0.86, spd:38 },
+  { id:'llama-3.1-8b',       label:'Llama 3.1 8B Instruct',   org:'Meta',       oss:true,  params:8,  costIn:0.03, costOut:0.05, base:0.71, spd:120 },
+  { id:'qwen-2.5-72b',       label:'Qwen 2.5 72B Instruct',   org:'Alibaba',    oss:true,  params:72, costIn:0.25, costOut:0.42, base:0.88, spd:35 },
+  { id:'qwen-2.5-7b',        label:'Qwen 2.5 7B Instruct',    org:'Alibaba',    oss:true,  params:7,  costIn:0.03, costOut:0.05, base:0.74, spd:135 },
+  { id:'mistral-small-3',    label:'Mistral Small 3 24B',     org:'Mistral AI', oss:true,  params:24, costIn:0.09, costOut:0.28, base:0.82, spd:74 },
+  { id:'gemma-4-31b',        label:'Gemma 4 31B IT',          org:'Google',     oss:true,  params:31, costIn:0.11, costOut:0.30, base:0.83, spd:66 },
+  { id:'gemma-4-26b-a4b',    label:'Gemma 4 26B A4B IT',      org:'Google',     oss:true,  params:26, costIn:0.08, costOut:0.24, base:0.81, spd:88 },
+  { id:'deepseek-v3',        label:'DeepSeek V3',             org:'DeepSeek',   oss:true,  params:671,costIn:0.27, costOut:1.10, base:0.89, spd:28 },
+  // API fechada (baselines de referência)
+  { id:'gemini-2.5-flash',   label:'gemini-2.5-flash',        org:'Google',     oss:false, params:null, costIn:0.30, costOut:2.50, base:0.91, spd:45 },
+  { id:'gpt-4o-mini',        label:'gpt-4o-mini',             org:'OpenAI',     oss:false, params:null, costIn:0.15, costOut:0.60, base:0.87, spd:58 },
+  { id:'claude-haiku-4.5',   label:'claude-haiku-4-5',        org:'Anthropic',  oss:false, params:null, costIn:1.00, costOut:5.00, base:0.90, spd:52 },
+];
+
+const TASKS = [
+  {
+    label:'Classificação de texto',
+    n:20, evaluator:'binary',
+    hint:'Rótulo único, avaliação objetiva por correspondência exata. Tarefa fácil — espere efeito teto em modelos grandes.',
+    difficulty:0.15,
+    preview:'cls_t10  Manchete: "Flamengo contrata técnico europeu por € 4 milhões…"  ->  Esporte\ncls_s06  Notícia: "Selic permanece em 10,5% ao ano após reunião do Copom…"  ->  Neutro\ncls_t05  Manchete: "Seleção brasileira vence Argentina por 2x1…"  ->  Esporte\ncls_s05  Notícia: "Magazine Luiza tem prejuízo de R$ 400 milhões…"  ->  Negativo\n… (20 instâncias)'
+  },
+  {
+    label:'Análise financeira',
+    n:15, evaluator:'llm_judge',
+    hint:'Prosa longa avaliada por juiz-LLM em escala contínua 0–1. Discrimina bem entre modelos — sem efeito teto.',
+    difficulty:0.55,
+    preview:'fin_009  "Analise o impacto da alta de juros na margem EBITDA do setor de papel e celulose."\nfin_014  "Explique o mecanismo de transmissão do risco soberano para o custo de capital das empresas."\nfin_003  "Avalie a estrutura de capital da Ambev S.A. e a sustentabilidade do endividamento atual."\n… (15 instâncias, avaliador llm_judge)'
+  },
+  {
+    label:'Tarefa custom',
+    n:0, evaluator:'a definir',
+    hint:'Cole seus próprios exemplos. O avaliador é inferido do formato: saída curta → binary, prosa → llm_judge.',
+    difficulty:0.4,
+    preview:''
+  },
+];
+
+const API_URL = window.OTM_API_URL || 'http://localhost:8000';
+
+let state = {
+  taskIdx: 0,
+  filter: 'oss',
+  selected: new Set(['llama-3.1-8b','qwen-2.5-7b','gemma-4-31b','mistral-small-3','gemini-2.5-flash']),
+  arch: 'sas', harness: 'zero_shot', reps: 3,
+  sort: 'score',
+  results: [], running: false, customN: 0,
+  mock: true,          // true = simulação no cliente | false = pipeline Python real
+  apiModels: null,     // catálogo vindo de /api/models
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// Modo real — integração com o backend (server.py)
+// ═══════════════════════════════════════════════════════════════════
+function setApiStatus(kind, html) {
+  const el = document.getElementById('api-status');
+  el.className = 'api-status visible ' + kind;
+  el.innerHTML = html;
+}
+function hideApiStatus() {
+  document.getElementById('api-status').className = 'api-status';
+}
+
+async function toggleMock() {
+  const btn = document.getElementById('mock-toggle');
+  const label = document.getElementById('mock-label');
+
+  if (state.mock) {
+    // Tentando entrar no modo real — precisa da API no ar
+    label.textContent = '...';
+    try {
+      const r = await fetch(`${API_URL}/api/health`, { signal: AbortSignal.timeout(4000) });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+    } catch (e) {
+      setApiStatus('err',
+        `<strong>API não encontrada.</strong> O modo real precisa do backend rodando:<br>` +
+        `<code>python -m uvicorn server:app --port 8000</code>`);
+      label.textContent = 'Mock';
+      return;
+    }
+    state.mock = false;
+    btn.classList.remove('mock-on'); btn.classList.add('real-on');
+    label.textContent = 'Real';
+    await loadApiModels();
+  } else {
+    state.mock = true;
+    btn.classList.remove('real-on'); btn.classList.add('mock-on');
+    label.textContent = 'Mock';
+    state.apiModels = null;
+    hideApiStatus();
+    renderModels();
+    term('modo mock — resultados simulados no navegador', 'tl-warn');
+  }
+}
+
+async function loadApiModels() {
+  try {
+    const r = await fetch(`${API_URL}/api/models`);
+    const d = await r.json();
+    state.apiModels = d;
+
+    // Converte o catálogo do backend para o formato da UI
+    MODELS.length = 0;
+    d.models.forEach(m => MODELS.push({
+      id: m.id, label: m.label, org: m.org, oss: m.oss,
+      params: m.params || null,
+      costIn: m.price?.in ?? 0, costOut: m.price?.out ?? 0,
+      available: m.available, installed: m.installed, hint: m.hint,
+      base: 0.85, spd: 60,   // usados só no modo mock
+    }));
+
+    // Seleção padrão: os primeiros modelos realmente utilizáveis
+    state.selected = new Set(MODELS.filter(m => m.available).slice(0, 3).map(m => m.id));
+
+    const o = d.ollama;
+    if (o.reachable) {
+      setApiStatus('ok', `<strong>Ollama conectado</strong> — ${o.installed_count} modelo(s) open-weight instalado(s) em <code>${o.base_url}</code>`);
+    } else {
+      setApiStatus('warn',
+        `<strong>Ollama não encontrado</strong> em <code>${o.base_url}</code>.<br>` +
+        `Modelos open-weight aparecem desabilitados. Para habilitá-los: instale o Ollama e rode ` +
+        `<code>ollama pull llama3.1:8b</code>`);
+    }
+    renderModels();
+    term(`✓ catálogo carregado do backend — ${MODELS.length} modelos`, 'tl-ok');
+  } catch (e) {
+    setApiStatus('err', `Falha ao carregar modelos: ${e.message}`);
+  }
+}
+
+async function runBenchmarkReal() {
+  const models = MODELS.filter(m => state.selected.has(m.id));
+  const task = TASKS[state.taskIdx];
+  const taskName = state.taskIdx === 1 ? 'finance_agent' : 'text_classification';
+  const evaluator = state.taskIdx === 1 ? 'llm_judge' : 'binary';
+  const n = nInstances();
+
+  const cfg = {
+    models: models.map(m => m.id),
+    architecture: state.arch,
+    harness: state.harness,
+    task: taskName,
+    evaluator: evaluator,
+    num_instances: n,
+    seed: 42,
+    reps: state.reps,
+  };
+
+  termClear();
+  term(`$ POST ${API_URL}/api/benchmark`, 'tl-dim');
+  term(`&nbsp;&nbsp;${JSON.stringify(cfg)}`, 'tl-dim');
+  term('&nbsp;');
+
+  let done = 0, total = models.length * state.reps;
+
+  try {
+    const resp = await fetch(`${API_URL}/api/benchmark`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cfg),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${await resp.text()}`);
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done: fin, value } = await reader.read();
+      if (fin) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let e; try { e = JSON.parse(line.slice(6)); } catch { continue; }
+
+        if (e.type === 'start') {
+          term(`▸ benchmark ${e.bench_id} — ${e.models.length} modelos, ${e.total_runs} execuções`, 'tl-head');
+        } else if (e.type === 'model_start') {
+          const m = MODELS.find(x => x.id === e.model);
+          term(`[${m?.oss ? 'oss' : 'api'}] ${e.model}`, m?.oss ? 'tl-oss' : 'tl-cmd');
+          document.getElementById('ps-status').textContent = 'executando';
+        } else if (e.type === 'log') {
+          if (/score=|\[OK\]/.test(e.text)) term('&nbsp;&nbsp;' + e.text.trim(), 'tl-sys');
+        } else if (e.type === 'model_done') {
+          const m = MODELS.find(x => x.id === e.model) || {};
+          state.results.push({
+            id: e.model, label: m.label || e.model, oss: !!m.oss, org: m.org || '',
+            score: e.score, sd: e.sd,
+            latency: e.elapsed_s, inTok: e.input_tokens, outTok: e.output_tokens,
+            cost: e.cost_usd, calls: e.llm_calls,
+          });
+          done += e.reps;
+          term(`&nbsp;&nbsp;score=${e.score.toFixed(4)} ±${e.sd.toFixed(3)}  lat=${e.elapsed_s}s  tok=${e.total_tokens}  custo=$${e.cost_usd}`, 'tl-ok');
+          document.getElementById('ps-fill').style.width = (done / total * 100) + '%';
+          document.getElementById('ps-count').textContent = `${done}/${total}`;
+          renderLeaderboard(e.model);
+        } else if (e.type === 'model_error') {
+          done += state.reps;
+          document.getElementById('ps-fill').style.width = (done / total * 100) + '%';
+          document.getElementById('ps-count').textContent = `${done}/${total}`;
+          const msg = e.message.includes('RESOURCE_EXHAUSTED') || e.message.includes('429')
+            ? 'cota da API excedida (429) — aguarde ou use outro provider'
+            : e.message.slice(0, 160);
+          term(`&nbsp;&nbsp;✗ ${msg}`, 'tl-err');
+        } else if (e.type === 'done') {
+          term('&nbsp;');
+          term(`✓ benchmark concluído — ${e.results.length} modelos comparados`, 'tl-ok');
+        }
+      }
+    }
+  } catch (err) {
+    term(`✗ erro de conexão: ${err.message}`, 'tl-err');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// UI helpers
+// ═══════════════════════════════════════════════════════════════════
+function term(html, cls) {
+  const b = document.getElementById('term-body');
+  const s = document.createElement('span');
+  s.className = 'tl ' + (cls || '');
+  s.innerHTML = html;
+  b.appendChild(s);
+  b.scrollTop = b.scrollHeight;
+}
+function termClear() { document.getElementById('term-body').innerHTML = ''; }
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function archCalls(a) { return a === 'sas' ? 1 : a === 'centralized' ? 5 : 8; }
+
+function renderTask() {
+  const t = TASKS[state.taskIdx];
+  const isCustom = state.taskIdx === 2;
+  document.getElementById('task-preview-box').style.display = isCustom ? 'none' : 'block';
+  document.getElementById('task-custom-area').style.display = isCustom ? 'block' : 'none';
+  document.getElementById('task-preview-box').textContent = t.preview;
+  document.getElementById('ti-n').textContent = isCustom ? (state.customN || '—') : t.n;
+  document.getElementById('ti-eval').textContent = t.evaluator;
+  document.getElementById('task-hint').textContent = t.hint;
+  updateCost();
+}
+function selectTask(i, el) {
+  state.taskIdx = i;
+  document.querySelectorAll('.ts-tab').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderTask();
+}
+function onCustomTask() {
+  const v = document.getElementById('task-custom-area').value.trim();
+  state.customN = v ? v.split('\n').filter(l => l.trim()).length : 0;
+  document.getElementById('ti-n').textContent = state.customN || '—';
+  updateCost();
+}
+
+function renderModels() {
+  const list = document.getElementById('model-list');
+  list.innerHTML = '';
+  MODELS.filter(m => state.filter === 'all' || (state.filter === 'oss' ? m.oss : !m.oss))
+    .forEach(m => {
+      const sel = state.selected.has(m.id);
+      // No modo real, um modelo sem chave/sem instalação local não pode ser executado
+      const usable = state.mock || m.available !== false;
+      const d = document.createElement('div');
+      d.className = 'model-item' + (sel ? ' selected' : '') + (usable ? '' : ' unavailable');
+      d.onclick = () => { if (usable) toggleModel(m.id); };
+      d.title = usable ? '' : (m.hint ? `Indisponível — rode: ${m.hint}` : 'Indisponível — falta chave de API');
+      const cost = (m.costIn === 0 && m.costOut === 0)
+        ? 'sem custo de API (local)'
+        : `$${m.costIn}/$${m.costOut} por 1M tok`;
+      d.innerHTML = `
+        <div class="mi-check">${sel && usable ? '✓' : ''}</div>
+        <div class="mi-main">
+          <div class="mi-name">${m.label}</div>
+          <div class="mi-meta">${m.org}${m.params ? ' · ' + m.params : ''} · ${cost}</div>
+        </div>
+        <div class="mi-tag ${usable ? (m.oss ? 'oss' : 'api') : 'off'}">${usable ? (m.oss ? 'OSS' : 'API') : 'N/D'}</div>`;
+      list.appendChild(d);
+    });
+  updateCost();
+}
+function toggleModel(id) {
+  state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
+  renderModels();
+}
+function setFilter(f, el) {
+  state.filter = f;
+  document.querySelectorAll('.mf-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderModels();
+}
+function setConfig(k, v, el) {
+  state[k] = v;
+  el.parentElement.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  updateCost();
+}
+function setSort(s, el) {
+  state.sort = s;
+  document.querySelectorAll('.lb-sort').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderLeaderboard();
+}
+
+function nInstances() {
+  return state.taskIdx === 2 ? state.customN : TASKS[state.taskIdx].n;
+}
+function updateCost() {
+  const n = nInstances(), m = state.selected.size, c = archCalls(state.arch);
+  const calls = n * m * c * state.reps;
+  const el = document.getElementById('cost-preview');
+  if (!n || !m) { el.innerHTML = 'selecione tarefa e modelos'; return; }
+  el.innerHTML = `<strong>${m}</strong> modelos × <strong>${n}</strong> instâncias × <strong>${c}</strong> chamada(s)/inst × <strong>${state.reps}</strong> rep<br>= <strong>${calls.toLocaleString('pt-BR')}</strong> chamadas de LLM`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Simulação de benchmark
+// ═══════════════════════════════════════════════════════════════════
+function scoreFor(m, task) {
+  // headroom = distância do modelo até o topo de capacidade.
+  // Em tarefas fáceis a dificuldade não "cobra" esse headroom → todos saturam (efeito teto).
+  // Em tarefas difíceis o headroom domina → a capacidade base separa os modelos.
+  const headroom = 1 - m.base;
+  let s = 1 - headroom * task.difficulty * 2.4;
+  if (task.difficulty < 0.25) s = s + (1 - s) * 0.55;   // teto puxa todos para perto de 1
+  s += (Math.random() - 0.5) * 0.04;
+  return Math.max(0.05, Math.min(1, s));
+}
+
+async function runBenchmark() {
+  if (state.running) return;
+  const n = nInstances(), models = MODELS.filter(m => state.selected.has(m.id));
+  if (!n) { term('✗ defina a tarefa antes de rodar (nenhuma instância).', 'tl-err'); return; }
+  if (!models.length) { term('✗ selecione ao menos um modelo candidato.', 'tl-err'); return; }
+
+  state.running = true; state.results = [];
+  const btn = document.getElementById('run-btn');
+  btn.classList.add('running'); btn.disabled = true;
+  document.getElementById('run-label').textContent = 'rodando…';
+  document.getElementById('lb-live').classList.remove('idle');
+  document.getElementById('lb-body').innerHTML = '';
+  document.getElementById('pareto-panel').classList.remove('visible');
+  document.getElementById('reco-panel').classList.remove('visible');
+  document.getElementById('result-summary').style.display = 'none';
+  document.getElementById('ps-fill').style.width = '0%';
+
+  // Modo real: delega ao backend Python
+  if (!state.mock) {
+    await runBenchmarkReal();
+    finishRun();
+    return;
+  }
+
+  const task = TASKS[state.taskIdx], c = archCalls(state.arch);
+  const totalCalls = n * models.length * c * state.reps;
+
+  termClear();
+  term(`$ overthinking-machine --module model_benchmark \\`, 'tl-dim');
+  term(`&nbsp;&nbsp;&nbsp;--task "${task.label}" --arch ${state.arch} --harness ${state.harness} --reps ${state.reps}`, 'tl-dim');
+  term('&nbsp;');
+  term(`configuração congelada para todos os candidatos:`, 'tl-head');
+  term(`&nbsp;&nbsp;arquitetura=${state.arch}  harness=${state.harness}  n=${n}  reps=${state.reps}`, 'tl-sys');
+  term(`&nbsp;&nbsp;avaliador=${task.evaluator}  chamadas/instância=${c}`, 'tl-sys');
+  term('&nbsp;');
+  term(`→ ${models.length} modelos · ${totalCalls.toLocaleString('pt-BR')} chamadas de LLM no total`, 'tl-cmd');
+  term('&nbsp;');
+
+  let done = 0;
+  for (const m of models) {
+    term(`[${m.oss ? 'oss' : 'api'}] ${m.label}`, m.oss ? 'tl-oss' : 'tl-cmd');
+    await sleep(220);
+
+    const scores = [];
+    for (let r = 0; r < state.reps; r++) scores.push(scoreFor(m, task));
+    const score = scores.reduce((a, b) => a + b, 0) / scores.length;
+    const sd = Math.sqrt(scores.reduce((a, s) => a + (s - score) ** 2, 0) / scores.length);
+
+    // tokens: tarefas de prosa geram muito mais saída
+    const inTok = Math.round((task.difficulty > 0.4 ? 420 : 95) * c * (0.9 + Math.random() * 0.2));
+    const outTok = Math.round((task.difficulty > 0.4 ? 640 : 180) * c * (0.9 + Math.random() * 0.2));
+    const latency = +((inTok + outTok) / m.spd * (0.85 + Math.random() * 0.3)).toFixed(2);
+    const cost = +(((inTok * m.costIn) + (outTok * m.costOut)) / 1e6 * n * state.reps).toFixed(4);
+
+    state.results.push({ ...m, score, sd, inTok, outTok, latency, cost, calls: n * c * state.reps });
+    done += n * c * state.reps;
+
+    term(`&nbsp;&nbsp;score=${score.toFixed(4)} ±${sd.toFixed(3)}  lat=${latency}s  tok=${(inTok + outTok).toLocaleString('pt-BR')}  custo=$${cost}`, 'tl-ok');
+    document.getElementById('ps-fill').style.width = (done / totalCalls * 100) + '%';
+    document.getElementById('ps-count').textContent = `${done.toLocaleString('pt-BR')}/${totalCalls.toLocaleString('pt-BR')}`;
+    document.getElementById('ps-status').textContent = 'avaliando';
+    renderLeaderboard(m.id);
+    await sleep(340);
+  }
+
+  term('&nbsp;');
+  term('✓ benchmark concluído.', 'tl-ok');
+  finishRun();
+}
+
+function finishRun() {
+  state.running = false;
+  const btn = document.getElementById('run-btn');
+  btn.classList.remove('running'); btn.disabled = false;
+  document.getElementById('run-label').textContent = 'Rodar benchmark';
+  document.getElementById('ps-status').textContent = 'concluído';
+  document.getElementById('lb-live').classList.add('idle');
+  renderLeaderboard();
+  renderSummary();
+  renderReco();
+  drawPareto();
+}
+
+function sortedResults() {
+  const r = [...state.results];
+  if (state.sort === 'score') r.sort((a, b) => b.score - a.score);
+  if (state.sort === 'latency') r.sort((a, b) => a.latency - b.latency);
+  if (state.sort === 'cost') r.sort((a, b) => a.cost - b.cost);
+  if (state.sort === 'efficiency') r.sort((a, b) => (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)));
+  return r;
+}
+
+function renderLeaderboard(newId) {
+  const body = document.getElementById('lb-body');
+  if (!state.results.length) {
+    body.innerHTML = '<div class="lb-empty"><div class="lb-empty-icon">⚖️</div><div style="font-size:0.75rem">Nenhum benchmark executado</div></div>';
+    return;
+  }
+  const rows = sortedResults();
+  const best = Math.max(...rows.map(r => r.score));
+  body.innerHTML = '';
+  rows.forEach((r, i) => {
+    const d = document.createElement('div');
+    const isWinner = !state.running && r.score === best;
+    d.className = 'lb-row' + (isWinner ? ' winner' : '') + (r.id === newId ? ' new-item' : '');
+    const barColor = r.oss ? '#34d399' : '#7B5EA7';
+    d.innerHTML = `
+      <div class="lb-rank">${i + 1}</div>
+      <div class="lb-main">
+        <div class="lb-name">
+          <span class="mi-tag ${r.oss ? 'oss' : 'api'}">${r.oss ? 'OSS' : 'API'}</span>
+          ${r.label}
+        </div>
+        <div class="lb-bar-track"><div class="lb-bar-fill" style="width:${r.score * 100}%;background:${barColor}"></div></div>
+      </div>
+      <div class="lb-metrics">
+        <div class="lb-metric"><div class="lb-mv">${r.score.toFixed(3)}</div><div class="lb-ml">score</div></div>
+        <div class="lb-metric"><div class="lb-mv">${r.latency}s</div><div class="lb-ml">lat</div></div>
+        <div class="lb-metric"><div class="lb-mv">$${r.cost}</div><div class="lb-ml">custo</div></div>
+      </div>`;
+    body.appendChild(d);
+  });
+}
+
+function renderSummary() {
+  const r = state.results;
+  if (!r.length) return;
+  document.getElementById('result-summary').style.display = 'grid';
+  const best = [...r].sort((a, b) => b.score - a.score)[0];
+  const eff = [...r].sort((a, b) => (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)))[0];
+  const oss = r.filter(x => x.oss), api = r.filter(x => !x.oss);
+  const totalCalls = r.reduce((a, x) => a + x.calls, 0);
+
+  document.getElementById('rs-best').textContent = best.score.toFixed(3);
+  document.getElementById('rs-best-sub').textContent = best.label;
+  document.getElementById('rs-eff').textContent = eff.oss ? 'OSS' : 'API';
+  document.getElementById('rs-eff-sub').textContent = eff.label;
+
+  if (oss.length && api.length) {
+    const bo = Math.max(...oss.map(x => x.score)), ba = Math.max(...api.map(x => x.score));
+    const gap = ((bo - ba) / ba * 100);
+    document.getElementById('rs-gap').textContent = (gap >= 0 ? '+' : '') + gap.toFixed(1) + '%';
+    document.getElementById('rs-gap-sub').textContent = gap >= 0 ? 'open-weight à frente' : 'open-weight atrás';
+  } else {
+    document.getElementById('rs-gap').textContent = 'n/d';
+    document.getElementById('rs-gap-sub').textContent = 'inclua ambos os tipos';
+  }
+  document.getElementById('rs-calls').textContent = totalCalls.toLocaleString('pt-BR');
+  document.getElementById('rs-calls-sub').textContent = `${r.length} modelos`;
+}
+
+function renderReco() {
+  const r = state.results;
+  if (!r.length) return;
+  const best = [...r].sort((a, b) => b.score - a.score)[0];
+  const tol = 0.02;
+  // candidato mais barato dentro da margem de tolerância do melhor score
+  const good = r.filter(x => x.score >= best.score - tol).sort((a, b) => a.cost - b.cost);
+  const pick = good[0];
+
+  document.getElementById('reco-panel').classList.add('visible');
+  document.getElementById('reco-model').textContent = pick.label;
+
+  let why;
+  if (pick.id === best.id) {
+    why = `Entrega o maior score da comparação (<strong>${pick.score.toFixed(3)}</strong>) e nenhum outro candidato chega perto por menos custo. ` +
+          `Latência de <strong>${pick.latency}s</strong> por instância, <strong>$${pick.cost}</strong> para rodar a tarefa completa.`;
+  } else {
+    const savings = ((best.cost - pick.cost) / best.cost * 100).toFixed(0);
+    why = `Score de <strong>${pick.score.toFixed(3)}</strong> — estatisticamente indistinguível do melhor da comparação ` +
+          `(${best.label}, ${best.score.toFixed(3)}), dentro da margem de ±${tol} — por <strong>${savings}% menos custo</strong>. ` +
+          `Pagar a mais pelo topo do ranking não se justifica nesta tarefa.`;
+  }
+  if (pick.oss) {
+    why += ` Por ser <strong>open-weight</strong>, pode rodar na sua própria infraestrutura (Ollama/vLLM), eliminando custo por token e dependência de fornecedor.`;
+  } else {
+    const bestOss = [...r].filter(x => x.oss).sort((a, b) => b.score - a.score)[0];
+    if (bestOss) {
+      const d = ((pick.score - bestOss.score) / bestOss.score * 100).toFixed(1);
+      why += ` A melhor alternativa open-weight é <strong>${bestOss.label}</strong> (${bestOss.score.toFixed(3)}, ${d}% abaixo) — avalie se essa diferença compensa o lock-in.`;
+    }
+  }
+  document.getElementById('reco-why').innerHTML = why;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Pareto (canvas)
+// ═══════════════════════════════════════════════════════════════════
+function drawPareto() {
+  const panel = document.getElementById('pareto-panel');
+  panel.classList.add('visible');
+  const cv = document.getElementById('pareto-canvas');
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth, h = 320;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d');
+  if (!ctx) return;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const pad = { l: 54, r: 20, t: 18, b: 42 };
+  const pw = w - pad.l - pad.r, ph = h - pad.t - pad.b;
+  const r = state.results;
+  if (!r.length) return;
+
+  const maxCost = Math.max(...r.map(x => x.cost)) * 1.15 || 1;
+  const minS = Math.min(...r.map(x => x.score)) - 0.05;
+  const maxS = Math.max(...r.map(x => x.score)) + 0.05;
+  const X = c => pad.l + (c / maxCost) * pw;
+  const Y = s => pad.t + ph - ((s - minS) / (maxS - minS)) * ph;
+
+  // grid
+  ctx.strokeStyle = 'rgba(58,58,92,0.45)'; ctx.lineWidth = 1;
+  ctx.font = '10px "JetBrains Mono", monospace'; ctx.fillStyle = '#3A3A5C';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (ph / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+    const sv = maxS - ((maxS - minS) / 4) * i;
+    ctx.fillText(sv.toFixed(2), 12, y + 3);
+  }
+  for (let i = 0; i <= 4; i++) {
+    const x = pad.l + (pw / 4) * i;
+    ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + ph); ctx.stroke();
+    ctx.fillText('$' + (maxCost / 4 * i).toFixed(3), x - 14, pad.t + ph + 16);
+  }
+  // eixos
+  ctx.fillStyle = 'rgba(200,200,232,0.65)'; ctx.font = '11px Inter, sans-serif';
+  ctx.fillText('custo da tarefa completa (USD) →', pad.l, h - 8);
+  ctx.save(); ctx.translate(14, pad.t + ph / 2 + 40); ctx.rotate(-Math.PI / 2);
+  ctx.fillText('score ↑', 0, 0); ctx.restore();
+
+  // fronteira de Pareto: ordenar por custo, manter os que aumentam score
+  const byCost = [...r].sort((a, b) => a.cost - b.cost);
+  const frontier = []; let bestSoFar = -Infinity;
+  byCost.forEach(p => { if (p.score > bestSoFar) { frontier.push(p); bestSoFar = p.score; } });
+
+  ctx.strokeStyle = '#FFD166'; ctx.lineWidth = 1.8; ctx.setLineDash([5, 4]);
+  ctx.beginPath();
+  frontier.forEach((p, i) => i === 0 ? ctx.moveTo(X(p.cost), Y(p.score)) : ctx.lineTo(X(p.cost), Y(p.score)));
+  ctx.stroke(); ctx.setLineDash([]);
+
+  // pontos
+  const fset = new Set(frontier.map(p => p.id));
+  r.forEach(p => {
+    const x = X(p.cost), y = Y(p.score), onF = fset.has(p.id);
+    if (onF) {
+      ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,209,102,0.22)'; ctx.fill();
+    }
+    ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI * 2);
+    ctx.fillStyle = p.oss ? '#34d399' : '#7B5EA7'; ctx.fill();
+    ctx.strokeStyle = onF ? '#FFD166' : 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = onF ? 2 : 1; ctx.stroke();
+
+    ctx.fillStyle = 'rgba(200,200,232,0.8)'; ctx.font = '9px "JetBrains Mono", monospace';
+    const short = p.label.length > 18 ? p.label.slice(0, 17) + '…' : p.label;
+    ctx.fillText(short, x + 9, y + 3);
+  });
+}
+
+window.addEventListener('resize', () => { if (state.results.length) drawPareto(); });
+
+// init
+renderTask();
+renderModels();
+</script>
+</body>
+</html>
