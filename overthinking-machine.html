@@ -548,6 +548,50 @@
       margin-bottom: 48px;
     }
 
+    /* ── Hero da página de módulo ─────────────────────────────────── */
+    .mod-hero {
+      padding: 56px 5% 44px;
+      background: linear-gradient(160deg, #F3F0FF 0%, #FAF9FF 55%, #FFFFFF 100%);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .mod-hero-inner { max-width: 900px; }
+    .mod-back {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      color: var(--texto-secundario); text-decoration: none; margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .mod-back:hover { color: var(--roxo-profundo); }
+    .mod-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(93,63,211,0.08); color: var(--roxo-profundo);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.6px;
+      padding: 6px 15px 6px 6px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .mod-num {
+      width: 21px; height: 21px; border-radius: 50%;
+      background: var(--roxo-profundo); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.68rem;
+    }
+    .mod-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.1;
+      color: var(--texto-principal); letter-spacing: -1.2px; margin-bottom: 16px;
+    }
+    .mod-title em {
+      font-style: normal; color: var(--roxo-profundo);
+    }
+    .mod-sub {
+      font-size: 0.97rem; color: var(--texto-secundario);
+      line-height: 1.75; max-width: 660px; margin-bottom: 24px;
+    }
+    .mod-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mod-chip {
+      background: #fff; border: 1.5px solid var(--card-border); border-radius: 8px;
+      padding: 6px 13px; font-size: 0.72rem; color: var(--texto-secundario);
+    }
+    .mod-chip strong { color: var(--roxo-profundo); font-weight: 800; }
+
     /* ── Seção de módulos ─────────────────────────────────────────── */
     .modules-section {
       background: linear-gradient(180deg, #FBFAFF 0%, #FFFFFF 100%);
@@ -3100,15 +3144,15 @@
 
 <!-- ═══════════════════════════ HEADER ════════════════════════════════ -->
 <header>
-  <div class="logo">
+  <a class="logo" href="index.html" style="text-decoration:none">
     <span class="logo-dot"></span>
     OVERTHINKING<span>MACHINE</span>
-  </div>
+  </a>
   <nav>
     <div class="nav-modules">
       <button class="nav-trigger" type="button">Módulos</button>
       <div class="nav-dropdown">
-        <a href="#testes" class="nd-item m1">
+        <a href="overthinking-machine.html" class="nd-item m1">
           <span class="nd-num">1</span>
           <span class="nd-txt">
             <span class="nd-title">Arquitetura de Agentes</span>
@@ -3149,164 +3193,26 @@
   </nav>
 </header>
 
-<!-- ═══════════════════════════ HERO ══════════════════════════════════ -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-badge">Agent Benchmarking Platform · Research Preview</div>
-    <h1 class="tagline">RELAX,<br>WE <em>OVERTHINK</em><br>FOR YOU.</h1>
-    <p class="subtitle">
-      Saiba, com dados, qual arquitetura de agentes realmente vale o investimento.
-      Benchmarks prontos comparam SAS, Independent, Centralized, Decentralized e Hybrid em accuracy, custo de tokens
-      e amplificação de erro — para você escolher a topologia certa antes de colocar em produção.
+<!-- ═══════════════════════ HERO DO MÓDULO ════════════════════════════ -->
+<section class="mod-hero">
+  <div class="mod-hero-inner">
+    <a class="mod-back" href="index.html">← Todos os módulos</a>
+    <div class="mod-badge"><span class="mod-num">1</span> Arquitetura de Agentes</div>
+    <h1 class="mod-title">Qual arquitetura de agentes<br><em>vale o investimento?</em></h1>
+    <p class="mod-sub">
+      Um agente só resolve a sua tarefa tão bem quanto cinco coordenados — e custa uma fração.
+      Aqui você mede isso: as cinco topologias na mesma tarefa, com o mesmo modelo e o mesmo harness,
+      comparadas em score, tokens e latência.
     </p>
-    <div class="hero-actions">
-      <a href="#modulos" class="cta-button">Explorar os módulos ↓</a>
-      <a href="#testes" class="cta-secondary">Ir direto ao laboratório</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-showcase">
-      <div class="hsc-card">
-        <div class="hsc-card-top">
-          <div class="hsc-dot-row">
-            <span class="hsc-dot r"></span><span class="hsc-dot y"></span><span class="hsc-dot g"></span>
-          </div>
-          <div class="hsc-card-title">leaderboard · live</div>
-        </div>
-        <div class="hsc-card-body">
-          <div class="hsc-card-label">🏆 Top arquiteturas · finance_agent</div>
-          <div class="hsc-row">
-            <span class="hsc-rank">1</span>
-            <span class="hsc-arch-chip" style="--c:#fbbf24">Hybrid</span>
-            <div class="hsc-bar-track"><div class="hsc-bar-fill" style="width:90%;background:#fbbf24"></div></div>
-            <span class="hsc-score">0.903</span>
-          </div>
-          <div class="hsc-row">
-            <span class="hsc-rank">2</span>
-            <span class="hsc-arch-chip" style="--c:#c4b5fd">Centralized</span>
-            <div class="hsc-bar-track"><div class="hsc-bar-fill" style="width:87%;background:#c4b5fd"></div></div>
-            <span class="hsc-score">0.871</span>
-          </div>
-          <div class="hsc-row">
-            <span class="hsc-rank">3</span>
-            <span class="hsc-arch-chip" style="--c:#fb923c">Decentral.</span>
-            <div class="hsc-bar-track"><div class="hsc-bar-fill" style="width:79%;background:#fb923c"></div></div>
-            <span class="hsc-score">0.823</span>
-          </div>
-          <div class="hsc-row">
-            <span class="hsc-rank">4</span>
-            <span class="hsc-arch-chip" style="--c:#4ade80">Independ.</span>
-            <div class="hsc-bar-track"><div class="hsc-bar-fill" style="width:74%;background:#4ade80"></div></div>
-            <span class="hsc-score">0.762</span>
-          </div>
-          <div class="hsc-row">
-            <span class="hsc-rank">5</span>
-            <span class="hsc-arch-chip" style="--c:#38bdf8">SAS</span>
-            <div class="hsc-bar-track"><div class="hsc-bar-fill" style="width:63%;background:#38bdf8"></div></div>
-            <span class="hsc-score">0.630</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hsc-badge hsc-badge-1">
-        <div class="hsc-badge-val">+80.8%</div>
-        <div class="hsc-badge-label">ganho em tarefas financeiras com Centralized</div>
-      </div>
-      <div class="hsc-badge hsc-badge-2">
-        <div class="hsc-badge-val">17.2× → 4.4×</div>
-        <div class="hsc-badge-label">redução de amplificação de erro</div>
-      </div>
-      <div class="hsc-badge hsc-badge-3">
-        <div class="hsc-badge-val">25</div>
-        <div class="hsc-badge-label">combinações testadas por benchmark</div>
-      </div>
-      <div class="hsc-badge hsc-badge-4">
-        <div class="hsc-badge-val">3</div>
-        <div class="hsc-badge-label">papers acadêmicos validados</div>
-      </div>
+    <div class="mod-chips">
+      <span class="mod-chip"><strong>5</strong> arquiteturas</span>
+      <span class="mod-chip"><strong>5</strong> harnesses</span>
+      <span class="mod-chip">score · tokens · latência</span>
+      <span class="mod-chip">seed fixa, reprodutível</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ MÓDULOS ═══════════════════════════════ -->
-<section id="modulos" class="modules-section">
-  <div class="section-label">Os 4 módulos</div>
-  <h2 class="section-title">Quatro perguntas, quatro experimentos</h2>
-  <p class="section-desc">
-    Cada módulo isola uma variável diferente do sistema. Comece pelo módulo 1 se você ainda não sabe
-    qual arquitetura usar — ou vá direto ao módulo que responde a sua dúvida.
-  </p>
-
-  <div class="modules-grid">
-    <a href="#testes" class="module-card m1">
-      <div class="mc-head">
-        <span class="mc-num">1</span>
-        <span class="mc-q">“Qual arquitetura de agentes usar?”</span>
-      </div>
-      <h3 class="mc-title">Arquitetura de Agentes</h3>
-      <p class="mc-desc">
-        Compara SAS, Independent, Centralized, Decentralized e Hybrid na mesma tarefa — score,
-        consumo de tokens e latência. Experimento individual ou matriz completa arquitetura × harness.
-      </p>
-      <div class="mc-meta">
-        <span class="mc-tag">5 arquiteturas</span>
-        <span class="mc-tag">5 harnesses</span>
-      </div>
-      <span class="mc-cta">Ir ao laboratório →</span>
-    </a>
-
-    <a href="pesquisa-avancada.html" class="module-card m2">
-      <div class="mc-head">
-        <span class="mc-num">2</span>
-        <span class="mc-q">“O que acontece dentro do modelo?”</span>
-      </div>
-      <h3 class="mc-title">Ativação de Rede Neural</h3>
-      <p class="mc-desc">
-        Inspeciona as representações internas: PCA das ativações por camada e linear probes
-        para localizar onde a noção de verdade é codificada.
-      </p>
-      <div class="mc-meta">
-        <span class="mc-tag">PCA por camada</span>
-        <span class="mc-tag">linear probes</span>
-      </div>
-      <span class="mc-cta">Abrir módulo →</span>
-    </a>
-
-    <a href="prompt-sensitivity-benchmark.html" class="module-card m3">
-      <div class="mc-head">
-        <span class="mc-num">3</span>
-        <span class="mc-q">“Que parte do meu prompt importa?”</span>
-      </div>
-      <h3 class="mc-title">Sensibilidade de Prompt</h3>
-      <p class="mc-desc">
-        Quebra o system prompt em cláusulas e mede, por ablação empírica, quais sustentam o score
-        e quais só consomem tokens — incluindo interações entre cláusulas.
-      </p>
-      <div class="mc-meta">
-        <span class="mc-tag">leave-one-out</span>
-        <span class="mc-tag">compressor</span>
-      </div>
-      <span class="mc-cta">Abrir módulo →</span>
-    </a>
-
-    <a href="model-benchmark.html" class="module-card m4">
-      <div class="mc-head">
-        <span class="mc-num">4</span>
-        <span class="mc-q">“Qual modelo devo usar?”</span>
-      </div>
-      <h3 class="mc-title">Benchmark de Modelos</h3>
-      <p class="mc-desc">
-        Descobre qual modelo resolve a <em>sua</em> tarefa, com foco em open-weight.
-        Fronteira de Pareto entre qualidade, custo e latência, com recomendação automática.
-      </p>
-      <div class="mc-meta">
-        <span class="mc-tag">open-weight</span>
-        <span class="mc-tag">Pareto</span>
-      </div>
-      <span class="mc-cta">Abrir módulo →</span>
-    </a>
-  </div>
-</section>
 
 <!-- ═══════════════════════════ LAB ═══════════════════════════════════ -->
 <section id="testes">
