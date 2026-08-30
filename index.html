@@ -90,7 +90,12 @@
     .ht-body {
       padding:18px 20px; font-family:'JetBrains Mono',monospace;
       font-size:0.72rem; line-height:1.95; color:var(--term-text);
+      /* pre preserva o alinhamento das colunas — sem isso o HTML
+         colapsa os espacos e a tabela do terminal desmonta */
+      white-space:pre; overflow-x:auto;
     }
+    .ht-body::-webkit-scrollbar { height:4px; }
+    .ht-body::-webkit-scrollbar-thumb { background:var(--term-dim); border-radius:2px; }
     .t-dim { color:var(--term-dim); } .t-blue { color:var(--term-blue); }
     .t-ok { color:var(--term-green); } .t-warn { color:#FFD166; }
     .t-win { background:rgba(0,229,153,0.1); border-left:2px solid var(--term-green); padding-left:8px; display:block; }
@@ -178,7 +183,8 @@
     .mcp-code {
       background:var(--term-bg); border-radius:14px; padding:20px;
       font-family:'JetBrains Mono',monospace; font-size:0.72rem;
-      line-height:1.85; color:var(--term-text); overflow-x:auto;
+      line-height:1.85; color:var(--term-text);
+      white-space:pre; overflow-x:auto;
     }
     .mcp-list { list-style:none; margin-top:20px; }
     .mcp-list li { font-size:0.85rem; color:var(--texto-secundario); line-height:1.6; padding:8px 0 8px 24px; position:relative; }
@@ -253,20 +259,18 @@
         <span class="ht-dot" style="background:#febc2e"></span>
         <span class="ht-dot" style="background:#28c840"></span>
       </div>
-      <div class="ht-body">
-        <span class="t-dim">$ benchmark --task minha_tarefa --n 10</span><br>
-        <span class="t-dim">&nbsp;</span><br>
-        <span class="t-blue">arquitetura     score   tokens   latência</span><br>
-        <span class="t-win">sas             1.000      261     1.31s</span>
-        independent     1.000    1 078     5.48s<br>
-        centralized     1.000    3 338    14.30s<br>
-        decentralized   1.000    3 012    12.96s<br>
-        hybrid          0.900    6 387    25.54s<br>
-        <span class="t-dim">&nbsp;</span><br>
-        <span class="t-warn">! todas empatam em score</span><br>
-        <span class="t-ok">→ sas resolve igual por 1/24 dos tokens</span><br>
-        <span class="t-ok">→ multi-agente aqui é só custo</span>
-      </div>
+      <div class="ht-body"><span class="t-dim">$ benchmark --task minha_tarefa --n 10</span>
+
+<span class="t-blue">arquitetura      score   tokens   latência</span>
+<span class="t-win">sas              1.000      261     1.31s</span>
+independent      1.000    1 078     5.48s
+centralized      1.000    3 338    14.30s
+decentralized    1.000    3 012    12.96s
+hybrid           0.900    6 387    25.54s
+
+<span class="t-warn">! todas empatam em score</span>
+<span class="t-ok">→ sas resolve igual por 1/24 dos tokens</span>
+<span class="t-ok">→ multi-agente aqui é só custo</span></div>
     </div>
   </div>
 </section>
@@ -441,22 +445,20 @@
           <li><strong>Metodologia como recurso</strong> — o agente lê antes de rodar</li>
         </ul>
       </div>
-      <div class="mcp-code">
-<span class="t-dim">// mcp.json</span><br>
-{<br>
-&nbsp;&nbsp;<span class="t-blue">"mcpServers"</span>: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"overthinking-machine"</span>: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"command"</span>: <span class="t-ok">"python"</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-blue">"args"</span>: [<span class="t-ok">"mcp_server.py"</span>]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;}<br>
-}<br>
-<span class="t-dim">&nbsp;</span><br>
-<span class="t-dim">// depois, em linguagem natural:</span><br>
-<span class="t-ok">"Descubra qual modelo usar na minha</span><br>
-<span class="t-ok">&nbsp;tarefa. Siga o protocolo e me mostre</span><br>
-<span class="t-ok">&nbsp;o custo antes de rodar."</span>
-      </div>
+      <div class="mcp-code"><span class="t-dim">// mcp.json</span>
+{
+  <span class="t-blue">"mcpServers"</span>: {
+    <span class="t-blue">"overthinking-machine"</span>: {
+      <span class="t-blue">"command"</span>: <span class="t-ok">"python"</span>,
+      <span class="t-blue">"args"</span>: [<span class="t-ok">"mcp_server.py"</span>]
+    }
+  }
+}
+
+<span class="t-dim">// depois, em linguagem natural:</span>
+<span class="t-ok">"Descubra qual modelo usar na minha
+ tarefa. Siga o protocolo e me mostre
+ o custo antes de rodar."</span></div>
     </div>
   </div>
 </section>
