@@ -19,6 +19,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 
 from src.agents.agent_base import AgentBase, AgentTrace
+from src.llm_text import texto_da_resposta
 
 
 class CentralizedMAS(AgentBase):
@@ -70,7 +71,7 @@ class CentralizedMAS(AgentBase):
             SystemMessage(content=system_content),
             HumanMessage(content=decompose_prompt),
         ])
-        subtasks_raw = decompose_response.content.strip()
+        subtasks_raw = texto_da_resposta(decompose_response)
         step += 1
 
         self.last_trace.append(AgentTrace(
@@ -107,7 +108,7 @@ class CentralizedMAS(AgentBase):
                 SystemMessage(content=system_content),
                 HumanMessage(content=worker_prompt),
             ])
-            worker_output = worker_response.content.strip()
+            worker_output = texto_da_resposta(worker_response)
             step += 1
 
             self.last_trace.append(AgentTrace(
@@ -144,7 +145,7 @@ class CentralizedMAS(AgentBase):
             SystemMessage(content=system_content),
             HumanMessage(content=synthesis_prompt),
         ])
-        final_output = final_response.content.strip()
+        final_output = texto_da_resposta(final_response)
         step += 1
 
         self.last_trace.append(AgentTrace(

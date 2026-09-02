@@ -38,6 +38,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 
 from src.task_base import TaskBase, TaskInstance
 from src.harnesses.harness_base import HarnessBase, HarnessOutput
+from src.llm_text import texto_da_resposta
 from src.harnesses.manual_harnesses import (
     ZeroShotHarness,
     _system,
@@ -427,7 +428,7 @@ class MetaHarness:
                 SystemMessage(content=_PROPOSER_SYSTEM),
                 HumanMessage(content=prompt),
             ])
-            raw = response.content.strip()
+            raw = texto_da_resposta(response)
 
             # Remove markdown code fences se presentes
             if raw.startswith("```"):

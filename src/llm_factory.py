@@ -9,12 +9,18 @@ Providers de API fechada (exigem chave no .env):
     google/gemini-2.5-flash
 
 Providers de peso aberto rodando localmente (não exigem chave):
-    ollama/llama3.1:8b          → servidor Ollama  (padrão http://localhost:11434/v1)
-    vllm/Qwen/Qwen2.5-7B-Instruct → servidor vLLM  (padrão http://localhost:8000/v1)
+    ollama/llama3.1:8b            → servidor Ollama (padrão localhost:11434)
+    vllm/Qwen/Qwen2.5-7B-Instruct → servidor vLLM   (padrão localhost:8000)
 
-Ambos expõem uma API compatível com a da OpenAI, então reaproveitamos o
-ChatOpenAI trocando apenas o base_url. Os endereços podem ser sobrescritos
-por OLLAMA_BASE_URL / VLLM_BASE_URL no .env.
+Providers de peso aberto hospedados (exigem chave, mas dispensam GPU local):
+    moonshot/kimi-k2.6            → Moonshot AI (Kimi)
+    zai/glm-5                     → Z.ai / Zhipu (GLM)
+    groq/llama-3.3-70b-versatile  → Groq
+    together/... , openrouter/... , deepinfra/...   → agregadores
+
+Todos falam a API da OpenAI, então reaproveitamos o ChatOpenAI trocando apenas
+base_url e chave. Qualquer endereço pode ser sobrescrito por env var
+(ex.: MOONSHOT_BASE_URL, ZAI_BASE_URL, OLLAMA_BASE_URL).
 """
 from __future__ import annotations
 import contextvars
@@ -47,19 +53,31 @@ def get_request_keys() -> dict[str, str]:
 
 class LLMFactory:
 
-    PROVIDERS = {
-        "openai":    "langchain_openai.ChatOpenAI",
-        "anthropic": "langchain_anthropic.ChatAnthropic",
-        "google":    "langchain_google_genai.ChatGoogleGenerativeAI",
-        # peso aberto, servidos localmente via API compatível com OpenAI
-        "ollama":    "langchain_openai.ChatOpenAI",
-        "vllm":      "langchain_openai.ChatOpenAI",
-    }
-
     # Providers locais: sem chave de API, endereço configurável por env var
     LOCAL_PROVIDERS = {
         "ollama": ("OLLAMA_BASE_URL", "http://localhost:11434/v1"),
         "vllm":   ("VLLM_BASE_URL",   "http://localhost:8000/v1"),
+    }
+
+    # Providers com API compatível com OpenAI, hospedados: exigem chave, mas
+    # dispensam GPU. É por aqui que entram os modelos de peso aberto (Kimi, GLM,
+    # Llama, Qwen, DeepSeek) sem depender do hardware de quem roda a plataforma.
+    #   provider: (env da chave, base_url padrão, env que sobrescreve a url)
+    COMPATIBLE_PROVIDERS = {
+        "moonshot":   ("MOONSHOT_API_KEY",   "https://api.moonshot.ai/v1",          "MOONSHOT_BASE_URL"),
+        "zai":        ("ZAI_API_KEY",        "https://api.z.ai/api/paas/v4",        "ZAI_BASE_URL"),
+        "groq":       ("GROQ_API_KEY",       "https://api.groq.com/openai/v1",      "GROQ_BASE_URL"),
+        "together":   ("TOGETHER_API_KEY",   "https://api.together.xyz/v1",         "TOGETHER_BASE_URL"),
+        "openrouter": ("OPENROUTER_API_KEY", "https://openrouter.ai/api/v1",        "OPENROUTER_BASE_URL"),
+        "deepinfra":  ("DEEPINFRA_API_KEY",  "https://api.deepinfra.com/v1/openai", "DEEPINFRA_BASE_URL"),
+    }
+
+    PROVIDERS = {
+        "openai":    "langchain_openai.ChatOpenAI",
+        "anthropic": "langchain_anthropic.ChatAnthropic",
+        "google":    "langchain_google_genai.ChatGoogleGenerativeAI",
+        **{p: "langchain_openai.ChatOpenAI" for p in LOCAL_PROVIDERS},
+        **{p: "langchain_openai.ChatOpenAI" for p in COMPATIBLE_PROVIDERS},
     }
 
     @classmethod
@@ -82,6 +100,7 @@ class LLMFactory:
         "openai":    "OPENAI_API_KEY",
         "anthropic": "ANTHROPIC_API_KEY",
         "google":    "GOOGLE_API_KEY",
+        **{p: spec[0] for p, spec in COMPATIBLE_PROVIDERS.items()},
     }
 
     @staticmethod
@@ -111,12 +130,22 @@ class LLMFactory:
 
     @staticmethod
     def base_url(provider: str) -> str | None:
-        """Endereço do servidor local para providers de peso aberto."""
+        """Endereço do endpoint, para providers compatíveis com a API da OpenAI."""
         spec = LLMFactory.LOCAL_PROVIDERS.get(provider)
-        if not spec:
-            return None
-        env_var, default = spec
-        return os.getenv(env_var, default)
+        if spec:
+            env_var, default = spec
+            return os.getenv(env_var, default)
+        spec = LLMFactory.COMPATIBLE_PROVIDERS.get(provider)
+        if spec:
+            _, default, env_url = spec
+            return os.getenv(env_url, default)
+        return None
+
+    @staticmethod
+    def is_open_weight(provider: str) -> bool:
+        """True para providers que servem modelos de peso aberto."""
+        return (provider in LLMFactory.LOCAL_PROVIDERS
+                or provider in LLMFactory.COMPATIBLE_PROVIDERS)
 
     @staticmethod
     def _build(provider: str, model_name: str, temperature: float, **kwargs: Any) -> BaseChatModel:
@@ -150,6 +179,16 @@ class LLMFactory:
                 **kwargs,
             )
 
+        elif provider in LLMFactory.COMPATIBLE_PROVIDERS:
+            from langchain_openai import ChatOpenAI
+            return ChatOpenAI(
+                model=model_name,
+                temperature=temperature,
+                base_url=LLMFactory.base_url(provider),
+                api_key=chave,
+                **kwargs,
+            )
+
     @classmethod
     def list_supported(cls) -> list[str]:
         return [
@@ -159,9 +198,14 @@ class LLMFactory:
             "anthropic/claude-haiku-4-5-20251001",
             "google/gemini-2.5-flash",
             "google/gemini-2.5-pro",
-            # peso aberto via Ollama (exemplos — o que estiver instalado localmente)
+            # peso aberto — Google serve os Gemma pela mesma chave do Gemini
+            "google/gemma-4-31b-it",
+            "google/gemma-4-26b-a4b-it",
+            # peso aberto hospedado (exigem a chave do respectivo provedor)
+            "moonshot/kimi-k2.6",
+            "zai/glm-5",
+            "groq/llama-3.3-70b-versatile",
+            # peso aberto local, se houver Ollama instalado
             "ollama/llama3.1:8b",
             "ollama/qwen2.5:7b",
-            "ollama/mistral-small",
-            "ollama/gemma2:27b",
         ]

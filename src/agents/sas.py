@@ -14,6 +14,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 
 from src.agents.agent_base import AgentBase, AgentTrace
+from src.llm_text import texto_da_resposta
 
 
 class SingleAgentSystem(AgentBase):
@@ -44,7 +45,7 @@ class SingleAgentSystem(AgentBase):
 
         # Única chamada LLM
         response = self.llm.invoke(messages)
-        output = response.content.strip()
+        output = texto_da_resposta(response)
 
         self.last_trace.append(AgentTrace(
             agent_id="agent",

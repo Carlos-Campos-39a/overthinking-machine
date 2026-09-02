@@ -74,9 +74,16 @@ app.add_middleware(
 
 # Headers pelos quais o visitante envia a própria chave (nunca são persistidos)
 _KEY_HEADERS = {
-    "google":    "x-google-key",
-    "openai":    "x-openai-key",
-    "anthropic": "x-anthropic-key",
+    "google":     "x-google-key",
+    "openai":     "x-openai-key",
+    "anthropic":  "x-anthropic-key",
+    # peso aberto hospedado
+    "moonshot":   "x-moonshot-key",
+    "zai":        "x-zai-key",
+    "groq":       "x-groq-key",
+    "together":   "x-together-key",
+    "openrouter": "x-openrouter-key",
+    "deepinfra":  "x-deepinfra-key",
 }
 
 
@@ -957,6 +964,20 @@ _API_MODELS = [
     {"id": "anthropic/claude-haiku-4-5-20251001", "label": "claude-haiku-4-5",      "org": "Anthropic", "oss": False},
 ]
 
+# Modelos de PESO ABERTO servidos por API — não exigem GPU local, só a chave do
+# provedor. É o caminho prático para incluir Kimi, GLM e companhia num benchmark
+# sem depender do hardware de quem roda a plataforma.
+_OSS_HOSTED = [
+    # Gemma sai pela mesma chave do Gemini que a plataforma já usa
+    {"id": "google/gemma-4-31b-it",              "label": "Gemma 4 31B",       "org": "Google",    "oss": True, "params": "31B"},
+    {"id": "google/gemma-4-26b-a4b-it",          "label": "Gemma 4 26B A4B",   "org": "Google",    "oss": True, "params": "26B"},
+    {"id": "moonshot/kimi-k2.6",                 "label": "Kimi K2.6",         "org": "Moonshot",  "oss": True},
+    {"id": "moonshot/kimi-k2.7-code",            "label": "Kimi K2.7 Code",    "org": "Moonshot",  "oss": True},
+    {"id": "zai/glm-5",                          "label": "GLM-5",             "org": "Z.ai",      "oss": True},
+    {"id": "zai/glm-4.6",                        "label": "GLM-4.6",           "org": "Z.ai",      "oss": True},
+    {"id": "groq/llama-3.3-70b-versatile",       "label": "Llama 3.3 70B",     "org": "Meta",      "oss": True, "params": "70B"},
+]
+
 # Sugestões de modelos open-weight (aparecem como "não instalado" se o Ollama
 # não os tiver localmente — servem de guia do que baixar).
 _OSS_SUGGESTED = [
@@ -1049,6 +1070,20 @@ async def list_models(request: Request):
             "price": pricing.get(m["id"], {"in": 0.0, "out": 0.0}),
         })
 
+    # Peso aberto hospedado: disponível se houver chave do provedor (BYOK ou env)
+    from src.llm_factory import LLMFactory as _F
+    oss_hosted = []
+    for m in _OSS_HOSTED:
+        provider = m["id"].split("/", 1)[0]
+        tem_chave = bool(byok.get(provider) or os.getenv(_F.ENV_VARS.get(provider, "")))
+        oss_hosted.append({
+            **m,
+            "installed": True,
+            "available": tem_chave,
+            "price": pricing.get(m["id"], {"in": 0.0, "out": 0.0}),
+            "hint": None if tem_chave else f"informe a chave de {provider} em 🔑 Chaves",
+        })
+
     installed, ollama_err = _ollama_installed()
     installed_ids = {m["id"] for m in installed}
     for m in installed:
@@ -1065,7 +1100,7 @@ async def list_models(request: Request):
 
     from src.llm_factory import LLMFactory
     return {
-        "models": installed + suggested + api_models,
+        "models": installed + oss_hosted + suggested + api_models,
         "ollama": {
             "base_url": LLMFactory.base_url("ollama"),
             "reachable": ollama_err is None,

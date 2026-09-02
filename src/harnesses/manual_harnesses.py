@@ -4,6 +4,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.language_models import BaseChatModel
 from src.task_base import TaskInstance
 from src.harnesses.harness_base import HarnessBase, HarnessOutput
+from src.llm_text import texto_da_resposta
 
 
 # ------------------------------------------------------------------
@@ -269,7 +270,7 @@ class AceHarness(HarnessBase):
             )),
         ])
 
-        updated = _trim_to_limit(response.content.strip())
+        updated = _trim_to_limit(texto_da_resposta(response))
         _write_kb(self.task_name, updated)
 
 
@@ -414,7 +415,7 @@ class MceHarness(HarnessBase):
                 f"**Procedimento:** [passo 1] → [passo 2] → [passo 3]"
             )),
         ])
-        return response.content.strip()
+        return texto_da_resposta(response)
 
     # --- Curator ---
 
@@ -441,7 +442,7 @@ class MceHarness(HarnessBase):
             )),
         ])
 
-        updated = _trim_to_limit(response.content.strip())
+        updated = _trim_to_limit(texto_da_resposta(response))
         _write_pokedex(self.task_name, updated)
 
     def _update_pokedex(self) -> None:

@@ -20,6 +20,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 
 from src.agents.agent_base import AgentBase, AgentTrace
+from src.llm_text import texto_da_resposta
 
 
 class DecentralizedMAS(AgentBase):
@@ -73,7 +74,7 @@ class DecentralizedMAS(AgentBase):
                 SystemMessage(content=system_content),
                 HumanMessage(content=perspective_prompt),
             ])
-            output = response.content.strip()
+            output = texto_da_resposta(response)
             current_responses.append(output)
             step += 1
 
@@ -120,7 +121,7 @@ class DecentralizedMAS(AgentBase):
                     SystemMessage(content=system_content),
                     HumanMessage(content=debate_prompt),
                 ])
-                output = response.content.strip()
+                output = texto_da_resposta(response)
                 new_responses.append(output)
                 step += 1
 
@@ -168,7 +169,7 @@ class DecentralizedMAS(AgentBase):
                 SystemMessage(content=system_content),
                 HumanMessage(content=consensus_prompt),
             ])
-            final_output = consensus_response.content.strip()
+            final_output = texto_da_resposta(consensus_response)
             step += 1
 
             self.last_trace.append(AgentTrace(

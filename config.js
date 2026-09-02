@@ -26,11 +26,17 @@
   // ── 2. Chaves do visitante ────────────────────────────────────────────────
   var STORE = "otm_api_keys";
   var PROVIDERS = [
-    { id: "google",    rotulo: "Google (Gemini)", header: "X-Google-Key",
-      ajuda: "aistudio.google.com/apikey" },
-    { id: "openai",    rotulo: "OpenAI",          header: "X-OpenAI-Key",
+    { id: "google",    rotulo: "Google — Gemini e Gemma", header: "X-Google-Key",
+      ajuda: "aistudio.google.com/apikey", oss: true },
+    { id: "moonshot",  rotulo: "Moonshot — Kimi",  header: "X-Moonshot-Key",
+      ajuda: "platform.moonshot.ai", oss: true },
+    { id: "zai",       rotulo: "Z.ai — GLM",       header: "X-Zai-Key",
+      ajuda: "z.ai/model-api", oss: true },
+    { id: "groq",      rotulo: "Groq — Llama e outros abertos", header: "X-Groq-Key",
+      ajuda: "console.groq.com/keys", oss: true },
+    { id: "openai",    rotulo: "OpenAI",           header: "X-OpenAI-Key",
       ajuda: "platform.openai.com/api-keys" },
-    { id: "anthropic", rotulo: "Anthropic",       header: "X-Anthropic-Key",
+    { id: "anthropic", rotulo: "Anthropic",        header: "X-Anthropic-Key",
       ajuda: "console.anthropic.com" },
   ];
 
@@ -121,9 +127,11 @@
         "<h3>Suas chaves de API</h3>" +
         '<div class="sub">Esta instância não tem chave própria — cada pessoa usa a sua. ' +
         "As chaves ficam <strong>só no seu navegador</strong> e são enviadas apenas nas " +
-        "chamadas que você mesmo dispara.</div>" +
+        "chamadas que você mesmo dispara. Preencha só os provedores que for usar.</div>" +
         PROVIDERS.map(function (p) {
-          return '<label>' + p.rotulo + "</label>" +
+          return '<label>' + p.rotulo +
+            (p.oss ? ' <span style="color:#0a7a5c;font-weight:700;font-size:.85em">· peso aberto</span>' : '') +
+            "</label>" +
             '<input type="password" id="otm-k-' + p.id + '" placeholder="deixe vazio se não for usar">' +
             '<div class="hint">obtenha em ' + p.ajuda + "</div>";
         }).join("") +

@@ -17,6 +17,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import SystemMessage, HumanMessage
 
 from src.task_base import TaskBase, TaskInstance
+from src.llm_text import texto_da_resposta
 
 
 @dataclass
@@ -160,7 +161,7 @@ class LLMJudgeEvaluator(EvaluatorBase):
             SystemMessage(content=_JUDGE_SYSTEM),
             HumanMessage(content=prompt),
         ])
-        raw = response.content.strip()
+        raw = texto_da_resposta(response)
 
         score = _extract_score(raw)
         if score is None:

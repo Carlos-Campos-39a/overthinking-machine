@@ -3,16 +3,72 @@
   "_source": {
     "openai": "https://openai.com/api/pricing",
     "anthropic": "https://www.anthropic.com/pricing",
-    "google": "https://ai.google.dev/pricing"
+    "google": "https://ai.google.dev/pricing",
+    "moonshot": "https://platform.moonshot.ai/docs/pricing",
+    "zai": "https://docs.z.ai/guides/overview/pricing",
+    "groq": "https://groq.com/pricing"
   },
   "pricing": {
-    "google/gemini-2.5-flash":              { "in": 0.30, "out": 2.50 },
-    "google/gemini-2.5-flash-lite":         { "in": 0.10, "out": 0.40 },
-    "google/gemini-2.5-pro":                { "in": 1.25, "out": 10.00 },
-    "openai/gpt-4o-mini":                   { "in": 0.15, "out": 0.60 },
-    "openai/gpt-4o":                        { "in": 2.50, "out": 10.00 },
-    "anthropic/claude-haiku-4-5-20251001":  { "in": 1.00, "out": 5.00 },
-    "anthropic/claude-sonnet-4-6":          { "in": 3.00, "out": 15.00 }
+    "google/gemini-2.5-flash": {
+      "in": 0.3,
+      "out": 2.5
+    },
+    "google/gemini-2.5-flash-lite": {
+      "in": 0.1,
+      "out": 0.4
+    },
+    "google/gemini-2.5-pro": {
+      "in": 1.25,
+      "out": 10.0
+    },
+    "openai/gpt-4o-mini": {
+      "in": 0.15,
+      "out": 0.6
+    },
+    "openai/gpt-4o": {
+      "in": 2.5,
+      "out": 10.0
+    },
+    "anthropic/claude-haiku-4-5-20251001": {
+      "in": 1.0,
+      "out": 5.0
+    },
+    "anthropic/claude-sonnet-4-6": {
+      "in": 3.0,
+      "out": 15.0
+    },
+    "google/gemma-4-31b-it": {
+      "in": 0.0,
+      "out": 0.0
+    },
+    "google/gemma-4-26b-a4b-it": {
+      "in": 0.0,
+      "out": 0.0
+    },
+    "moonshot/kimi-k2.6": {
+      "in": 0.6,
+      "out": 2.5
+    },
+    "moonshot/kimi-k2.7-code": {
+      "in": 0.6,
+      "out": 2.5
+    },
+    "zai/glm-5": {
+      "in": 0.6,
+      "out": 2.2
+    },
+    "zai/glm-4.6": {
+      "in": 0.4,
+      "out": 1.75
+    },
+    "groq/llama-3.3-70b-versatile": {
+      "in": 0.59,
+      "out": 0.79
+    }
   },
-  "local_cost": { "in": 0.0, "out": 0.0 }
+  "local_cost": {
+    "in": 0.0,
+    "out": 0.0
+  },
+  "_nota_precos_oss": "Gemma sai a custo zero de API por vir na cota do Gemini que a plataforma ja usa. Os demais sao estimativas de tabela publica e devem ser conferidos no provedor antes de virar numero de relatorio."
 }
