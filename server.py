@@ -1084,17 +1084,33 @@ async def list_models(request: Request):
             "hint": None if tem_chave else f"informe a chave de {provider} em 🔑 Chaves",
         })
 
-    installed, ollama_err = _ollama_installed()
+    # Ollama roda na MAQUINA ONDE ESTE PROCESSO ESTA. Numa instancia hospedada,
+    # "localhost" e o contêiner do servidor — nunca o computador do visitante.
+    # Por isso nem consultamos: em modo hospedado esses modelos sao inalcancaveis
+    # por construcao, e oferece-los como "instale o Ollama" seria enganoso.
+    if HOSTED:
+        installed, ollama_err = [], (
+            "Instância hospedada: o Ollama teria de rodar neste servidor, não na "
+            "sua máquina. Para usar modelos locais, rode a plataforma localmente. "
+            "Para modelos de peso aberto sem instalar nada, use Gemma, Kimi, GLM "
+            "ou Groq com a sua chave."
+        )
+    else:
+        installed, ollama_err = _ollama_installed()
     installed_ids = {m["id"] for m in installed}
     for m in installed:
         m["available"] = True
         m["price"] = {"in": 0.0, "out": 0.0}
 
-    # Sugestões que ainda não estão instaladas localmente
+    # Sugestões de modelos locais. Em modo hospedado elas viram apenas
+    # informativas: ficam marcadas como exclusivas do modo local, para o
+    # visitante não perder tempo instalando algo que este servidor não alcança.
     suggested = [
         {**m, "installed": False, "available": False,
          "price": {"in": 0.0, "out": 0.0},
-         "hint": f"ollama pull {m['id'].split('/', 1)[1]}"}
+         "local_only": HOSTED,
+         "hint": ("disponível apenas rodando a plataforma localmente"
+                  if HOSTED else f"ollama pull {m['id'].split('/', 1)[1]}")}
         for m in _OSS_SUGGESTED if m["id"] not in installed_ids
     ]
 
@@ -1106,6 +1122,9 @@ async def list_models(request: Request):
             "reachable": ollama_err is None,
             "error": ollama_err,
             "installed_count": len(installed),
+            # deixa explicito de onde o "localhost" esta sendo visto
+            "escopo": "servidor hospedado" if HOSTED else "sua máquina",
+            "local_only": HOSTED,
         },
         "keys": key_present,
     }
