@@ -136,8 +136,17 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
             inst.metadata = {**inst.metadata, "system_override": system_override}
 
     # ── Instancia agente ──────────────────────────────────────────────
+    # `topologia_spec` traz uma topologia declarativa montada pelo usuário na
+    # interface ou vinda por MCP. Quando presente, ela substitui o nome da
+    # arquitetura; o caminho por nome segue intacto para todo o resto.
     agent_kwargs = config.get("agent_kwargs", {})
-    agent = create_agent(config["architecture"], llm=llm, **agent_kwargs)
+    topologia_spec = config.get("topologia_spec")
+    if topologia_spec:
+        agent = create_agent("declarativo", llm=llm, spec=topologia_spec)
+        architecture_used = topologia_spec.get("nome", "declarativo")
+    else:
+        agent = create_agent(config["architecture"], llm=llm, **agent_kwargs)
+        architecture_used = config["architecture"]
 
     # ── Instancia evaluator ───────────────────────────────────────────
     eval_name = config.get("evaluator", "binary")
@@ -152,7 +161,14 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
     harness_name = config.get("harness", "zero_shot")
     task_name = config["task"]
 
-    if harness_name == "meta_harness":
+    harness_spec = config.get("harness_spec")
+    if harness_spec:
+        # Harness declarativo montado pelo usuário — mesma lógica do agente.
+        from src.harnesses.harness_declarativo import HarnessDeclarativo
+        harness = HarnessDeclarativo(harness_spec)
+        harness_used = harness_spec.get("nome", "declarativo")
+
+    elif harness_name == "meta_harness":
         # Meta-Harness: busca automática de harnesses
         harness = _setup_meta_harness(
             config=config,
@@ -221,8 +237,14 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
             "tokens": tokens,
         })
 
-        # Atualiza memória (ACE / MCE)
-        if isinstance(harness, (AceHarness, MceHarness)):
+        # Atualiza a memória do harness, se ele tiver alguma.
+        #
+        # Antes isto era `isinstance(harness, (AceHarness, MceHarness))`. Com
+        # harnesses definidos por terceiros, uma checagem por classe ignoraria
+        # em SILÊNCIO qualquer harness com estado que não fosse um dos dois:
+        # nenhum erro, apenas uma memória que nunca atualiza — o tipo de falha
+        # que a plataforma existe para detectar, não para produzir.
+        if hasattr(harness, "record_result"):
             harness.record_result(
                 instance=instance,
                 output=output,
@@ -230,8 +252,8 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
                 feedback=result.feedback,
             )
 
-    # Flush final para ACE / MCE
-    if isinstance(harness, (AceHarness, MceHarness)):
+    # Descarga final da memória (ACE / MCE e afins)
+    if hasattr(harness, "flush"):
         harness.flush()
 
     # ── Salva resultados ──────────────────────────────────────────────
@@ -246,6 +268,10 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
     results = {
         "run_id": run_id,
         "config": config,
+        # Nome da topologia efetivamente executada — para uma spec declarativa é
+        # o nome dela, não a string "declarativo", senão o leaderboard mostraria
+        # todas as topologias do usuário sob o mesmo rótulo.
+        "architecture_used": architecture_used,
         "harness_used": harness_used,
         "num_instances": len(instances),
         "mean_score": round(mean_score, 4),

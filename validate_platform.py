@@ -151,9 +151,14 @@ def val_registros() -> None:
     from src.llm_factory import LLMFactory
 
     arqs = list_architectures()
+    # Superconjunto, e não igualdade: além das 5 do paper, o registro agora tem
+    # o interpretador "declarativo", e topologias de usuário entram por ele.
+    # Uma asserção de igualdade transformaria cada extensão numa falsa falha.
     esperado_arq = {"sas", "independent", "centralized", "decentralized", "hybrid"}
-    check("registros", "5 arquiteturas", OK if set(arqs) == esperado_arq else FAIL,
-          ", ".join(arqs))
+    faltando = esperado_arq - set(arqs)
+    check("registros", "5 arquiteturas do paper presentes",
+          OK if not faltando else FAIL,
+          ", ".join(arqs) + (f"  FALTANDO: {faltando}" if faltando else ""))
 
     harn = set(HARNESSES) | {"meta_harness"}
     esperado_h = {"zero_shot", "few_shot", "ace", "mce", "meta_harness"}

@@ -19,6 +19,7 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 
 from src.agents.agent_base import AgentBase, AgentTrace
+from src.agents.parse_subtarefas import parse_subtarefas
 from src.llm_text import texto_da_resposta
 
 
@@ -159,27 +160,6 @@ class CentralizedMAS(AgentBase):
         return final_output
 
     def _parse_subtasks(self, raw: str, fallback: str) -> list[str]:
-        """Extrai subtarefas numeradas do output do orquestrador."""
-        lines = [
-            line.strip()
-            for line in raw.splitlines()
-            if line.strip() and line.strip()[0].isdigit()
-        ]
-        # Remove numeração (1. / 1) etc.)
-        subtasks = []
-        for line in lines:
-            # Remove prefix "1." ou "1)" etc.
-            cleaned = line.lstrip("0123456789.)- ").strip()
-            if cleaned:
-                subtasks.append(cleaned)
-
-        # Fallback: se parse falhou, divide por parágrafo
-        if not subtasks:
-            paragraphs = [p.strip() for p in raw.split("\n\n") if p.strip()]
-            subtasks = paragraphs or [fallback]
-
-        # Garante exatamente n_workers subtasks
-        while len(subtasks) < self.n_workers:
-            subtasks.append(fallback)
-
-        return subtasks[: self.n_workers]
+        # Parser compartilhado com o interpretador declarativo — ver
+        # src/agents/parse_subtarefas.py.
+        return parse_subtarefas(raw, fallback, self.n_workers)

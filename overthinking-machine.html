@@ -3220,6 +3220,14 @@
   <h2 class="section-title">Configure seu Experimento</h2>
   <p class="section-desc">Escolha modelo, arquitetura, harness e tarefa. A simulação replica fielmente o output do <code style="background:var(--roxo-lavanda);color:var(--roxo-profundo);padding:2px 6px;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:0.85em;">runner.py</code>.</p>
 
+  <!-- Abas do laboratório — reusa .view-tabs/.view-tab, sem CSS novo -->
+  <div class="view-tabs" style="max-width:460px;margin:0 auto 24px">
+    <button class="view-tab active" id="labtab-padrao" type="button"
+            onclick="switchLabTab('padrao')">Experimento</button>
+    <button class="view-tab" id="labtab-esp" type="button"
+            onclick="switchLabTab('esp')">Montar topologia</button>
+  </div>
+
   <div class="lab-layout">
     <!-- Config Panel -->
     <div class="config-panel">
@@ -3804,6 +3812,8 @@
       </div>
     </div>
   </div>
+
+  <div id="esp-wrap" hidden></div>
 </section>
 
 <!-- ═══════════════════════════ LEADERBOARD ═══════════════════════════ -->
@@ -4460,7 +4470,7 @@ document.querySelectorAll('.option-card').forEach(card => {
 });
 
 // ── Real experiment (API mode) ───────────────────────────────────────
-async function startRealExperiment() {
+async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo compositor de topologias
   if (state.running) return;
 
   // Verifica API
@@ -4511,6 +4521,11 @@ async function startRealExperiment() {
     // Envia IDs específicos quando o modo é preset (seleção manual)
     instance_ids: state.instMode === 'preset' ? [...state.selectedIds] : [],
   };
+
+  // O compositor de topologias entra por aqui, sobrescrevendo architecture e
+  // acrescentando topologia_spec. Assim ele reusa terminal, painel de
+  // resultados, leaderboard e cancelamento sem duplicar o consumidor de SSE.
+  Object.assign(cfg, extraCfg || {});
 
   let realResults = null;
   let realScores  = [];
@@ -8838,6 +8853,558 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
     <div id="cards-popup-content"></div>
   </div>
 </div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   Compositor de topologias — aba "Montar topologia" do módulo 1.
+
+   Fica num bloco próprio, separado do script principal de ~4800 linhas, para
+   que um erro de sintaxe aqui não derrube a página inteira.
+
+   Prefixo esp* / .esp- em tudo, para não colidir com o que já existe.
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  "use strict";
+
+  var API = window.OTM_API_URL || 'http://localhost:8000';
+
+  var TIPOS = {
+    unico:    { rotulo: 'Único',    desc: '1 chamada',                    cor: '#5D3FD3' },
+    paralelo: { rotulo: 'Paralelo', desc: 'n chamadas independentes',     cor: '#60B4FF' },
+    debate:   { rotulo: 'Debate',   desc: 'n agentes × r rodadas',        cor: '#FFD166' },
+    reduzir:  { rotulo: 'Reduzir',  desc: '1 chamada que junta as outras', cor: '#00E599' },
+  };
+
+  var esp = {
+    estagios: [],
+    nome: 'minha-topologia',
+    titulo: '',
+    descricao: '',
+    limites: null,
+    biblioteca: [],
+    arrastando: null,
+  };
+  window.espState = esp;
+
+  /* Escapa antes de qualquer interpolação em HTML. A biblioteca é pública e
+     sem autenticação: título, descrição e prompts vêm de terceiros. */
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s == null ? '' : String(s);
+    return d.innerHTML;
+  }
+
+  function chamadasDe(e) {
+    if (e.tipo === 'paralelo') return e.n;
+    if (e.tipo === 'debate') return e.n * e.rodadas;
+    return 1;
+  }
+  function totalChamadas() {
+    return esp.estagios.reduce(function (s, e) { return s + chamadasDe(e); }, 0);
+  }
+
+  function novoEstagio(tipo) {
+    var base = {
+      id: tipo.slice(0, 3) + (esp.estagios.length + 1),
+      tipo: tipo, rotulo: '', n: 1, rodadas: 1, prompt: '', final: false,
+    };
+    if (tipo === 'paralelo' || tipo === 'debate') base.n = 3;
+    if (tipo === 'debate') base.rodadas = 1;
+    base.prompt = tipo === 'reduzir'
+      ? 'Sintetize as respostas abaixo em uma só.\n\n{blocos}'
+      : tipo === 'debate'
+        ? 'Sua resposta: {resposta_anterior}\n\nOutros agentes:\n{pares}\n\nRefine.'
+        : 'TAREFA:\n{task_content}';
+    return base;
+  }
+
+  /* ── Especificação ───────────────────────────────────────────────────── */
+
+  function montarSpec() {
+    return {
+      tipo: 'topologia',
+      nome: esp.nome || 'minha-topologia',
+      titulo: esp.titulo || '',
+      descricao: esp.descricao || '',
+      estagios: esp.estagios.map(function (e, i) {
+        var o = { id: e.id, tipo: e.tipo, prompt: e.prompt, final: i === esp.estagios.length - 1 };
+        if (e.rotulo) o.rotulo = e.rotulo;
+        if (e.tipo === 'paralelo' || e.tipo === 'debate') o.n = e.n;
+        if (e.tipo === 'debate') o.rodadas = e.rodadas;
+        if (e.dividir) o.dividir = true;
+        return o;
+      }),
+    };
+  }
+
+  /* ── Render ──────────────────────────────────────────────────────────── */
+
+  function render() {
+    renderPipeline();
+    renderPainel();
+  }
+
+  function renderPipeline() {
+    var alvo = document.getElementById('esp-pipeline');
+    if (!alvo) return;
+
+    if (!esp.estagios.length) {
+      alvo.innerHTML =
+        '<div class="esp-vazio">Arraste um bloco da esquerda, ou carregue uma ' +
+        'proposta inicial para editar.</div>';
+      return;
+    }
+
+    alvo.innerHTML = esp.estagios.map(function (e, i) {
+      var t = TIPOS[e.tipo];
+      var ultimo = i === esp.estagios.length - 1;
+      return '' +
+        '<div class="esp-card" draggable="true" data-i="' + i + '" style="--c:' + t.cor + '">' +
+          '<div class="esp-card-top">' +
+            '<span class="esp-tag">' + t.rotulo + '</span>' +
+            '<input class="esp-id" value="' + esc(e.id) + '" ' +
+                   'onchange="espSet(' + i + ',\'id\',this.value)" title="identificador">' +
+            '<span class="esp-n">' + chamadasDe(e) + ' chamada' + (chamadasDe(e) > 1 ? 's' : '') + '</span>' +
+            (ultimo ? '<span class="esp-final">final</span>' : '') +
+            '<span class="esp-acoes">' +
+              '<button type="button" onclick="espMover(' + i + ',-1)" title="subir">↑</button>' +
+              '<button type="button" onclick="espMover(' + i + ',1)" title="descer">↓</button>' +
+              '<button type="button" onclick="espRemover(' + i + ')" title="remover">✕</button>' +
+            '</span>' +
+          '</div>' +
+          (e.tipo === 'paralelo' || e.tipo === 'debate'
+            ? '<div class="esp-params">' +
+                '<label>agentes <input type="number" min="2" max="8" value="' + e.n +
+                  '" onchange="espSet(' + i + ',\'n\',+this.value)"></label>' +
+                (e.tipo === 'debate'
+                  ? '<label>rodadas <input type="number" min="1" max="3" value="' + e.rodadas +
+                    '" onchange="espSet(' + i + ',\'rodadas\',+this.value)"></label>' : '') +
+                (e.tipo === 'paralelo'
+                  ? '<label class="esp-check"><input type="checkbox"' + (e.dividir ? ' checked' : '') +
+                    ' onchange="espSet(' + i + ',\'dividir\',this.checked)"> dividir a resposta anterior em subtarefas</label>' : '') +
+              '</div>'
+            : '') +
+          '<textarea class="esp-prompt" rows="3" placeholder="prompt deste estágio" ' +
+                   'onchange="espSet(' + i + ',\'prompt\',this.value)">' + esc(e.prompt) + '</textarea>' +
+        '</div>';
+    }).join('');
+
+    ligarArrasto();
+  }
+
+  function renderPainel() {
+    var el = document.getElementById('esp-custo');
+    if (!el) return;
+    var n = totalChamadas();
+    var inst = 10;
+    el.innerHTML =
+      '<div class="esp-metrica"><strong>' + n + '</strong> chamadas por instância</div>' +
+      '<div class="esp-metrica esp-dim">' + (n * inst) + ' chamadas ao rodar com ' + inst + ' instâncias</div>';
+    var svg = document.getElementById('esp-svg');
+    if (svg) svg.innerHTML = desenhar();
+  }
+
+  /* Desenho do pipeline. Reusa o idioma visual de buildArchSVG (círculos,
+     setas, rótulos mono) sem tocar naquela função. */
+  function desenhar() {
+    if (!esp.estagios.length) return '';
+    var L = 96, H = 150, W = Math.max(240, esp.estagios.length * L + 40);
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto">';
+    s += '<defs><marker id="esp-seta" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">' +
+         '<path d="M0,0 L6,3 L0,6 Z" fill="rgba(93,63,211,0.45)"/></marker></defs>';
+
+    esp.estagios.forEach(function (e, i) {
+      var cx = 40 + i * L, t = TIPOS[e.tipo];
+      var qtd = (e.tipo === 'paralelo' || e.tipo === 'debate') ? e.n : 1;
+      var passo = qtd > 1 ? Math.min(26, 84 / qtd) : 0;
+      var y0 = 62 - ((qtd - 1) * passo) / 2;
+
+      if (i > 0) {
+        s += '<line x1="' + (cx - L + 22) + '" y1="62" x2="' + (cx - 20) + '" y2="62" ' +
+             'stroke="rgba(93,63,211,0.35)" stroke-width="1.4" marker-end="url(#esp-seta)"/>';
+      }
+      for (var k = 0; k < qtd; k++) {
+        var cy = y0 + k * passo;
+        s += '<circle cx="' + cx + '" cy="' + cy + '" r="11" fill="' + t.cor +
+             '" fill-opacity="0.16" stroke="' + t.cor + '" stroke-width="1.6"/>';
+      }
+      if (e.tipo === 'debate') {
+        // arcos tracejados = conversa entre pares
+        s += '<path d="M' + (cx - 17) + ',' + (y0 - 4) + ' Q' + (cx - 30) + ',62 ' +
+             (cx - 17) + ',' + (y0 + (qtd - 1) * passo + 4) + '" fill="none" ' +
+             'stroke="' + t.cor + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
+        s += '<text x="' + cx + '" y="' + (H - 22) + '" text-anchor="middle" ' +
+             'font-family="JetBrains Mono,monospace" font-size="7" fill="#6B6B80">' +
+             e.rodadas + '×</text>';
+      }
+      s += '<text x="' + cx + '" y="' + (H - 34) + '" text-anchor="middle" ' +
+           'font-family="JetBrains Mono,monospace" font-size="7.5" fill="#1F1F2E">' +
+           esc(e.id).slice(0, 12) + '</text>';
+      s += '<text x="' + cx + '" y="' + (H - 8) + '" text-anchor="middle" ' +
+           'font-family="Inter,sans-serif" font-size="7" fill="#6B6B80">' +
+           TIPOS[e.tipo].rotulo + '</text>';
+    });
+    return s + '</svg>';
+  }
+
+  /* ── Mutação ─────────────────────────────────────────────────────────── */
+
+  window.espSet = function (i, campo, valor) {
+    if (!esp.estagios[i]) return;
+    esp.estagios[i][campo] = valor;
+    render();
+  };
+  window.espMover = function (i, d) {
+    var j = i + d;
+    if (j < 0 || j >= esp.estagios.length) return;
+    var tmp = esp.estagios[i];
+    esp.estagios[i] = esp.estagios[j];
+    esp.estagios[j] = tmp;
+    render();
+  };
+  window.espRemover = function (i) {
+    esp.estagios.splice(i, 1);
+    render();
+  };
+  window.espAdicionar = function (tipo) {
+    esp.estagios.push(novoEstagio(tipo));
+    render();
+  };
+
+  /* ── Arrastar ────────────────────────────────────────────────────────── */
+  /* Arrastar é a afordância; os botões ↑↓✕ são o contrato — o HTML5 drag and
+     drop não funciona por teclado e é ruim em toque. */
+
+  function ligarArrasto() {
+    var zona = document.getElementById('esp-pipeline');
+    if (!zona) return;
+
+    zona.querySelectorAll('.esp-card').forEach(function (card) {
+      card.addEventListener('dragstart', function (ev) {
+        esp.arrastando = +card.dataset.i;
+        ev.dataTransfer.effectAllowed = 'move';
+        ev.dataTransfer.setData('text/plain', 'reordenar');
+        card.classList.add('esp-arrastando');
+      });
+      card.addEventListener('dragend', function () {
+        card.classList.remove('esp-arrastando');
+        esp.arrastando = null;
+      });
+    });
+  }
+
+  function indiceNoPonto(y) {
+    var cards = document.querySelectorAll('#esp-pipeline .esp-card');
+    for (var i = 0; i < cards.length; i++) {
+      var r = cards[i].getBoundingClientRect();
+      if (y < r.top + r.height / 2) return i;
+    }
+    return cards.length;
+  }
+
+  function prepararZona() {
+    var zona = document.getElementById('esp-pipeline');
+    if (!zona || zona._pronta) return;
+    zona._pronta = true;
+
+    // Sem preventDefault no dragover, o evento drop nunca dispara.
+    zona.addEventListener('dragover', function (ev) {
+      ev.preventDefault();
+      zona.classList.add('esp-sobre');
+    });
+    zona.addEventListener('dragleave', function () { zona.classList.remove('esp-sobre'); });
+    zona.addEventListener('drop', function (ev) {
+      ev.preventDefault();
+      zona.classList.remove('esp-sobre');
+      var destino = indiceNoPonto(ev.clientY);
+      var tipoNovo = ev.dataTransfer.getData('text/otm-tipo');
+
+      if (tipoNovo && TIPOS[tipoNovo]) {
+        esp.estagios.splice(destino, 0, novoEstagio(tipoNovo));
+      } else if (esp.arrastando !== null) {
+        var item = esp.estagios.splice(esp.arrastando, 1)[0];
+        if (destino > esp.arrastando) destino--;
+        esp.estagios.splice(destino, 0, item);
+      }
+      esp.arrastando = null;
+      render();
+    });
+
+    document.querySelectorAll('.esp-bloco').forEach(function (b) {
+      b.addEventListener('dragstart', function (ev) {
+        ev.dataTransfer.effectAllowed = 'copy';
+        ev.dataTransfer.setData('text/otm-tipo', b.dataset.tipo);
+      });
+    });
+  }
+
+  /* ── API ─────────────────────────────────────────────────────────────── */
+
+  function aviso(html, tipo) {
+    var el = document.getElementById('esp-aviso');
+    if (!el) return;
+    el.className = 'esp-aviso esp-' + (tipo || 'info');
+    el.innerHTML = html;
+    el.hidden = false;
+  }
+
+  window.espValidar = async function () {
+    try {
+      var r = await fetch(API + '/api/especificacoes/validar', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spec: montarSpec() }),
+      });
+      var d = await r.json();
+      if (d.ok) {
+        aviso('Válida — <strong>' + d.chamadas_por_instancia + '</strong> chamadas por ' +
+              'instância. Cabem até ' + d.max_instancias_possiveis + ' instâncias por execução.', 'ok');
+      } else {
+        aviso('<strong>Não passou:</strong><br>· ' +
+              d.erros.map(esc).join('<br>· '), 'erro');
+      }
+    } catch (e) {
+      aviso('API fora do ar: ' + esc(e.message), 'erro');
+    }
+  };
+
+  window.espPrevia = async function () {
+    try {
+      var r = await fetch(API + '/api/especificacoes/previa', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spec: montarSpec() }),
+      });
+      if (!r.ok) { aviso('Não foi possível gerar a prévia: ' + esc(await r.text()), 'erro'); return; }
+      var d = await r.json();
+      var alvo = document.getElementById('esp-previa');
+      alvo.hidden = false;
+      alvo.innerHTML =
+        '<div class="esp-previa-topo">' + d.chamadas.length + ' prompts · nenhuma chamada real' +
+        '<button type="button" onclick="document.getElementById(\'esp-previa\').hidden=true">fechar</button></div>' +
+        d.chamadas.map(function (c) {
+          return '<div class="esp-previa-item"><div class="esp-previa-cab">' +
+            c.ordem + '/' + d.chamadas.length + ' · ' + esc(c.estagio) + ' · ' + esc(c.agente) +
+            '</div><pre>' + esc(c.mensagens[c.mensagens.length - 1].conteudo) + '</pre></div>';
+        }).join('');
+      alvo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (e) {
+      aviso('API fora do ar: ' + esc(e.message), 'erro');
+    }
+  };
+
+  window.espRodar = function () {
+    if (!esp.estagios.length) { aviso('Monte ao menos um estágio.', 'erro'); return; }
+    if (typeof mockMode !== 'undefined' && mockMode) {
+      aviso('Topologias montadas só rodam no modo <strong>Real</strong> — ' +
+            'desligue o Mock no menu e informe a sua chave em 🔑 Chaves.', 'erro');
+      return;
+    }
+    switchLabTab('padrao');
+    // Reusa o consumidor SSE do laboratório: terminal, resultados, leaderboard
+    // e cancelamento continuam funcionando sem nenhuma duplicação.
+    startRealExperiment({ architecture: 'declarativo', topologia_spec: montarSpec() });
+  };
+
+  window.espPublicar = async function () {
+    var nome = prompt('Nome da topologia (minúsculas, sem espaço):', esp.nome);
+    if (!nome) return;
+    esp.nome = nome;
+    var autor = prompt('Seu nome (aparece na biblioteca, opcional):', '') || '';
+    try {
+      var r = await fetch(API + '/api/biblioteca', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ spec: montarSpec(), autor: autor }),
+      });
+      var d = await r.json();
+      if (!r.ok) { aviso('Não publicou: ' + esc(d.detail || ''), 'erro'); return; }
+      aviso('Publicada como <strong>' + esc(d.nome) + '</strong>.<br>' +
+            'Token de exclusão (aparece uma única vez, guarde): ' +
+            '<code>' + esc(d.token_exclusao) + '</code>', 'ok');
+      carregarBiblioteca();
+    } catch (e) {
+      aviso('API fora do ar: ' + esc(e.message), 'erro');
+    }
+  };
+
+  window.espCarregar = async function (nome) {
+    if (!nome) return;
+    try {
+      var d = await (await fetch(API + '/api/biblioteca/' + encodeURIComponent(nome))).json();
+      var s = d.spec;
+      esp.nome = s.nome + '-copia';
+      esp.titulo = s.titulo || '';
+      esp.descricao = s.descricao || '';
+      esp.estagios = (s.estagios || []).map(function (e) {
+        return {
+          id: e.id, tipo: e.tipo, rotulo: e.rotulo || '', n: e.n || 1,
+          rodadas: e.rodadas || 1, prompt: e.prompt || '',
+          dividir: !!e.dividir, final: !!e.final,
+        };
+      });
+      render();
+      aviso(d.origem === 'usuario'
+        ? 'Carregada da biblioteca. <strong>Conteúdo de terceiro</strong> — use ' +
+          'Prévia para ler os prompts antes de rodar com a sua chave.'
+        : 'Proposta inicial carregada. Edite à vontade: isto é uma cópia.', 'info');
+    } catch (e) {
+      aviso('Não consegui carregar: ' + esc(e.message), 'erro');
+    }
+  };
+
+  async function carregarBiblioteca() {
+    try {
+      var d = await (await fetch(API + '/api/biblioteca?tipo=topologia')).json();
+      esp.biblioteca = d.itens || [];
+      var sel = document.getElementById('esp-biblioteca');
+      if (!sel) return;
+      sel.innerHTML = '<option value="">— carregar da biblioteca —</option>' +
+        esp.biblioteca.map(function (i) {
+          var marca = i.origem === 'proposta_inicial' ? 'proposta' : 'usuário';
+          return '<option value="' + esc(i.nome) + '">' + esc(i.titulo || i.nome) +
+                 ' (' + marca + ', ' + i.chamadas_inst + ' chamadas)</option>';
+        }).join('');
+    } catch (e) { /* a biblioteca é opcional para montar */ }
+  }
+
+  /* ── Montagem da aba ─────────────────────────────────────────────────── */
+
+  var MARCACAO =
+    '<div class="esp-layout">' +
+      '<aside class="esp-paleta">' +
+        '<div class="esp-titulo">Blocos</div>' +
+        Object.keys(TIPOS).map(function (t) {
+          return '<div class="esp-bloco" draggable="true" data-tipo="' + t + '" ' +
+                 'onclick="espAdicionar(\'' + t + '\')" style="--c:' + TIPOS[t].cor + '">' +
+                 '<strong>' + TIPOS[t].rotulo + '</strong>' +
+                 '<span>' + TIPOS[t].desc + '</span></div>';
+        }).join('') +
+        '<div class="esp-titulo" style="margin-top:20px">Começar de</div>' +
+        '<select id="esp-biblioteca" onchange="espCarregar(this.value)"></select>' +
+        '<div class="esp-nota">As 5 arquiteturas do paper entram aqui como ' +
+        'propostas iniciais — carregue uma e edite.</div>' +
+      '</aside>' +
+
+      '<div class="esp-meio">' +
+        '<div class="esp-titulo">Pipeline <span class="esp-dim">— arraste para reordenar</span></div>' +
+        '<div id="esp-pipeline" class="esp-zona"></div>' +
+        '<div id="esp-aviso" class="esp-aviso" hidden></div>' +
+        '<div id="esp-previa" class="esp-previa" hidden></div>' +
+      '</div>' +
+
+      '<aside class="esp-painel">' +
+        '<div class="esp-titulo">Custo</div>' +
+        '<div id="esp-custo"></div>' +
+        '<div id="esp-svg" class="esp-svg"></div>' +
+        '<div class="esp-botoes">' +
+          '<button type="button" class="esp-btn" onclick="espValidar()">Validar</button>' +
+          '<button type="button" class="esp-btn" onclick="espPrevia()">Prévia · 0 custo</button>' +
+          '<button type="button" class="esp-btn esp-primario" onclick="espRodar()">Rodar</button>' +
+          '<button type="button" class="esp-btn esp-fraco" onclick="espPublicar()">Publicar</button>' +
+        '</div>' +
+        '<div class="esp-nota">A prévia mostra os prompts exatos sem gastar ' +
+        'nenhuma chamada — use antes de rodar uma topologia de outra pessoa.</div>' +
+      '</aside>' +
+    '</div>';
+
+  var CSS =
+    '.esp-layout{display:grid;grid-template-columns:210px 1fr 250px;gap:20px;align-items:start}' +
+    '@media(max-width:1000px){.esp-layout{grid-template-columns:1fr}}' +
+    '.esp-titulo{font-family:Montserrat,sans-serif;font-weight:800;font-size:.78rem;' +
+      'color:var(--texto-principal);margin-bottom:10px}' +
+    '.esp-dim{color:var(--texto-secundario);font-weight:400}' +
+    '.esp-bloco{display:flex;flex-direction:column;gap:2px;background:#fff;cursor:grab;' +
+      'border:1.5px solid var(--card-border);border-left:3px solid var(--c);border-radius:9px;' +
+      'padding:9px 11px;margin-bottom:7px;transition:transform .15s,box-shadow .15s}' +
+    '.esp-bloco:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(31,31,46,.08)}' +
+    '.esp-bloco strong{font-size:.76rem}' +
+    '.esp-bloco span{font-size:.64rem;color:var(--texto-secundario)}' +
+    '#esp-biblioteca{width:100%;padding:7px;border:1.5px solid var(--card-border);' +
+      'border-radius:8px;font-size:.7rem;font-family:Inter,sans-serif}' +
+    '.esp-nota{font-size:.63rem;color:var(--texto-secundario);line-height:1.5;margin-top:10px}' +
+    '.esp-zona{min-height:150px;border:2px dashed var(--card-border);border-radius:12px;padding:12px}' +
+    '.esp-zona.esp-sobre{border-color:var(--roxo-profundo);background:rgba(93,63,211,.03)}' +
+    '.esp-vazio{color:var(--texto-secundario);font-size:.75rem;text-align:center;padding:36px 12px}' +
+    '.esp-card{background:#fff;border:1.5px solid var(--card-border);border-left:3px solid var(--c);' +
+      'border-radius:10px;padding:10px 12px;margin-bottom:9px;cursor:grab}' +
+    '.esp-card.esp-arrastando{opacity:.4}' +
+    '.esp-card-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:7px}' +
+    '.esp-tag{background:var(--c);color:#fff;font-size:.6rem;font-weight:700;' +
+      'padding:2px 7px;border-radius:4px}' +
+    '.esp-id{border:1px solid var(--card-border);border-radius:5px;padding:2px 6px;width:88px;' +
+      'font-family:JetBrains Mono,monospace;font-size:.66rem}' +
+    '.esp-n{font-size:.63rem;color:var(--texto-secundario)}' +
+    '.esp-final{background:rgba(0,229,153,.14);color:#0a7a5c;font-size:.58rem;font-weight:700;' +
+      'padding:2px 6px;border-radius:4px}' +
+    '.esp-acoes{margin-left:auto;display:flex;gap:3px}' +
+    '.esp-acoes button{border:1px solid var(--card-border);background:#fff;border-radius:5px;' +
+      'width:22px;height:22px;cursor:pointer;font-size:.7rem;color:var(--texto-secundario)}' +
+    '.esp-acoes button:hover{border-color:var(--roxo-profundo);color:var(--roxo-profundo)}' +
+    '.esp-params{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:7px}' +
+    '.esp-params label{font-size:.65rem;color:var(--texto-secundario)}' +
+    '.esp-params input[type=number]{width:46px;border:1px solid var(--card-border);' +
+      'border-radius:5px;padding:2px 5px;font-size:.66rem}' +
+    '.esp-check{display:flex;align-items:center;gap:5px}' +
+    '.esp-prompt{width:100%;border:1.5px solid var(--card-border);border-radius:7px;padding:7px 9px;' +
+      'font-family:JetBrains Mono,monospace;font-size:.66rem;line-height:1.55;resize:vertical}' +
+    '.esp-prompt:focus{outline:none;border-color:var(--roxo-profundo)}' +
+    '.esp-metrica{font-size:.8rem;margin-bottom:3px}' +
+    '.esp-metrica strong{font-family:Montserrat,sans-serif;font-size:1.3rem;color:var(--roxo-profundo)}' +
+    '.esp-metrica.esp-dim{font-size:.66rem}' +
+    '.esp-svg{margin:12px 0;background:var(--card-bg);border-radius:9px;padding:8px}' +
+    '.esp-botoes{display:flex;flex-direction:column;gap:6px}' +
+    '.esp-btn{padding:8px;border-radius:8px;border:1.5px solid var(--card-border);background:#fff;' +
+      'cursor:pointer;font-family:Inter,sans-serif;font-weight:700;font-size:.72rem;' +
+      'color:var(--texto-principal)}' +
+    '.esp-btn:hover{border-color:var(--roxo-profundo);color:var(--roxo-profundo)}' +
+    '.esp-btn.esp-primario{background:var(--roxo-profundo);color:#fff;border-color:var(--roxo-profundo)}' +
+    '.esp-btn.esp-primario:hover{background:#4b32b3;color:#fff}' +
+    '.esp-btn.esp-fraco{font-weight:500;color:var(--texto-secundario)}' +
+    '.esp-aviso{margin-top:12px;padding:10px 12px;border-radius:9px;font-size:.72rem;line-height:1.6}' +
+    '.esp-aviso.esp-ok{background:rgba(0,229,153,.09);border:1px solid rgba(10,122,92,.25);color:#0a7a5c}' +
+    '.esp-aviso.esp-erro{background:rgba(255,107,107,.08);border:1px solid rgba(192,57,43,.25);color:#c0392b}' +
+    '.esp-aviso.esp-info{background:rgba(93,63,211,.06);border:1px solid rgba(93,63,211,.2);color:var(--roxo-mid)}' +
+    '.esp-aviso code{font-family:JetBrains Mono,monospace;font-size:.9em;background:#fff;padding:1px 5px;border-radius:4px}' +
+    '.esp-previa{margin-top:12px;max-height:420px;overflow:auto;border:1.5px solid var(--card-border);' +
+      'border-radius:10px}' +
+    '.esp-previa-topo{position:sticky;top:0;background:var(--card-bg);padding:8px 12px;font-size:.7rem;' +
+      'display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--card-border)}' +
+    '.esp-previa-topo button{border:none;background:none;cursor:pointer;font-size:.68rem;' +
+      'color:var(--texto-secundario);text-decoration:underline}' +
+    '.esp-previa-item{padding:9px 12px;border-bottom:1px solid var(--card-border)}' +
+    '.esp-previa-cab{font-family:JetBrains Mono,monospace;font-size:.62rem;' +
+      'color:var(--roxo-profundo);margin-bottom:5px}' +
+    '.esp-previa-item pre{white-space:pre-wrap;font-family:JetBrains Mono,monospace;' +
+      'font-size:.64rem;line-height:1.6;color:var(--texto-principal);margin:0}';
+
+  var montado = false;
+
+  window.switchLabTab = function (aba) {
+    var bp = document.getElementById('labtab-padrao');
+    var be = document.getElementById('labtab-esp');
+    var lab = document.querySelector('#testes .lab-layout');
+    var wrap = document.getElementById('esp-wrap');
+    if (!bp || !be || !lab || !wrap) return;
+
+    bp.classList.toggle('active', aba === 'padrao');
+    be.classList.toggle('active', aba === 'esp');
+    // display:'' devolve o valor da folha de estilo — .lab-layout é grid, e
+    // fixar 'block' aqui quebraria as duas colunas na volta.
+    lab.style.display = aba === 'padrao' ? '' : 'none';
+    wrap.hidden = aba !== 'esp';
+
+    if (aba === 'esp' && !montado) {
+      montado = true;
+      var st = document.createElement('style');
+      st.textContent = CSS;
+      document.head.appendChild(st);
+      wrap.innerHTML = MARCACAO;
+      prepararZona();
+      carregarBiblioteca();
+      if (!esp.estagios.length) espCarregar('centralized');
+      render();
+    }
+  };
+})();
+</script>
 
 </body>
 </html>

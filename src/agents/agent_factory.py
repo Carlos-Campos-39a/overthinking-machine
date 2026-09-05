@@ -21,6 +21,7 @@ from src.agents.independent import IndependentMAS
 from src.agents.centralized import CentralizedMAS
 from src.agents.decentralized import DecentralizedMAS
 from src.agents.hybrid import HybridMAS
+from src.agents.agente_declarativo import AgenteDeclarativo
 
 
 # Mapa: nome → classe
@@ -30,6 +31,10 @@ _AGENT_CLASSES: dict[str, type[AgentBase]] = {
     "centralized":   CentralizedMAS,
     "decentralized": DecentralizedMAS,
     "hybrid":        HybridMAS,
+    # Interpretador de topologias declarativas. Não aparece como card no
+    # catálogo (interno=True em descrever_arquiteturas): é o motor por trás de
+    # qualquer topologia montada pelo usuário, e recebe a spec via agent_kwargs.
+    "declarativo":   AgenteDeclarativo,
 }
 
 
@@ -66,3 +71,40 @@ def create_agent(
 def list_architectures() -> list[str]:
     """Retorna lista de arquiteturas disponíveis."""
     return sorted(_AGENT_CLASSES.keys())
+
+
+# Metadados das arquiteturas, servidos em GET /api/arquiteturas. Existe para que
+# frontend e MCP parem de repetir a lista à mão — foi assim que o módulo 4
+# passou a oferecer 3 harnesses e o MCP congelou 5 arquiteturas.
+_DESCRICOES = {
+    "sas":           ("Single Agent System", "Um LLM com o contexto completo. Baseline.", "O(k)"),
+    "independent":   ("Independent MAS", "N agentes sem comunicação + agregador.", "O(nk)"),
+    "centralized":   ("Centralized MAS", "Orquestrador decompõe, workers executam, orquestrador sintetiza.", "O(rnk)"),
+    "decentralized": ("Decentralized MAS", "N pares debatem por r rodadas e consolidam.", "O(dnk)"),
+    "hybrid":        ("Hybrid MAS", "Hierarquia com debate entre workers.", "O(rnk + pn)"),
+    "declarativo":   ("Topologia declarativa", "Interpretador de topologias definidas por especificação.", "varia"),
+}
+
+_PARAMETROS = {
+    "independent":   {"n_agents": 3},
+    "centralized":   {"n_workers": 3},
+    "decentralized": {"n_agents": 3, "debate_rounds": 1},
+    "hybrid":        {"n_workers": 3, "debate_rounds": 1},
+}
+
+
+def descrever_arquiteturas() -> list[dict]:
+    saida = []
+    for nome in list_architectures():
+        titulo, descricao, complexidade = _DESCRICOES.get(nome, (nome, "", ""))
+        saida.append({
+            "nome": nome,
+            "titulo": titulo,
+            "descricao": descricao,
+            "complexidade": complexidade,
+            "parametros": _PARAMETROS.get(nome, {}),
+            # O declarativo é o motor por trás das topologias do usuário, não
+            # uma opção de catálogo: a interface o esconde da grade de cards.
+            "interno": nome == "declarativo",
+        })
+    return saida
