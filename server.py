@@ -1881,3 +1881,58 @@ async def _stream_prompt_sensitivity(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
+
+
+# ── MCP montado na própria API ────────────────────────────────────────────────
+#
+# O servidor MCP vive no mesmo processo do FastAPI, servido em /mcp do mesmo
+# domínio. É o que torna "qualquer um consegue conectar" literalmente verdade:
+# quem quiser acrescenta uma URL ao mcp.json, sem clonar repositório nem
+# instalar Python. Sem isto, o MCP existia mas não estava publicado em lugar
+# nenhum — /mcp devolvia 404 na instância no ar.
+#
+# Sem autenticação, por decisão: como a plataforma é BYOK, quem abusar gasta a
+# própria cota de inferência, nunca a de outra pessoa. O que resta a proteger é
+# CPU e a escrita na biblioteca, e ambos já têm teto (chamadas por execução e
+# publicações por IP).
+#
+# stateless_http porque o contêiner pode ser recriado a qualquer momento; sessão
+# presa em memória viraria erro intermitente e difícil de diagnosticar.
+try:
+    # A env vem ANTES do import: o mcp_server resolve o endereço a cada chamada,
+    # mas definir aqui deixa o valor certo desde o primeiro instante e evita
+    # depender dessa ordem.
+    #
+    # O MCP conversa com esta mesma API por HTTP. Em produção é uma volta pelo
+    # loopback — barata, e mantém UM caminho de código só: o mesmo que funciona
+    # quando o MCP roda na máquina de outra pessoa apontando para cá.
+    os.environ.setdefault("OTM_API_URL", f"http://127.0.0.1:{os.getenv('PORT', '8000')}")
+
+    from mcp_server import server as _servidor_mcp
+
+    # streamable_http_path="/" porque o sub-app já roteia /mcp por padrão:
+    # montado em /mcp sem isso, o endereço final vira /mcp/mcp e o cliente
+    # recebe 404.
+    _app_mcp = _servidor_mcp.streamable_http_app(
+        stateless_http=True, streamable_http_path="/")
+
+    # O Starlette NÃO executa o lifespan de um sub-app montado, e o MCP precisa
+    # do session_manager rodando — sem isto o handshake devolve 500. O próprio
+    # SDK expõe o session_manager justamente para este caso ("mounting multiple
+    # MCPServer instances in a single FastAPI application").
+    from contextlib import asynccontextmanager as _acm
+    _ciclo_anterior = app.router.lifespan_context
+
+    @_acm
+    async def _ciclo_com_mcp(_app):
+        async with _servidor_mcp.session_manager.run():
+            async with _ciclo_anterior(_app):
+                yield
+
+    app.router.lifespan_context = _ciclo_com_mcp
+    app.mount("/mcp", _app_mcp)
+    print(f"[mcp] montado em /mcp (API interna: {os.environ['OTM_API_URL']})")
+except Exception as _e:  # pragma: no cover
+    # A API não pode deixar de subir porque o MCP falhou: quem usa o site não
+    # depende dele.
+    print(f"[mcp] NAO montado: {_e}")

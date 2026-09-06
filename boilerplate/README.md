@@ -126,11 +126,18 @@ python mcp_server.py --http        # http://127.0.0.1:8765/mcp
 | `comparar_modelos` | módulo 4, com fronteira de Pareto e recomendação |
 | `dividir_prompt` | cláusulas do prompt, sem gastar LLM |
 | `analisar_prompt` | módulo 3: ablação leave-one-out |
+| `listar_topologias` | acervo da comunidade + as 5 propostas iniciais |
+| `obter_topologia` | a especificação completa de uma delas |
+| `validar_topologia` | estrutura e custo real, sem gastar nada |
+| `previa_topologia` | os prompts literais que seriam enviados, custo zero |
+| `rodar_com_topologia` | roda a sua topologia com as mesmas métricas |
+| `publicar_topologia` | publica na biblioteca (pública, sem moderação) |
+| `excluir_topologia` | remove uma que você publicou, com o token |
 
 **Prompts guiados** — `protocolo_validacao`, `escolher_arquitetura`,
 `escolher_modelo`, `otimizar_prompt`
 
-**Recursos** — `otm://metodologia`, `otm://referencias`
+**Recursos** — `otm://metodologia`, `otm://esquema-topologia`, `otm://referencias`
 
 Exemplo de uso, em linguagem natural:
 

@@ -439,26 +439,32 @@ hybrid           0.900    6 387    25.54s
           impede de improvisar um benchmark sem controle.
         </p>
         <ul class="mcp-list">
-          <li><strong>7 ferramentas</strong> — do catálogo de modelos à ablação de prompt</li>
-          <li><strong>4 fluxos guiados</strong> — protocolo de validação, escolha de arquitetura, de modelo, otimização de prompt</li>
+          <li><strong>14 ferramentas</strong> — do catálogo de modelos à composição de topologias</li>
+          <li><strong>5 fluxos guiados</strong> — protocolo de validação, escolha de arquitetura e de modelo, otimização de prompt, e testar a sua própria topologia</li>
           <li><strong>Estimativa de custo</strong> obrigatória antes de qualquer experimento grande</li>
           <li><strong>Metodologia como recurso</strong> — o agente lê antes de rodar</li>
         </ul>
       </div>
-      <div class="mcp-code"><span class="t-dim">// mcp.json</span>
+      <div class="mcp-code"><span class="t-dim">// mcp.json — nada para instalar</span>
 {
   <span class="t-blue">"mcpServers"</span>: {
     <span class="t-blue">"overthinking-machine"</span>: {
-      <span class="t-blue">"command"</span>: <span class="t-ok">"python"</span>,
-      <span class="t-blue">"args"</span>: [<span class="t-ok">"mcp_server.py"</span>]
+      <span class="t-blue">"url"</span>: <span class="t-ok">"https://overthinking-machine-production
+              .up.railway.app/mcp/"</span>,
+      <span class="t-blue">"headers"</span>: {
+        <span class="t-blue">"X-Google-Key"</span>: <span class="t-ok">"a-sua-chave"</span>
+      }
     }
   }
 }
 
+<span class="t-dim">// a chave e sua: voce paga o que consumir,</span>
+<span class="t-dim">// e ela nao fica guardada no servidor.</span>
+
 <span class="t-dim">// depois, em linguagem natural:</span>
-<span class="t-ok">"Descubra qual modelo usar na minha
- tarefa. Siga o protocolo e me mostre
- o custo antes de rodar."</span></div>
+<span class="t-ok">"Monte uma topologia com debate entre
+ tres agentes e compare com a linha de
+ base. Me mostre o custo antes de rodar."</span></div>
     </div>
   </div>
 </section>

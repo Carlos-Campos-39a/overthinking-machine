@@ -92,7 +92,22 @@ PLACEHOLDERS_TOPOLOGIA = [
     ("{resposta_anterior}", "a saída do estágio consumido"),
     ("{pares}",             "as respostas dos outros agentes (só em debate)"),
     ("{blocos}",            "todas as respostas do estágio consumido, formatadas"),
-    ("{rodada}",            "a rodada atual do debate"),
+    ("{rodada}",            "a rodada atual do debate (1..rodadas)"),
+    ("{rodada_anterior}",   "a rodada anterior — vale 0 na primeira, para rotular "
+                            "a resposta prévia como as classes embutidas fazem"),
+    ("{n:<id>}",            "o n de OUTRO estágio, pelo id. O estágio que decompõe "
+                            "precisa dizer 'divida em N partes', mas quem tem esse "
+                            "N é o estágio de workers, mais adiante: {n:worker}"),
+    ("{rodadas:<id>}",      "as rodadas de outro estágio, pelo id: {rodadas:debate}"),
+    ("{saida:<id>}",        "a saída de qualquer estágio anterior, pelo id"),
+]
+
+# Placeholders válidos apenas dentro de formato_par e formato_bloco, que são
+# renderizados uma vez por resposta sendo formatada.
+PLACEHOLDERS_FORMATO = [
+    ("{j}",           "índice da resposta sendo formatada (1..n)"),
+    ("{saida}",       "o texto daquela resposta"),
+    ("{subtarefa_j}", "a subtarefa daquele agente, quando houve decomposição"),
 ]
 
 

@@ -136,11 +136,22 @@ nada a mais do seu lado:
 }
 ```
 
-**b) Você hospeda o MCP por HTTP** — um segundo serviço no Railway com start
-command `python mcp_server.py --http` e `OTM_MCP_HOST=0.0.0.0`. Antes de expor
-publicamente, resolva dois pontos que hoje não estão tratados: **autenticação**
-(o endpoint está aberto) e **repasse da chave BYOK** (o MCP hoje não encaminha
-header de chave do usuário final).
+**b) O MCP já está publicado junto da API** — é o caminho recomendado, e não exige nada de quem conecta:
+
+```json
+{
+  "mcpServers": {
+    "overthinking-machine": {
+      "url": "https://seu-projeto.up.railway.app/mcp/",
+      "headers": { "X-Google-Key": "a-chave-de-quem-conecta" }
+    }
+  }
+}
+```
+
+O MCP é montado dentro do próprio FastAPI (`app.mount("/mcp", ...)` no fim do `server.py`), então é um serviço só no Railway. A chave viaja por header e vale só para aquela requisição — o servidor não guarda nenhuma.
+
+Sem autenticação, por decisão: como a plataforma é BYOK, quem abusar gasta a própria cota de inferência, nunca a sua. O que resta a proteger é CPU e a escrita na biblioteca, e ambos já têm teto.
 
 ---
 

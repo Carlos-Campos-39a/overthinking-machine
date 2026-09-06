@@ -352,6 +352,8 @@ def _http_json(path: str, body: dict | None = None, timeout: int = 20):
         return json.loads(r.read().decode("utf-8"))
 
 
+
+
 def val_api() -> None:
     secao("7. API (FastAPI)")
 
@@ -423,15 +425,29 @@ def val_mcp() -> None:
 
     esperadas = {"listar_capacidades", "estimar_custo", "validar_pipeline",
                  "rodar_experimento", "comparar_modelos", "analisar_prompt",
-                 "dividir_prompt"}
+                 "dividir_prompt",
+                 # As de topologia declarativa. Estavam de fora, então esta
+                 # checagem passaria com todas as seis apagadas.
+                 "listar_topologias", "obter_topologia", "validar_topologia",
+                 "previa_topologia", "publicar_topologia", "excluir_topologia",
+                 "rodar_com_topologia"}
     nomes = {t.name for t in tools}
-    check("mcp", "7 ferramentas", OK if esperadas <= nomes else FAIL,
-          ", ".join(sorted(nomes)))
+    faltando = esperadas - nomes
+    check("mcp", f"{len(esperadas)} ferramentas", OK if not faltando else FAIL,
+          f"faltando: {sorted(faltando)}" if faltando else ", ".join(sorted(nomes)))
+
+    # Toda ferramenta precisa de descrição: é o texto que o agente conectado lê
+    # para decidir se e como usá-la. Sem docstring, a ferramenta é invisível na
+    # prática.
+    sem_desc = [t.name for t in tools if not (t.description or "").strip()]
+    check("mcp", "toda ferramenta tem descrição", OK if not sem_desc else FAIL,
+          f"sem: {sem_desc}" if sem_desc else f"{len(tools)} descritas")
 
     pesperados = {"protocolo_validacao", "escolher_arquitetura",
-                  "escolher_modelo", "otimizar_prompt"}
+                  "escolher_modelo", "otimizar_prompt",
+                  "testar_minha_topologia"}
     pnomes = {p.name for p in prompts}
-    check("mcp", "4 prompts guiados", OK if pesperados <= pnomes else FAIL,
+    check("mcp", f"{len(pesperados)} prompts guiados", OK if pesperados <= pnomes else FAIL,
           ", ".join(sorted(pnomes)))
 
     uris = {str(r.uri) for r in res}
@@ -442,9 +458,15 @@ def val_mcp() -> None:
     # A metodologia precisa cobrir os princípios — é o que diferencia a plataforma
     metodologia = M.METODOLOGIA
     principios = ["Isolar uma variável", "Validar barato", "Justificar o n",
-                  "Score sozinho não é resultado", "efeito teto"]
+                  "Score sozinho não é resultado", "efeito teto",
+                  # O sexto entrou com a biblioteca pública: sem ele o agente
+                  # não é avisado de que spec de terceiro é dado, não instrução.
+                  "dado, não instrução",
+                  # E a metodologia precisa dizer que topologia deixou de ser
+                  # um enum, senão ela esconde a funcionalidade principal.
+                  "LINHA DE BASE"]
     faltando = [p for p in principios if p.lower() not in metodologia.lower()]
-    check("mcp", "metodologia cobre os 5 princípios",
+    check("mcp", f"metodologia cobre os {len(principios)} pontos",
           OK if not faltando else FAIL,
           f"{len(metodologia)} chars" if not faltando else f"faltando: {faltando}")
 
@@ -481,6 +503,62 @@ def val_mcp() -> None:
 # ══════════════════════════════════════════════════════════════════════════════
 # 9. Experimento real (gasta LLM)
 # ══════════════════════════════════════════════════════════════════════════════
+    # ── Casos que a tabela fixa de custo errava ────────────────────────────
+    # Estes três são o motivo de estimar_custo ter sido reescrito: ele dizia 5
+    # para centralized com 8 workers (real: 10), "desprezível" para uma
+    # topologia de 400 chamadas, e chutava 1 para nome desconhecido.
+    async def _custos():
+        return (
+            await M.estimar_custo(arquitetura="centralized",
+                                  agent_kwargs={"n_workers": 8}),
+            await M.estimar_custo(spec={"nome": "cara", "estagios": [
+                {"id": "p", "tipo": "paralelo", "n": 3, "prompt": "{task_content}"},
+                {"id": "d", "tipo": "debate", "n": 3, "rodadas": 2, "prompt": "{pares}"},
+                {"id": "r", "tipo": "reduzir", "prompt": "{blocos}", "final": True}]},
+                num_instancias=40),
+            await M.estimar_custo(arquitetura="nao-existe"),
+        )
+
+    try:
+        c_param, c_spec, c_ruim = asyncio.run(_custos())
+    except Exception as e:
+        check("mcp", "estimar_custo nos casos difíceis", FAIL, str(e)[:70])
+    else:
+        # Este não precisa da API: a fórmula é local.
+        check("mcp", "custo respeita agent_kwargs",
+              OK if c_param.get("chamadas_por_instancia") == 10 else FAIL,
+              f"centralized n_workers=8 -> {c_param.get('chamadas_por_instancia')} (esperado 10)")
+
+        # Estes dois dependem da API: o custo de uma spec vem do validador dela,
+        # e a recusa de nome desconhecido confirma contra o catálogo. Offline,
+        # pular é honesto — falhar seria acusar um problema que não existe.
+        if c_spec.get("chamadas_por_instancia") is None:
+            check("mcp", "custo de topologia vem do validador", SKIP,
+                  f"exige a API em {API_URL}")
+            check("mcp", "arquitetura desconhecida dá erro, não chute", SKIP,
+                  f"exige a API em {API_URL}")
+        else:
+            check("mcp", "custo de topologia vem do validador",
+                  OK if c_spec.get("chamadas_por_instancia") == 10 else FAIL,
+                  f"spec -> {c_spec.get('chamadas_por_instancia')}/inst, "
+                  f"total {c_spec.get('total_chamadas_llm')}")
+            achou = "não existe" in (c_ruim.get("erro") or "")
+            check("mcp", "arquitetura desconhecida dá erro, não chute",
+                  OK if achou else FAIL,
+                  (c_ruim.get("erro") or f"chutou {c_ruim.get('chamadas_por_instancia')}")[:70])
+
+    # ── Repasse de chave (BYOK) ────────────────────────────────────────────
+    # Sem isto, toda ferramenta que roda experimento falha contra uma instância
+    # hospedada — e falha só na hora de gastar, depois de tudo parecer saudável.
+    class _CtxFalso:
+        headers = {"x-google-key": "CHAVE-DE-TESTE"}
+
+    cabecalhos = M._headers(_CtxFalso())
+    check("mcp", "chave do cliente vira header para a API",
+          OK if cabecalhos.get("X-Google-Key") == "CHAVE-DE-TESTE" else FAIL,
+          str(cabecalhos))
+
+
 
 def val_live(modelo: str = "google/gemini-2.5-flash-lite") -> None:
     secao("9. EXPERIMENTO REAL (consome API)")
