@@ -713,6 +713,7 @@ async def comparar_modelos(
     harness: str = "zero_shot",
     num_instancias: int = 10,
     reps: int = 1,
+    tarefa_spec: dict | None = None,
     ctx: Context = None,
 ) -> dict:
     """
@@ -725,12 +726,19 @@ async def comparar_modelos(
 
     Prefira modelos open-weight quando o score for estatisticamente
     indistinguível: eles removem custo por token e dependência de fornecedor.
+
+    `tarefa_spec` roda a SUA tarefa em vez de uma embutida (ver listar_tarefas
+    e validar_tarefa). Quando presente, `tarefa` e `avaliador` derivado dela
+    são ignorados. Prefira a sua: as embutidas saturam.
     """
-    avaliador = "llm_judge" if tarefa == "finance_agent" else "binary"
+    # Tarefa declarativa é sempre de rótulo fechado: avaliador binário.
+    avaliador = "binary" if tarefa_spec else (
+        "llm_judge" if tarefa == "finance_agent" else "binary")
     body = {
         "models": modelos, "architecture": arquitetura, "harness": harness,
         "task": tarefa, "evaluator": avaliador,
         "num_instances": num_instancias, "seed": 42, "reps": reps,
+        "tarefa_spec": tarefa_spec,
     }
     try:
         evs = await _post_sse("/api/benchmark", body, ctx)
@@ -786,6 +794,7 @@ async def analisar_prompt(
     num_instancias: int = 5,
     reps: int = 1,
     interacoes: bool = False,
+    tarefa_spec: dict | None = None,
     ctx: Context = None,
 ) -> dict:
     """
@@ -803,13 +812,19 @@ async def analisar_prompt(
 
     Custo: (1 + nº de cláusulas) × num_instancias × reps chamadas. Um prompt de
     10 cláusulas com num_instancias=5 já são 55 chamadas.
+
+    `tarefa_spec` roda a SUA tarefa em vez de uma embutida (ver listar_tarefas
+    e validar_tarefa). Quando presente, `tarefa` e `avaliador` derivado dela
+    são ignorados. Prefira a sua: as embutidas saturam.
     """
     body = {
         "system_prompt": system_prompt, "model": modelo, "task": tarefa,
-        "evaluator": "llm_judge" if tarefa == "finance_agent" else "binary",
+        "evaluator": "binary" if tarefa_spec else (
+            "llm_judge" if tarefa == "finance_agent" else "binary"),
         "architecture": "sas", "harness": "zero_shot",
         "num_instances": num_instancias, "reps": reps,
         "interactions": interacoes,
+        "tarefa_spec": tarefa_spec,
     }
     try:
         evs = await _post_sse("/api/prompt-sensitivity", body, ctx)
@@ -1206,7 +1221,17 @@ SIGA NESTA ORDEM:
    Se o sas já vier perto de 1.0, PARE e avise: a tarefa não discrimina. Kim et
    al. mostram que coordenar dá retorno decrescente quando o agente único já vai
    bem. Comparar topologias nessa tarefa não vai medir topologia — vai medir
-   ruído. Sugira uma tarefa mais difícil antes de gastar mais.
+   ruído.
+
+   O CAMINHO DE SAÍDA é a tarefa do próprio usuário, não uma embutida diferente:
+   as embutidas saturam do mesmo jeito. Chame listar_tarefas e leia a LINHA DE
+   BASE de cada uma — se o score do experimento não passar dela com folga, não
+   houve descoberta. Para trazer a tarefa dele, monte uma spec (instrucao +
+   casos + rotulos_validos), passe por validar_tarefa, RESOLVA OS AVISOS que
+   ela devolver (classes desbalanceadas, poucos casos, gabarito visível dentro
+   do enunciado) e então passe tarefa_spec= em rodar_experimento e
+   rodar_com_topologia. Uma tarefa que vem da operação real do usuário
+   discrimina onde as sintéticas empatam.
 
 6. estimar_custo passando spec=, e mostre o total ao usuário.
    Peça confirmação antes de gastar.
