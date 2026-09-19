@@ -189,6 +189,34 @@ def tarefa_declarativa() -> None:
           "max_casos" in lim and "max_chars_caso" in lim, f"max_casos={lim.get('max_casos')}")
 
 
+def configuracao() -> None:
+    print("\n4. CONFIGURAÇÃO VISÍVEL DE FORA")
+    h = c.get("/api/health").json()
+    s = c.get("/api/biblioteca/saude").json()
+
+    # Sem isto não há como conferir se OTM_ADMIN_TOKEN pegou: uma requisição com
+    # token errado e uma instância sem token nenhum devolvem o mesmo 403.
+    esperado = bool(os.getenv("OTM_ADMIN_TOKEN"))
+    check("/api/health diz se o admin está configurado",
+          h.get("admin_configurado") is esperado, f"admin_configurado={h.get('admin_configurado')}")
+    check("a saúde da biblioteca concorda",
+          s.get("admin_configurado") is esperado)
+
+    # Booleano, nunca o valor.
+    valor = os.getenv("OTM_ADMIN_TOKEN") or ""
+    check("o valor do token nunca aparece na resposta",
+          not valor or valor not in (json.dumps(h) + json.dumps(s)))
+
+    # As duas rotas não podem se contradizer: "persistente" respondia True só
+    # por existir arquivo em disco, mesmo num contêiner sem volume.
+    check("health e biblioteca/saude concordam sobre persistência",
+          h.get("biblioteca_persistente") == s.get("persistente"),
+          f"health={h.get('biblioteca_persistente')} saude={s.get('persistente')}")
+    check("sem volume, a saúde avisa em vez de dizer só 'true'",
+          bool(s.get("volume_configurado")) or "recriado a cada deploy" in str(s.get("aviso", "")),
+          str(s.get("aviso"))[:70])
+
+
 def main() -> int:
     print("=" * 66)
     print("  testar_api.py — tetos de custo e honestidade do módulo 2")
@@ -196,6 +224,7 @@ def main() -> int:
     tetos()
     modulo2()
     tarefa_declarativa()
+    configuracao()
     print("\n" + ("tudo passou" if not _falhas else f"{_falhas} FALHA(S)"))
     return 1 if _falhas else 0
 

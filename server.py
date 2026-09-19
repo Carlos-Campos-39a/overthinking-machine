@@ -135,9 +135,13 @@ _ESTADO: dict = {"mcp": False, "mcp_erro": None}
 @app.get("/api/health")
 async def health():
     """
-    Saúde da instância. Além do "ok", responde às três perguntas que permitem
-    conferir um deploy de fora: qual commit está no ar, o MCP montou, e a
-    biblioteca sobrevive a um redeploy.
+    Saúde da instância. Além do "ok", responde às perguntas que permitem
+    conferir um deploy DE FORA: qual commit está no ar, o MCP montou, a
+    biblioteca sobrevive a um redeploy e o token de admin está definido.
+
+    `admin_configurado` é booleano e nunca o valor — sem ele não havia como
+    verificar de fora se a variável pegou, porque uma requisição com token
+    errado e uma instância sem token nenhum devolvem o mesmo 403.
     """
     try:
         from src.biblioteca import obter_biblioteca
@@ -153,6 +157,7 @@ async def health():
         "mcp_erro": _ESTADO["mcp_erro"],
         "hospedado": HOSTED,
         "biblioteca_persistente": persistente,
+        "admin_configurado": bool(os.getenv("OTM_ADMIN_TOKEN")),
     }
 
 

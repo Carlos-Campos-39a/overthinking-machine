@@ -826,6 +826,16 @@ def val_producao() -> None:
           "ok" if saude.get("biblioteca_persistente")
           else "sem OTM_DATA_DIR: o que os visitantes publicarem some no próximo deploy")
 
+    # ── dá para moderar o que terceiros publicam? ───────────────────────────
+    # Booleano vindo do /api/health: uma chamada com token errado e uma
+    # instância sem token nenhum devolvem o mesmo 403, então não havia como
+    # conferir isto de fora.
+    check("producao", "OTM_ADMIN_TOKEN definido",
+          OK if saude.get("admin_configurado") else WARN,
+          "ok — dá para remover topologia publicada por terceiro"
+          if saude.get("admin_configurado")
+          else "sem token: não há como apagar o que um terceiro publicar")
+
     # ── o site ──────────────────────────────────────────────────────────────
     #
     # As páginas conferidas são as RASTREADAS no git: se está no repositório,

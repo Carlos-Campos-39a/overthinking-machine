@@ -315,14 +315,28 @@ class BibliotecaSQLite:
             u = con.execute(
                 "SELECT COUNT(*) FROM especificacoes WHERE origem='usuario'"
             ).fetchone()[0]
-        return {
-            "persistente": True,
+        # "persistente" respondia True só por existir um arquivo no disco — mas
+        # num contêiner sem volume esse disco é recriado a cada deploy. Quem
+        # lesse o campo entendia "o acervo sobrevive", que é justamente o que não
+        # acontece. Agora ele significa o que o nome promete.
+        em_volume = bool(os.getenv("OTM_DATA_DIR"))
+        saude = {
+            "persistente": em_volume,
+            "em_disco": True,
             "caminho": str(self.caminho),
-            "volume_configurado": bool(os.getenv("OTM_DATA_DIR")),
+            "volume_configurado": em_volume,
+            "admin_configurado": bool(os.getenv("OTM_ADMIN_TOKEN")),
             "total": n,
             "de_usuarios": u,
             "teto": MAX_ESPECS_BIBLIOTECA,
         }
+        if not em_volume:
+            saude["aviso"] = (
+                "Sem OTM_DATA_DIR: o banco está no disco do contêiner, que é "
+                "recriado a cada deploy. As propostas iniciais voltam sozinhas; "
+                "o que visitantes publicarem, não."
+            )
+        return saude
 
 
 class BibliotecaMemoria:
@@ -395,8 +409,10 @@ class BibliotecaMemoria:
     def saude(self) -> dict:
         return {
             "persistente": False,
+            "em_disco": False,
             "caminho": "(memória)",
             "volume_configurado": False,
+            "admin_configurado": bool(os.getenv("OTM_ADMIN_TOKEN")),
             "total": len(self._itens),
             "de_usuarios": sum(1 for i in self._itens.values() if i["origem"] == "usuario"),
             "teto": MAX_ESPECS_BIBLIOTECA,
