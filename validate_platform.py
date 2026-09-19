@@ -11,7 +11,8 @@ USO
     python validate_platform.py --api        # inclui a API (precisa do uvicorn no ar)
     python validate_platform.py --mcp        # inclui handshake MCP
     python validate_platform.py --live       # inclui 1 chamada real de LLM (tem custo)
-    python validate_platform.py --all        # tudo
+    python validate_platform.py --all        # tudo (menos produção)
+    python validate_platform.py --producao   # SÓ o que está no ar: rotas, MCP, commit
 
 Códigos de saída: 0 = tudo passou, 1 = alguma checagem falhou.
 """
@@ -644,6 +645,141 @@ def relatorio() -> int:
     return 1 if n_fail else 0
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# 10. PRODUÇÃO
+#
+# Todas as outras camadas olham para o código local. Esta olha para o que está
+# NO AR — e existe porque o backend ficou cinco commits atrás do repositório sem
+# que nenhuma checagem acusasse: o frontend já chamava rotas que davam 404 e a
+# landing mandava colar uma URL de MCP que não existia.
+# ─────────────────────────────────────────────────────────────────────────────
+
+PROD_API = os.getenv("OTM_PROD_API", "https://overthinking-machine-production.up.railway.app").rstrip("/")
+PROD_SITE = os.getenv("OTM_PROD_SITE", "https://overthinking-machine-chi.vercel.app").rstrip("/")
+
+
+def _prod(url: str, body: dict | None = None, headers: dict | None = None, timeout: int = 30):
+    """(status, texto). Nunca levanta: um 404 é resultado, não exceção."""
+    import urllib.error
+    h = dict(headers or {})
+    dados = None
+    if body is not None:
+        dados = json.dumps(body).encode("utf-8")
+        h.setdefault("Content-Type", "application/json")
+    req = urllib.request.Request(url, data=dados, headers=h, method="POST" if body is not None else "GET")
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.status, r.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        return e.code, e.read().decode("utf-8", "replace")
+    except Exception as e:
+        return 0, str(e)
+
+
+def _rotas_locais() -> set[str]:
+    """Caminhos declarados no server.py local, lidos dos decoradores."""
+    import re
+    fonte = (PROJ / "server.py").read_text(encoding="utf-8")
+    return set(re.findall(r'^@app\.(?:get|post|delete|put|patch)\("([^"]+)"', fonte, flags=re.M))
+
+
+def val_producao() -> None:
+    secao(f"10. PRODUÇÃO  ({PROD_API})")
+
+    # ── a API responde, e em que commit está ────────────────────────────────
+    st, txt = _prod(f"{PROD_API}/api/health")
+    if st != 200:
+        check("producao", "API no ar", FAIL, f"HTTP {st}: {txt[:80]}")
+        return
+    saude = json.loads(txt)
+    check("producao", "API no ar", OK, f"commit {saude.get('commit', '(health antigo, sem commit)')}")
+
+    try:
+        import subprocess
+        local = subprocess.run(["git", "rev-parse", "--short=7", "HEAD"], cwd=PROJ,
+                               capture_output=True, text=True, timeout=10).stdout.strip()
+    except Exception:
+        local = ""
+    remoto = saude.get("commit")
+    if remoto and local:
+        check("producao", "commit no ar = HEAD local",
+              OK if remoto == local else FAIL, f"no ar {remoto} · local {local}")
+    else:
+        # /api/health antigo não informa commit: por si só já indica atraso.
+        check("producao", "commit no ar = HEAD local", FAIL if not remoto else WARN,
+              "o /api/health no ar não informa commit — build anterior a esta checagem")
+
+    # ── toda rota do código local existe no ar ──────────────────────────────
+    st, txt = _prod(f"{PROD_API}/openapi.json")
+    remotas = set(json.loads(txt).get("paths", {})) if st == 200 else set()
+    faltando = sorted(_rotas_locais() - remotas)
+    check("producao", "todas as rotas locais existem no ar",
+          OK if not faltando else FAIL,
+          f"{len(remotas)} no ar" if not faltando
+          else f"faltam {len(faltando)}: {', '.join(faltando[:6])}{'…' if len(faltando) > 6 else ''}")
+
+    # ── MCP: handshake de verdade, como um cliente externo faria ────────────
+    h = {"Accept": "application/json, text/event-stream"}
+    st, txt = _prod(f"{PROD_API}/mcp/", headers=h, body={
+        "jsonrpc": "2.0", "id": 1, "method": "initialize",
+        "params": {"protocolVersion": "2025-06-18", "capabilities": {},
+                   "clientInfo": {"name": "validate_platform", "version": "1"}}})
+    if st != 200:
+        check("producao", "MCP responde em /mcp/", FAIL,
+              f"HTTP {st} — a landing manda colar exatamente esta URL")
+    else:
+        check("producao", "MCP responde em /mcp/", OK, "handshake ok")
+        st2, txt2 = _prod(f"{PROD_API}/mcp/", headers=h, body={
+            "jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}})
+        nomes: set[str] = set()
+        for linha in txt2.splitlines():
+            if linha.startswith("data: "):
+                try:
+                    nomes = {t["name"] for t in json.loads(linha[6:])["result"]["tools"]}
+                except Exception:
+                    pass
+        try:
+            import mcp_server as M
+            locais = {t.name for t in asyncio.run(M.server.list_tools())}
+        except Exception:
+            locais = set()
+        falt = sorted(locais - nomes)
+        check("producao", "ferramentas MCP no ar = ferramentas locais",
+              OK if nomes and not falt else FAIL,
+              f"{len(nomes)} no ar" if not falt else f"faltam no ar: {', '.join(falt[:5])}")
+
+    check("producao", "MCP montou (segundo o /api/health)",
+          OK if saude.get("mcp") else FAIL,
+          saude.get("mcp_erro") or ("ok" if saude.get("mcp") else "health antigo ou MCP não montado"))
+
+    # ── a biblioteca sobrevive a um redeploy? ───────────────────────────────
+    check("producao", "biblioteca em volume persistente",
+          OK if saude.get("biblioteca_persistente") else WARN,
+          "ok" if saude.get("biblioteca_persistente")
+          else "sem OTM_DATA_DIR: o que os visitantes publicarem some no próximo deploy")
+
+    # ── o site ──────────────────────────────────────────────────────────────
+    for pagina in ("", "overthinking-machine", "pesquisa-avancada",
+                   "prompt-sensitivity-benchmark", "model-benchmark", "config.js"):
+        st, _ = _prod(f"{PROD_SITE}/{pagina}")
+        check("producao", f"site /{pagina}", OK if st == 200 else FAIL, f"HTTP {st}")
+
+    # ── o que o frontend NO AR chama existe no backend NO AR? ───────────────
+    import re
+    chamadas: set[str] = set()
+    for pagina in ("overthinking-machine", "model-benchmark", "prompt-sensitivity-benchmark",
+                   "pesquisa-avancada"):
+        st, html = _prod(f"{PROD_SITE}/{pagina}")
+        if st == 200:
+            chamadas |= set(re.findall(r"""['"`](/api/[a-z\-/]+)""", html))
+    # normaliza prefixos: /api/biblioteca/ casa com /api/biblioteca/{nome}
+    orfas = sorted(c for c in chamadas
+                   if not any(r == c.rstrip("/") or r.startswith(c) for r in remotas))
+    check("producao", "frontend no ar só chama rotas que existem no ar",
+          OK if not orfas else FAIL,
+          f"{len(chamadas)} chamadas conferidas" if not orfas else f"órfãs: {', '.join(orfas[:6])}")
+
+
 def main() -> int:
     args = set(sys.argv[1:])
     tudo = "--all" in args
@@ -651,6 +787,12 @@ def main() -> int:
     print("=" * 66)
     print("  OVERTHINKING MACHINE — validação de integridade")
     print("=" * 66)
+
+    # --producao sozinho roda só a camada de produção: é o comando do checklist
+    # pós-deploy, e não deve depender de venv completo nem de API local.
+    if args == {"--producao"}:
+        val_producao()
+        return relatorio()
 
     val_ambiente()
     val_codigo()
@@ -665,6 +807,8 @@ def main() -> int:
         val_mcp()
     if tudo or "--live" in args:
         val_live()
+    if "--producao" in args:
+        val_producao()
 
     return relatorio()
 

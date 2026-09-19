@@ -105,6 +105,33 @@ Com a URL do Vercel em mãos, volte ao Railway e ajuste
 
 ## Parte 3 — Verificação pós-deploy
 
+**Rode isto depois de TODO push** — antes de qualquer conferência manual:
+
+```bash
+python validate_platform.py --producao
+```
+
+Ele confere o que está **no ar**, não o código local: o commit implantado é o
+HEAD, toda rota do `server.py` existe em produção, o MCP faz handshake em `/mcp/`
+com as mesmas ferramentas do código, e o frontend publicado só chama rotas que o
+backend publicado tem.
+
+Esse comando existe porque o backend já ficou **cinco commits atrás** do
+repositório sem ninguém notar: `/api/health` e `/api/keys` — as duas rotas que o
+checklist antigo mandava conferir — eram justamente as que continuavam
+respondendo. O Vercel atualiza sozinho a cada push; o Railway **nem sempre**. Se
+o check acusar commit atrasado, o botão é **"Update available → Yes"** no painel
+do serviço.
+
+Uma olhada rápida sem o script:
+
+```bash
+curl https://seu-projeto.up.railway.app/api/health
+# esperado: "commit" igual ao seu HEAD, "mcp": true, "biblioteca_persistente": true
+```
+
+Depois, a conferência manual:
+
 1. Abra o site do Vercel. As 4 páginas devem carregar em modo **Mock**.
 2. Clique em **🔑 Chaves** e informe uma chave do Gemini.
 3. Vá ao **Módulo 4**, troque para **Real** e rode um benchmark pequeno

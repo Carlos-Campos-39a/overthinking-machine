@@ -124,9 +124,35 @@ class RunConfig(BaseModel):
 
 # ── Health ─────────────────────────────────────────────────────────────────────
 
+# Estado de montagem, preenchido no fim deste arquivo. Existe para que o
+# /api/health consiga DIZER se o MCP subiu: antes a falha de montagem era só um
+# print no log do contêiner, e a produção ficou cinco commits atrás — sem /mcp —
+# sem que nada acusasse.
+_ESTADO: dict = {"mcp": False, "mcp_erro": None}
+
+
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "timestamp": datetime.now().isoformat()}
+    """
+    Saúde da instância. Além do "ok", responde às três perguntas que permitem
+    conferir um deploy de fora: qual commit está no ar, o MCP montou, e a
+    biblioteca sobrevive a um redeploy.
+    """
+    try:
+        from src.biblioteca import obter_biblioteca
+        persistente = bool(obter_biblioteca().saude().get("volume_configurado"))
+    except Exception:
+        persistente = False
+    return {
+        "status": "ok",
+        "timestamp": datetime.now().isoformat(),
+        # O Railway injeta o sha do commit implantado; localmente fica "local".
+        "commit": (os.getenv("RAILWAY_GIT_COMMIT_SHA") or "local")[:7],
+        "mcp": _ESTADO["mcp"],
+        "mcp_erro": _ESTADO["mcp_erro"],
+        "hospedado": HOSTED,
+        "biblioteca_persistente": persistente,
+    }
 
 
 # ── Run (POST + SSE stream) ────────────────────────────────────────────────────
@@ -1931,8 +1957,11 @@ try:
 
     app.router.lifespan_context = _ciclo_com_mcp
     app.mount("/mcp", _app_mcp)
+    _ESTADO["mcp"] = True
     print(f"[mcp] montado em /mcp (API interna: {os.environ['OTM_API_URL']})")
 except Exception as _e:  # pragma: no cover
     # A API não pode deixar de subir porque o MCP falhou: quem usa o site não
-    # depende dele.
+    # depende dele. Mas a falha precisa ser VISÍVEL de fora — fica em
+    # /api/health, onde o check de produção a encontra.
+    _ESTADO["mcp_erro"] = f"{type(_e).__name__}: {_e}"[:200]
     print(f"[mcp] NAO montado: {_e}")
