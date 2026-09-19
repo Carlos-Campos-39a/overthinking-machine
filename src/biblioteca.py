@@ -286,8 +286,13 @@ class BibliotecaSQLite:
             "tipo": tipo,
             "chamadas_inst": chamadas,
             "token_exclusao": token,
+            # Dizer COMO usar, não só "guarde". Sem isto, quem publica descobre
+            # na hora de apagar que não sabe onde o token vai — e o servidor
+            # guarda só o hash, então não há segunda chance.
             "aviso": ("Guarde o token: ele aparece uma única vez e é o único jeito "
-                      "de excluir esta especificação depois."),
+                      "de excluir esta especificação depois. Para excluir: "
+                      "DELETE /api/biblioteca/{nome} com o header "
+                      "X-OTM-Token: <token>."),
         }
 
     def excluir(self, nome: str, token: str = "", admin: bool = False) -> bool:
