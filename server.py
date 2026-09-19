@@ -1939,8 +1939,31 @@ try:
     # streamable_http_path="/" porque o sub-app já roteia /mcp por padrão:
     # montado em /mcp sem isso, o endereço final vira /mcp/mcp e o cliente
     # recebe 404.
+    #
+    # transport_security: por padrão o SDK liga uma proteção contra DNS
+    # rebinding que só aceita `Host: localhost`. Ela faz sentido para um servidor
+    # MCP na máquina de alguém, que confia em quem chega pelo loopback. Numa
+    # instância pública atrás do proxy do Railway ela só atrapalha: o Host é o
+    # domínio público e TODO cliente recebia HTTP 421. Passava no teste local e
+    # quebrava só no ar — foi o check de produção que pegou.
+    #
+    # Hospedado: desligada (o servidor já é público e sem autenticação por
+    # decisão; não há o que o rebinding contornar). Local: mantida.
+    from mcp.server.transport_security import TransportSecuritySettings as _TSS
+    if HOSTED:
+        _seguranca = _TSS(enable_dns_rebinding_protection=False)
+    else:
+        _porta = os.getenv("PORT", "8000")
+        _seguranca = _TSS(
+            enable_dns_rebinding_protection=True,
+            allowed_hosts=[f"127.0.0.1:{_porta}", f"localhost:{_porta}",
+                           "127.0.0.1:*", "localhost:*"],
+            allowed_origins=["http://127.0.0.1:*", "http://localhost:*"],
+        )
+
     _app_mcp = _servidor_mcp.streamable_http_app(
-        stateless_http=True, streamable_http_path="/")
+        stateless_http=True, streamable_http_path="/",
+        transport_security=_seguranca)
 
     # O Starlette NÃO executa o lifespan de um sub-app montado, e o MCP precisa
     # do session_manager rodando — sem isto o handshake devolve 500. O próprio
