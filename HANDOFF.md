@@ -18,19 +18,24 @@ commit do repositório. Conferido: `validate_platform.py --producao` dá
 **15 passaram · 1 aviso · 0 falhas**, `/api/tarefas` responde, a gravação anônima
 em `/api/library` devolve **403** e o `escHtml` no ar já escapa aspas.
 
-**Mas o auto-deploy continua quebrado, e o próximo push vai ficar para trás de
-novo.** O que funcionou foi um caminho específico, que vale registrar:
+**A causa-raiz do auto-deploy foi corrigida.** O GitHub App do Railway estava
+instalado em modo *"Only select repositories"* com **apenas dois** repositórios
+(`vc-tracker` e `Fields`) — `overthinking-machine` **não estava na lista**. Sem
+acesso, não havia webhook, e cada push ficava no GitHub sem chegar ao ar.
 
-- O botão **Check for updates** (Settings → Source) responde *"You're on the
-  latest version of this repository"* mesmo com o serviço vários commits atrás.
-  Não confie nele.
-- O que funciona é o badge **"Update available"** no canto superior esquerdo da
-  barra lateral do projeto → **Yes** no diálogo *Update template*. Aí o deploy
-  começa de verdade.
-- O badge só aparece algum tempo depois do push. Se não estiver lá, recarregue a
-  página um minuto depois.
+O que foi feito (GitHub → Settings → Applications → Railway App → Configure):
+`overthinking-machine` acrescentado à lista, mantendo *"Only select
+repositories"* e os outros dois intactos — o Railway recebeu acesso só a este
+repositório, não a todos. Depois, no painel do Railway, o aviso mudou de
+*"Auto deploy unavailable"* para *"Auto deploy is disabled"*, e o botão
+**Enable** foi acionado: agora diz **"Auto deploys when pushed to GitHub"**.
 
-Conferir **sempre** depois, porque o painel não é fonte confiável:
+Ressalva: o painel ainda mostra *"Could not load branches. Retry"* mesmo depois
+do acesso, e o **Retry não limpa**. Parece cache do painel e não impediu o
+deploy automático de funcionar (comprovado por um push logo em seguida), mas se
+um push seu não subir, é o primeiro lugar a olhar.
+
+**Conferir sempre**, porque o painel não é fonte confiável:
 
 ```bash
 curl -s https://overthinking-machine-production.up.railway.app/api/health
@@ -38,26 +43,34 @@ curl -s https://overthinking-machine-production.up.railway.app/api/health
 
 O campo `commit` tem de bater com `git rev-parse --short HEAD`.
 
-Por que ele quebra: o painel mostra *"Auto deploy unavailable / Could not load
-branches"*. O serviço foi criado como **template** a partir da URL do repo, e o
-GitHub App do Railway nunca recebeu acesso a `overthinking-machine` — então não
-há webhook, e cada push fica no GitHub sem chegar ao ar.
-
-Outra coisa que **não** resolve: *Redeploy* na aba Deployments reimplanta o
-**mesmo** commit.
+**Se o auto-deploy falhar de novo**, o caminho manual que funciona é o badge
+**"Update available"** no canto superior esquerdo da barra lateral do projeto →
+**Yes** no diálogo *Update template*. Duas coisas que **não** funcionam e já
+custaram tempo: o botão *Check for updates* (Settings → Source) responde
+*"You're on the latest version"* mesmo com o serviço vários commits atrás, e
+*Redeploy* na aba Deployments reimplanta o **mesmo** commit.
 
 ### 1.2 Decisões que dependem de você
 
-1. **Acesso do GitHub App do Railway ao repositório** — é o que conserta o
-   auto-deploy de vez. Alternativa sem dar acesso: um GitHub Action chamando o
-   deploy hook do Railway.
+1. ~~Acesso do GitHub App do Railway ao repositório~~ — **feito** (ver 1.1).
 2. **Volume no Railway** (`/data` + `OTM_DATA_DIR=/data`) — sem ele, a
    biblioteca de topologias que visitantes publicarem some a cada deploy.
-   `/api/health` confirma hoje: `"biblioteca_persistente": false`. Pode ter
-   custo, então não criei.
+   `/api/health` confirma hoje: `"biblioteca_persistente": false`.
+   O caminho é: no canvas do projeto, **Add → Volume → overthinking-machine**,
+   caminho de montagem `/data`; depois, em *Variables*, `OTM_DATA_DIR=/data`.
+   Cheguei até a tela do caminho de montagem, mas o modo de permissão desta
+   sessão bloqueou a digitação no painel, então **nada foi criado** — a tela foi
+   fechada sem salvar.
 3. **`OTM_ADMIN_TOKEN`** — continua não configurado. É a única alavanca para
-   apagar uma topologia publicada por terceiro. Defina você; eu não devo
-   escrever segredo em painel.
+   apagar uma topologia publicada por terceiro. **Este é seu por princípio, não
+   por falta de acesso:** eu não digito segredo em campo nenhum. Gere e cole:
+
+   ```bash
+   python -c "import secrets; print(secrets.token_urlsafe(32))"
+   ```
+
+   Railway → serviço → *Variables* → `OTM_ADMIN_TOKEN`. Depois, para apagar uma
+   topologia: `DELETE /api/biblioteca/{nome}` com o header `X-OTM-Admin`.
 
 ### 1.3 `curiosidades.html` foi publicada
 
