@@ -1,6 +1,6 @@
 # HANDOFF — Overthinking Machine
 
-Estado em **2026-09-19**, commit `86aca78`.
+Estado em **2026-09-19**. Produção e repositório no mesmo commit.
 
 > **Este arquivo é servido publicamente pelo Vercel.** `*.md` não está no
 > `.vercelignore`, então `HANDOFF.md`, `DEPLOY.md`, `README.md` e `turnover.md`
@@ -11,12 +11,14 @@ Estado em **2026-09-19**, commit `86aca78`.
 
 ## 1. Os três pontos urgentes
 
-### 1.1 O backend no ar está desatualizado (de novo)
+### 1.1 Produção em dia, e o auto-deploy funcionando
 
-**Resolvido nesta sessão** — frontend e backend estão em `84e8cde`, o mesmo
-commit do repositório. Conferido: `validate_platform.py --producao` dá
-**15 passaram · 1 aviso · 0 falhas**, `/api/tarefas` responde, a gravação anônima
-em `/api/library` devolve **403** e o `escHtml` no ar já escapa aspas.
+**Resolvido nesta sessão.** Frontend e backend servem o mesmo commit do
+repositório, e `validate_platform.py --producao` dá **17 passaram · 0 avisos ·
+0 falhas** — a primeira vez que a camada de produção fecha limpa. Conferido no
+ar: `/api/tarefas` responde, a gravação anônima em `/api/library` devolve
+**403**, o `escHtml` publicado escapa aspas, o volume está montado e o token de
+admin, ativo.
 
 **A causa-raiz do auto-deploy foi corrigida.** O GitHub App do Railway estava
 instalado em modo *"Only select repositories"* com **apenas dois** repositórios
@@ -53,17 +55,13 @@ custaram tempo: o botão *Check for updates* (Settings → Source) responde
 ### 1.2 Decisões que dependem de você
 
 1. ~~Acesso do GitHub App do Railway ao repositório~~ — **feito** (ver 1.1).
-2. **Volume no Railway** (`/data` + `OTM_DATA_DIR=/data`) — sem ele, a
-   biblioteca de topologias que visitantes publicarem some a cada deploy.
-   `/api/health` confirma hoje: `"biblioteca_persistente": false`.
-   O caminho é: no canvas do projeto, **Add → Volume → overthinking-machine**,
-   caminho de montagem `/data`; depois, em *Variables*, `OTM_DATA_DIR=/data`.
-   Cheguei até a tela do caminho de montagem, mas o modo de permissão desta
-   sessão bloqueou a digitação no painel, então **nada foi criado** — a tela foi
-   fechada sem salvar.
-3. **`OTM_ADMIN_TOKEN`** — continua não configurado. É a única alavanca para
-   apagar uma topologia publicada por terceiro. **Este é seu por princípio, não
-   por falta de acesso:** eu não digito segredo em campo nenhum. Gere e cole:
+2. ~~Volume no Railway~~ — **feito**. Volume `overthinking-machine-volume`
+   montado em `/data`, com `OTM_DATA_DIR=/data`. O banco saiu de
+   `/app/dados/biblioteca.db` (disco do contêiner) para `/data/biblioteca.db`.
+   Provado com um redeploy de verdade, não só pelo campo de saúde: uma
+   topologia publicada antes do deploy continuou lá depois.
+3. ~~`OTM_ADMIN_TOKEN`~~ — **feito por você**; eu não digito segredo em campo
+   nenhum, e isso não muda com permissão liberada. Se precisar trocar:
 
    ```bash
    python -c "import secrets; print(secrets.token_urlsafe(32))"
@@ -89,8 +87,8 @@ avaliação, não de leitura.
 
 ## 2. Vulnerabilidade encontrada e corrigida nesta sessão
 
-**XSS armazenado com roubo de chave de API, na instância pública no ar.**
-Corrigido em `86aca78`, mas **ainda não implantado** (ver 1.1).
+**XSS armazenado com roubo de chave de API, que estava ativo na instância
+pública.** Corrigido em `86aca78` e **implantado** — conferido no ar.
 
 A cadeia completa era:
 
