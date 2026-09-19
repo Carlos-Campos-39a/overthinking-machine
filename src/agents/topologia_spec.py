@@ -42,6 +42,10 @@ MAX_CHARS_SPEC             = 20_000
 MAX_INSTANCIAS             = 50
 MAX_CHAMADAS_POR_RUN       = 400
 MAX_ESPECS_BIBLIOTECA      = 500
+# Lote = várias execuções numa requisição só (comparar modelos, ablação de prompt).
+MAX_MODELOS_POR_LOTE       = 12
+MAX_REPS                   = 5
+MAX_CHAMADAS_POR_LOTE      = 2000
 
 LIMITES = {
     "max_estagios":               MAX_ESTAGIOS,
@@ -53,6 +57,9 @@ LIMITES = {
     "max_instancias":             MAX_INSTANCIAS,
     "max_chamadas_por_run":       MAX_CHAMADAS_POR_RUN,
     "max_especs_biblioteca":      MAX_ESPECS_BIBLIOTECA,
+    "max_modelos_por_lote":       MAX_MODELOS_POR_LOTE,
+    "max_reps":                   MAX_REPS,
+    "max_chamadas_por_lote":      MAX_CHAMADAS_POR_LOTE,
 }
 
 _SLUG = re.compile(r"^[a-z0-9][a-z0-9_-]{1,39}$")

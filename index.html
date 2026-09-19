@@ -186,6 +186,21 @@
       line-height:1.85; color:var(--term-text);
       white-space:pre; overflow-x:auto;
     }
+    /* A URL fica numa linha só e o bloco rola: partida em duas linhas dentro de um
+       white-space:pre, ela era copiada com quebra e espaços no meio e o cliente
+       MCP recusava. O botão copia de uma constante, não do DOM. */
+    .mcp-bloco { min-width:0; }
+    .mcp-barra { display:flex; justify-content:space-between; align-items:center;
+      background:var(--term-header); color:var(--term-text); font-family:'JetBrains Mono',monospace;
+      font-size:0.68rem; padding:9px 14px; border-radius:14px 14px 0 0; }
+    .mcp-barra + .mcp-code { border-radius:0 0 14px 14px; }
+    .mcp-copiar { background:rgba(255,255,255,0.08); color:var(--term-green); border:1px solid rgba(0,229,153,0.35);
+      border-radius:6px; padding:3px 12px; font-family:inherit; font-size:0.68rem; cursor:pointer; }
+    .mcp-copiar:hover { background:rgba(0,229,153,0.14); }
+    .mcp-nota { font-size:0.76rem; line-height:1.7; color:var(--texto-secundario); margin:12px 2px; }
+    .mcp-nota code { font-family:'JetBrains Mono',monospace; font-size:0.9em;
+      background:var(--roxo-lavanda); color:var(--roxo-profundo); padding:1px 5px; border-radius:4px; }
+    .mcp-fala { margin-top:4px; }
     .mcp-list { list-style:none; margin-top:20px; }
     .mcp-list li { font-size:0.85rem; color:var(--texto-secundario); line-height:1.6; padding:8px 0 8px 24px; position:relative; }
     .mcp-list li::before { content:'→'; position:absolute; left:0; color:var(--roxo-profundo); font-weight:700; }
@@ -365,8 +380,8 @@ hybrid           0.900    6 387    25.54s
       <a class="mod" style="--c:var(--m2)" href="pesquisa-avancada.html">
         <div class="mod-top"><span class="mod-n">2</span><span class="mod-q">"O que acontece dentro do modelo?"</span></div>
         <div class="mod-h">Ativação de Rede Neural</div>
-        <div class="mod-p">Inspeciona as representações internas: PCA das ativações por camada e linear probes para localizar onde a noção de verdade é codificada.</div>
-        <div class="mod-tags"><span class="mod-tag">PCA por camada</span><span class="mod-tag">linear probes</span></div>
+        <div class="mod-p">Lê as ativações internas do modelo (hook): PCA por camada e linear probes para localizar onde a noção de verdade é codificada. <strong>Aqui no site roda uma simulação didática</strong> — o hook de verdade precisa dos pesos do modelo e roda na sua máquina; a página importa o resultado.</div>
+        <div class="mod-tags"><span class="mod-tag">simulação online</span><span class="mod-tag">hook real · local</span><span class="mod-tag">linear probes</span></div>
         <span class="mod-go">Abrir módulo →</span>
       </a>
       <a class="mod" style="--c:var(--m3)" href="prompt-sensitivity-benchmark.html">
@@ -445,26 +460,32 @@ hybrid           0.900    6 387    25.54s
           <li><strong>Metodologia como recurso</strong> — o agente lê antes de rodar</li>
         </ul>
       </div>
-      <div class="mcp-code"><span class="t-dim">// mcp.json — nada para instalar</span>
-{
+      <div class="mcp-bloco">
+        <div class="mcp-barra">
+          <span>mcp.json — nada para instalar</span>
+          <button type="button" class="mcp-copiar" id="mcp-copiar" onclick="copiarMcp()">copiar</button>
+        </div>
+        <div class="mcp-code" id="mcp-json">{
   <span class="t-blue">"mcpServers"</span>: {
     <span class="t-blue">"overthinking-machine"</span>: {
-      <span class="t-blue">"url"</span>: <span class="t-ok">"https://overthinking-machine-production
-              .up.railway.app/mcp/"</span>,
-      <span class="t-blue">"headers"</span>: {
-        <span class="t-blue">"X-Google-Key"</span>: <span class="t-ok">"a-sua-chave"</span>
-      }
+      <span class="t-blue">"url"</span>: <span class="t-ok">"https://overthinking-machine-production.up.railway.app/mcp/"</span>,
+      <span class="t-blue">"headers"</span>: { <span class="t-blue">"X-Google-Key"</span>: <span class="t-ok">"a-sua-chave"</span> }
     }
   }
-}
-
-<span class="t-dim">// a chave e sua: voce paga o que consumir,</span>
-<span class="t-dim">// e ela nao fica guardada no servidor.</span>
-
-<span class="t-dim">// depois, em linguagem natural:</span>
-<span class="t-ok">"Monte uma topologia com debate entre
- tres agentes e compare com a linha de
- base. Me mostre o custo antes de rodar."</span></div>
+}</div>
+        <div class="mcp-nota">
+          A chave é sua: você paga o que consumir, e ela não fica guardada no servidor.
+          Outros provedores entram do mesmo jeito, um header cada:
+          <code>X-Moonshot-Key</code> (Kimi), <code>X-Zai-Key</code> (GLM),
+          <code>X-Groq-Key</code>, <code>X-Openai-Key</code>, <code>X-Anthropic-Key</code>,
+          <code>X-Together-Key</code>, <code>X-Openrouter-Key</code>, <code>X-Deepinfra-Key</code>.
+          A chave do Google também libera os modelos <strong>Gemma</strong>.
+        </div>
+        <div class="mcp-code mcp-fala"><span class="t-dim">// depois, em linguagem natural:</span>
+<span class="t-ok">"Monte uma topologia com debate entre três agentes
+ e compare com a linha de base. Me mostre o custo
+ antes de rodar."</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -525,6 +546,30 @@ hybrid           0.900    6 387    25.54s
   </div>
 </footer>
 
+<script>
+// JSON copiado de uma constante, nunca do que está pintado na tela: assim o que
+// vai para a área de transferência é sempre JSON válido, com a URL inteira.
+var MCP_JSON = JSON.stringify({
+  mcpServers: { "overthinking-machine": {
+    url: "https://overthinking-machine-production.up.railway.app/mcp/",
+    headers: { "X-Google-Key": "a-sua-chave" }
+  } }
+}, null, 2);
+
+function copiarMcp() {
+  var btn = document.getElementById('mcp-copiar');
+  function ok() { btn.textContent = 'copiado ✓'; setTimeout(function () { btn.textContent = 'copiar'; }, 1800); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(MCP_JSON).then(ok, fallback);
+  } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = MCP_JSON; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); } catch (e) { btn.textContent = 'selecione e copie'; }
+    document.body.removeChild(ta);
+  }
+}
+</script>
 <script src="config.js"></script>
 </body>
 </html>

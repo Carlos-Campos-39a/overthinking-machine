@@ -646,6 +646,64 @@ def relatorio() -> int:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 9. JAVASCRIPT DAS PÁGINAS
+#
+# As páginas não têm build: o JS vive em <script> inline dentro de HTML de até
+# 440 KB. Um erro de sintaxe ali não aparece em teste nenhum de Python — a página
+# abre em branco, ou pior, abre sem os botões, e só quem clicar descobre. Já
+# aconteceu: uma quebra de linha real foi parar dentro de uma string JS.
+# ─────────────────────────────────────────────────────────────────────────────
+
+PAGINAS = ["index.html", "overthinking-machine.html", "pesquisa-avancada.html",
+           "prompt-sensitivity-benchmark.html", "model-benchmark.html"]
+
+
+def val_javascript() -> None:
+    secao("9. JAVASCRIPT DAS PÁGINAS")
+    import re
+    import shutil
+    import tempfile
+
+    node = shutil.which("node")
+    if not node:
+        check("javascript", "node disponível", SKIP, "instale o Node para checar a sintaxe do JS inline")
+        return
+
+    alvos = [(PROJ / n) for n in PAGINAS] + [PROJ / "config.js"]
+    for arq in alvos:
+        if not arq.exists():
+            check("javascript", arq.name, FAIL, "arquivo não existe")
+            continue
+        fonte = arq.read_text(encoding="utf-8")
+        if arq.suffix == ".js":
+            blocos = [fonte]
+        else:
+            # só <script> sem src — os com src são arquivos à parte
+            blocos = re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", fonte, flags=re.S | re.I)
+        erros = []
+        for i, bloco in enumerate(blocos, 1):
+            if not bloco.strip():
+                continue
+            with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as tmp:
+                tmp.write(bloco)
+                caminho = tmp.name
+            try:
+                r = subprocess.run([node, "--check", caminho], capture_output=True, text=True,
+                                   timeout=60, encoding="utf-8", errors="replace")
+                if r.returncode != 0:
+                    linhas = [l for l in r.stderr.splitlines() if l.strip()]
+                    msg = next((l for l in linhas if "Error" in l), linhas[-1] if linhas else "erro")
+                    erros.append(f"bloco {i}: {msg.strip()[:90]}")
+            finally:
+                try:
+                    os.unlink(caminho)
+                except OSError:
+                    pass
+        check("javascript", f"{arq.name} ({len(blocos)} bloco(s))",
+              OK if not erros else FAIL, "sintaxe ok" if not erros else "; ".join(erros[:2]))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 10. PRODUÇÃO
 #
 # Todas as outras camadas olham para o código local. Esta olha para o que está
@@ -800,6 +858,7 @@ def main() -> int:
     val_comportamentos()
     val_boilerplate()
     val_frontend()
+    val_javascript()
 
     if tudo or "--api" in args:
         val_api()

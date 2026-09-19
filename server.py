@@ -179,7 +179,31 @@ def _validar_orcamento(cfg) -> None:
         if errs:
             raise HTTPException(400, "harness inválido — " + "; ".join(errs[:3]))
 
+    if not 1 <= cfg.meta_budget <= 10:
+        raise HTTPException(400, f"meta_budget={cfg.meta_budget} fora do intervalo 1–10.")
+
     if not cfg.topologia_spec:
+        # Arquitetura embutida: agent_kwargs (n_agents, debate_rounds) também
+        # multiplica chamadas, e não passava por teto nenhum.
+        formula = _CHAMADAS_EMBUTIDAS.get(cfg.architecture)
+        if formula:
+            from src.agents.topologia_spec import MAX_CHAMADAS_POR_INSTANCIA
+            try:
+                por_inst = int(formula(cfg.agent_kwargs or {}))
+            except Exception:
+                raise HTTPException(400, "agent_kwargs inválido: n_agents, n_workers e debate_rounds são inteiros.")
+            if por_inst > MAX_CHAMADAS_POR_INSTANCIA:
+                raise HTTPException(
+                    400, f"{por_inst} chamadas por instância; o teto é {MAX_CHAMADAS_POR_INSTANCIA}. "
+                         f"Reduza n_agents/n_workers ou debate_rounds."
+                )
+            total = por_inst * max(1, cfg.num_instances)
+            if total > MAX_CHAMADAS_POR_RUN:
+                raise HTTPException(
+                    400, f"esta execução faria {total} chamadas ({por_inst} por instância x "
+                         f"{cfg.num_instances}); o teto é {MAX_CHAMADAS_POR_RUN}. "
+                         f"Cabem até {max(1, MAX_CHAMADAS_POR_RUN // por_inst)} instâncias."
+                )
         return
 
     errs = erros_de(cfg.topologia_spec)
@@ -195,6 +219,61 @@ def _validar_orcamento(cfg) -> None:
             f"esta execução faria {total} chamadas ({por_inst} por instância x "
             f"{cfg.num_instances}); o teto é {MAX_CHAMADAS_POR_RUN}. "
             f"Com esta topologia cabem até {cabe} instâncias.",
+        )
+
+
+# Chamadas de LLM por instância das arquiteturas embutidas. Mesmas fórmulas de
+# mcp_server._FORMULAS — se mudar lá, mude aqui.
+_CHAMADAS_EMBUTIDAS = {
+    "sas":           lambda k: 1,
+    "independent":   lambda k: k.get("n_agents", 3) + 1,
+    "centralized":   lambda k: k.get("n_workers", 3) + 2,
+    "decentralized": lambda k: (k.get("n_agents", 3) * (k.get("debate_rounds", 1) + 1)) + 1,
+    "hybrid":        lambda k: (k.get("n_workers", 3) * (k.get("debate_rounds", 1) + 1)) + 2,
+}
+
+
+def _validar_lote(execucoes: int, o_que: str, cfg) -> None:
+    """
+    Teto de um LOTE: várias execuções numa requisição só (um modelo por execução
+    no módulo 4, uma cláusula removida por execução no módulo 3). /api/run tinha
+    teto e estes dois não tinham nenhum — 25 modelos x 5 reps x qualquer número
+    de instâncias passava direto, com a chave do visitante pagando.
+    """
+    from src.agents.topologia_spec import (
+        MAX_CHAMADAS_POR_INSTANCIA, MAX_CHAMADAS_POR_LOTE, MAX_INSTANCIAS, MAX_REPS,
+    )
+
+    if cfg.num_instances > MAX_INSTANCIAS:
+        raise HTTPException(
+            400, f"{cfg.num_instances} instâncias é demais; o teto é {MAX_INSTANCIAS}."
+        )
+    if cfg.num_instances < 1:
+        raise HTTPException(400, "num_instances precisa ser ao menos 1.")
+    if not 1 <= cfg.reps <= MAX_REPS:
+        raise HTTPException(400, f"reps={cfg.reps} fora do intervalo 1–{MAX_REPS}.")
+
+    kwargs = getattr(cfg, "agent_kwargs", None) or {}
+    formula = _CHAMADAS_EMBUTIDAS.get(cfg.architecture)
+    try:
+        por_inst = int(formula(kwargs)) if formula else 1
+    except Exception:
+        raise HTTPException(400, "agent_kwargs inválido: n_agents, n_workers e debate_rounds são inteiros.")
+    if por_inst > MAX_CHAMADAS_POR_INSTANCIA:
+        raise HTTPException(
+            400, f"{por_inst} chamadas por instância; o teto é {MAX_CHAMADAS_POR_INSTANCIA}. "
+                 f"Reduza n_agents/n_workers ou debate_rounds."
+        )
+
+    total = execucoes * cfg.reps * cfg.num_instances * max(1, por_inst)
+    if total > MAX_CHAMADAS_POR_LOTE:
+        cabe = max(1, MAX_CHAMADAS_POR_LOTE // (execucoes * cfg.reps * max(1, por_inst)))
+        raise HTTPException(
+            400,
+            f"este lote faria {total} chamadas ({execucoes} {o_que} x {cfg.reps} rep x "
+            f"{cfg.num_instances} instâncias x {por_inst} chamada(s) por instância); "
+            f"o teto é {MAX_CHAMADAS_POR_LOTE}. Com esta configuração cabem até "
+            f"{cabe} instâncias — ou reduza {o_que} ou reps.",
         )
 
 
@@ -295,10 +374,14 @@ def _write_keys(keys: dict) -> None:
 # elas são desligadas quando OTM_HOSTED=1; nesse modo a chave viaja por
 # header, só em memória, isolada por requisição (ver _keys_from_request).
 
+# Montada a partir de _KEY_HEADERS, e não escrita à mão: a versão anterior citava
+# 3 headers enquanto o servidor aceitava 9 — justamente os de peso aberto (Kimi,
+# GLM, Groq) ficavam de fora da única documentação que a API devolve.
 _HOSTED_KEYS_MSG = (
     "Nesta instância hospedada as chaves não são salvas no servidor. "
-    "Envie a sua chave por requisição nos headers "
-    "X-Google-Key / X-OpenAI-Key / X-Anthropic-Key."
+    "Envie a sua chave por requisição, em um destes headers: "
+    + ", ".join("-".join(p.capitalize() for p in h.split("-")) for h in _KEY_HEADERS.values())
+    + "."
 )
 
 
@@ -616,6 +699,38 @@ def _sse(data: dict) -> str:
     return f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
 
 
+def _evento_de_erro(exc: BaseException) -> dict:
+    """
+    Evento de erro para o navegador — SEM traceback.
+
+    Antes o traceback Python completo ia para qualquer visitante, com caminhos
+    internos do servidor. Agora ele fica no log, e o cliente recebe a mensagem e,
+    nos dois casos que mais acontecem, o que fazer a respeito.
+    """
+    import traceback
+    print(f"[erro] {type(exc).__name__}: {exc}\n{traceback.format_exc()}", file=sys.stderr)
+
+    bruto = str(exc)
+    evento = {"type": "error", "message": bruto[:400]}
+
+    if "RESOURCE_EXHAUSTED" in bruto or " 429" in bruto or "quota" in bruto.lower():
+        evento["codigo"] = "cota_esgotada"
+        evento["message"] = "A cota da sua chave neste modelo acabou (HTTP 429)."
+        evento["como_resolver"] = (
+            "O nível gratuito do gemini-2.5-flash permite cerca de 20 requisições por "
+            "dia — menos que um experimento mínimo. Os modelos Gemma usam a MESMA chave "
+            "do Google com cota separada; Groq também tem nível gratuito. Troque de "
+            "modelo ou reduza as instâncias."
+        )
+    elif "Nenhuma chave para" in bruto:
+        evento["codigo"] = "sem_chave"
+        evento["como_resolver"] = (
+            "Esta instância não tem chave própria. Clique em 🔑 Chaves e informe a do "
+            "provedor do modelo escolhido — ela fica só no seu navegador."
+        )
+    return evento
+
+
 async def _stream_experiment(
     run_id: str,
     cfg: RunConfig,
@@ -677,12 +792,7 @@ async def _stream_experiment(
                 {"type": "done", "results": results},
             )
         except Exception as exc:
-            import traceback
-            tb = traceback.format_exc()
-            loop.call_soon_threadsafe(
-                queue.put_nowait,
-                {"type": "error", "message": str(exc), "traceback": tb},
-            )
+            loop.call_soon_threadsafe(queue.put_nowait, _evento_de_erro(exc))
         finally:
             loop.call_soon_threadsafe(queue.put_nowait, None)  # sentinel
 
@@ -802,8 +912,7 @@ async def _stream_geometry(cfg: GeometryRunConfig):
         try:
             _geometry_worker(cfg, _put)
         except Exception as exc:
-            import traceback
-            _put({"type": "error", "message": str(exc), "traceback": traceback.format_exc()})
+            _put(_evento_de_erro(exc))
         finally:
             _put(None)
 
@@ -881,23 +990,23 @@ def _geometry_worker(cfg: GeometryRunConfig, emit):
     _random.shuffle(sample)
     log(f"Amostra selecionada: {len(sample)} instâncias ({sum(r['label'] for r in sample)} verdadeiras).")
 
-    # ── 2. Simula/executa agente ───────────────────────────────────────────────
+    # ── 2. Agente simulado ────────────────────────────────────────────────────
+    # Esta instância NUNCA lê ativações de um modelo. O "modo real" que existia
+    # aqui era código morto: testava `"_real_activations" in dir()` — nome que
+    # não é definido em lugar nenhum —, caía sempre na simulação e ainda assim
+    # devolvia mode="real", que a tela traduzia como "Origem: Llama real". Dado
+    # sintético rotulado como ativação de modelo, numa página que cita Marks &
+    # Tegmark. Hook de verdade exige os pesos residentes; o caminho honesto é o
+    # script local (geometry-of-truth/experiments/sas_classifier/
+    # experimento_multi.py), cujo JSON a página já sabe importar.
     if cfg.mode == "real":
-        log("Modo real solicitado — verificando disponibilidade do Llama-3.2-1B...")
-        try:
-            results_with_preds = _run_real_agent(sample, cfg, log, progress)
-        except Exception as e:
-            log(f"Modelo real indisponível ({e}). Usando simulação.")
-            results_with_preds = _run_simulated_agent(sample, cfg, log, progress)
-    else:
-        results_with_preds = _run_simulated_agent(sample, cfg, log, progress)
+        log("AVISO: esta instância não lê ativações reais — o resultado abaixo é "
+            "simulação didática. Para hook real, rode o script local e importe o JSON.")
+    results_with_preds = _run_simulated_agent(sample, cfg, log, progress)
 
-    # ── 3. Extrai ativações ────────────────────────────────────────────────────
-    log("Extraindo ativações do residual stream...")
-    if cfg.mode == "real" and "_real_activations" in dir():
-        activations_by_layer = _real_activations
-    else:
-        activations_by_layer = _simulate_activations(results_with_preds, n_layers=16, d_model=2048, log=log)
+    # ── 3. Ativações SINTÉTICAS ───────────────────────────────────────────────
+    log("Gerando ativações sintéticas (simulação didática, não é um modelo)...")
+    activations_by_layer = _simulate_activations(results_with_preds, n_layers=16, d_model=2048, log=log)
 
     n_layers = len(activations_by_layer)
     log(f"Ativações extraídas: {n_layers} camadas, d_model={len(activations_by_layer[0][0])}.")
@@ -949,10 +1058,19 @@ def _geometry_worker(cfg: GeometryRunConfig, emit):
             "probe_accuracies": [round(a, 4) for a in probe_accuracies],
             "best_probe_layer": best_layer,
             "best_probe_acc": round(max(probe_accuracies), 4),
+            # Chutar sempre a classe majoritária já dá isto. Probe abaixo ou
+            # perto desta linha não achou nada — sem ela a curva não se lê.
+            "probe_baseline": round(max(n_correct, n_incorrect) / max(1, n_correct + n_incorrect), 4),
             "pc1_separation": round(sep, 4),
             "dataset": cfg.dataset,
             "arch": cfg.arch,
-            "mode": cfg.mode,
+            # O que de fato rodou — nunca o que foi pedido.
+            "mode": "simulacao",
+            "sintetico": True,
+            "probe_metodo": "validação cruzada 3-fold (acurácia fora da amostra)",
+            "aviso": ("Simulação didática: as ativações são ruído gaussiano com uma "
+                      "curva de separabilidade desenhada à mão. Não são ativações de "
+                      "nenhum modelo. Para hook real, rode o script local e importe o JSON."),
         }
     })
 
@@ -977,11 +1095,14 @@ def _run_simulated_agent(sample, cfg, log, progress):
 
     results = []
     for i, row in enumerate(sample):
-        # Simula decisão do agente com ruído
-        noise = _random.gauss(0, 0.15)
-        confidence = base_acc + noise
-        agent_pred = 1 if confidence > 0.5 else 0
-        correct = (agent_pred == row["label"])
+        # Acerta com probabilidade base_acc, INDEPENDENTE do rótulo. A versão
+        # anterior fazia pred = 1 sempre que (base_acc + ruído) > 0.5 — ou seja,
+        # quase sempre "verdadeiro". Acerto virava sinônimo de rótulo==1: a
+        # acurácia saía ~50% (não os ~76% anunciados) e a probe de "acerto" lia,
+        # na verdade, o rótulo — separável em todas as camadas, inclusive na 0.
+        correct = _random.random() < base_acc
+        agent_pred = row["label"] if correct else 1 - row["label"]
+        confidence = (0.78 if correct else 0.58) + _random.gauss(0, 0.10)
         results.append({
             **row,
             "agent_pred": agent_pred,
@@ -994,55 +1115,6 @@ def _run_simulated_agent(sample, cfg, log, progress):
 
     n_ok = sum(1 for r in results if r["agent_correct"])
     log(f"Agente concluído: {n_ok}/{len(results)} acertos ({n_ok/len(results)*100:.1f}%).")
-    return results
-
-
-def _run_real_agent(sample, cfg, log, progress):
-    """Tenta rodar o agente real via LangChain. Fallback para simulação se falhar."""
-    log("Carregando modelo LLM para agente real...")
-    from src.llm_factory import LLMFactory
-    from langchain_core.messages import HumanMessage, SystemMessage
-
-    # Usa o modelo configurado nas chaves
-    keys = _read_keys()
-    if keys.get("anthropic"):
-        model_id = "anthropic/claude-haiku-4-5-20251001"
-    elif keys.get("openai"):
-        model_id = "openai/gpt-4o-mini"
-    else:
-        raise RuntimeError("Nenhuma chave API configurada para o agente real.")
-
-    llm = LLMFactory.create(model_id)
-    results = []
-
-    system_prompt = (
-        "Você é um classificador de afirmações. "
-        "Para cada afirmação, responda APENAS com 'verdadeiro' ou 'falso'."
-    )
-
-    for i, row in enumerate(sample):
-        try:
-            msgs = [
-                SystemMessage(content=system_prompt),
-                HumanMessage(content=f"Afirmação: {row['statement']}\nClassifique:")
-            ]
-            resp = llm.invoke(msgs)
-            pred_text = resp.content.strip().lower()
-            agent_pred = 1 if "verdadeiro" in pred_text or "true" in pred_text else 0
-        except Exception:
-            agent_pred = _random.randint(0, 1)
-
-        correct = (agent_pred == row["label"])
-        results.append({
-            **row,
-            "agent_pred": agent_pred,
-            "agent_correct": correct,
-            "confidence": 0.8 if correct else 0.4,
-        })
-        if (i + 1) % 5 == 0:
-            log(f"  Processadas {i+1}/{len(sample)} instâncias...")
-            progress(i + 1)
-
     return results
 
 
@@ -1172,27 +1244,25 @@ def _pca_2d(activations, results):
 
 # ── Sonda linear (regressão logística manual) ─────────────────────────────
 
-def _linear_probe(activations, results):
+def _linear_probe(activations, results, k_folds: int = 3, passos: int = 120):
     """
-    Treina sonda linear (regressão logística simples) nas ativações reduzidas.
-    Retorna acurácia no treino (leave-one-out simplificado).
+    Probe linear (regressão logística) com VALIDAÇÃO CRUZADA.
+
+    Devolve a acurácia FORA da amostra. A versão anterior pontuava no próprio
+    conjunto de treino — com 50 features e ~40 amostras isso dá perto de 100% por
+    construção, em qualquer camada, inclusive em ruído puro. A docstring dizia
+    "leave-one-out simplificado"; não era.
+
+    3 folds x 120 passos custa aproximadamente o mesmo que os 200 passos
+    in-sample de antes.
     """
     n = len(activations)
-    if n < 4:
+    if n < 2 * k_folds:
         return 0.5
 
     K = min(50, len(activations[0]))
     X = [row[:K] for row in activations]
     y = [1 if r["agent_correct"] else 0 for r in results]
-
-    # Centraliza
-    mean = [sum(X[i][j] for i in range(n)) / n for j in range(K)]
-    Xc = [[X[i][j] - mean[j] for j in range(K)] for i in range(n)]
-
-    # Gradiente descendente para regressão logística
-    w = [0.0] * K
-    lr = 0.05
-    lam = 0.01  # regularização L2
 
     def sigmoid(z):
         return 1 / (1 + _math.exp(-max(-20, min(20, z))))
@@ -1200,22 +1270,43 @@ def _linear_probe(activations, results):
     def dot(a, b):
         return sum(ai * bi for ai, bi in zip(a, b))
 
-    for _ in range(200):
-        grad = [0.0] * K
-        for i in range(n):
-            xi = Xc[i]
-            yi = y[i]
-            pred = sigmoid(dot(w, xi))
-            err = pred - yi
+    def treinar(idx):
+        m = len(idx)
+        media = [sum(X[i][j] for i in idx) / m for j in range(K)]
+        Xc = {i: [X[i][j] - media[j] for j in range(K)] for i in idx}
+        w = [0.0] * K
+        lr, lam = 0.05, 0.01
+        for _ in range(passos):
+            grad = [0.0] * K
+            for i in idx:
+                err = sigmoid(dot(w, Xc[i])) - y[i]
+                xi = Xc[i]
+                for j in range(K):
+                    grad[j] += err * xi[j] / m
             for j in range(K):
-                grad[j] += err * xi[j] / n
-        for j in range(K):
-            w[j] -= lr * (grad[j] + lam * w[j])
+                w[j] -= lr * (grad[j] + lam * w[j])
+        return w, media
 
-    # Avalia
-    correct = sum(1 for i in range(n)
-                  if round(sigmoid(dot(w, Xc[i]))) == y[i])
-    return correct / n
+    # Folds estratificados e determinísticos: ordena por classe e distribui.
+    ordem = sorted(range(n), key=lambda i: (y[i], i))
+    fold_de = {i: pos % k_folds for pos, i in enumerate(ordem)}
+
+    acertos = 0
+    for f in range(k_folds):
+        treino = [i for i in range(n) if fold_de[i] != f]
+        teste = [i for i in range(n) if fold_de[i] == f]
+        if len({y[i] for i in treino}) < 2:
+            # Fold de treino com uma classe só: a probe não tem o que aprender.
+            # Conta como chute da classe majoritária — honesto, não otimista.
+            maj = round(sum(y[i] for i in treino) / max(1, len(treino)))
+            acertos += sum(1 for i in teste if y[i] == maj)
+            continue
+        w, media = treinar(treino)
+        for i in teste:
+            xi = [X[i][j] - media[j] for j in range(K)]
+            if round(sigmoid(dot(w, xi))) == y[i]:
+                acertos += 1
+    return acertos / n
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1335,10 +1426,12 @@ async def list_models(request: Request):
     """
     pricing = _load_pricing()
     byok = _keys_from_request(request)
+    # Todos os provedores que aceitam chave, não só os três de API fechada: sem
+    # isso nenhuma tela consegue dizer "você tem chave de Moonshot configurada".
+    from src.llm_factory import LLMFactory as _LF
     key_present = {
-        "google":    bool(byok.get("google")    or os.getenv("GOOGLE_API_KEY")),
-        "openai":    bool(byok.get("openai")    or os.getenv("OPENAI_API_KEY")),
-        "anthropic": bool(byok.get("anthropic") or os.getenv("ANTHROPIC_API_KEY")),
+        prov: bool(byok.get(prov) or os.getenv(_LF.ENV_VARS.get(prov, "")))
+        for prov in _KEY_HEADERS
     }
 
     api_models = []
@@ -1428,6 +1521,12 @@ async def start_benchmark(cfg: BenchmarkConfig, request: Request):
     """Roda a mesma tarefa em N modelos e devolve um stream SSE comparativo."""
     if not cfg.models:
         raise HTTPException(400, "Informe ao menos um modelo em 'models'.")
+    from src.agents.topologia_spec import MAX_MODELOS_POR_LOTE
+    if len(cfg.models) > MAX_MODELOS_POR_LOTE:
+        raise HTTPException(
+            400, f"{len(cfg.models)} modelos é demais; o teto é {MAX_MODELOS_POR_LOTE} por comparação."
+        )
+    _validar_lote(len(cfg.models), "modelos", cfg)
 
     bench_id = f"bench_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
     cancel_event = threading.Event()
@@ -1679,6 +1778,11 @@ async def start_prompt_sensitivity(cfg: PromptSensitivityConfig, request: Reques
         raise HTTPException(400, "system_prompt vazio ou sem cláusulas reconhecíveis.")
     if len(clauses) > 20:
         raise HTTPException(400, f"{len(clauses)} cláusulas é demais — o custo cresce linearmente. Máximo 20.")
+    if not 0 <= cfg.max_pairs <= 5:
+        raise HTTPException(400, f"max_pairs={cfg.max_pairs} fora do intervalo 0–5.")
+    # baseline + uma execução por cláusula removida + os pares de interação
+    execucoes = 1 + len(clauses) + (cfg.max_pairs if cfg.interactions else 0)
+    _validar_lote(execucoes, "variações do prompt", cfg)
 
     ps_id = f"ps_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
     cancel_event = threading.Event()
@@ -1865,10 +1969,7 @@ async def _stream_prompt_sensitivity(
                 },
             })
         except Exception as exc:
-            import traceback
-            loop.call_soon_threadsafe(queue.put_nowait, {
-                "type": "error", "message": str(exc), "traceback": traceback.format_exc(),
-            })
+            loop.call_soon_threadsafe(queue.put_nowait, _evento_de_erro(exc))
         finally:
             loop.call_soon_threadsafe(queue.put_nowait, None)
 

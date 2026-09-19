@@ -4470,6 +4470,12 @@ document.querySelectorAll('.option-card').forEach(card => {
 });
 
 // ── Real experiment (API mode) ───────────────────────────────────────
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s == null ? '' : String(s);
+  return d.innerHTML;
+}
+
 async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo compositor de topologias
   if (state.running) return;
 
@@ -4480,9 +4486,19 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
     return;
   }
 
-  const instCount = state.instMode === 'csv'
-    ? state.customInstances.length
-    : state.selectedIds.size;
+  if (state.instMode === 'csv') {
+    // Trava honesta, até a tarefa declarativa (tarefa_spec) entrar: as linhas do
+    // CSV nunca chegavam ao backend. O POST levava só a QUANTIDADE, e o servidor
+    // rodava as N primeiras instâncias da tarefa EMBUTIDA — a pessoa via um score
+    // e acreditava que era da tarefa dela.
+    showToast('⚠ O CSV importado ainda não é enviado ao servidor no modo Real.');
+    await termLine('<span class="t-warn">  ! No modo Real, as instâncias do CSV não são enviadas ao servidor —</span>', 0);
+    await termLine('<span class="t-warn">    rodar agora mediria a tarefa embutida, não a sua. Use as instâncias</span>', 0);
+    await termLine('<span class="t-warn">    da lista, ou o modo Mock. Tarefa própria entra em breve, declarativa.</span>', 0);
+    return;
+  }
+
+  const instCount = state.selectedIds.size;
   if (instCount === 0) { showToast('⚠ Selecione ao menos uma instância.'); return; }
 
   state.running = true;
@@ -4562,7 +4578,12 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
         try { msg = JSON.parse(line.slice(6)); } catch { continue; }
         await _handleApiEvent(msg, realScores);
         if (msg.type === 'done')  { realResults = msg.results; }
-        if (msg.type === 'error') { await termLine(`<span class="t-error">  ✗ ${msg.message}</span>`, 0); }
+        if (msg.type === 'error') {
+          await termLine(`<span class="t-error">  ✗ ${escHtml(msg.message)}</span>`, 0);
+          if (msg.como_resolver) {
+            await termLine(`<span class="t-warn">    → ${escHtml(msg.como_resolver)}</span>`, 0);
+          }
+        }
         if (msg.type === 'cancel') { await termLine(`<span class="t-warn">  ⚠ Cancelado.</span>`, 0); }
       }
     }
@@ -8136,6 +8157,16 @@ async function openSkillsModal(taskName, runId) {
   const body = document.getElementById('skills-body');
   body.textContent = 'Carregando skills...';
 
+  // A Pokédex é gerada em disco pelo harness MCE durante execuções LOCAIS. A
+  // instância pública não tem esse diretório (o disco é efêmero e o conteúdo
+  // não é versionado), então lá o endpoint responde 404 por construção.
+  if (!mockMode && /railway\.app|vercel\.app/.test(API_URL + location.host)) {
+    body.textContent = 'A Pokédex de skills é gerada em disco pelo harness MCE em execuções '
+      + 'locais. Na instância pública ela não existe: rode a plataforma na sua máquina com '
+      + 'o harness "mce" para ver as skills aprendidas.';
+    return;
+  }
+
   if (!mockMode) {
     try {
       const r = await fetch(`${API_URL}/api/skills/${taskName}`);
@@ -8256,7 +8287,7 @@ function getPromptAgents(type, id) {
       agents.push({
         label: `Worker ${i+1}`,
         system: sys,
-        human: `{subtask_${i+1}}\n\nExecute esta subtarefa de forma completa e detalhada. Forneça uma análise aprofundada como contribuição para a resposta final.`,
+        human: `{subtarefa}\n\nExecute esta subtarefa de forma completa e detalhada. Forneça uma análise aprofundada como contribuição para a resposta final.`,
       });
     }
     const synthParts = Array.from({length:n}, (_,i) => `=== Worker ${i+1} ===\n{output_worker_${i+1}}`).join('\n\n');
@@ -8276,7 +8307,7 @@ function getPromptAgents(type, id) {
       return {
         label: `Agente ${i+1}`,
         system: sys,
-        human: `{task_content}\n\n[Perspectiva ${i+1}/${n}: analise a partir de um ângulo ${persp}]\n\n─── Rounds de debate (template aplicado iterativamente) ───\nTAREFA ORIGINAL:\n{task_content}\n\nSUA RESPOSTA ANTERIOR (Round {r-1}):\n{prev_response}\n\nRESPOSTAS DOS OUTROS AGENTES:\n{peer_responses}\n\nRevise incorporando insights válidos. Mantenha pontos corretos e corrija erros identificados.`,
+        human: `{task_content}\n\n[Perspectiva ${i+1}/${n}: analise a partir de um ângulo ${persp}]\n\n─── Rounds de debate (template aplicado iterativamente) ───\nTAREFA ORIGINAL:\n{task_content}\n\nSUA RESPOSTA ANTERIOR (Round {rodada_anterior}):\n{resposta_anterior}\n\nRESPOSTAS DOS OUTROS AGENTES:\n{pares}\n\nRevise incorporando insights válidos. Mantenha pontos corretos e corrija erros identificados.`,
       };
     });
   }
@@ -8292,7 +8323,7 @@ function getPromptAgents(type, id) {
       agents.push({
         label: `Worker ${i+1}`,
         system: sys,
-        human: `{subtask_${i+1}}\n\nExecute esta subtarefa.\n\n─── Debate peer-to-peer entre workers ───\nSUA RESPOSTA ANTERIOR:\n{prev_response}\n\nRESPOSTAS DOS OUTROS WORKERS:\n{peer_responses}\n\nRevise incorporando insights válidos.`,
+        human: `{subtarefa}\n\nExecute esta subtarefa.\n\n─── Debate peer-to-peer entre workers ───\nSUA RESPOSTA ANTERIOR:\n{resposta_anterior}\n\nRESPOSTAS DOS OUTROS WORKERS:\n{pares}\n\nRevise incorporando insights válidos.`,
       });
     }
     const synthParts = Array.from({length:n}, (_,i) => `=== Worker ${i+1} ===\n{output_worker_${i+1}}`).join('\n\n');

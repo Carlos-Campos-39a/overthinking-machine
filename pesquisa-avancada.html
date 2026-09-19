@@ -675,6 +675,16 @@
       border-radius: 3px;
       transition: width 0.4s ease;
     }
+  
+    .origem-selo { margin: 0 0 14px; padding: 9px 14px; border-radius: 10px;
+      font-size: 0.78rem; font-weight: 600; line-height: 1.5; }
+    .origem-sim  { background: rgba(255,209,102,0.16); border: 1px solid rgba(179,120,0,0.35); color: #7a5200; }
+    .origem-real { background: rgba(0,229,153,0.12); border: 1px solid rgba(10,122,92,0.35); color: #0a7a5c; }
+    .hook-real-nota { font-size: 0.72rem; line-height: 1.6; color: var(--texto-secundario);
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px;
+      padding: 10px 12px; margin-bottom: 12px; }
+    .hook-real-nota code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .hook-real-nota a { color: var(--roxo-profundo); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -831,8 +841,7 @@
       <div class="form-group">
         <label class="form-label">Modo de Execução</label>
         <select class="form-select" id="cfg-mode">
-          <option value="simulate" selected>🔮 Simulação Realista (sem GPU)</option>
-          <option value="real">⚡ Modelo Real (Llama-3.2-1B — requer GPU)</option>
+          <option value="simulate" selected>🔮 Simulação didática — não são ativações de um modelo</option>
         </select>
       </div>
 
@@ -845,7 +854,15 @@
         <span class="spinner"></span>
       </button>
 
-      <div class="import-divider">ou importar do Kaggle / Colab</div>
+      <div class="import-divider">hook real: rode na sua máquina e importe</div>
+      <div class="hook-real-nota">
+        Esta instância pública <strong>não lê ativações de modelo nenhum</strong> — ler o
+        residual stream exige os pesos na máquina. O experimento de verdade
+        (TransformerLens, <code>blocks.N.hook_resid_post</code>, validação cruzada) é o script
+        <a href="https://github.com/Carlos-Campos-39a/overthinking-machine/blob/main/geometry-of-truth/experiments/sas_classifier/experimento_multi.py"
+           target="_blank" rel="noopener">experimento_multi.py</a>.
+        Ele grava um <code>otm_results_*.json</code>; importe-o abaixo.
+      </div>
 
       <input type="file" id="import-file" accept=".json" multiple style="display:none" onchange="importResults(this)">
       <button class="import-btn" onclick="document.getElementById('import-file').click()">
@@ -916,6 +933,7 @@
           </div>
         </div>
 
+        <div class="origem-selo" id="origem-selo" hidden></div>
         <div class="metrics-grid" id="metrics-grid" style="display:none">
           <div class="metric-card">
             <div class="metric-val" id="m-accuracy">—</div>
@@ -1087,6 +1105,18 @@ function onLayerChange(val) {
 /* ══════════════════════════════════════════════════════════════
    EXECUTAR EXPERIMENTO
 ══════════════════════════════════════════════════════════════ */
+// Selo de origem dos dados. Existe porque esta página já escreveu "Llama real"
+// em cima de ruído gaussiano: quem vê o gráfico precisa saber o que está vendo.
+function marcarOrigem(tipo) {
+  const el = $('origem-selo');
+  if (!el) return;
+  el.hidden = false;
+  el.className = 'origem-selo ' + (tipo === 'real' ? 'origem-real' : 'origem-sim');
+  el.textContent = tipo === 'real'
+    ? '⚡ Hook real — ativações lidas de um modelo pelo script local'
+    : '🔮 Simulação didática — ativações sintéticas, não vêm de um modelo';
+}
+
 async function startExperiment() {
   if (running) return;
   running = true;
@@ -1119,7 +1149,7 @@ async function startExperiment() {
 
   logLine('─'.repeat(56), 'log-dim');
   logLine(`Iniciando experimento: ${dataset} · ${arch}`, 'log-info');
-  logLine(`Modo: ${mode === 'simulate' ? 'Simulação Realista' : 'Modelo Real'}  |  N=${n}`, 'log-info');
+  logLine(`Modo: simulação didática (ativações sintéticas)  |  N=${n}`, 'log-info');
   logLine('─'.repeat(56), 'log-dim');
 
   try {
@@ -1159,6 +1189,11 @@ async function startExperiment() {
             break;
           case 'done':
             handleResults(evt.results, n);
+            // O backend agora diz o que rodou, nunca o que foi pedido.
+            if (evt.results && evt.results.sintetico) {
+              logLine('SIMULAÇÃO DIDÁTICA — ' + (evt.results.aviso || ''), 'log-warn');
+              marcarOrigem('simulacao');
+            }
             break;
           case 'error':
             logLine('ERRO: ' + evt.message, 'log-err');
@@ -1169,7 +1204,8 @@ async function startExperiment() {
     }
   } catch (err) {
     logLine('Falha ao conectar com o servidor: ' + err.message, 'log-err');
-    logLine('Verifique se o servidor está rodando em localhost:8000', 'log-warn');
+    logLine('A API em ' + API + ' não respondeu. Rodando local? Suba com: python -m uvicorn server:app --port 8000', 'log-warn');
+    logLine('Você ainda pode importar um JSON de hook real gerado na sua máquina — isso não depende da API.', 'log-dim');
     showToast('Servidor indisponível', 'err');
   } finally {
     running = false;
@@ -1192,6 +1228,9 @@ function handleResults(res, n) {
   logLine(`Experimento concluído. ${res.n_correct} acertos, ${res.n_incorrect} erros.`, 'log-ok');
   logLine(`Acurácia do agente: ${(res.agent_accuracy * 100).toFixed(1)}%`, 'log-ok');
   logLine(`Melhor sonda linear: camada ${res.best_probe_layer} → ${(res.best_probe_acc * 100).toFixed(1)}%`, 'log-ok');
+  if (typeof res.probe_baseline === 'number') {
+    logLine(`Linha de base (chutar a classe majoritária): ${(res.probe_baseline * 100).toFixed(1)}% — sonda perto disso não achou nada.`, 'log-dim');
+  }
   logLine(`Separação PC1 (camada ${res.best_probe_layer}): ${res.pc1_separation.toFixed(3)}`, 'log-ok');
   logLine('─'.repeat(56), 'log-dim');
 
@@ -1596,7 +1635,8 @@ function selectDataset(key) {
   switchTab('log');
   logLine('─'.repeat(56), 'log-dim');
   logLine(`Dataset ativo: ${filename}`, 'log-info');
-  logLine(`Origem: ${data.mode === 'real' ? '⚡ Llama real' : '🔮 Simulação'}`, 'log-info');
+  logLine(`Origem: ${data.mode === 'real' ? '⚡ hook real (script local)' : '🔮 simulação didática'}`, 'log-info');
+  marcarOrigem(data.mode === 'real' ? 'real' : 'simulacao');
   logLine(`Dataset: ${data.dataset || '?'}  ·  Arch: ${data.arch || '?'}  ·  Classes: ${data.n_classes || 2}`, 'log-info');
   logLine(`${n} instâncias · ${data.n_layers} camadas · sonda: ${(data.best_probe_acc*100).toFixed(0)}% (camada ${data.best_probe_layer})`, 'log-info');
   logLine('─'.repeat(56), 'log-dim');
