@@ -653,6 +653,7 @@ async def rodar_experimento(
     num_instancias: int = 10,
     seed: int = 42,
     agent_kwargs: dict | None = None,
+    tarefa_spec: dict | None = None,
     ctx: Context = None,
 ) -> dict:
     """
@@ -667,11 +668,17 @@ async def rodar_experimento(
     {"n_workers": 5} em centralized/hybrid, {"n_agents": 5} em independent/
     decentralized, {"debate_rounds": 2} onde há debate. Isso muda o CUSTO —
     passe o mesmo dicionário a estimar_custo.
+
+    `tarefa_spec` roda a SUA tarefa em vez de uma embutida (ver listar_tarefas e
+    validar_tarefa). Quando presente, `tarefa` é ignorada. Prefira a sua tarefa:
+    as embutidas saturam — todas as arquiteturas tiram 1.0 com modelo de
+    raciocínio, e aí o experimento não separa nada.
     """
     body = {
         "model": modelo, "architecture": arquitetura, "harness": harness,
         "task": tarefa, "evaluator": avaliador,
         "num_instances": num_instancias, "seed": seed,
+        "tarefa_spec": tarefa_spec,
     }
     try:
         evs = await _post_sse("/api/run", body, ctx)
@@ -868,6 +875,53 @@ AVISO_DADO = (
 
 
 @server.tool()
+async def listar_tarefas(ctx: Context = None) -> dict:
+    """
+    Lista as tarefas embutidas com o que decide se um resultado significa algo:
+    número de casos, rótulos e a LINHA DE BASE — o score de quem responde sempre
+    o rótulo mais comum.
+
+    Leia a linha de base antes de comemorar qualquer número. Um experimento que
+    tira 0.80 numa tarefa cuja linha de base é 0.78 não descobriu nada.
+
+    As tarefas embutidas SATURAM: com um modelo de raciocínio, todas as
+    arquiteturas tiram 1.0 e a comparação não separa nada. Se a sua pergunta é
+    "qual arquitetura é melhor", traga a sua tarefa com validar_tarefa e passe-a
+    em tarefa_spec — é o único jeito de sair do teto.
+    """
+    try:
+        return await _get("/api/tarefas", ctx=ctx)
+    except Exception as e:
+        return _err(f"Não consegui listar as tarefas: {e}", _dica_offline())
+
+
+@server.tool()
+async def validar_tarefa(spec: dict, ctx: Context = None) -> dict:
+    """
+    Valida uma tarefa declarativa e devolve o resumo, de graça, antes de gastar
+    chamada de modelo.
+
+    Formato mínimo:
+        {"nome": "minha-tarefa",
+         "instrucao": "enunciado comum a todos os casos",
+         "rotulos_validos": ["a", "b"],
+         "casos": [{"id": "c1", "entrada": "...", "esperado": "a"}],
+         "exemplos": [{"entrada": "...", "saida": "a"}]}
+
+    O resumo traz a distribuição das classes, a linha de base e AVISOS — classes
+    desbalanceadas, poucos casos, gabarito visível dentro do enunciado. Avisos
+    não impedem de rodar; impedem de acreditar no resultado. Resolva-os antes.
+
+    A tarefa NÃO vai para a biblioteca compartilhada: casos costumam conter dado
+    real. Ela viaja só nas suas requisições. Não cole dado pessoal de terceiros.
+    """
+    try:
+        return await _post_json("/api/tarefas/validar", {"spec": spec}, ctx)
+    except Exception as e:
+        return _err(f"Não consegui validar: {e}", _dica_offline())
+
+
+@server.tool()
 async def listar_topologias(tipo: str = "", busca: str = "", ctx: Context = None) -> dict:
     """
     Lista as topologias e harnesses da biblioteca compartilhada.
@@ -1004,11 +1058,16 @@ async def rodar_com_topologia(
     harness: str = "zero_shot",
     num_instancias: int = 10,
     seed: int = 42,
+    tarefa_spec: dict | None = None,
     ctx: Context = None,
 ) -> dict:
     """
     Roda um experimento com uma topologia declarativa em vez de uma das cinco
     embutidas. Métricas idênticas: score, tokens, latência e chamadas.
+
+    `tarefa_spec` roda a SUA tarefa em vez de uma embutida; quando presente,
+    `tarefa` é ignorada. Topologia própria + tarefa própria é o caso completo:
+    o seu método, medido no seu problema, contra a mesma linha de base.
 
     `spec` é a especificação completa (use obter_topologia para pegá-la da
     biblioteca). Estime o custo com validar_topologia antes: o total é
@@ -1031,6 +1090,7 @@ async def rodar_com_topologia(
             "num_instances": num_instancias,
             "seed": seed,
             "topologia_spec": spec,
+            "tarefa_spec": tarefa_spec,
         })
     except Exception as e:
         # O teto de orçamento da API chega aqui como HTTP 400 com uma mensagem

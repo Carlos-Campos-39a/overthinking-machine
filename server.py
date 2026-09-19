@@ -116,10 +116,11 @@ class RunConfig(BaseModel):
     exp_name: str = ""
     custom_prompts: Optional[dict] = None   # reservado para uso futuro
     instance_ids: list[str] = []            # IDs específicos selecionados na UI
-    # Topologia/harness montados pelo usuário. Ausentes = caminho por nome,
-    # exatamente como antes; nenhum cliente atual é afetado.
+    # Topologia/harness/tarefa montados pelo usuário. Ausentes = caminho por
+    # nome, exatamente como antes; nenhum cliente atual é afetado.
     topologia_spec: Optional[dict] = None
     harness_spec: Optional[dict] = None
+    tarefa_spec: Optional[dict] = None
 
 
 # ── Health ─────────────────────────────────────────────────────────────────────
@@ -179,6 +180,8 @@ def _validar_orcamento(cfg) -> None:
         if errs:
             raise HTTPException(400, "harness inválido — " + "; ".join(errs[:3]))
 
+    _validar_tarefa_spec(cfg)
+
     if not 1 <= cfg.meta_budget <= 10:
         raise HTTPException(400, f"meta_budget={cfg.meta_budget} fora do intervalo 1–10.")
 
@@ -233,6 +236,36 @@ _CHAMADAS_EMBUTIDAS = {
 }
 
 
+def _validar_tarefa_spec(cfg) -> None:
+    """
+    Recusa tarefa inválida com HTTP 400, antes do stream.
+
+    Sem isto, a spec só seria validada dentro da thread do experimento, e o erro
+    chegaria como evento dentro do SSE — depois de a pessoa já ver "iniciando".
+    """
+    spec = getattr(cfg, "tarefa_spec", None)
+    if not spec:
+        return
+    from src.tasks.tarefa_spec import MAX_CHARS_TAREFA, erros_de_tarefa
+
+    if len(json.dumps(spec, ensure_ascii=False)) > MAX_CHARS_TAREFA:
+        raise HTTPException(400, f"tarefa acima de {MAX_CHARS_TAREFA} caracteres")
+    errs = erros_de_tarefa(spec)
+    if errs:
+        raise HTTPException(400, "tarefa inválida — " + "; ".join(errs[:3]))
+
+    # Pedir mais instâncias do que a tarefa tem não é erro, mas silenciosamente
+    # rodar menos casos e comparar com outra execução seria.
+    n_casos = len(spec.get("casos") or [])
+    if cfg.num_instances > n_casos:
+        raise HTTPException(
+            400,
+            f"a sua tarefa tem {n_casos} caso(s), mas foram pedidas "
+            f"{cfg.num_instances} instâncias. Reduza num_instances para "
+            f"{n_casos} ou acrescente casos.",
+        )
+
+
 def _validar_lote(execucoes: int, o_que: str, cfg) -> None:
     """
     Teto de um LOTE: várias execuções numa requisição só (um modelo por execução
@@ -252,6 +285,8 @@ def _validar_lote(execucoes: int, o_que: str, cfg) -> None:
         raise HTTPException(400, "num_instances precisa ser ao menos 1.")
     if not 1 <= cfg.reps <= MAX_REPS:
         raise HTTPException(400, f"reps={cfg.reps} fora do intervalo 1–{MAX_REPS}.")
+
+    _validar_tarefa_spec(cfg)
 
     kwargs = getattr(cfg, "agent_kwargs", None) or {}
     formula = _CHAMADAS_EMBUTIDAS.get(cfg.architecture)
@@ -494,6 +529,13 @@ AVISO_TERCEIROS = (
     "prévia para ler os prompts literais antes de rodar com a sua chave."
 )
 
+AVISO_TAREFA_PROPRIA = (
+    "Traga a sua tarefa em tarefa_spec: instrução comum + casos rotulados. Ela "
+    "NÃO vai para a biblioteca compartilhada — casos costumam conter dado real, "
+    "e uma topologia é método enquanto uma tarefa é conteúdo. A spec viaja só "
+    "nesta requisição. Não cole dado pessoal de clientes."
+)
+
 
 def _ip_do(request: Request) -> str:
     """
@@ -542,7 +584,70 @@ async def listar_harnesses():
 @app.get("/api/limites")
 async def obter_limites():
     """Servido para que interface e MCP nunca repitam os tetos à mão."""
-    return {"limites": LIMITES}
+    from src.tasks.tarefa_spec import LIMITES_TAREFA
+    return {"limites": {**LIMITES, **LIMITES_TAREFA}}
+
+
+# ── Tarefas ────────────────────────────────────────────────────────────────────
+
+@app.get("/api/tarefas")
+async def listar_tarefas():
+    """
+    Catálogo de tarefas embutidas, com o que se precisa saber ANTES de rodar:
+    quantos casos, quais rótulos e — o número que decide se um resultado quer
+    dizer alguma coisa — a linha de base de quem responde sempre o rótulo mais
+    comum. Sem ela, 0.80 parece bom mesmo quando o chute fixo dá 0.78.
+    """
+    from src.task_base import TaskRegistry
+
+    tarefas = []
+    for nome in TaskRegistry.list_available():
+        item: dict = {"nome": nome, "embutida": True}
+        try:
+            t = TaskRegistry.get(nome)
+            t.load()
+            insts = t._instances
+            item["casos"] = len(insts)
+            rotulos = (insts[0].metadata.get("valid_labels") if insts else None) or []
+            item["rotulos"] = list(rotulos)
+            item["tipo"] = insts[0].task_type if insts else ""
+            verdades = [str(i.ground_truth) for i in insts]
+            if verdades:
+                dist: dict[str, int] = {}
+                for v in verdades:
+                    dist[v] = dist.get(v, 0) + 1
+                item["distribuicao"] = dict(sorted(dist.items(), key=lambda kv: -kv[1]))
+                item["linha_de_base"] = round(max(dist.values()) / len(verdades), 4)
+        except Exception as e:
+            # Uma tarefa que não carrega não pode derrubar o catálogo inteiro.
+            item["erro"] = f"não carregou: {type(e).__name__}"
+        tarefas.append(item)
+
+    return {"tarefas": tarefas, "aviso_tarefa_propria": AVISO_TAREFA_PROPRIA}
+
+
+class TarefaBody(BaseModel):
+    spec: dict
+
+
+@app.post("/api/tarefas/validar")
+async def validar_tarefa_endpoint(body: TarefaBody):
+    """
+    Valida uma tarefa declarativa e devolve o resumo — de graça, antes de
+    qualquer chamada de modelo.
+    """
+    from src.tasks.tarefa_spec import (
+        MAX_CHARS_TAREFA, erros_de_tarefa, resumo_da_tarefa, validar_tarefa,
+    )
+
+    spec = body.spec
+    if len(json.dumps(spec, ensure_ascii=False)) > MAX_CHARS_TAREFA:
+        raise HTTPException(400, f"tarefa acima de {MAX_CHARS_TAREFA} caracteres")
+
+    errs = erros_de_tarefa(spec)
+    if errs:
+        return {"ok": False, "erros": errs}
+    return {"ok": True, "erros": [], "resumo": resumo_da_tarefa(validar_tarefa(spec))}
 
 
 @app.post("/api/especificacoes/validar")
@@ -780,6 +885,7 @@ async def _stream_experiment(
             # declarativo. Ausentes, o runner segue exatamente como antes.
             "topologia_spec": cfg.topologia_spec,
             "harness_spec":   cfg.harness_spec,
+            "tarefa_spec":    cfg.tarefa_spec,
         }
 
         capture = _Capture()
@@ -1514,6 +1620,9 @@ class BenchmarkConfig(BaseModel):
     seed: int = 42
     reps: int = 1
     agent_kwargs: dict = {}
+    # A mesma tarefa própria vale para comparar modelos — é o ponto: descobrir
+    # qual modelo resolve a SUA tarefa, não a embutida.
+    tarefa_spec: Optional[dict] = None
 
 
 @app.post("/api/benchmark")
@@ -1595,6 +1704,7 @@ async def _stream_benchmark(
                     "num_instances": cfg.num_instances,
                     "seed":          cfg.seed,
                     "agent_kwargs":  cfg.agent_kwargs,
+                    "tarefa_spec":   cfg.tarefa_spec,
                 }
                 try:
                     with redirect_stdout(capture):
@@ -1769,6 +1879,7 @@ class PromptSensitivityConfig(BaseModel):
     reps: int = 1
     interactions: bool = False     # testa pares das cláusulas mais relevantes
     max_pairs: int = 2
+    tarefa_spec: Optional[dict] = None
 
 
 @app.post("/api/prompt-sensitivity")
@@ -1844,6 +1955,7 @@ async def _stream_prompt_sensitivity(
                     "num_instances": cfg.num_instances,
                     "seed":          cfg.seed,
                     "system_prompt_override": prompt_text,
+                    "tarefa_spec":   cfg.tarefa_spec,
                 }
                 with redirect_stdout(capture):
                     runs.append(_run_experiment(config, verbose=True))

@@ -82,6 +82,9 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
             seed           (int)  ex: 42
             agent_kwargs   (dict) parâmetros extras para create_agent
             meta_budget    (int)  iterações do Meta-Harness (se harness=meta_harness)
+            topologia_spec (dict) topologia declarativa; substitui `architecture`
+            harness_spec   (dict) harness declarativo; substitui `harness`
+            tarefa_spec    (dict) tarefa declarativa; substitui `task`
 
         verbose: se True, imprime progresso no terminal
 
@@ -99,7 +102,8 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
         print(f"  Modelo:       {config['model']}")
         print(f"  Arquitetura:  {config['architecture']}")
         print(f"  Harness:      {config['harness']}")
-        print(f"  Tarefa:       {config['task']}")
+        # Uma spec declarativa dispensa o nome da tarefa embutida.
+        print(f"  Tarefa:       {(config.get('tarefa_spec') or {}).get('nome') or config.get('task', '—')}")
         print(f"  Avaliador:    {config['evaluator']}")
         print(f"  Instâncias:   {config.get('num_instances', 5)}")
         print(f"{'='*60}\n")
@@ -108,11 +112,25 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
     llm = LLMFactory.create(config["model"])
 
     # ── Instancia tarefa ──────────────────────────────────────────────
-    task = TaskRegistry.get(
-        config["task"],
-        num_instances=config.get("num_instances", 5),
-        seed=config.get("seed", 42),
-    )
+    # `tarefa_spec` traz uma tarefa declarativa da própria pessoa (colada na
+    # interface ou enviada por MCP). Quando presente, substitui o nome da
+    # tarefa; o caminho pelo registro segue intacto para todo o resto.
+    tarefa_spec = config.get("tarefa_spec")
+    if tarefa_spec:
+        from src.tasks.tarefa_declarativa import TarefaDeclarativa
+        task = TarefaDeclarativa(
+            tarefa_spec,
+            num_instances=config.get("num_instances", 5),
+            seed=config.get("seed", 42),
+        )
+        task_used = task.name
+    else:
+        task = TaskRegistry.get(
+            config["task"],
+            num_instances=config.get("num_instances", 5),
+            seed=config.get("seed", 42),
+        )
+        task_used = config["task"]
 
     # Se instance_ids foi fornecido, carrega todas as instâncias e filtra pelos IDs
     instance_ids: list[str] = config.get("instance_ids", [])
@@ -159,7 +177,10 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
 
     # ── Instancia harness ─────────────────────────────────────────────
     harness_name = config.get("harness", "zero_shot")
-    task_name = config["task"]
+    # ACE e MCE guardam memória por tarefa em disco. Com tarefa declarativa o
+    # nome é o da spec, senão a memória da tarefa de uma pessoa entraria na pasta
+    # da tarefa embutida e contaminaria a execução de outra.
+    task_name = task_used
 
     harness_spec = config.get("harness_spec")
     if harness_spec:
@@ -273,6 +294,7 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
         # todas as topologias do usuário sob o mesmo rótulo.
         "architecture_used": architecture_used,
         "harness_used": harness_used,
+        "task_used": task_used,
         "num_instances": len(instances),
         "mean_score": round(mean_score, 4),
         "mean_elapsed_s": round(mean_elapsed_s, 3),

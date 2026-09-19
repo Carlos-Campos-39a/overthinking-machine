@@ -431,7 +431,10 @@ def val_mcp() -> None:
                  # checagem passaria com todas as seis apagadas.
                  "listar_topologias", "obter_topologia", "validar_topologia",
                  "previa_topologia", "publicar_topologia", "excluir_topologia",
-                 "rodar_com_topologia"}
+                 "rodar_com_topologia",
+                 # Tarefa declarativa: sem elas, quem conecta só consegue rodar
+                 # as tarefas embutidas — que saturam.
+                 "listar_tarefas", "validar_tarefa"}
     nomes = {t.name for t in tools}
     faltando = esperadas - nomes
     check("mcp", f"{len(esperadas)} ferramentas", OK if not faltando else FAIL,
@@ -654,8 +657,15 @@ def relatorio() -> int:
 # aconteceu: uma quebra de linha real foi parar dentro de uma string JS.
 # ─────────────────────────────────────────────────────────────────────────────
 
-PAGINAS = ["index.html", "overthinking-machine.html", "pesquisa-avancada.html",
-           "prompt-sensitivity-benchmark.html", "model-benchmark.html"]
+def paginas_locais() -> list[Path]:
+    """
+    Toda página .html da raiz, lida do disco — não uma lista mantida à mão.
+
+    Uma página nova é justamente a que alguém esqueceria de acrescentar à lista,
+    e é a que mais precisa da checagem. Vale também para quem está escrevendo uma
+    página agora e ainda não commitou.
+    """
+    return sorted(PROJ.glob("*.html"))
 
 
 def val_javascript() -> None:
@@ -669,7 +679,7 @@ def val_javascript() -> None:
         check("javascript", "node disponível", SKIP, "instale o Node para checar a sintaxe do JS inline")
         return
 
-    alvos = [(PROJ / n) for n in PAGINAS] + [PROJ / "config.js"]
+    alvos = paginas_locais() + [PROJ / "config.js"]
     for arq in alvos:
         if not arq.exists():
             check("javascript", arq.name, FAIL, "arquivo não existe")
@@ -817,8 +827,22 @@ def val_producao() -> None:
           else "sem OTM_DATA_DIR: o que os visitantes publicarem some no próximo deploy")
 
     # ── o site ──────────────────────────────────────────────────────────────
-    for pagina in ("", "overthinking-machine", "pesquisa-avancada",
-                   "prompt-sensitivity-benchmark", "model-benchmark", "config.js"):
+    #
+    # As páginas conferidas são as RASTREADAS no git: se está no repositório,
+    # tem de estar no ar. Página ainda não commitada é trabalho em andamento
+    # (possivelmente de outra pessoa, agora) e não conta como falha.
+    rastreadas = subprocess.run(["git", "ls-files", "*.html"], cwd=PROJ,
+                                capture_output=True, text=True, timeout=30)
+    nomes = [l.strip() for l in rastreadas.stdout.splitlines() if l.strip()]
+    locais = {p.name for p in paginas_locais()}
+    nao_commitadas = sorted(locais - set(nomes))
+    if nao_commitadas:
+        check("producao", "páginas ainda não commitadas", SKIP,
+              f"fora da conferência: {', '.join(nao_commitadas)}")
+
+    # index.html é servido na raiz; as outras pelo nome sem .html (cleanUrls)
+    urls = [""] + [n[:-5] for n in sorted(nomes) if n != "index.html"] + ["config.js"]
+    for pagina in urls:
         st, _ = _prod(f"{PROD_SITE}/{pagina}")
         check("producao", f"site /{pagina}", OK if st == 200 else FAIL, f"HTTP {st}")
 

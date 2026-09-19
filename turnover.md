@@ -1,5 +1,28 @@
 # Turnover — Validação do projeto e roteiro de teste mínimo com Gemini
 
+> ## ⚠ CORREÇÃO — 2026-09-19
+>
+> **A seção 2 deste documento acusa "Kim et al., 2025" e "Lee et al., 2026" de
+> serem citações inventadas. Isso está ERRADO. Os dois papers são reais**, e a
+> acusação foi um engano meu (assistente) numa sessão anterior. Verificado
+> diretamente no arXiv em 19/09/2026:
+>
+> | citação | é real | título | 1º autor |
+> |---|---|---|---|
+> | `arXiv:2512.08296` | **sim** | *Towards a Science of Scaling Agent Systems* | Yubin Kim |
+> | `arXiv:2603.28052` | **sim** | *Meta-Harness: End-to-End Optimization of Model Harnesses* | Yoonho Lee |
+>
+> O paper de Kim inclusive descreve o **efeito de saturação de capacidade** e os
+> ganhos decrescentes de coordenação — exatamente o que a plataforma mede, e a
+> origem do Princípio 5. As citações podem ir para o TCC.
+>
+> **"Bigeard et al., 2025" (em `finance_agent.py`) continua NÃO verificada** —
+> essa parte do alerta segue de pé.
+>
+> Um aviso falso de fabricação faz tanto estrago quanto uma citação fabricada:
+> seguir o conselho abaixo teria tirado do TCC as duas referências que o
+> sustentam. O resto do documento é histórico e fica como está.
+
 Documento gerado em 2026-06-27 após uma sessão de auditoria do projeto. Cobre três coisas: (1) o que foi checado e o que foi corrigido, (2) pontos que precisam da sua atenção antes de rodar testes reais, e (3) um roteiro passo a passo para rodar o menor experimento real (com a API do Gemini) que ainda produz resultados defensáveis para o TCC, validando todas as ferramentas construídas no caminho.
 
 ## 1. Resumo do que foi validado
@@ -159,4 +182,4 @@ for r in sorted(rows, key=lambda r: (r["arch"], r["harness"])):
 - [ ] `llm_judge` produz feedback real (não só fallback `0.5`) e a tarefa `finance_agent` roda (Tier 3).
 - [ ] A matriz piloto de 10 runs do Tier 4 completa e a tabela agregada faz sentido direcionalmente (Tier 4).
 - [ ] (Opcional, fora do escopo do Gemini) Abrir `overthinking-machine.html` num navegador e confirmar visualmente a aba "Visual" de uma arquitetura, já que o teste headless não consegue renderizar `<canvas>` de verdade.
-- [ ] Antes de escrever o texto do TCC: substituir "Kim et al., 2025", "Lee et al., 2026" e verificar "Bigeard et al., 2025" por literatura real.
+- [x] ~~Antes de escrever o texto do TCC: substituir "Kim et al., 2025", "Lee et al., 2026"~~ — **cancelado: os dois são reais e verificados** (ver a correção no topo). Continua pendente apenas: verificar "Bigeard et al., 2025" (`finance_agent.py`).

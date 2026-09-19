@@ -115,9 +115,10 @@ def main() -> int:
 
     # 3. superfície
     ferramentas = {t["name"] for t in c.rpc("tools/list")["result"]["tools"]}
-    check("ferramentas", len(ferramentas) >= 14, f"{len(ferramentas)}")
+    check("ferramentas", len(ferramentas) >= 16, f"{len(ferramentas)}")
     essenciais = {"listar_capacidades", "validar_topologia", "previa_topologia",
-                  "rodar_com_topologia", "rodar_experimento", "estimar_custo"}
+                  "rodar_com_topologia", "rodar_experimento", "estimar_custo",
+                  "listar_tarefas", "validar_tarefa"}
     falt = essenciais - ferramentas
     check("ferramentas essenciais presentes", not falt, f"faltam: {sorted(falt)}" if falt else "")
 
