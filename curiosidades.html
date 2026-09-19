@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curiosidades · Overthinking Machine</title>
+  <meta name="description" content="Achados que saíram dos experimentos do OTM e contrariaram a expectativa — cada um com n, modelo, data e o que ele não prova.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --branco:#FFFFFF; --azul-sereno:#AEC6CF; --roxo-lavanda:#E6E6FA;
+      --roxo-profundo:#5D3FD3; --roxo-mid:#7B5EA7; --roxo-hover:#4b32b3;
+      --texto-principal:#1F1F2E; --texto-secundario:#6B6B80;
+      --card-bg:#FAFAFE; --card-border:#E8E8F5;
+      --term-bg:#080812; --term-header:#0F0F22; --term-green:#00E599;
+      --term-blue:#60B4FF; --term-dim:#3A3A5C; --term-text:#C8C8E8;
+      --m1:#5D3FD3; --m2:#9B59B6; --m3:#b3471f; --m4:#0a7a5c;
+      --shadow-card:0 4px 20px rgba(93,63,211,0.08);
+      /* As tres interfaces comparadas reusam as cores dos modulos. A ordem e fixa:
+         cor segue a interface, nunca a posicao no ranking. */
+      --i-mcp:var(--m1); --i-openapi:var(--m3); --i-docs:var(--m4);
+    }
+    *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--branco); color:var(--texto-principal); overflow-x:hidden; }
+    ::selection { background:var(--roxo-lavanda); color:var(--roxo-profundo); }
+
+    /* ── Header ────────────────────────────────────────────────── */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 5%; background:rgba(255,255,255,0.9);
+      backdrop-filter:blur(16px); border-bottom:1px solid rgba(93,63,211,0.08);
+      position:sticky; top:0; z-index:200;
+    }
+    .logo {
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.25rem;
+      color:var(--roxo-profundo); letter-spacing:-0.5px;
+      display:flex; align-items:center; gap:7px; text-decoration:none;
+    }
+    .logo span { color:var(--azul-sereno); }
+    .logo-dot { width:8px; height:8px; background:var(--term-green); border-radius:50%; animation:blink 1.8s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    nav { display:flex; gap:26px; align-items:center; }
+    nav a { font-size:0.86rem; font-weight:500; color:var(--texto-secundario); text-decoration:none; transition:color 0.2s; }
+    nav a:hover { color:var(--roxo-profundo); }
+    .nav-btn {
+      background:var(--roxo-profundo); color:#fff !important;
+      padding:9px 20px; border-radius:50px; white-space:nowrap;
+      transition:background 0.2s, transform 0.2s;
+    }
+    .nav-btn:hover { background:var(--roxo-hover); transform:translateY(-1px); }
+    @media(max-width:900px){ nav > a:not(.nav-btn){ display:none } }
+
+    /* ── Hero ──────────────────────────────────────────────────── */
+    .hero {
+      padding:64px 5% 52px;
+      background:linear-gradient(165deg,#F5F2FF 0%,#FAF9FF 50%,#FFFFFF 100%);
+      border-bottom:1px solid var(--card-border);
+    }
+    .wrap { max-width:1060px; margin:0 auto; }
+    .page-label {
+      font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+      color:var(--roxo-profundo); opacity:0.75; margin-bottom:12px;
+    }
+    h1.page-title {
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:clamp(1.9rem,4vw,3rem); line-height:1.1;
+      letter-spacing:-1.5px; margin-bottom:20px; text-wrap:balance;
+    }
+    h1.page-title em { font-style:normal; color:var(--roxo-profundo); }
+    .page-sub { font-size:1rem; line-height:1.8; color:var(--texto-secundario); max-width:660px; }
+    .page-sub strong { color:var(--texto-principal); font-weight:600; }
+    .regra {
+      margin-top:26px; border-left:3px solid var(--roxo-profundo);
+      padding:2px 0 2px 16px; font-size:0.88rem; line-height:1.7; color:var(--texto-secundario); max-width:660px;
+    }
+    .regra strong { color:var(--texto-principal); font-weight:600; }
+
+    /* ── Achados ───────────────────────────────────────────────── */
+    section.blk { padding:64px 5%; }
+    .achado { border-top:1px solid var(--card-border); }
+    .achado:first-of-type { border-top:none; }
+    .ach-top { display:flex; align-items:baseline; gap:14px; margin-bottom:8px; flex-wrap:wrap; }
+    .ach-n {
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:0.78rem;
+      color:#fff; background:var(--c,var(--roxo-profundo)); border-radius:6px;
+      padding:3px 9px; letter-spacing:0.5px; flex:none;
+    }
+    .ach-q { font-size:0.85rem; color:var(--texto-secundario); font-style:italic; }
+    h2.ach-h {
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:clamp(1.35rem,2.5vw,1.95rem); letter-spacing:-0.7px;
+      line-height:1.2; margin-bottom:14px; text-wrap:balance;
+    }
+    .ach-p { font-size:0.96rem; line-height:1.78; color:var(--texto-secundario); max-width:680px; margin-bottom:14px; }
+    .ach-p strong { color:var(--texto-principal); font-weight:600; }
+    .ach-p code, .meta code, .nao li code {
+      font-family:'JetBrains Mono',monospace; font-size:0.86em;
+      background:var(--roxo-lavanda); color:var(--roxo-profundo); padding:1px 5px; border-radius:4px;
+    }
+
+    /* Ficha tecnica: n, modelo, data, metodo */
+    .meta {
+      display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 4px;
+    }
+    .meta-item {
+      font-family:'JetBrains Mono',monospace; font-size:0.7rem;
+      background:var(--card-bg); border:1px solid var(--card-border);
+      border-radius:6px; padding:5px 10px; color:var(--texto-secundario);
+    }
+    .meta-item b { color:var(--texto-principal); font-weight:500; }
+
+    /* Caixa "o que nao prova" — o compromisso da casa em forma de componente */
+    .nao {
+      margin-top:22px; background:var(--card-bg);
+      border:1.5px solid var(--card-border); border-left:3px solid var(--m3);
+      border-radius:12px; padding:20px 22px; max-width:760px;
+    }
+    .nao-h {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.85rem;
+      color:var(--m3); margin-bottom:12px; display:flex; align-items:center; gap:8px;
+    }
+    .nao ul { list-style:none; }
+    .nao li {
+      font-size:0.85rem; line-height:1.65; color:var(--texto-secundario);
+      padding:7px 0 7px 20px; position:relative; border-bottom:1px solid var(--card-border);
+    }
+    .nao li:last-child { border-bottom:none; }
+    .nao li::before { content:'✕'; position:absolute; left:0; top:7px; color:var(--m3); font-weight:700; font-size:0.8rem; }
+    .nao li strong { color:var(--texto-principal); font-weight:600; }
+
+    /* ── Graficos ──────────────────────────────────────────────── */
+    .controles { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:26px 0 18px; }
+    .controles .lbl { font-size:0.78rem; color:var(--texto-secundario); }
+    .seg { display:inline-flex; flex-wrap:wrap; max-width:100%; border:1.5px solid var(--card-border); border-radius:50px; overflow:hidden; background:#fff; }
+    .seg button {
+      font:600 0.8rem 'Inter',sans-serif; color:var(--texto-secundario);
+      background:transparent; border:0; padding:7px 17px; cursor:pointer; transition:background 0.18s,color 0.18s;
+    }
+    .seg button:hover { background:var(--card-bg); }
+    .seg button[aria-pressed="true"] { background:var(--roxo-profundo); color:#fff; }
+    .legenda { display:flex; flex-wrap:wrap; gap:16px; font-size:0.78rem; color:var(--texto-secundario); }
+    .legenda span { display:inline-flex; align-items:center; gap:6px; }
+    .legenda i { width:11px; height:11px; border-radius:3px; display:inline-block; flex:none; }
+
+    .painel {
+      background:#fff; border:1.5px solid var(--card-border); border-radius:16px;
+      padding:22px; box-shadow:var(--shadow-card); min-width:0;
+    }
+    .painel + .painel { margin-top:14px; }
+    .painel-h { font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.98rem; margin-bottom:4px; }
+    .painel-s { font-size:0.8rem; color:var(--texto-secundario); line-height:1.6; margin-bottom:16px; }
+    .trio { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:14px; margin-top:14px; }
+    svg { display:block; width:100%; overflow:visible; }
+    svg text { font-family:'Inter',sans-serif; fill:var(--texto-secundario); font-size:12px; }
+    svg .val { fill:var(--texto-principal); font-weight:600; font-variant-numeric:tabular-nums; }
+    svg .mult { fill:var(--texto-secundario); font-size:11px; }
+    svg .tick { fill:var(--texto-secundario); opacity:0.75; font-size:10.5px; font-variant-numeric:tabular-nums; }
+    .barra { outline:none; }
+    .barra:hover path, .barra:focus path { filter:brightness(1.1); }
+    .barra:focus-visible rect.hit, .seg button:focus-visible, summary:focus-visible { outline:2px solid var(--roxo-profundo); outline-offset:2px; }
+
+    #dica {
+      position:fixed; z-index:300; pointer-events:none;
+      background:var(--term-bg); color:var(--term-text);
+      border:1px solid var(--term-dim); border-radius:9px;
+      padding:9px 12px; font-size:0.74rem; line-height:1.5; max-width:270px;
+      box-shadow:0 8px 28px rgba(31,31,46,0.3);
+    }
+    #dica b { display:block; color:#fff; font-size:0.82rem; margin-bottom:3px; }
+    #dica i { font-style:normal; color:var(--term-dim); }
+
+    /* ── Tabela ────────────────────────────────────────────────── */
+    details {
+      margin-top:18px; border:1.5px solid var(--card-border);
+      border-radius:12px; background:#fff; max-width:100%;
+    }
+    summary {
+      cursor:pointer; padding:13px 18px; font-size:0.84rem; font-weight:600;
+      color:var(--roxo-profundo); list-style:none;
+    }
+    summary::-webkit-details-marker { display:none; }
+    summary::before { content:'▸ '; }
+    details[open] summary::before { content:'▾ '; }
+    .rolagem { overflow-x:auto; padding:0 18px 18px; }
+    table { border-collapse:collapse; width:100%; font-size:0.78rem; font-variant-numeric:tabular-nums; }
+    th, td { text-align:right; padding:7px 10px; border-bottom:1px solid var(--card-border); white-space:nowrap; }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align:left; }
+    th { color:var(--texto-secundario); font-weight:600; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.5px; }
+    tbody tr:hover { background:var(--card-bg); }
+    td .pip { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:7px; }
+    td.falha { color:var(--m3); font-weight:600; }
+
+    /* ── Terminal (achados secundarios) ────────────────────────── */
+    .term { background:var(--term-bg); border-radius:12px; overflow:hidden; margin-top:20px; max-width:760px; }
+    .term-body {
+      padding:16px 18px; font-family:'JetBrains Mono',monospace;
+      font-size:0.72rem; line-height:1.95; color:var(--term-text);
+      /* pre preserva as colunas: sem isso o HTML colapsa os espacos e a tabela desmonta */
+      white-space:pre; overflow-x:auto;
+    }
+    .term-body::-webkit-scrollbar { height:4px; }
+    .term-body::-webkit-scrollbar-thumb { background:var(--term-dim); border-radius:2px; }
+    .t-dim { color:var(--term-dim); } .t-blue { color:var(--term-blue); }
+    .t-ok { color:var(--term-green); } .t-warn { color:#FFD166; }
+    .t-win { background:rgba(0,229,153,0.1); border-left:2px solid var(--term-green); padding-left:8px; display:block; }
+
+    /* ── Fonte / creditos ─────────────────────────────────────── */
+    .fonte { margin-top:18px; font-size:0.8rem; color:var(--texto-secundario); line-height:1.7; max-width:680px; }
+    .fonte a { color:var(--roxo-profundo); text-decoration:none; border-bottom:1px solid rgba(93,63,211,0.3); }
+    .fonte a:hover { border-bottom-color:var(--roxo-profundo); }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    footer {
+      background:var(--term-bg); color:var(--term-text);
+      padding:44px 5% 34px; text-align:center;
+    }
+    .foot-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.05rem; color:#fff; margin-bottom:14px; }
+    .foot-links { display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-bottom:18px; }
+    .foot-links a { color:var(--term-text); font-size:0.82rem; text-decoration:none; opacity:0.75; transition:opacity 0.2s; }
+    .foot-links a:hover { opacity:1; color:var(--term-green); }
+    .foot-fine { font-size:0.74rem; color:var(--term-dim); line-height:1.7; }
+
+    @media(max-width:700px){
+      section.blk { padding:46px 5%; }
+      .nao, .term, .fonte, .ach-p { max-width:100%; }
+    }
+    @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .logo-dot{animation:none} }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <span class="logo-dot"></span>OVERTHINKING<span>MACHINE</span>
+  </a>
+  <nav>
+    <a href="index.html#modulos">Módulos</a>
+    <a href="index.html#metodo">Método</a>
+    <a href="index.html#agentes">Para agentes</a>
+    <a href="overthinking-machine.html" class="nav-btn">Começar um teste</a>
+  </nav>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="page-label">Curiosidades</div>
+    <h1 class="page-title">O que a gente mediu<br>e <em>não</em> esperava.</h1>
+    <p class="page-sub">
+      Todo experimento aqui existe para responder a uma pergunta prática. Às vezes a resposta
+      contraria o que a gente apostava — e <strong>esses são os achados que valem contar</strong>.
+      Inclusive quando desmentem o próprio site.
+    </p>
+    <div class="regra">
+      <strong>A regra desta página:</strong> nenhum número entra sem <code>n</code>, modelo, data e
+      método. E cada achado carrega a lista do que ele <strong>não</strong> prova — porque é aí que
+      benchmark costuma virar propaganda.
+    </div>
+  </div>
+</section>
+
+<!-- ── ACHADO 01 · MCP × API ────────────────────────────────────── -->
+<section class="blk achado" id="mcp-api">
+  <div class="wrap">
+    <div class="ach-top" style="--c:var(--m1)">
+      <span class="ach-n">01</span>
+      <span class="ach-q">"Meu agente precisa de MCP ou uma API resolve?"</span>
+    </div>
+    <h2 class="ach-h">MCP não é necessário. É que sai bem mais barato.</h2>
+    <p class="ach-p">
+      Rodamos <strong>144 agentes de verdade</strong> (Claude Code em modo headless) resolvendo as
+      mesmas 8 tarefas sobre o <strong>mesmo backend</strong> de ticketeria. Só uma coisa mudava: como
+      o agente alcança o sistema — pelas ferramentas <strong>MCP</strong>, ou por <code>curl</code>
+      contra a <strong>API REST</strong> equivalente, descobrindo os endpoints pelo spec OpenAPI ou já
+      com a documentação colada no prompt.
+    </p>
+    <p class="ach-p">
+      A expectativa era ver o braço sem MCP falhar. <strong>Não falhou.</strong> Os três chegam ao
+      resultado praticamente sempre — a diferença aparece na conta: com MCP o mesmo trabalho custa
+      cerca de <strong>metade</strong> do braço OpenAPI, com 3 a 5 vezes menos tokens e
+      <strong>nenhuma chamada falhada</strong> no caminho.
+    </p>
+
+    <div class="controles">
+      <span class="lbl">Modelo</span>
+      <div class="seg" id="seg-modelo" role="group" aria-label="Escolher modelo"></div>
+      <div class="legenda" id="legenda"></div>
+    </div>
+
+    <div class="painel">
+      <div class="painel-h">Todos concluem a tarefa</div>
+      <div class="painel-s">
+        Sucesso conferido no banco de dados depois de cada execução — não no que o agente diz que fez —
+        incluindo checagem de dano colateral. O traço fino é o intervalo de confiança de 95% (Wilson):
+        onde eles se sobrepõem, não há diferença demonstrada.
+      </div>
+      <div id="g-sucesso"></div>
+    </div>
+
+    <div class="painel">
+      <div class="painel-h">Mas não pelo mesmo preço</div>
+      <div class="painel-s">Média por execução, sobre as 8 tarefas. O número cinza é o multiplicador em relação ao MCP.</div>
+      <div class="trio" id="g-custo"></div>
+    </div>
+
+    <div class="painel">
+      <div class="painel-h">E não sem tropeçar</div>
+      <div class="painel-s">
+        Execuções em que ao menos uma chamada falhou (HTTP 4xx, comando de shell com erro, ou erro de
+        ferramenta MCP) — mesmo quando o agente se recuperou e concluiu a tarefa. Fora da conta: a T7,
+        onde o erro faz parte do enunciado, e as falhas causadas pelo shell do Windows, que num agente
+        em Linux não existiriam. O número bruto aparece ao passar o mouse.
+      </div>
+      <div id="g-atrito"></div>
+    </div>
+
+    <details>
+      <summary>Ver tarefa por tarefa</summary>
+      <div class="rolagem"><table id="tabela"></table></div>
+    </details>
+
+    <div class="meta">
+      <span class="meta-item"><b>n</b> = 144 execuções · 24 por braço e modelo</span>
+      <span class="meta-item"><b>modelos</b> claude-sonnet-5 · claude-haiku-4-5</span>
+      <span class="meta-item"><b>data</b> 19/09/2026</span>
+      <span class="meta-item"><b>método</b> 3 repetições · ordem sorteada · banco resetado a cada execução</span>
+      <span class="meta-item"><b>verificação</b> estado do banco, sem LLM-juiz</span>
+    </div>
+
+    <div class="nao">
+      <div class="nao-h">O que este experimento não prova</div>
+      <ul>
+        <li><strong>Que agentes precisam de MCP.</strong> Em capacidade de concluir a tarefa os três braços
+          empatam dentro da margem de erro. Um agente com shell, <code>curl</code> e documentação razoável
+          chega lá.</li>
+        <li><strong>Que API sempre gasta mais turnos.</strong> Com a documentação no prompt, o Sonnet usou
+          <em>menos</em> turnos que no MCP — no shell ele encadeia várias chamadas num único comando,
+          enquanto no MCP cada chamada é um turno.</li>
+        <li><strong>Nada sobre muitos servidores conectados.</strong> Aqui são 8 ferramentas, e o custo fixo
+          dos schemas é pequeno. Com dezenas de servidores MCP ele cresce — e isso não foi medido.</li>
+        <li><strong>Generalização.</strong> Um domínio (ticketeria), um harness (Claude Code), shell Windows
+          no braço API e 3 repetições por célula. As diferenças de custo e tokens são grandes e
+          consistentes; as de taxa de sucesso, não.</li>
+      </ul>
+    </div>
+
+    <p class="fonte">
+      As duas únicas falhas saíram do mesmo erro, e ele é instrutivo: o agente mandou
+      <code>?status=open&amp;status=pending</code>, o REST aceitou em silêncio usando só o último valor, e
+      ele respondeu com confiança sobre o ticket errado. O schema tipado de uma ferramenta MCP não
+      permite escrever essa chamada. Foram 2 casos em 144 — sinal, não prova.
+    </p>
+  </div>
+</section>
+
+<!-- ── ACHADO 02 · a probe que se enganava ─────────────────────── -->
+<section class="blk achado" id="probe">
+  <div class="wrap">
+    <div class="ach-top" style="--c:var(--m2)">
+      <span class="ach-n">02</span>
+      <span class="ach-q">"E se a gente medir o nosso próprio medidor?"</span>
+    </div>
+    <h2 class="ach-h">Nossa probe dava 100% de acerto em ruído puro.</h2>
+    <p class="ach-p">
+      O módulo 2 treina uma <em>linear probe</em> sobre vetores de ativação para prever uma pergunta
+      binária: <strong>"o agente acertou esta instância?"</strong>. Havia dois defeitos empilhados. O
+      primeiro: a probe era <strong>avaliada no mesmo conjunto em que treinava</strong> — e com
+      50 parâmetros para 30 amostras, decorar é trivial. Não é "quase 100%" por sorte;
+      é <strong>100% por construção</strong>.
+    </p>
+    <p class="ach-p">
+      O segundo era o rótulo na tela. A linha que imprimia <strong>"Origem: ⚡ Llama real"</strong> lia
+      o modo que o usuário <em>pediu</em> no seletor, não o que de fato tinha rodado. Bastava escolher
+      "real" para a tela anunciar Llama sobre ruído gaussiano. E a docstring da função se contradizia
+      em uma linha só: <code>"acurácia no treino (leave-one-out simplificado)"</code> — acurácia no
+      treino não é leave-one-out. O comentário dizia a verdade; o rótulo mentia.
+    </p>
+    <p class="ach-p">
+      Com <strong>validação cruzada 3-fold</strong> estratificada, medindo fora da amostra, o ruído cai
+      para <strong>perto do acaso</strong> — que é o resultado honesto — e o sinal limpo se mantém em
+      <strong>1,000</strong>. O número bonito de antes era a probe decorando, não descobrindo.
+    </p>
+    <div class="term">
+      <div class="term-body"><span class="t-dim">$ probe antiga (pontua no proprio treino) --entrada ruido_puro --sementes 5</span>
+
+<span class="t-blue">tamanho   acuracia por semente                      media</span>
+n=30      1.000  1.000  1.000  1.000  1.000         1.000   <span class="t-warn">← 100% em ruido</span>
+n=40      1.000  1.000  1.000  1.000  0.975         0.995
+n=60      0.917  0.983  0.950  1.000  0.833         0.937
+
+<span class="t-warn">! 50 parametros para 30 amostras: o 1.000 e por construcao</span>
+
+<span class="t-dim">$ probe nova (validacao cruzada 3-fold, fora da amostra)</span>
+
+ruido puro     0.533    <span class="t-ok">← acaso = 0.500, como deveria</span>
+<span class="t-win">sinal limpo    1.000</span></div>
+    </div>
+    <div class="meta">
+      <span class="meta-item"><b>métrica</b> acurácia (não AUC) · acaso com classes balanceadas = 0,500</span>
+      <span class="meta-item"><b>entrada</b> ruído N(0,1) sem relação com o rótulo</span>
+      <span class="meta-item"><b>probe</b> 50 das 2048 dimensões do vetor</span>
+      <span class="meta-item"><b>n</b> = 30 / 40 / 60 · 5 sementes cada</span>
+      <span class="meta-item"><b>correção</b> commit <code>0c08b51</code> — "fase 1: parar de enganar"</span>
+    </div>
+    <div class="nao">
+      <div class="nao-h">O que este achado não é</div>
+      <ul>
+        <li><strong>Não é "a plataforma lia o Llama errado".</strong> Essa página nunca leu ativação de
+          modelo nenhum: o ramo "real" era código morto — testava um nome que não existe, então dava
+          sempre falso — e <strong>os dois modos geravam o mesmo ruído sintético</strong>. O erro foi de
+          rótulo e de avaliação, não de leitura.</li>
+        <li><strong>Não desqualifica a técnica.</strong> Linear probe sobre ativações é método legítimo e
+          publicado. O defeito era da nossa avaliação.</li>
+        <li><strong>O 0,533 não é constante.</strong> Ele varia com o tamanho da amostra e a semente: o que
+          o dado sustenta é "perto do acaso", não esse decimal. Só o <strong>1,000</strong> do sinal limpo
+          é firme.</li>
+        <li><strong>A página ainda não lê o seu modelo.</strong> O hook de verdade
+          (<code>hook_resid_post</code> via TransformerLens) precisa dos pesos e roda num script local —
+          o site mostra <strong>simulação didática</strong>, e agora diz isso.</li>
+      </ul>
+    </div>
+    <p class="fonte">
+      Fica aqui porque é o achado mais desconfortável do projeto: quem constrói a ferramenta de medir é
+      quem tem mais facilidade em se enganar com ela. A regra desta página — citar <code>n</code>,
+      modelo, método e o que não se prova — nasceu deste episódio.
+    </p>
+  </div>
+</section>
+
+<!-- ── ACHADO 03 · a tarefa que satura ─────────────────────────── -->
+<section class="blk achado" id="saturacao">
+  <div class="wrap">
+    <div class="ach-top" style="--c:var(--m3)">
+      <span class="ach-n">03</span>
+      <span class="ach-q">"Qual arquitetura de agentes é melhor na minha tarefa?"</span>
+    </div>
+    <h2 class="ach-h">Quando todos acertam tudo, "melhor" deixa de ser sobre qualidade.</h2>
+    <p class="ach-p">
+      Numa tarefa operacional real de triagem de cobrança, três arquiteturas foram medidas com o mesmo
+      modelo de raciocínio. <strong>As três acertaram os 24 casos</strong> — score 1,000 em todas. O
+      score, que é a métrica que todo mundo olha primeiro, <strong>não decidiu nada</strong>. Quem
+      decidiu foi token e latência: a arquitetura mais simples fez o mesmo trabalho por
+      <strong>menos da metade dos tokens</strong> e em <strong>um terço do tempo</strong>.
+    </p>
+    <div class="term">
+      <div class="term-body"><span class="t-dim">$ avaliar --tarefa triagem_cobranca --casos 24 --seed 42</span>
+
+<span class="t-blue">arquitetura                score    tokens    latência</span>
+<span class="t-win">sas                        1.000       700      23.2s</span>
+verificador-precedencia    1.000     1 517      67.0s
+cascata-de-regras          1.000     1 701      59.8s
+
+<span class="t-warn">! score satura: empate em 1.000</span>
+<span class="t-ok">→ decide quem gasta menos: sas, 2,2x menos tokens</span></div>
+    </div>
+    <div class="meta">
+      <span class="meta-item"><b>n</b> = 24 casos · <b>1 execução</b> (sem repetição)</span>
+      <span class="meta-item"><b>modelo</b> gemma-4-31b-it</span>
+      <span class="meta-item"><b>seed</b> 42</span>
+      <span class="meta-item"><b>tarefa</b> triagem_cobranca</span>
+    </div>
+    <div class="nao">
+      <div class="nao-h">O que este experimento não prova</div>
+      <ul>
+        <li><strong>Nada com significância estatística.</strong> É <strong>uma</strong> execução, sem
+          repetições e sem desvio-padrão. Serve para orientar a próxima rodada, não para fechar questão.</li>
+        <li><strong>Que SAS é a melhor arquitetura.</strong> O que a tarefa mostrou é que <em>esta</em>
+          tarefa satura com um modelo de raciocínio. Numa tarefa que não sature, o score volta a decidir —
+          e a resposta pode inverter.</li>
+        <li><strong>Que multi-agente é desperdício.</strong> Só que, quando o score empata, o custo extra
+          fica sem contrapartida visível nesta medição.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACHADO 04 · MCP hospedado ───────────────────────────────── -->
+<section class="blk achado" id="mcp-publico">
+  <div class="wrap">
+    <div class="ach-top" style="--c:var(--m4)">
+      <span class="ach-n">04</span>
+      <span class="ach-q">"O MCP público do OTM funciona de fora mesmo?"</span>
+    </div>
+    <h2 class="ach-h">Testar como cliente de verdade achou o que o teste interno não achava.</h2>
+    <p class="ach-p">
+      O servidor MCP do OTM passou a ser verificado por um cliente MCP real, contra a
+      <strong>URL pública</strong>, e não por chamada interna simulada: conexão, catálogo de
+      ferramentas, prompts e o repasse de chave BYOK por header. <strong>14 de 14 ferramentas
+      respondem.</strong> O caminho até lá incluiu um <code>HTTP 421</code> que só aparece quando a
+      requisição chega pelo domínio público — exatamente o tipo de falha que teste local não encontra.
+    </p>
+    <div class="meta">
+      <span class="meta-item"><b>verificação</b> 14/14 · <code>testar_mcp.py</code></span>
+      <span class="meta-item"><b>superfície</b> 14 ferramentas · 5 prompts · 3 recursos</span>
+      <span class="meta-item"><b>alvo</b> URL pública em produção</span>
+      <span class="meta-item"><b>inclui</b> repasse de chave BYOK por header</span>
+    </div>
+    <div class="nao">
+      <div class="nao-h">O que isso não é</div>
+      <ul>
+        <li><strong>Não é benchmark.</strong> Diz que o servidor <em>funciona</em> como cliente nenhum
+          havia testado antes — não diz que é rápido, barato ou melhor que alternativa.</li>
+        <li><strong>Não cobre o backend inteiro.</strong> O deploy do backend e o do frontend seguem
+          ciclos separados, e já ficaram fora de sincronia antes.</li>
+      </ul>
+    </div>
+    <p class="fonte">
+      Quer ligar seu próprio agente? O <code>mcp.json</code> está na
+      <a href="index.html#agentes">página inicial, na seção "Para agentes"</a> — a chave é sua, e não
+      fica guardada no servidor.
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────── -->
+<footer>
+  <div class="foot-logo">OVERTHINKING MACHINE</div>
+  <div class="foot-links">
+    <a href="index.html">Início</a>
+    <a href="overthinking-machine.html">Arquitetura</a>
+    <a href="pesquisa-avancada.html">Rede Neural</a>
+    <a href="prompt-sensitivity-benchmark.html">Prompt</a>
+    <a href="model-benchmark.html">Modelos</a>
+    <a href="curiosidades.html">Curiosidades</a>
+  </div>
+  <div class="foot-fine">
+    Achados de experimentos controlados, com n e método declarados.<br>
+    Cada um traz o que não prova — é o que separa medição de propaganda.
+  </div>
+</footer>
+
+<div id="dica" hidden></div>
+
+<script>
+// Dados do experimento 01, embutidos: a pagina nao chama API nenhuma.
+// Gerado por bench/analyze.py (mcp-vs-api-bench), run "full2".
+var DADOS = {"by_arm":{"haiku|api_docs":{"n":24,"ok":22,"lo":0.7415,"hi":0.9768,"cost":0.02591,"tok":33489,"turns":5.21,"dur":19.0,"fr":3,"frn":21,"frraw":9},"haiku|api_openapi":{"n":24,"ok":24,"lo":0.862,"hi":1.0,"cost":0.03901,"tok":73955,"turns":8.38,"dur":31.1,"fr":12,"frn":21,"frraw":16},"haiku|mcp":{"n":24,"ok":24,"lo":0.862,"hi":1.0,"cost":0.02055,"tok":15115,"turns":4.67,"dur":12.3,"fr":0,"frn":21,"frraw":0},"sonnet|api_docs":{"n":24,"ok":24,"lo":0.862,"hi":1.0,"cost":0.0256,"tok":29189,"turns":3.75,"dur":13.5,"fr":1,"frn":21,"frraw":3},"sonnet|api_openapi":{"n":24,"ok":24,"lo":0.862,"hi":1.0,"cost":0.03907,"tok":49793,"turns":6.08,"dur":19.3,"fr":7,"frn":21,"frraw":10},"sonnet|mcp":{"n":24,"ok":24,"lo":0.862,"hi":1.0,"cost":0.02078,"tok":15634,"turns":4.75,"dur":9.6,"fr":0,"frn":21,"frraw":0}},"by_task":{"haiku|api_docs|t1":{"n":3,"ok":3,"cost":0.01641,"tok":17241,"turns":3,"dur":11.3},"haiku|api_docs|t2":{"n":3,"ok":3,"cost":0.01516,"tok":11419,"turns":2,"dur":10.5},"haiku|api_docs|t3":{"n":3,"ok":3,"cost":0.04324,"tok":68868,"turns":6,"dur":24.5},"haiku|api_docs|t4":{"n":3,"ok":1,"cost":0.02047,"tok":24331,"turns":5,"dur":16.1},"haiku|api_docs|t5":{"n":3,"ok":3,"cost":0.03869,"tok":56827,"turns":9,"dur":26.0},"haiku|api_docs|t6":{"n":3,"ok":3,"cost":0.03278,"tok":38141,"turns":8,"dur":28.5},"haiku|api_docs|t7":{"n":3,"ok":3,"cost":0.02195,"tok":31076,"turns":5,"dur":16.2},"haiku|api_docs|t8":{"n":3,"ok":3,"cost":0.02035,"tok":24490,"turns":4,"dur":16.6},"haiku|api_openapi|t1":{"n":3,"ok":3,"cost":0.02097,"tok":29911,"turns":5,"dur":17.6},"haiku|api_openapi|t2":{"n":3,"ok":3,"cost":0.019,"tok":18169,"turns":3,"dur":13.7},"haiku|api_openapi|t3":{"n":3,"ok":3,"cost":0.04458,"tok":76855,"turns":7,"dur":33.0},"haiku|api_openapi|t4":{"n":3,"ok":3,"cost":0.03258,"tok":58378,"turns":7,"dur":28.0},"haiku|api_openapi|t5":{"n":3,"ok":3,"cost":0.05944,"tok":130812,"turns":13,"dur":46.9},"haiku|api_openapi|t6":{"n":3,"ok":3,"cost":0.06522,"tok":160584,"turns":13,"dur":49.6},"haiku|api_openapi|t7":{"n":3,"ok":3,"cost":0.03668,"tok":62965,"turns":10,"dur":33.9},"haiku|api_openapi|t8":{"n":3,"ok":3,"cost":0.02765,"tok":40817,"turns":6,"dur":22.5},"haiku|mcp|t1":{"n":3,"ok":3,"cost":0.01172,"tok":9865,"turns":3,"dur":7.4},"haiku|mcp|t2":{"n":3,"ok":3,"cost":0.00796,"tok":6382,"turns":2,"dur":5.8},"haiku|mcp|t3":{"n":3,"ok":3,"cost":0.02512,"tok":17843,"turns":3,"dur":15.4},"haiku|mcp|t4":{"n":3,"ok":3,"cost":0.02128,"tok":12032,"turns":5,"dur":13.9},"haiku|mcp|t5":{"n":3,"ok":3,"cost":0.02989,"tok":27477,"turns":8,"dur":17.6},"haiku|mcp|t6":{"n":3,"ok":3,"cost":0.02555,"tok":13414,"turns":8,"dur":15.4},"haiku|mcp|t7":{"n":3,"ok":3,"cost":0.02927,"tok":23363,"turns":6,"dur":16.2},"haiku|mcp|t8":{"n":3,"ok":3,"cost":0.00847,"tok":6492,"turns":2,"dur":6.4},"sonnet|api_docs|t1":{"n":3,"ok":3,"cost":0.01512,"tok":20654,"turns":3,"dur":8.4},"sonnet|api_docs|t2":{"n":3,"ok":3,"cost":0.01001,"tok":13163,"turns":2,"dur":6.0},"sonnet|api_docs|t3":{"n":3,"ok":3,"cost":0.04045,"tok":41002,"turns":4,"dur":16.8},"sonnet|api_docs|t4":{"n":3,"ok":3,"cost":0.0201,"tok":21659,"turns":3,"dur":10.4},"sonnet|api_docs|t5":{"n":3,"ok":3,"cost":0.04166,"tok":56926,"turns":7,"dur":20.7},"sonnet|api_docs|t6":{"n":3,"ok":3,"cost":0.02426,"tok":22737,"turns":3,"dur":15.8},"sonnet|api_docs|t7":{"n":3,"ok":3,"cost":0.02537,"tok":29846,"turns":4,"dur":13.0},"sonnet|api_docs|t8":{"n":3,"ok":3,"cost":0.01865,"tok":21176,"turns":3,"dur":12.7},"sonnet|api_openapi|t1":{"n":3,"ok":3,"cost":0.02441,"tok":33758,"turns":5,"dur":12.1},"sonnet|api_openapi|t2":{"n":3,"ok":3,"cost":0.02218,"tok":27431,"turns":4,"dur":13.1},"sonnet|api_openapi|t3":{"n":3,"ok":3,"cost":0.04183,"tok":62687,"turns":8,"dur":21.3},"sonnet|api_openapi|t4":{"n":3,"ok":3,"cost":0.03031,"tok":36648,"turns":5,"dur":14.8},"sonnet|api_openapi|t5":{"n":3,"ok":3,"cost":0.06915,"tok":92525,"turns":9,"dur":28.6},"sonnet|api_openapi|t6":{"n":3,"ok":3,"cost":0.05502,"tok":57241,"turns":6,"dur":22.7},"sonnet|api_openapi|t7":{"n":3,"ok":3,"cost":0.03708,"tok":46411,"turns":6,"dur":18.8},"sonnet|api_openapi|t8":{"n":3,"ok":3,"cost":0.0361,"tok":50851,"turns":7,"dur":21.3},"sonnet|mcp|t1":{"n":3,"ok":3,"cost":0.00996,"tok":10560,"turns":3,"dur":4.8},"sonnet|mcp|t2":{"n":3,"ok":3,"cost":0.00717,"tok":6641,"turns":2,"dur":4.7},"sonnet|mcp|t3":{"n":3,"ok":3,"cost":0.03524,"tok":19791,"turns":3,"dur":10.5},"sonnet|mcp|t4":{"n":3,"ok":3,"cost":0.01655,"tok":11973,"turns":5,"dur":8.1},"sonnet|mcp|t5":{"n":3,"ok":3,"cost":0.03344,"tok":28656,"turns":8,"dur":14.9},"sonnet|mcp|t6":{"n":3,"ok":3,"cost":0.02641,"tok":13579,"turns":8,"dur":12.7},"sonnet|mcp|t7":{"n":3,"ok":3,"cost":0.02818,"tok":27069,"turns":7,"dur":15.2},"sonnet|mcp|t8":{"n":3,"ok":3,"cost":0.00787,"tok":6833,"turns":2,"dur":3.7}},"tasks":[{"id":"t1","label":"T1 · Consulta simples"},{"id":"t2","label":"T2 · Contagem com filtro"},{"id":"t3","label":"T3 · Agregação paginada"},{"id":"t4","label":"T4 · Multi-hop"},{"id":"t5","label":"T5 · Criar e atribuir"},{"id":"t6","label":"T6 · Operação em lote"},{"id":"t7","label":"T7 · Recuperação de erro"},{"id":"t8","label":"T8 · Texto com caracteres especiais"}]};
+
+var NS = 'http://www.w3.org/2000/svg';
+// Ordem fixa. A cor segue a interface, nunca a posicao no ranking: filtrar ou
+// reordenar nao pode repintar quem sobrou.
+var BRACOS = [
+  { id:'mcp',         rotulo:'MCP',                  cor:'var(--i-mcp)' },
+  { id:'api_openapi', rotulo:'API + OpenAPI',        cor:'var(--i-openapi)' },
+  { id:'api_docs',    rotulo:'API + docs no prompt', cor:'var(--i-docs)' }
+];
+var MODELOS = [ { id:'sonnet', rotulo:'Sonnet 5' }, { id:'haiku', rotulo:'Haiku 4.5' } ];
+var METRICAS = [
+  { id:'cost', rotulo:'Custo',   unidade:'US$ por execução', fmt:function(v){ return 'US$ ' + num(v,3); } },
+  { id:'tok',  rotulo:'Tokens',  unidade:'tokens processados', fmt:function(v){ return num(v/1000,1) + ' mil'; } },
+  { id:'dur',  rotulo:'Duração', unidade:'segundos',          fmt:function(v){ return num(v,0) + ' s'; } }
+];
+var estado = { modelo:'sonnet' };
+
+function num(v, d) { return v.toLocaleString('pt-BR', { minimumFractionDigits:d, maximumFractionDigits:d }); }
+function pct(v) { return num(v*100, 0) + '%'; }
+function mult(a, b) { return b ? num(a/b, 1) + '×' : '–'; }
+function el(id) { return document.getElementById(id); }
+function braco(arm) { return DADOS.by_arm[estado.modelo + '|' + arm]; }
+function tarefa(arm, t) { return DADOS.by_task[estado.modelo + '|' + arm + '|' + t]; }
+
+function h(tag, attrs, texto) {
+  var e = document.createElement(tag);
+  for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+  if (texto != null) { e.textContent = texto; }
+  return e;
+}
+function s(tag, attrs, pai, texto) {
+  var e = document.createElementNS(NS, tag);
+  for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+  if (texto != null) { e.textContent = texto; }
+  if (pai) { pai.appendChild(e); }
+  return e;
+}
+
+// Topo arredondado so na ponta do dado; a base fica reta, ancorada na linha zero.
+function caminho(x, y, larg, alt, r) {
+  larg = Math.max(larg, 1);
+  r = Math.min(r, larg, alt/2);
+  return 'M' + x + ',' + y + 'h' + (larg-r) + 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r +
+         'v' + (alt-2*r) + 'a' + r + ',' + r + ' 0 0 1 ' + (-r) + ',' + r + 'h' + (-(larg-r)) + 'z';
+}
+
+var dica = el('dica');
+function mostrarDica(ev, titulo, linhas) {
+  var filhos = [ h('b', {}, titulo) ];
+  for (var i = 0; i < linhas.length; i++) { filhos.push(h('i', {}, linhas[i])); filhos.push(h('br', {})); }
+  dica.replaceChildren.apply(dica, filhos);
+  dica.hidden = false;
+  var r = ev.currentTarget.getBoundingClientRect();
+  var x = ev.clientX || r.right, y = ev.clientY || r.top;
+  var w = dica.offsetWidth, alt = dica.offsetHeight;
+  dica.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, x + 14)) + 'px';
+  dica.style.top = Math.max(8, Math.min(window.innerHeight - alt - 8, y - alt - 10)) + 'px';
+}
+function ligarDica(no, titulo, linhas) {
+  no.addEventListener('pointermove', function (ev) { mostrarDica(ev, titulo, linhas); });
+  no.addEventListener('pointerleave', function () { dica.hidden = true; });
+  no.addEventListener('focus', function (ev) { mostrarDica(ev, titulo, linhas); });
+  no.addEventListener('blur', function () { dica.hidden = true; });
+}
+
+function tetoBonito(v) {
+  if (v <= 0) { return 1; }
+  var p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p;
+  var passos = [1, 1.2, 1.6, 2, 2.5, 3, 4, 5, 6, 8, 10];
+  for (var i = 0; i < passos.length; i++) { if (m <= passos[i]) { return passos[i] * p; } }
+  return 10 * p;
+}
+
+// Barras horizontais. linhas: {rotulo, cor, valor, lo, hi, texto, extra, dicaTitulo, dicaLinhas}
+function barras(hosp, linhas, opcoes) {
+  hosp.replaceChildren();
+  var L = Math.max(230, hosp.clientWidth || 600);
+  var rotuloW = opcoes.rotuloW || 0;
+  var dirW = opcoes.dirW || 108;
+  var plotW = Math.max(40, L - rotuloW - dirW);
+  var altBarra = opcoes.altBarra || 16;
+  var passoY = altBarra + (rotuloW ? 12 : 8) + (opcoes.comRotuloAcima ? 16 : 0);
+  var topo = 4;
+  var fundo = topo + linhas.length * passoY;
+  var H = fundo + 20;
+  var marcas = opcoes.marcas == null ? 3 : opcoes.marcas;
+  var svg = s('svg', { viewBox:'0 0 ' + L + ' ' + H, height:H, role:'img',
+                       'aria-label':opcoes.aria || '' }, hosp);
+
+  for (var i = 0; i <= marcas; i++) {
+    var v = opcoes.teto * i / marcas, x = rotuloW + plotW * i / marcas;
+    s('line', { x1:x, x2:x, y1:0, y2:fundo, stroke:i === 0 ? 'var(--card-border)' : 'var(--card-border)',
+                'stroke-width':1, opacity:i === 0 ? 1 : 0.7 }, svg);
+    s('text', { x:x, y:H - 6, 'text-anchor':i === 0 ? 'start' : 'middle', 'class':'tick' },
+      svg, opcoes.marcaFmt(v));
+  }
+
+  linhas.forEach(function (ln, idx) {
+    var y = topo + idx * passoY + (opcoes.comRotuloAcima ? 14 : 0);
+    var larg = plotW * Math.min(ln.valor, opcoes.teto) / opcoes.teto;
+    var g = s('g', { 'class':'barra', tabindex:'0', role:'listitem',
+                     'aria-label':ln.rotulo + ': ' + ln.texto + (ln.extra ? ' (' + ln.extra + ')' : '') }, svg);
+    s('rect', { 'class':'hit', x:0, y:y - 4, width:L, height:altBarra + 8, fill:'transparent' }, g);
+    if (rotuloW) { s('text', { x:0, y:y + altBarra - 3 }, g, ln.rotulo); }
+    if (opcoes.comRotuloAcima) { s('text', { x:0, y:y - 5, 'class':'mult' }, g, ln.rotulo); }
+    s('path', { d:caminho(rotuloW, y, larg, altBarra, 4), fill:ln.cor }, g);
+
+    var fim = rotuloW + larg;
+    if (ln.lo != null && ln.hi != null && ln.hi > ln.lo) {
+      var xa = rotuloW + plotW * Math.min(ln.lo, opcoes.teto) / opcoes.teto;
+      var xb = rotuloW + plotW * Math.min(ln.hi, opcoes.teto) / opcoes.teto;
+      var cy = y + altBarra / 2;
+      s('line', { x1:xa, x2:xb, y1:cy, y2:cy, stroke:'var(--texto-principal)', 'stroke-width':1.25, opacity:0.55 }, g);
+      s('line', { x1:xa, x2:xa, y1:cy - 3.5, y2:cy + 3.5, stroke:'var(--texto-principal)', 'stroke-width':1.25, opacity:0.55 }, g);
+      s('line', { x1:xb, x2:xb, y1:cy - 3.5, y2:cy + 3.5, stroke:'var(--texto-principal)', 'stroke-width':1.25, opacity:0.55 }, g);
+      fim = Math.max(fim, xb);
+    }
+    var t = s('text', { x:fim + 8, y:y + altBarra - 3, 'class':'val' }, g, ln.texto);
+    if (ln.extra) { s('tspan', { 'class':'mult', dx:7 }, t, ln.extra); }
+    ligarDica(g, ln.dicaTitulo, ln.dicaLinhas);
+  });
+}
+
+function desenharControles() {
+  var seg = el('seg-modelo');
+  seg.replaceChildren();
+  MODELOS.forEach(function (m) {
+    var b = h('button', { type:'button', 'aria-pressed':String(estado.modelo === m.id) }, m.rotulo);
+    b.addEventListener('click', function () { estado.modelo = m.id; desenharTudo(); });
+    seg.appendChild(b);
+  });
+  var lg = el('legenda');
+  lg.replaceChildren();
+  BRACOS.forEach(function (a) {
+    var sp = h('span');
+    var i = h('i');
+    i.style.background = a.cor;
+    sp.appendChild(i);
+    sp.appendChild(document.createTextNode(a.rotulo));
+    lg.appendChild(sp);
+  });
+}
+
+function desenharSucesso() {
+  var linhas = BRACOS.map(function (a) {
+    var r = braco(a.id);
+    return { rotulo:a.rotulo, cor:a.cor, valor:r.ok / r.n, lo:r.lo, hi:r.hi,
+             texto:r.ok + '/' + r.n, extra:pct(r.ok / r.n),
+             dicaTitulo:a.rotulo + ' — ' + pct(r.ok / r.n),
+             dicaLinhas:[ r.ok + ' de ' + r.n + ' execuções corretas',
+                          'IC 95%: ' + pct(r.lo) + ' – ' + pct(r.hi) ] };
+  });
+  var hosp = el('g-sucesso');
+  barras(hosp, linhas, { teto:1, marcaFmt:pct, altBarra:20, marcas:4,
+    rotuloW:Math.min(165, (hosp.clientWidth || 600) * 0.34),
+    aria:'Taxa de sucesso por interface' });
+}
+
+function desenharCusto() {
+  var hosp = el('g-custo');
+  hosp.replaceChildren();
+  METRICAS.forEach(function (mt) {
+    var cartao = h('div');
+    cartao.appendChild(h('div', { 'class':'painel-h' }, mt.rotulo));
+    cartao.appendChild(h('div', { 'class':'painel-s' }, mt.unidade));
+    var plot = h('div');
+    cartao.appendChild(plot);
+    hosp.appendChild(cartao);
+    var base = braco('mcp')[mt.id];
+    var linhas = BRACOS.map(function (a) {
+      var v = braco(a.id)[mt.id];
+      return { rotulo:a.rotulo, cor:a.cor, valor:v, texto:mt.fmt(v),
+               extra:a.id === 'mcp' ? '' : mult(v, base),
+               dicaTitulo:a.rotulo + ' — ' + mt.fmt(v),
+               dicaLinhas:[ 'média por execução',
+                            a.id === 'mcp' ? 'é a referência da comparação' : mult(v, base) + ' o do MCP' ] };
+    });
+    barras(plot, linhas, { teto:tetoBonito(Math.max.apply(null, linhas.map(function (x) { return x.valor; }))),
+      marcaFmt:function (v) { return mt.fmt(v).replace('US$ ', ''); },
+      altBarra:14, marcas:2, dirW:118, comRotuloAcima:true,
+      aria:mt.rotulo + ' por interface' });
+  });
+}
+
+function desenharAtrito() {
+  var linhas = BRACOS.map(function (a) {
+    var r = braco(a.id);
+    var parte = r.frn ? r.fr / r.frn : 0;
+    return { rotulo:a.rotulo, cor:a.cor, valor:parte, texto:r.fr + '/' + r.frn, extra:pct(parte),
+             dicaTitulo:a.rotulo + ' — ' + pct(parte) + ' das execuções',
+             dicaLinhas:[ r.fr + ' de ' + r.frn + ' execuções com alguma chamada falhada',
+                          'bruto, somando artefatos do Windows: ' + r.frraw + '/' + r.frn ] };
+  });
+  var hosp = el('g-atrito');
+  barras(hosp, linhas, { teto:1, marcaFmt:pct, altBarra:20, marcas:4,
+    rotuloW:Math.min(165, (hosp.clientWidth || 600) * 0.34),
+    aria:'Execuções com chamada falhada, por interface' });
+}
+
+function desenharTabela() {
+  var t = el('tabela');
+  t.replaceChildren();
+  var thead = h('thead');
+  var tr = h('tr');
+  ['Tarefa', 'Interface', 'Sucesso', 'Custo', 'Tokens', 'Turnos', 'Duração'].forEach(function (x) {
+    tr.appendChild(h('th', {}, x));
+  });
+  thead.appendChild(tr);
+  t.appendChild(thead);
+  var tbody = h('tbody');
+  DADOS.tasks.forEach(function (tk) {
+    BRACOS.forEach(function (a) {
+      var r = tarefa(a.id, tk.id);
+      if (!r) { return; }
+      var linha = h('tr');
+      var cel = h('td');
+      var pip = h('span', { 'class':'pip' });
+      pip.style.background = a.cor;
+      cel.appendChild(pip);
+      cel.appendChild(document.createTextNode(a.rotulo));
+      linha.appendChild(h('td', {}, tk.label));
+      linha.appendChild(cel);
+      linha.appendChild(h('td', r.ok < r.n ? { 'class':'falha' } : {}, r.ok + '/' + r.n));
+      linha.appendChild(h('td', {}, METRICAS[0].fmt(r.cost)));
+      linha.appendChild(h('td', {}, METRICAS[1].fmt(r.tok)));
+      linha.appendChild(h('td', {}, num(r.turns, 0)));
+      linha.appendChild(h('td', {}, METRICAS[2].fmt(r.dur)));
+      tbody.appendChild(linha);
+    });
+  });
+  t.appendChild(tbody);
+}
+
+function desenharTudo() {
+  desenharControles();
+  desenharSucesso();
+  desenharCusto();
+  desenharAtrito();
+  desenharTabela();
+}
+
+desenharTudo();
+
+// Redesenha ao mudar a largura: os graficos leem clientWidth para posicionar rotulo e valor.
+var tmr;
+window.addEventListener('resize', function () {
+  clearTimeout(tmr);
+  tmr = setTimeout(function () { desenharSucesso(); desenharCusto(); desenharAtrito(); }, 140);
+});
+</script>
+</body>
+</html>
