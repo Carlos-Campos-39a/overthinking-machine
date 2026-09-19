@@ -39,7 +39,7 @@ from typing import Optional, AsyncIterator
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 # Garante que o diretório do projeto está no path
 PROJECT_DIR = Path(__file__).parent
@@ -772,14 +772,62 @@ async def get_library():
     return {"cards": _read_library()}
 
 
+MAX_CARTOES_BIBLIOTECA = 500
+
+
+class CartaoExperimento(BaseModel):
+    """
+    Cartão de execução gravado em library.json.
+
+    extra="forbid" e teto em todo campo de texto. Antes isto era `list[dict]`
+    cru: qualquer um mandava qualquer chave, com qualquer tamanho, e o conteúdo
+    era devolvido a TODOS os visitantes em GET /api/library, que a interface
+    interpola em innerHTML. Com as chaves BYOK no localStorage, isso era XSS
+    armazenado com roubo de chave. A interface agora também escapa, mas a
+    validação aqui é a defesa que vale para qualquer cliente.
+    """
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    id: str = Field(default="", max_length=120)
+    name: str = Field(default="", max_length=120)
+    arch: str = Field(default="", max_length=60)
+    harness: str = Field(default="", max_length=60)
+    task: str = Field(default="", max_length=60)
+    score: float = 0.0
+    accuracy: float = 0.0
+    scores: list[float] = Field(default_factory=list, max_length=200)
+    tokens: float = 0.0
+    date: str = Field(default="", max_length=40)
+    timestamp: str = Field(default="", max_length=40)
+    real: bool = False
+    isLast: bool = False
+
+
 @app.post("/api/library")
-async def save_library(cards: list[dict]):
+async def save_library(cards: list[CartaoExperimento]):
+    # A instância pública não aceita escrita anônima aqui. O arquivo é
+    # compartilhado por todos os visitantes e o disco do Railway é efêmero, o
+    # que torna a gravação inútil e perigosa ao mesmo tempo. Os cartões de quem
+    # visita continuam no localStorage do próprio navegador — o front grava lá
+    # antes de tentar o backend, então nada se perde.
+    if HOSTED:
+        raise HTTPException(
+            403,
+            "A biblioteca de execuções é local. Nesta instância pública os seus "
+            "cartões ficam só no seu navegador. Para acervo compartilhado, "
+            "publique uma TOPOLOGIA em /api/biblioteca.",
+        )
+
+    if len(cards) > MAX_CARTOES_BIBLIOTECA:
+        raise HTTPException(400, f"{len(cards)} cartões de uma vez; o teto é {MAX_CARTOES_BIBLIOTECA}.")
+
     existing = _read_library()
     existing_ids = {c.get("id") or (c.get("name", "") + c.get("arch", "")) for c in existing}
-    new_cards = [c for c in cards if (c.get("id") or (c.get("name","") + c.get("arch",""))) not in existing_ids]
-    merged = new_cards + existing
+    novos = [c.model_dump() for c in cards
+             if (c.id or (c.name + c.arch)) not in existing_ids]
+    merged = (novos + existing)[:MAX_CARTOES_BIBLIOTECA]
     LIBRARY_FILE.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
-    return {"saved": len(new_cards), "total": len(merged)}
+    return {"saved": len(novos), "total": len(merged)}
 
 
 @app.get("/api/skills/{task_name}")

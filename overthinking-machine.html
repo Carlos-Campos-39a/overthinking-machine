@@ -4471,9 +4471,11 @@ document.querySelectorAll('.option-card').forEach(card => {
 
 // ── Real experiment (API mode) ───────────────────────────────────────
 function escHtml(s) {
-  const d = document.createElement('div');
-  d.textContent = s == null ? '' : String(s);
-  return d.innerHTML;
+  // Escapa também as aspas: o truque do textContent sozinho não as cobre, e
+  // um valor sem aspas escapadas escapa de um atributo HTML.
+  return (s == null ? '' : String(s))
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo compositor de topologias
@@ -7745,8 +7747,11 @@ function generateCardHTML(run) {
   const taskLabel = run.task === 'finance_agent' ? 'FINANCE' : 'TEXT CLS';
   const isReal  = run.real ? `<span class="pac-badge pac-real-pill">● REAL</span>` : '';
   const isMCE   = harness === 'mce';
+  // Atributos data-* + escape: os valores vêm do cartão, e cartão podia vir de
+  // terceiro. Em atributo, a entidade é decodificada antes do JS rodar, então
+  // string JS dentro de onclick não se protege só com escape de HTML.
   const skillsBtn = isMCE
-    ? `<div class="pac-skills-row"><button class="pac-skills-btn" onclick="openSkillsModal('${run.task}','${run.id||''}')">⚡ Ver Skills (Pokédex)</button></div>`
+    ? `<div class="pac-skills-row"><button class="pac-skills-btn" data-task="${escHtml(run.task||'')}" data-run="${escHtml(run.id||'')}" onclick="openSkillsModal(this.dataset.task, this.dataset.run)">⚡ Ver Skills (Pokédex)</button></div>`
     : '';
 
   // Bar widths
@@ -7755,14 +7760,14 @@ function generateCardHTML(run) {
   const scW  = Math.round(Math.min(100, sc));
 
   return `
-  <div class="pac-card pac-${arch}">
+  <div class="pac-card pac-${escHtml(arch)}">
     <div class="pac-header">
-      <div class="pac-name">${name}</div>
+      <div class="pac-name">${escHtml(name)}</div>
       <div class="pac-hp"><span class="pac-hp-val">${(acc*100).toFixed(1)}</span>% ACC</div>
     </div>
     <div class="pac-type-row">
-      <span class="pac-badge pac-arch-badge">${arch}</span>
-      <span class="pac-badge pac-harness-badge">${harness}</span>
+      <span class="pac-badge pac-arch-badge">${escHtml(arch)}</span>
+      <span class="pac-badge pac-harness-badge">${escHtml(harness)}</span>
       ${isReal}
     </div>
     <div class="pac-illustration">${svg}</div>
@@ -7786,8 +7791,8 @@ function generateCardHTML(run) {
     </div>
     ${skillsBtn}
     <div class="pac-footer">
-      <span class="pac-run-id">${(run.id||'mock').slice(0,18)}</span>
-      <span class="pac-task-pill">${taskLabel}</span>
+      <span class="pac-run-id">${escHtml((run.id||'mock').slice(0,18))}</span>
+      <span class="pac-task-pill">${escHtml(taskLabel)}</span>
     </div>
   </div>`;
 }
@@ -7842,6 +7847,24 @@ function toggleBibSelect(key) {
   _updateAnalysisBtn();
 }
 
+// Versões por índice, usadas pelos atributos onclick/onchange da tabela: a
+// chave é derivada de dado de cartão e não pode ir para dentro de markup.
+// A ordem é a mesma de renderLibraryTable, que também parte de groupLibraryCards().
+function _bibGrupoNoIndice(i) {
+  // groupLibraryCards() já devolve ordenado por bestScore, e a tabela renderiza
+  // nessa mesma ordem — por isso o índice basta.
+  const g = groupLibraryCards()[i];
+  return g ? g.key : null;
+}
+function toggleBibSelectAt(i) {
+  const k = _bibGrupoNoIndice(i);
+  if (k) toggleBibSelect(k);
+}
+function openCardsPopupAt(i) {
+  const k = _bibGrupoNoIndice(i);
+  if (k) openCardsPopup(k);
+}
+
 function _updateAnalysisBtn() {
   const btn = document.getElementById('bib-analysis-btn');
   if (!btn) return;
@@ -7871,15 +7894,18 @@ function renderBiblioteca() {
     const pct   = Math.round(Math.min(1, g.bestScore) * 100);
     const color = g.bestScore >= 0.7 ? '#22c55e' : g.bestScore >= 0.4 ? '#f59e0b' : '#ef4444';
     const archPills = g.archs.map(a =>
-      `<span class="bib-pill" style="margin-right:3px">${a}</span>`).join('');
+      `<span class="bib-pill" style="margin-right:3px">${escHtml(a)}</span>`).join('');
     const checked = selectedBibGroups.has(g.key) ? 'checked' : '';
-    const safeKey = g.key.replace(/'/g,'\\\'');
+    // O ÍNDICE vai para o atributo, nunca a chave. A chave vem dos cartões, que
+    // na instância pública podiam ser enviados por qualquer um; escapar HTML não
+    // basta dentro de uma string JS em atributo, porque o navegador decodifica a
+    // entidade ANTES de o JS ser interpretado. Um número não tem esse problema.
     return `<tr class="${checked ? 'bib-row-selected' : ''}">
-      <td><input type="checkbox" class="bib-checkbox" ${checked} onchange="toggleBibSelect('${safeKey}');this.closest('tr').classList.toggle('bib-row-selected',this.checked)" onclick="event.stopPropagation()"></td>
+      <td><input type="checkbox" class="bib-checkbox" ${checked} onchange="toggleBibSelectAt(${i});this.closest('tr').classList.toggle('bib-row-selected',this.checked)" onclick="event.stopPropagation()"></td>
       <td class="bib-rank">${i+1}</td>
-      <td class="bib-name">${g.harness}</td>
+      <td class="bib-name">${escHtml(g.harness)}</td>
       <td>${archPills}</td>
-      <td>${taskLabel(g.task)}</td>
+      <td>${escHtml(taskLabel(g.task))}</td>
       <td>
         <div class="bib-score-wrap">
           <div class="bib-score-bar"><div class="bib-score-fill" style="width:0%;background:${color}" data-w="${pct}"></div></div>
@@ -7887,7 +7913,7 @@ function renderBiblioteca() {
         </div>
       </td>
       <td class="bib-date">${fmt(g.date)}</td>
-      <td><button class="bib-cards-btn" title="Ver cards do experimento" onclick="openCardsPopup('${safeKey}')">🃏</button></td>
+      <td><button class="bib-cards-btn" title="Ver cards do experimento" onclick="openCardsPopupAt(${i})">🃏</button></td>
     </tr>`;
   }).join('');
 
@@ -7916,7 +7942,7 @@ function openCardsPopup(groupKey) {
   if (!group) return;
 
   const allCardsHTML = group.cards.map(c => generateCardHTML(c)).join('');
-  const title = `<div style="color:#fff;font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;margin-bottom:12px;text-align:center">${group.harness} × ${group.task} — ${group.archs.length} arquitetura(s)</div>`;
+  const title = `<div style="color:#fff;font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;margin-bottom:12px;text-align:center">${escHtml(group.harness)} × ${escHtml(group.task)} — ${group.archs.length} arquitetura(s)</div>`;
 
   document.getElementById('cards-popup-content').innerHTML = title + `<div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">${allCardsHTML}</div>`;
   document.getElementById('cards-overlay').classList.add('open');
@@ -8066,8 +8092,8 @@ function openAnalysisModal() {
 
   const tableRows = selected.map(g =>
     `<tr>
-      <td><strong>${HARNESS_LABEL[g.harness]||g.harness}</strong><br><small style="color:#6B7280">${g.task}</small></td>
-      <td>${g.archs.join(', ')}</td>
+      <td><strong>${escHtml(HARNESS_LABEL[g.harness]||g.harness)}</strong><br><small style="color:#6B7280">${escHtml(g.task)}</small></td>
+      <td>${escHtml(g.archs.join(', '))}</td>
       <td>${fmtPct(g.avgScore)}</td>
       <td>${fmtPct(g.avgAccuracy)}</td>
       <td>${fmtPct(g.successRate)}</td>
