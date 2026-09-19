@@ -1,272 +1,375 @@
 # HANDOFF — Overthinking Machine
 
-Estado em 2026-09-05, commit `30da54a`. Árvore de trabalho limpa.
+Estado em **2026-09-19**, commit `86aca78`.
+
+> **Este arquivo é servido publicamente pelo Vercel.** `*.md` não está no
+> `.vercelignore`, então `HANDOFF.md`, `DEPLOY.md`, `README.md` e `turnover.md`
+> ficam acessíveis em `https://overthinking-machine-chi.vercel.app/HANDOFF.md`.
+> Nada aqui tem segredo — mas não escreva nenhum aqui.
 
 ---
 
-## O ponto mais urgente
+## 1. Os três pontos urgentes
 
-**O frontend publicado está à frente do backend publicado.**
+### 1.1 O backend no ar está desatualizado (de novo)
 
-| | commit | tem a aba nova? |
+**Nada do trabalho desta sessão está no ar — nem o frontend.** `origin/main`
+está em `0c08b51`; o local está em `86aca78`, **3 commits à frente**
+(`54f44a2`, `33a6e25`, `86aca78`).
+
+| | commit | tem Fase 1 / Fase 2 / correção de XSS |
 |---|---|---|
-| Vercel (frontend) | atual | sim — `labtab-esp`, `esp-wrap`, `switchLabTab` no ar |
-| Railway (backend) | anterior | não — `/api/arquiteturas` e `/api/biblioteca` devolvem **404** |
+| Vercel (frontend) | `0c08b51` (= `origin/main`) | sim / não / **não** |
+| Railway (backend) | **`9b9143a`** | não / não / não |
+| repositório local | `86aca78` | sim / sim / sim |
 
-Quem abrir a aba **Montar topologia** no site hoje vê a interface montar e as
-chamadas falharem. O laboratório antigo continua funcionando normalmente.
+Duas consequências:
 
-O auto-deploy do Railway já parou de acompanhar os pushes uma vez nesta sessão.
-A correção é manual, no painel do serviço: banner **"Update available"** →
-**Yes**. Depois, conferir:
+- `GET /api/tarefas` em produção devolve **404** — a Fase 2 não está no ar.
+- **O XSS ainda é explorável no site público.** A correção do frontend está em
+  `86aca78`, que não foi empurrado: `curl .../overthinking-machine.html | grep -c quot`
+  devolve **0**, ou seja, o `escHtml` no ar ainda não escapa aspas. O `git push`
+  fecha a metade do frontend; o Railway fecha a do servidor.
+
+São dois passos separados: **`git push`** publica o frontend no Vercel (e veja o
+item 1.3 antes), e só depois o Railway precisa ser atualizado à mão.
+
+**O auto-deploy do Railway está quebrado e mente.** O painel mostra
+*"Auto deploy unavailable / Could not load branches"* e, ao clicar em
+**Check for updates**, responde **"You're on the latest version of this
+repository"** — enquanto `/api/health` devolve um commit atrasado. Ou seja: o
+botão que existe para detectar o atraso é justamente o que não detecta.
+
+Causa provável: o serviço foi criado como *template* a partir da URL do repo, e
+o GitHub App do Railway nunca recebeu acesso a `overthinking-machine`, então não
+há webhook.
+
+**Como subir**, enquanto não houver auto-deploy: no painel do Railway, aba
+*Deployments*, usar **Redeploy** no deploy mais recente **não resolve** (reimplanta
+o mesmo commit). É preciso forçar o serviço a buscar o repositório de novo —
+Settings → Source → *Check for updates* → **Update** → **Yes** — e conferir
+**sempre** com:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://overthinking-machine-production.up.railway.app/api/arquiteturas
+curl -s https://overthinking-machine-production.up.railway.app/api/health
 ```
 
-Esperado `200`. Enquanto der 404, o deploy não subiu.
+O campo `commit` tem de bater com `git rev-parse --short HEAD`. Enquanto não
+bater, o deploy não subiu, diga o painel o que disser.
+
+### 1.2 Decisões que dependem de você
+
+1. **Acesso do GitHub App do Railway ao repositório** — é o que conserta o
+   auto-deploy de vez. Alternativa sem dar acesso: um GitHub Action chamando o
+   deploy hook do Railway.
+2. **Volume no Railway** (`/data` + `OTM_DATA_DIR=/data`) — sem ele, a
+   biblioteca de topologias que visitantes publicarem some a cada deploy.
+   `/api/health` confirma hoje: `"biblioteca_persistente": false`. Pode ter
+   custo, então não criei.
+3. **`OTM_ADMIN_TOKEN`** — continua não configurado. É a única alavanca para
+   apagar uma topologia publicada por terceiro. Defina você; eu não devo
+   escrever segredo em painel.
+
+### 1.3 Há um commit de outra sessão não empurrado
+
+`54f44a2` ("curiosidades: pagina de achados, com o benchmark MCP x API") foi
+feito por outra sessão de Claude, nesta mesma árvore de trabalho, e **não foi
+empurrado** — ela deixou a decisão para você, porque o push publica no Vercel.
+`git push` agora leva esse commit junto com os meus. A página passou na
+verificação de sintaxe.
 
 ---
 
-## O que foi feito
+## 2. Vulnerabilidade encontrada e corrigida nesta sessão
 
-A plataforma tinha 5 arquiteturas e 5 harnesses fixos: respondia *"qual das 5 é
-melhor"*, nunca *"a minha é melhor que as 5?"*. Agora qualquer pessoa monta a
-própria topologia arrastando na interface, ou submete por MCP, e roda no mesmo
-esqueleto de medição. As 5 viraram **propostas iniciais** editáveis.
+**XSS armazenado com roubo de chave de API, na instância pública no ar.**
+Corrigido em `86aca78`, mas **ainda não implantado** (ver 1.1).
 
-### A linguagem
+A cadeia completa era:
 
-Pipeline de estágios, quatro tipos: `unico`, `paralelo`, `debate`, `reduzir`.
-Nada de terceiro executa — uma especificação é só nome, número e template de
-prompt. É o que permite aceitar contribuição numa instância pública.
+1. `POST /api/library` aceitava `list[dict]` cru: sem autenticação, sem
+   validação, sem teto, sem distinção entre instância local e pública.
+2. O conteúdo ia para `library.json`, um arquivo **compartilhado por todos**.
+3. `GET /api/library` devolvia isso a qualquer visitante, e `loadLibrary()`
+   misturava os cartões recebidos aos do próprio navegador.
+4. A interface interpolava `harness`, `arch`, `task` e `name` direto em
+   `innerHTML`, sem escapar.
+5. As chaves BYOK ficam no `localStorage`.
 
-**Prova de expressividade** (roda offline, custo zero): as 5 arquiteturas
-reescritas como especificação produzem os **mesmos prompts, byte a byte**, que
-as classes Python.
+Resultado: um cartão com `<img src=x onerror="...">` executava no navegador de
+todo visitante que abrisse a aba Biblioteca, com acesso à chave de API dele.
 
-| topologia | chamadas | prompts |
+**Correção em duas camadas.** No servidor, um modelo pydantic `extra="forbid"`
+com teto em cada campo, recusa de gravação anônima na instância hospedada (403)
+e teto de 500 cartões. Na interface, `escHtml` passou a escapar aspas também, e
+todo ponto que interpola dado de cartão agora escapa; a chave do grupo saiu dos
+atributos `onclick` (vai o índice) e o botão de skills usa `data-*` — dentro de
+atributo o navegador decodifica a entidade **antes** de o JS ser interpretado,
+então escapar HTML não protege uma string JS ali.
+
+Verificado com payload real no navegador: renderiza como texto, zero elementos
+injetados, `onerror` não dispara.
+
+**Ficou de fora, e vale revisar:** `renderLeaderboard()`
+(`overthinking-machine.html:5114`) tem dois blocos que interpolam em `innerHTML`
+sem escapar — `5155-5175` (ramo `experimentRuns`, com `${r.name}` cru inclusive
+dentro de `title=`) e `5217-5229` (ramo de referência, que consome a constante
+`LB_DATA` da própria página, com `${r.arch}`, `${r.harness}` e `${r.task}`).
+Hoje esses dados são locais ou fixos, então não são exploráveis por terceiro;
+se algum dia vierem do servidor, o problema volta.
+
+---
+
+## 3. O que foi feito nesta sessão
+
+### Fase 1 — parar de enganar (`0c08b51`)
+
+Quatro pontos em que a plataforma dizia algo falso:
+
+- **Módulo 2 nunca leu ativação de modelo nenhum.** O ramo "real" testava
+  `"_real_activations" in dir()` — nome que não existe —, caía sempre na
+  simulação e mesmo assim devolvia `mode: "real"`, que a tela escrevia como
+  **"Origem: ⚡ Llama real"** sobre ruído gaussiano. Removido. O payload agora
+  diz `mode: "simulacao"`, `sintetico: true`, e a tela mostra selo de origem.
+- **A probe linear pontuava no próprio treino.** A docstring dizia "acurácia no
+  treino (leave-one-out simplificado)" — que se contradiz em uma linha. Medido:
+  em **ruído puro**, a probe antiga dava **1,000** nas 5 sementes com n=30
+  (0,995 com n=40; 0,937 com n=60), contra acaso de 0,500. Agora é validação
+  cruzada 3-fold estratificada, com acurácia fora da amostra.
+- **O agente simulado acertava se e somente se o rótulo fosse 1** (bug meu,
+  encontrado ao conferir). A acurácia saía ~50% em vez dos ~76% anunciados, e a
+  probe de "acerto" lia na verdade o rótulo — separável em todas as camadas,
+  inclusive na camada 0. Corrigido: acerta com probabilidade `base_acc`,
+  independente do rótulo. A curva agora vai do acaso nas camadas iniciais a 1,0
+  no meio da rede, que é o padrão que a página se propõe a ilustrar.
+  O payload ganhou `probe_baseline` (classe majoritária) — sem ela a curva não
+  se lê.
+- **Importar CSV era armadilha silenciosa.** As linhas ficavam no navegador, o
+  POST mandava só a quantidade, e o servidor rodava as N primeiras instâncias da
+  tarefa **embutida**. A pessoa via um score e acreditava ser o da tarefa dela.
+  Bloqueado no modo Real com aviso — e resolvido de vez na Fase 2.
+
+Mais: `mcp.json` da landing em uma linha com botão copiar e os 9 headers; modal
+de prompts com os placeholders que existem de verdade; 429 com `como_resolver`;
+traceback Python parou de ir para o navegador; Pokédex explica que não existe na
+instância pública; tetos de custo em `/api/benchmark` e `/api/prompt-sensitivity`
+(que não tinham nenhum) e em `/api/run` para arquitetura embutida.
+
+### Fase 2 — tarefa declarativa (`33a6e25`)
+
+Fecha o objetivo "montar a própria arquitetura e direcionar para o tipo de
+tarefa". A plataforma só sabia responder *"qual arquitetura é melhor na minha
+tarefa embutida"* — e as embutidas **saturam**: com modelo de raciocínio todas
+tiram 1.0 e o experimento não separa nada.
+
+- `src/tasks/tarefa_spec.py` — instrução comum + casos rotulados. Nada executa:
+  é texto e rótulo, como uma topologia é nome e template.
+- `src/tasks/tarefa_declarativa.py` — o interpretador. **Não** é registrada no
+  `TaskRegistry` (nome vazio na classe): uma tarefa declarativa só existe com
+  uma spec junto.
+- **Prova de expressividade**: `triagem_cobranca` reescrita como spec — gerada
+  da *mesma fonte* que a classe, não copiada à mão — produz as mesmas 24
+  instâncias, os mesmos **48 prompts byte a byte** e os mesmos **384 scores**.
+- **Avisos em vez de recusa** para o que não impede de rodar mas impede de
+  acreditar: classes desbalanceadas (com a linha de base calculada), poucos
+  casos, gabarito visível dentro do enunciado, entradas duplicadas.
+- `GET /api/tarefas` passa a publicar a **linha de base** de cada tarefa. Sem
+  ela, 0.80 parece bom mesmo quando o chute fixo dá 0.78.
+- `tarefa_spec` em `RunConfig`, `BenchmarkConfig` e `PromptSensitivityConfig` —
+  os módulos 1, 3 e 4 rodam na tarefa da pessoa.
+- MCP: `listar_tarefas` e `validar_tarefa`; `tarefa_spec` em `rodar_experimento`
+  e `rodar_com_topologia`. São **16 ferramentas** agora.
+
+**Decisão:** tarefa **não** vai para a biblioteca pública. Uma topologia é
+método e não carrega dado; uma tarefa é feita de casos, e casos são exatamente
+onde alguém colaria um extrato de clientes reais sem pensar. A spec viaja só na
+requisição.
+
+### Correção de rumo: as citações são reais
+
+O `turnover.md` (de junho) acusava **"Kim et al., 2025"** e **"Lee et al.,
+2026"** de serem citações inventadas, e recomendava trocá-las antes do TCC.
+**Isso está errado, e o erro foi meu**, de uma sessão anterior. Verificado
+direto no arXiv em 19/09/2026:
+
+| citação | título | 1º autor |
 |---|---|---|
-| sas | 1 | idênticos |
-| independent | 4 | idênticos |
-| centralized | 5 | idênticos |
-| decentralized | 7 | idênticos |
-| hybrid | 8 | idênticos |
+| `arXiv:2512.08296` | *Towards a Science of Scaling Agent Systems* | Yubin Kim |
+| `arXiv:2603.28052` | *Meta-Harness: End-to-End Optimization of Model Harnesses* | Yoonho Lee |
 
-As contagens conferem com o dicionário fixo do MCP (`mcp_server.py`), o que
-cruza duas fontes que antes ninguém comparava.
+O paper de Kim avalia 260 configurações em 6 benchmarks e 5 abordagens
+arquiteturais, e descreve o **efeito de saturação de capacidade** — que é
+exatamente o que a plataforma mede, e a origem do Princípio 5. As duas podem ir
+para o TCC. `turnover.md` foi corrigido no topo.
 
-### Superfície nova
-
-**10 endpoints**, todos de custo zero em chamadas ao modelo:
-
-```
-GET    /api/arquiteturas          catálogo (mata o hardcode do front e do MCP)
-GET    /api/harnesses             idem, com os não-expressáveis e o motivo
-GET    /api/limites               os tetos, para ninguém repeti-los à mão
-POST   /api/especificacoes/validar
-POST   /api/especificacoes/previa renderiza TODOS os prompts sem chamar o modelo
-GET    /api/biblioteca            lista o acervo
-GET    /api/biblioteca/saude      denuncia acervo volátil
-GET    /api/biblioteca/{nome}
-POST   /api/biblioteca            publica (devolve token de exclusão)
-DELETE /api/biblioteca/{nome}     token do autor ou OTM_ADMIN_TOKEN
-```
-
-**6 ferramentas MCP**: `listar_topologias`, `obter_topologia`,
-`validar_topologia`, `previa_topologia`, `publicar_topologia`,
-`rodar_com_topologia`. Além disso `listar_capacidades` passou a **ler** o
-catálogo em vez de repetir a lista fixa.
-
-**Aba no módulo 1**: paleta arrastável, pipeline reordenável, diagrama SVG,
-custo ao vivo, e Validar · Prévia · Rodar · Publicar. Aditiva — o laboratório
-existente não foi reestruturado, e volta como `grid` ao alternar de aba.
-
-### Decisões que valem conhecer antes de mexer
-
-**Renderização de template por lista branca, não `str.format()`.** Dois motivos:
-prompts contêm chaves legítimas (exemplos de JSON na saída esperada), e
-`str.format` permite travessia de atributo — `{0.__class__.__mro__}` seria uma
-fuga real num sistema cujo pilar é não executar nada de terceiro. Há teste que
-confirma que isso renderiza literalmente.
-
-**`entrada_bruta`.** `SingleAgentSystem` e `IndependentMAS` chamam
-`llm.invoke(messages)` com a lista original do harness. Reconstruir um par
-[System, Human] daria prompt diferente sempre que o harness emitisse mais de
-duas mensagens. Essa flag é a diferença entre "parecido" e "idêntico".
-
-**Limites de custo, que não existiam em lugar nenhum da API.** Teto por estágio,
-por instância (40) e por execução (400), recusados com HTTP **400 antes** do
-stream — não como evento de erro dentro do SSE. `num_instances` também ganhou
-teto (50), o que é mudança de comportamento para todo mundo, não só para specs.
+**"Bigeard et al., 2025"** (em `src/tasks/finance_agent.py`) continua **não
+verificada** — essa parte do alerta segue de pé.
 
 ---
 
-## Bugs reais corrigidos no caminho
-
-1. **`runner.py`** checava `isinstance(harness, (AceHarness, MceHarness))` para
-   atualizar memória. Um harness com estado vindo de terceiros seria ignorado
-   **em silêncio** — memória que nunca atualiza, sem erro nenhum. Agora é
-   `hasattr`.
-2. **`validate_platform.py`** exigia *exatamente* 5 arquiteturas (`==`). Passou
-   a ser superconjunto, senão cada extensão vira falsa falha.
-3. **Os dois harnesses não estavam sendo semeados** na biblioteca: faltava a
-   chave `tipo`, e um `except: continue` engolia o erro. A semeadura agora
-   reclama alto.
-4. Três divergências de prompt que eu tinha assumido erradas, achadas só porque
-   a comparação é byte a byte: `centralized` e `hybrid` têm prompts de
-   decomposição **diferentes**; `decentralized` põe a persona **no fim**; o
-   debate rotula a rodada anterior como `n-1`.
-
----
-
-## Como testar
-
-Tudo offline, sem gastar chamada:
+## 4. Como testar (tudo offline, custo zero)
 
 ```bash
 .venv\Scripts\python.exe testar_topologias.py
 ```
-
-21 verificações: equivalência das 5, cada limite recusando, segurança do
-template, e 168 especificações aleatórias.
-
-Ver os prompts que uma topologia enviaria — é assim que se lê uma topologia de
-terceiro antes de gastar a própria chave:
+Equivalência das 5 arquiteturas, limites, segurança de template, 168 specs
+aleatórias. 22 checagens.
 
 ```bash
-.venv\Scripts\python.exe testar_topologias.py --previa centralized
+.venv\Scripts\python.exe testar_tarefas.py
 ```
-
-Suíte geral da plataforma (23 checagens):
+A linguagem de tarefas: equivalência (24 instâncias, 48 prompts, 384 scores),
+13 recusas, 7 avisos, 9 casos de score. 34 checagens. `--previa` mostra a spec.
 
 ```bash
-.venv\Scripts\python.exe validate_platform.py
+.venv\Scripts\python.exe testar_api.py
 ```
-
-Na interface, com a API local:
+Tetos de custo, honestidade do módulo 2 e os endpoints de tarefa. 38 checagens,
+sem gastar chamada de modelo.
 
 ```bash
-.venv\Scripts\python.exe -m uvicorn server:app --port 8000
+.venv\Scripts\python.exe validate_platform.py --mcp
 ```
+Suíte geral: 8 camadas nesse modo (as 7 offline + MCP; `--api`, `--live` e
+`--producao` acrescentam as suas). A **seção 7 roda `node --check` em todo
+`<script>` inline** de toda página `.html` da raiz — varrida por glob, sem lista
+para manter, então página nova entra sozinha. Existe porque uma quebra de linha
+real dentro de uma string JS já derrubou uma página inteira, em silêncio.
+
+```bash
+.venv\Scripts\python.exe validate_platform.py --producao
+.venv\Scripts\python.exe testar_mcp.py
+```
+Conferem o que está **no ar**: commit implantado, rotas, handshake MCP real e as
+páginas. `--producao` é o comando que teria pego os cinco commits de atraso
+anteriores, e é o que hoje acusa o atraso do item 1.1.
+
+**Estado das suítes agora.** Localmente: `testar_topologias.py`,
+`testar_tarefas.py` e `testar_api.py` verdes; `validate_platform.py --mcp` com
+40 passaram · 1 aviso · 0 falhas · 2 puladas (o aviso é chave local parecendo
+placeholder; as puladas exigem a API em `localhost:8000`).
+
+`--producao` dá **11 passaram · 1 aviso · 4 falhas** — e as 4 são exatamente o
+atraso descrito em 1.1, nada mais:
+
+1. commit no ar `9b9143a` ≠ HEAD `86aca78`;
+2. faltam no ar as rotas `/api/tarefas` e `/api/tarefas/validar`;
+3. faltam no ar as ferramentas MCP `listar_tarefas` e `validar_tarefa`;
+4. `/curiosidades` dá 404 (a página do item 1.3, ainda não empurrada).
+
+O aviso é a biblioteca sem volume (item 1.2). Depois do push e da atualização do
+Railway, essas 4 têm de virar verdes — se alguma sobrar, é problema de verdade.
 
 ---
 
-## Arquivos tocados
+## 5. O que falta, na ordem recomendada
 
-### Novos
+Plano completo em `C:\Users\carlo\.claude\plans\quero-fazer-a-plataforma-giggly-kurzweil.md`.
+Ordem: **0 → 1 → 2 → 4 → 5 → 3 → 6 → 7**. Fases 0, 1 e 2 feitas (0 pendente só
+no painel do Railway).
 
-| arquivo | papel |
-|---|---|
-| `src/agents/topologia_spec.py` | a linguagem: modelos, limites, renderização |
-| `src/agents/agente_declarativo.py` | o interpretador (`AgentBase`) |
-| `src/agents/propostas_iniciais.py` | as 5 arquiteturas como especificação |
-| `src/agents/parse_subtarefas.py` | parser extraído (estava duplicado) |
-| `src/agents/equivalencia.py` | LLM falso + comparação byte a byte |
-| `src/harnesses/harness_spec.py` | a linguagem de harness + 2 propostas |
-| `src/harnesses/harness_declarativo.py` | o interpretador de harness |
-| `src/biblioteca.py` | acervo em SQLite + guarda-corpos |
-| `testar_topologias.py` | verificação de custo zero |
+### Fase 2, o que ficou faltando
+- `tarefa_spec` em `comparar_modelos` e `analisar_prompt` no MCP.
+- Um passo sobre tarefa própria no prompt `testar_minha_topologia`.
+- **Toda a interface**: cartões de tarefa vindos de `/api/tarefas`, aba "Minha
+  tarefa" (colar CSV/JSON → validar → usar) e religar o import de CSV para
+  produzir `tarefa_spec`. Hoje a Fase 2 existe inteira no backend e no MCP, e
+  nada dela aparece no site.
 
-### Modificados
+### Fase 4 — baixáveis e skill agnóstico
+Diretório `baixar/` servido pelo Vercel, com `otm-agente.md` (o skill),
+`mcp.json`, boilerplate, topologias em JSON, `tarefa-exemplo.json` e o script de
+ativações. `gerar_baixaveis.py` monta tudo das **mesmas fontes** que o
+`mcp_server.py`, para não divergir. Aposentar `otm-project.skill`. Semear
+`PROPOSTAS_OPERACIONAIS` (hoje é código morto, importado em lugar nenhum).
 
-| arquivo | o que mudou |
-|---|---|
-| `src/runner.py` | aceita `topologia_spec`/`harness_spec`; `isinstance`→`hasattr`; registra `architecture_used` |
-| `src/agents/agent_factory.py` | registra `declarativo`; `descrever_arquiteturas()` |
-| `src/agents/centralized.py`, `hybrid.py` | delegam ao parser compartilhado |
-| `server.py` | 10 endpoints; `RunConfig` com as specs; `_validar_orcamento` |
-| `mcp_server.py` | 6 ferramentas; catálogo dinâmico; `_get` aceita params |
-| `overthinking-machine.html` | aba, compositor, `startRealExperiment(extraCfg)` |
-| `validate_platform.py` | asserção de superconjunto |
-| `.gitignore` | `dados/` |
+### Fase 5 — landing
+Diagrama SVG do fluxo, "Comece em 3 passos", seção "Baixar", aviso da cota
+gratuita. Tirar `long-doc-benchmark.html` do deploy (está órfã e no ar).
 
----
+### Fase 3 — compositor e chaves em todo lugar
+Módulo 1 com modelos vindos de `/api/models` (hoje 6 fixos no HTML, então quem
+tem chave de Kimi/GLM/Groq não consegue usá-la onde compõe a topologia); módulo
+3 com seletor de modelo (hoje `gemini-2.5-flash` fixo); campo "outro modelo";
+`config.js` com os **9** provedores que o backend aceita (hoje oferece 6);
+harnesses não-expressáveis exibidos travados com o motivo.
 
-## O que falta
+### Fase 6 — módulo 2 de primeira classe
+Bloco "hook real, na sua máquina", Marks & Tegmark nas referências, recurso MCP
+`otm://ativacoes`.
 
-### Bloqueante para a aba funcionar em produção
-
-- [ ] **Subir o Railway para `30da54a`** (ver o topo deste documento).
-
-### Decisões pendentes — são suas, não minhas
-
-#### 1. Volume no Railway
-
-A biblioteca compartilhada grava em SQLite sob `OTM_DATA_DIR`. **O disco do
-Railway é recriado a cada deploy.** Sem um volume montado, o acervo funciona em
-desenvolvimento e é apagado em produção a cada push — o pior modo de falha
-possível, porque não dá erro.
-
-O código já denuncia a situação: aviso no startup (`aviso_de_persistencia()`) e
-em `GET /api/biblioteca/saude`, com `volume_configurado: false`.
-
-Para resolver, no painel do Railway: criar um volume, montar em `/data`, e
-definir `OTM_DATA_DIR=/data`. As 7 propostas iniciais são re-semeadas sozinhas
-mesmo num volume zerado, então elas nunca somem — mas o que os visitantes
-publicarem, sim.
-
-**Alternativas, se não quiser volume:** deixar a biblioteca em memória e assumir
-que é efêmera (basta não configurar nada, e o aviso já diz isso a quem olhar), ou
-trocar por Postgres — a interface `Biblioteca` em `src/biblioteca.py` foi feita
-com esse Protocol justamente para a troca ser localizada.
-
-#### 2. Moderação
-
-`POST /api/biblioteca` é **público e sem autenticação**. Existe hoje:
-
-- limite de tamanho (20 KB) e validação estrita antes de gravar — campo que o
-  schema não conhece some antes de tocar o disco
-- limite por IP: 5/hora e 20/dia (só o hash do IP é guardado)
-- teto global de 500 (recusa em vez de despejar — despejar deixaria alguém
-  apagar o trabalho alheio por inundação)
-- token de exclusão do autor, e `OTM_ADMIN_TOKEN` como válvula
-
-**O que isso não resolve, e precisa ser decisão consciente:**
-
-- **Não há moderação nenhuma.** Qualquer um publica, e aparece para todos. Sem
-  conta, sem reputação, sem denúncia. A única alavanca é `OTM_ADMIN_TOKEN` +
-  exclusão manual — e ele **não está configurado** hoje.
-- **O limite por IP é contornável.** Segura inundação acidental, não alguém
-  determinado.
-- **Uma especificação é vetor de injeção de prompt.** Não executa código, mas é
-  texto de terceiro enviado ao LLM de quem a roda, com a chave de quem a roda. A
-  defesa é divulgação, não prevenção: a prévia de custo zero, o selo de conteúdo
-  de terceiros na interface, e o aviso repetido em três lugares no MCP
-  (docstring, payload e instruções do servidor).
-- **O custo de saída é ilimitado.** Os tetos limitam o número de chamadas e o
-  tamanho da entrada; uma spec que peça respostas gigantes custa dinheiro real
-  dentro dos limites.
-
-**Caminhos possíveis:** manter aberto e definir `OTM_ADMIN_TOKEN` para poder
-limpar; exigir aprovação sua antes de aparecer (uma coluna `aprovada` na tabela);
-ou fechar a publicação e aceitar contribuição só por pull request no
-repositório, o que troca conveniência por revisão humana.
-
-### Pendências anteriores, ainda abertas
-
-- **MCP público** sem autenticação e sem repasse de chave BYOK
-  (`DEPLOY.md` já registra). `rodar_com_topologia` contra a instância hospedada
-  falha por falta de chave.
-- **`POST /api/library`** (cartões de execução, feature separada) continua sem
-  validação e sem persistir — ficou fora do escopo deste trabalho.
-- **Cancelamento de execução é fraco:** `DELETE /api/run/{id}` só interrompe o
-  stream; a thread segue consumindo cota até terminar.
-- **`ace`/`mce`/`meta_harness` não são expressáveis** declarativamente, por
-  motivos legítimos documentados em `harness_spec.py` (`NAO_EXPRESSAVEIS`). A
-  interface deve mostrá-los travados com o motivo — hoje o dado existe no
-  endpoint, mas a aba ainda não o exibe.
+### Fase 7 — robustez
+`timeout`/`max_retries` no `llm_factory` (hoje zero); `try/except` por instância
+com gravação parcial (hoje um 429 no meio perde a execução inteira e os tokens
+já gastos); semáforo de execuções simultâneas; **`reps` + desvio-padrão no
+experimento individual** e **custo em US$ em todo resultado** — sem esses dois,
+nenhuma comparação é defensável.
 
 ---
 
-## Limites honestos do que foi provado
+## 6. Dívidas técnicas confirmadas (auditoria desta sessão)
 
-A igualdade byte a byte vale para **5 especificações**, e em parte por
-construção: os prompts das propostas foram transcritos do código das classes.
-Isso prova que os quatro tipos de estágio **cobrem** as cinco arquiteturas do
-paper. **Não** prova que o interpretador está correto para especificação
-arbitrária.
+Todas verificadas no código. Nenhuma é bloqueante hoje; a mais séria já foi
+corrigida (seção 2).
 
-O teste de propriedade (168 specs aleatórias, sem exceção, contagem sempre
-batendo com a estimativa) é cobertura adicional — e continua sendo cobertura,
-não prova.
+1. **`custom_prompts` é editável e ignorado.** A interface deixa editar e salvar
+   os prompts (`savePromptEdit`, `overthinking-machine.html:8437-8444`) e os
+   envia (`:4538`), mas o servidor não os repassa ao runner (`server.py:117`,
+   "reservado para uso futuro"; o dict `config` em `:921-937` não o inclui). No
+   modo Real, a pessoa edita prompts que não têm efeito nenhum. É o mesmo tipo
+   de mentira que a Fase 1 foi fechar — **próximo candidato óbvio**.
+2. **Cancelar execução é fraco.** `DELETE /api/run/{id}` encerra o stream; a
+   thread segue consumindo cota até terminar.
+3. **Sem teto de execuções simultâneas.** `threading.Thread` cru em 4 lugares;
+   `active_runs.pop` fora de `try/finally` (vaza quando o cliente desconecta); e
+   `redirect_stdout` é global ao processo, então execuções paralelas **misturam
+   os logs** uma da outra.
+4. **Modelo sem preço vira custo 0 em silêncio** (`server.py`, catálogo de
+   modelos). Deveria ser `null` + "preço não publicado".
+5. **Variáveis de ambiente não documentadas.** Fora do `.env.example` e do
+   `DEPLOY.md`: `OTM_ADMIN_TOKEN`, `OTM_DATA_DIR`, `OTM_IP_SALT`,
+   `OTM_PUB_POR_HORA`/`OTM_PUB_POR_DIA`, `OTM_MCP_HOST`/`OTM_MCP_PORT`/
+   `OTM_MCP_TIMEOUT`, `OTM_PROD_API`/`OTM_PROD_SITE`. Documentadas:
+   `OTM_ALLOWED_ORIGINS`, `OTM_HOSTED` e `OTM_API_URL`.
+6. **`*.md` servido pelo Vercel** — ver o aviso no topo deste arquivo.
+7. **`ace`/`mce`/`meta_harness` não são expressáveis** declarativamente, por
+   motivos legítimos (`NAO_EXPRESSAVEIS` em `harness_spec.py`). O dado existe no
+   endpoint; a interface ainda não os mostra travados.
+8. **`README.md` antecede a plataforma web.** Entrou no repositório em
+   2026-08-29 (`ecef884`) e nunca mais foi tocado: zero menção a BYOK, MCP,
+   Vercel ou Railway. **`DEPLOY.md`** apresenta como "esperado" um
+   `biblioteca_persistente: true` que a produção nega (linha 130), e conta
+   "4 páginas HTML" (linhas 7 e 135) quando há 7.
+
+### Biblioteca pública: continua sem moderação
+`POST /api/biblioteca` (topologias) é público e sem autenticação. Existe: limite
+de tamanho, validação estrita antes de gravar, limite por IP (5/h, 20/dia, só o
+hash do IP é guardado), teto global de 500 e token de exclusão do autor. **Não
+existe:** moderação, reputação ou denúncia. Uma especificação é vetor de injeção
+de prompt — não executa código, mas é texto de terceiro enviado ao modelo de
+quem a roda, com a chave de quem a roda. A defesa é divulgação: a prévia de
+custo zero e o selo de conteúdo de terceiros. `OTM_ADMIN_TOKEN` é a válvula, e
+não está configurado.
+
+---
+
+## 7. Limites honestos do que foi provado
+
+A equivalência byte a byte das topologias vale para **5 especificações**, e em
+parte por construção: os prompts das propostas foram transcritos do código das
+classes. Isso prova que os quatro tipos de estágio **cobrem** as cinco
+arquiteturas do paper. **Não** prova que o interpretador está correto para
+especificação arbitrária. O teste de propriedade (168 specs aleatórias) é
+cobertura adicional — e continua sendo cobertura, não prova.
+
+A equivalência de **tarefa** é mais forte num ponto: a spec é gerada da mesma
+fonte da classe, então uma mudança de formatação lá aparece aqui como
+divergência. Mas também vale para **uma** tarefa só.
+
+Sobre a avaliação operacional que motivou a Fase 2: em `triagem_cobranca`
+(24 casos, gemma-4-31b-it, seed 42, **uma execução, sem repetição nem
+desvio-padrão**), SAS tirou 1,000 com 700 tokens e 23,2 s; verificador-precedência
+1,000 com 1517 tokens (2,2×) e 67,0 s (2,9×); cascata-de-regras 1,000 com 1701
+tokens (2,4×) e 59,8 s. **A tarefa satura**: o score não decide nada, e quem
+decide é token e latência. Com n=1 execução, isso **não é estatisticamente
+defensável** — é o que a Fase 7 (`reps` + desvio) existe para consertar.

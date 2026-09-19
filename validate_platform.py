@@ -338,7 +338,7 @@ def val_frontend() -> None:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 7. API
+# 8. API
 # ══════════════════════════════════════════════════════════════════════════════
 
 def _http_json(path: str, body: dict | None = None, timeout: int = 20):
@@ -356,7 +356,7 @@ def _http_json(path: str, body: dict | None = None, timeout: int = 20):
 
 
 def val_api() -> None:
-    secao("7. API (FastAPI)")
+    secao("8. API (FastAPI)")
 
     try:
         h = _http_json("/api/health", timeout=5)
@@ -400,11 +400,11 @@ def val_api() -> None:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 8. MCP
+# 9. MCP
 # ══════════════════════════════════════════════════════════════════════════════
 
 def val_mcp() -> None:
-    secao("8. MCP")
+    secao("9. MCP")
 
     try:
         import mcp_server as M
@@ -505,7 +505,7 @@ def val_mcp() -> None:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 9. Experimento real (gasta LLM)
+# 10. Experimento real (gasta LLM)
 # ══════════════════════════════════════════════════════════════════════════════
     # ── Casos que a tabela fixa de custo errava ────────────────────────────
     # Estes três são o motivo de estimar_custo ter sido reescrito: ele dizia 5
@@ -565,7 +565,7 @@ def val_mcp() -> None:
 
 
 def val_live(modelo: str = "google/gemini-2.5-flash-lite") -> None:
-    secao("9. EXPERIMENTO REAL (consome API)")
+    secao("10. EXPERIMENTO REAL (consome API)")
 
     from src.runner import run_experiment
     cfg = {
@@ -649,7 +649,7 @@ def relatorio() -> int:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 9. JAVASCRIPT DAS PÁGINAS
+# 7. JAVASCRIPT DAS PÁGINAS
 #
 # As páginas não têm build: o JS vive em <script> inline dentro de HTML de até
 # 440 KB. Um erro de sintaxe ali não aparece em teste nenhum de Python — a página
@@ -669,7 +669,7 @@ def paginas_locais() -> list[Path]:
 
 
 def val_javascript() -> None:
-    secao("9. JAVASCRIPT DAS PÁGINAS")
+    secao("7. JAVASCRIPT DAS PÁGINAS")
     import re
     import shutil
     import tempfile
@@ -714,7 +714,7 @@ def val_javascript() -> None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 10. PRODUÇÃO
+# 11. PRODUÇÃO
 #
 # Todas as outras camadas olham para o código local. Esta olha para o que está
 # NO AR — e existe porque o backend ficou cinco commits atrás do repositório sem
@@ -752,7 +752,7 @@ def _rotas_locais() -> set[str]:
 
 
 def val_producao() -> None:
-    secao(f"10. PRODUÇÃO  ({PROD_API})")
+    secao(f"11. PRODUÇÃO  ({PROD_API})")
 
     # ── a API responde, e em que commit está ────────────────────────────────
     st, txt = _prod(f"{PROD_API}/api/health")
