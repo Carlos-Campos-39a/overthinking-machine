@@ -8946,9 +8946,14 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
   /* Escapa antes de qualquer interpolação em HTML. A biblioteca é pública e
      sem autenticação: título, descrição e prompts vêm de terceiros. */
   function esc(s) {
-    var d = document.createElement('div');
-    d.textContent = s == null ? '' : String(s);
-    return d.innerHTML;
+    // Escapa as ASPAS tambem. O truque do textContent sozinho nao as cobre, e
+    // esc() e usado dentro de ATRIBUTOS aqui — value="..." do id do estagio e
+    // <option value="..."> com nomes vindos da BIBLIOTECA PUBLICA, ou seja,
+    // texto de terceiro. Sem escapar aspas, um nome fecha o atributo e o resto
+    // vira atributo de verdade; conferido no navegador antes da correcao.
+    return (s == null ? '' : String(s))
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function chamadasDe(e) {
@@ -9197,6 +9202,74 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
 
   /* ── API ─────────────────────────────────────────────────────────────── */
 
+  /* ── Tokens de exclusão ───────────────────────────────────────────────
+     Ao publicar, o servidor devolve um token que aparece UMA VEZ — ele guarda
+     só o hash, então não há como recuperá-lo depois. Antes isso vivia só num
+     aviso na tela: qualquer refresh perdia o token para sempre, e a pessoa
+     ficava sem como apagar a própria publicação. Agora fica no navegador dela,
+     como as chaves de API já ficam, e a interface oferece Copiar e Excluir. */
+  var ESP_TOKENS = 'otm_tokens_topologia';
+
+  function espTokens() {
+    try { return JSON.parse(localStorage.getItem(ESP_TOKENS) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function espGuardarToken(nome, token) {
+    try {
+      var m = espTokens();
+      m[nome] = token;
+      localStorage.setItem(ESP_TOKENS, JSON.stringify(m));
+      return true;
+    } catch (e) { return false; }
+  }
+  window.espCopiarToken = function (nome) {
+    var tk = espTokens()[nome];
+    if (!tk) { aviso('Não há token guardado para ' + esc(nome) + '.', 'erro'); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(tk).then(function () {
+        aviso('Token de <strong>' + esc(nome) + '</strong> copiado.', 'ok');
+      });
+    }
+  };
+  window.espExcluirMinha = async function (nome) {
+    var tk = espTokens()[nome];
+    if (!tk) { aviso('Sem token guardado para ' + esc(nome) + '.', 'erro'); return; }
+    if (!confirm('Excluir "' + nome + '" da biblioteca pública? Não dá para desfazer.')) return;
+    try {
+      var r = await fetch(API + '/api/biblioteca/' + encodeURIComponent(nome), {
+        method: 'DELETE', headers: { 'X-OTM-Token': tk },
+      });
+      var d = await r.json();
+      if (!r.ok) { aviso('Não excluiu: ' + esc(d.detail || ''), 'erro'); return; }
+      var m = espTokens(); delete m[nome];
+      try { localStorage.setItem(ESP_TOKENS, JSON.stringify(m)); } catch (e) {}
+      aviso('<strong>' + esc(nome) + '</strong> excluída da biblioteca.', 'ok');
+      carregarBiblioteca(); espMinhas();
+    } catch (e) { aviso('API fora do ar: ' + esc(e.message), 'erro'); }
+  };
+  function espMinhas() {
+    var el = document.getElementById('esp-minhas');
+    if (!el) return;
+    var m = espTokens(), nomes = Object.keys(m);
+    if (!nomes.length) { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false;
+    el.innerHTML = '<div class="esp-titulo">Publicadas deste navegador</div>' +
+      nomes.map(function (n) {
+        return '<div class="esp-minha"><code>' + esc(n) + '</code>' +
+               '<button type="button" data-tok-copiar="' + esc(n) + '">copiar token</button>' +
+               '<button type="button" data-tok-excluir="' + esc(n) + '">excluir</button></div>';
+      }).join('') +
+      '<div class="esp-dim">Os tokens ficam só neste navegador. Limpar os dados do ' +
+      'site apaga-os, e não há como recuperá-los no servidor.</div>';
+    // Delegação: o nome vem do usuário e nunca entra em atributo de evento.
+    el.onclick = function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      if (b.dataset.tokCopiar) espCopiarToken(b.dataset.tokCopiar);
+      else if (b.dataset.tokExcluir) espExcluirMinha(b.dataset.tokExcluir);
+    };
+  }
+
   function aviso(html, tipo) {
     var el = document.getElementById('esp-aviso');
     if (!el) return;
@@ -9273,9 +9346,17 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
       });
       var d = await r.json();
       if (!r.ok) { aviso('Não publicou: ' + esc(d.detail || ''), 'erro'); return; }
+      var salvo = espGuardarToken(d.nome, d.token_exclusao);
       aviso('Publicada como <strong>' + esc(d.nome) + '</strong>.<br>' +
-            'Token de exclusão (aparece uma única vez, guarde): ' +
-            '<code>' + esc(d.token_exclusao) + '</code>', 'ok');
+            'Token de exclusão — <strong>aparece uma única vez</strong>, o servidor ' +
+            'guarda só o hash:<br><code>' + esc(d.token_exclusao) + '</code> ' +
+            '<button type="button" id="esp-copiar-token">copiar</button>' +
+            '<br>' + (salvo
+              ? 'Guardado neste navegador — use o botão excluir na lista abaixo.'
+              : '<strong>Não consegui guardar no navegador: copie agora.</strong>'), 'ok');
+      var bc = document.getElementById('esp-copiar-token');
+      if (bc) bc.onclick = function () { espCopiarToken(d.nome); };
+      espMinhas();
       carregarBiblioteca();
     } catch (e) {
       aviso('API fora do ar: ' + esc(e.message), 'erro');
@@ -9324,6 +9405,15 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
 
   /* ── Montagem da aba ─────────────────────────────────────────────────── */
 
+  var CSS_MINHAS =
+    '.esp-minhas{margin-top:10px;padding:10px 12px;border:1px solid var(--card-border,#E8E8F5);' +
+      'border-radius:10px;font-size:0.78rem}' +
+    '.esp-minha{display:flex;align-items:center;gap:8px;padding:4px 0;flex-wrap:wrap}' +
+    '.esp-minha code{font-family:JetBrains Mono,monospace;font-size:0.9em}' +
+    '.esp-minha button{font:inherit;padding:2px 9px;border-radius:6px;cursor:pointer;' +
+      'border:1px solid var(--card-border,#E8E8F5);background:transparent}' +
+    '.esp-minha button:hover{border-color:var(--roxo-profundo,#5D3FD3)}';
+
   var MARCACAO =
     '<div class="esp-layout">' +
       '<aside class="esp-paleta">' +
@@ -9344,6 +9434,7 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
         '<div class="esp-titulo">Pipeline <span class="esp-dim">— arraste para reordenar</span></div>' +
         '<div id="esp-pipeline" class="esp-zona"></div>' +
         '<div id="esp-aviso" class="esp-aviso" hidden></div>' +
+        '<div id="esp-minhas" class="esp-minhas" hidden></div>' +
         '<div id="esp-previa" class="esp-previa" hidden></div>' +
       '</div>' +
 
@@ -9451,11 +9542,12 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
     if (aba === 'esp' && !montado) {
       montado = true;
       var st = document.createElement('style');
-      st.textContent = CSS;
+      st.textContent = CSS + CSS_MINHAS;
       document.head.appendChild(st);
       wrap.innerHTML = MARCACAO;
       prepararZona();
       carregarBiblioteca();
+      espMinhas();          // tokens guardados sobrevivem ao refresh
       if (!esp.estagios.length) espCarregar('centralized');
       render();
     }
