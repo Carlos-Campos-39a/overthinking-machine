@@ -13,49 +13,38 @@ Estado em **2026-09-19**, commit `86aca78`.
 
 ### 1.1 O backend no ar está desatualizado (de novo)
 
-**Nada do trabalho desta sessão está no ar — nem o frontend.** `origin/main`
-está em `0c08b51`; o local está em `86aca78`, **3 commits à frente**
-(`54f44a2`, `33a6e25`, `86aca78`).
+**Resolvido nesta sessão** — frontend e backend estão em `84e8cde`, o mesmo
+commit do repositório. Conferido: `validate_platform.py --producao` dá
+**15 passaram · 1 aviso · 0 falhas**, `/api/tarefas` responde, a gravação anônima
+em `/api/library` devolve **403** e o `escHtml` no ar já escapa aspas.
 
-| | commit | tem Fase 1 / Fase 2 / correção de XSS |
-|---|---|---|
-| Vercel (frontend) | `0c08b51` (= `origin/main`) | sim / não / **não** |
-| Railway (backend) | **`9b9143a`** | não / não / não |
-| repositório local | `86aca78` | sim / sim / sim |
+**Mas o auto-deploy continua quebrado, e o próximo push vai ficar para trás de
+novo.** O que funcionou foi um caminho específico, que vale registrar:
 
-Duas consequências:
+- O botão **Check for updates** (Settings → Source) responde *"You're on the
+  latest version of this repository"* mesmo com o serviço vários commits atrás.
+  Não confie nele.
+- O que funciona é o badge **"Update available"** no canto superior esquerdo da
+  barra lateral do projeto → **Yes** no diálogo *Update template*. Aí o deploy
+  começa de verdade.
+- O badge só aparece algum tempo depois do push. Se não estiver lá, recarregue a
+  página um minuto depois.
 
-- `GET /api/tarefas` em produção devolve **404** — a Fase 2 não está no ar.
-- **O XSS ainda é explorável no site público.** A correção do frontend está em
-  `86aca78`, que não foi empurrado: `curl .../overthinking-machine.html | grep -c quot`
-  devolve **0**, ou seja, o `escHtml` no ar ainda não escapa aspas. O `git push`
-  fecha a metade do frontend; o Railway fecha a do servidor.
-
-São dois passos separados: **`git push`** publica o frontend no Vercel (e veja o
-item 1.3 antes), e só depois o Railway precisa ser atualizado à mão.
-
-**O auto-deploy do Railway está quebrado e mente.** O painel mostra
-*"Auto deploy unavailable / Could not load branches"* e, ao clicar em
-**Check for updates**, responde **"You're on the latest version of this
-repository"** — enquanto `/api/health` devolve um commit atrasado. Ou seja: o
-botão que existe para detectar o atraso é justamente o que não detecta.
-
-Causa provável: o serviço foi criado como *template* a partir da URL do repo, e
-o GitHub App do Railway nunca recebeu acesso a `overthinking-machine`, então não
-há webhook.
-
-**Como subir**, enquanto não houver auto-deploy: no painel do Railway, aba
-*Deployments*, usar **Redeploy** no deploy mais recente **não resolve** (reimplanta
-o mesmo commit). É preciso forçar o serviço a buscar o repositório de novo —
-Settings → Source → *Check for updates* → **Update** → **Yes** — e conferir
-**sempre** com:
+Conferir **sempre** depois, porque o painel não é fonte confiável:
 
 ```bash
 curl -s https://overthinking-machine-production.up.railway.app/api/health
 ```
 
-O campo `commit` tem de bater com `git rev-parse --short HEAD`. Enquanto não
-bater, o deploy não subiu, diga o painel o que disser.
+O campo `commit` tem de bater com `git rev-parse --short HEAD`.
+
+Por que ele quebra: o painel mostra *"Auto deploy unavailable / Could not load
+branches"*. O serviço foi criado como **template** a partir da URL do repo, e o
+GitHub App do Railway nunca recebeu acesso a `overthinking-machine` — então não
+há webhook, e cada push fica no GitHub sem chegar ao ar.
+
+Outra coisa que **não** resolve: *Redeploy* na aba Deployments reimplanta o
+**mesmo** commit.
 
 ### 1.2 Decisões que dependem de você
 
@@ -70,13 +59,18 @@ bater, o deploy não subiu, diga o painel o que disser.
    apagar uma topologia publicada por terceiro. Defina você; eu não devo
    escrever segredo em painel.
 
-### 1.3 Há um commit de outra sessão não empurrado
+### 1.3 `curiosidades.html` foi publicada
 
-`54f44a2` ("curiosidades: pagina de achados, com o benchmark MCP x API") foi
-feito por outra sessão de Claude, nesta mesma árvore de trabalho, e **não foi
-empurrado** — ela deixou a decisão para você, porque o push publica no Vercel.
-`git push` agora leva esse commit junto com os meus. A página passou na
-verificação de sintaxe.
+`54f44a2` veio de outra sessão de Claude trabalhando nesta mesma árvore: a
+página de achados com o benchmark MCP × API (144 agentes headless; taxa de
+sucesso praticamente igual nas três interfaces, MCP ~1,9× mais barato). Ela
+deixou o push para você decidir, você aprovou, e `/curiosidades` está no ar.
+
+Dois achados desta sessão entraram lá como conteúdo secundário — a probe que se
+enganava e a saturação da `triagem_cobranca`. Os números foram conferidos antes
+de publicar; o enquadramento diz explicitamente que a plataforma **nunca** leu
+ativação de modelo nenhum nessa página, e que o erro foi de rótulo e de
+avaliação, não de leitura.
 
 ---
 
@@ -108,7 +102,8 @@ atributo o navegador decodifica a entidade **antes** de o JS ser interpretado,
 então escapar HTML não protege uma string JS ali.
 
 Verificado com payload real no navegador: renderiza como texto, zero elementos
-injetados, `onerror` não dispara.
+injetados, `onerror` não dispara. **Conferido também em produção**: `POST`
+anônimo em `/api/library` devolve 403 e o `escHtml` publicado escapa aspas.
 
 **Ficou de fora, e vale revisar:** `renderLeaderboard()`
 (`overthinking-machine.html:5114`) tem dois blocos que interpolam em `innerHTML`
@@ -249,16 +244,9 @@ anteriores, e é o que hoje acusa o atraso do item 1.1.
 40 passaram · 1 aviso · 0 falhas · 2 puladas (o aviso é chave local parecendo
 placeholder; as puladas exigem a API em `localhost:8000`).
 
-`--producao` dá **11 passaram · 1 aviso · 4 falhas** — e as 4 são exatamente o
-atraso descrito em 1.1, nada mais:
-
-1. commit no ar `9b9143a` ≠ HEAD `86aca78`;
-2. faltam no ar as rotas `/api/tarefas` e `/api/tarefas/validar`;
-3. faltam no ar as ferramentas MCP `listar_tarefas` e `validar_tarefa`;
-4. `/curiosidades` dá 404 (a página do item 1.3, ainda não empurrada).
-
-O aviso é a biblioteca sem volume (item 1.2). Depois do push e da atualização do
-Railway, essas 4 têm de virar verdes — se alguma sobrar, é problema de verdade.
+Em produção: `--producao` dá **15 passaram · 1 aviso · 0 falhas** e
+`testar_mcp.py` passa contra a URL pública, com as 16 ferramentas. O único aviso
+é a biblioteca sem volume (item 1.2) — a decisão que continua sua.
 
 ---
 

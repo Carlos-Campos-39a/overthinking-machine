@@ -611,13 +611,23 @@ async def listar_tarefas():
             rotulos = (insts[0].metadata.get("valid_labels") if insts else None) or []
             item["rotulos"] = list(rotulos)
             item["tipo"] = insts[0].task_type if insts else ""
+            # Distribuição e linha de base só fazem sentido com rótulo fechado.
+            # Em tarefa de prosa (finance_agent), o "gabarito" é um parágrafo:
+            # contar frequência devolveria cada caso como uma classe de tamanho 1
+            # e uma linha de base de 1/n — um número sem significado, num catálogo
+            # que agentes leem pelo MCP para decidir o que rodar.
             verdades = [str(i.ground_truth) for i in insts]
-            if verdades:
+            fechado = bool(rotulos) and all(v in rotulos for v in verdades)
+            if verdades and fechado:
                 dist: dict[str, int] = {}
                 for v in verdades:
                     dist[v] = dist.get(v, 0) + 1
                 item["distribuicao"] = dict(sorted(dist.items(), key=lambda kv: -kv[1]))
                 item["linha_de_base"] = round(max(dist.values()) / len(verdades), 4)
+            else:
+                item["linha_de_base"] = None
+                item["nota"] = ("resposta aberta: não há rótulo fechado, então não "
+                                "há linha de base — o avaliador decide o score")
         except Exception as e:
             # Uma tarefa que não carrega não pode derrubar o catálogo inteiro.
             item["erro"] = f"não carregou: {type(e).__name__}"

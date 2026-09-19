@@ -151,6 +151,13 @@ def tarefa_declarativa() -> None:
     check("catálogo traz casos e rótulos",
           tri.get("casos") == 24 and len(tri.get("rotulos") or []) == 6,
           f"{tri.get('casos')} casos, {len(tri.get('rotulos') or [])} rótulos")
+    # Tarefa de resposta aberta não tem rótulo fechado: contar frequência de
+    # parágrafos daria uma "distribuição" de classes de tamanho 1 e uma linha de
+    # base de 1/n — número sem significado num catálogo lido por agentes.
+    fin = por_nome.get("finance_agent", {})
+    check("tarefa de prosa não inventa linha de base",
+          fin.get("linha_de_base") is None and "distribuicao" not in fin,
+          f"linha_de_base={fin.get('linha_de_base')} · nota={str(fin.get('nota'))[:60]}")
 
     v = c.post("/api/tarefas/validar", json={"spec": spec}).json()
     check("valida a spec de referência", v.get("ok") and not v.get("erros"), str(v.get("erros")))
