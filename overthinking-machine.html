@@ -4221,6 +4221,7 @@ function importCSV(file) {
     }
 
     state.customInstances = result.rows;
+    state.csvNomeArquivo = (file.name || '').replace(/\.csv$/i, '');
     updateInstCount();
     updateCliPreview();
 
@@ -4255,6 +4256,111 @@ function parseCSV(text) {
       eval_criteria: obj.eval_criteria.split(',').map(s => s.trim()).filter(Boolean) });
   }
   return { rows, errors };
+}
+
+/* ── CSV → tarefa declarativa ──────────────────────────────────────────
+   Antes, as linhas importadas ficavam só no navegador: o POST mandava a
+   QUANTIDADE e o servidor rodava as N primeiras instâncias da tarefa
+   EMBUTIDA. A pessoa via um score e acreditava ser o da tarefa dela. Esta
+   função é o que torna aquele botão verdadeiro — as linhas viram uma spec
+   que viaja na requisição e é de fato executada. */
+function slugTarefa(s) {
+  return String(s || "").toLowerCase().normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "").slice(0, 40) || "minha-tarefa";
+}
+
+function csvParaTarefaSpec(rows, nome) {
+  var problemas = [];
+  if (!rows || !rows.length) return { erro: "nenhuma linha importada" };
+
+  var semGabarito = rows.filter(function (r) { return !r.ground_truth; });
+  if (semGabarito.length) {
+    problemas.push(semGabarito.length + " linha(s) sem ground_truth: sem gabarito " +
+                   "nao ha o que pontuar.");
+  }
+  var usaveis = rows.filter(function (r) { return r.ground_truth; });
+  var rotulos = [];
+  usaveis.forEach(function (r) {
+    if (rotulos.indexOf(r.ground_truth) === -1) rotulos.push(r.ground_truth);
+  });
+
+  // Rotulo fechado e a premissa: a tarefa declarativa pontua por ACERTO EXATO.
+  // Gabarito em prosa nunca casa exatamente, entao produziria 0.000 em tudo —
+  // um numero que parece resultado e nao e. Melhor recusar e explicar.
+  // O sinal nao e o teto de 200 do schema (uma frase de 190 passaria e daria
+  // zero igual): e o COMPRIMENTO MEDIO. Rotulo de verdade e curto — "Positivo",
+  // "manter_acordo", "juridico". Frase de resposta esperada nao e.
+  var somaLen = rotulos.reduce(function (a, r) { return a + r.length; }, 0);
+  var mediaLen = rotulos.length ? somaLen / rotulos.length : 0;
+  if (mediaLen > 60) {
+    return { erro: "os gabaritos parecem respostas abertas, nao rotulos (media de " +
+                   Math.round(mediaLen) + " caracteres). Esta tarefa pontua por " +
+                   "acerto EXATO, entao prosa daria 0.000 em todos os casos. " +
+                   "Para resposta aberta use uma tarefa embutida com juiz-LLM." };
+  }
+  if (rotulos.length < 2) {
+    return { erro: "todos os casos tem o mesmo gabarito: essa tarefa nao mede nada." };
+  }
+  if (rotulos.length > usaveis.length * 0.8 && usaveis.length > 2) {
+    problemas.push("quase todo caso tem um gabarito diferente (" + rotulos.length +
+                   " rotulos para " + usaveis.length + " casos) — confira se sao " +
+                   "mesmo rotulos, e nao respostas abertas.");
+  }
+
+  var primeira = usaveis[0] || {};
+  var TIPOS_OK = ["classification", "market_search", "legal_analysis"];
+  var FORMATOS_OK = ["single_label", "long_prose", "bullet_points"];
+  var tipo = TIPOS_OK.indexOf(primeira.task_type) >= 0 ? primeira.task_type : "classification";
+  var formato = FORMATOS_OK.indexOf(primeira.response_format) >= 0
+                  ? primeira.response_format : "single_label";
+  var criterios = (primeira.eval_criteria && primeira.eval_criteria.length)
+                  ? primeira.eval_criteria.slice(0, 6) : ["accuracy"];
+
+  var vistos = {};
+  var casos = usaveis.map(function (r, i) {
+    var id = slugTarefa(r.id) || ("c" + (i + 1));
+    while (vistos[id]) id = id + "-" + (i + 1);   // ids repetidos sao recusados
+    vistos[id] = true;
+    return { id: id, entrada: r.input, esperado: r.ground_truth };
+  });
+
+  return {
+    spec: {
+      nome: slugTarefa(nome),
+      titulo: String(nome || "Minha tarefa").slice(0, 120),
+      descricao: "Importada de CSV com " + casos.length + " casos.",
+      instrucao: "",
+      tipo: tipo,
+      formato_resposta: formato,
+      criterios: criterios,
+      rotulos_validos: rotulos,
+      casos: casos,
+      exemplos: []
+    },
+    problemas: problemas
+  };
+}
+
+function nomeDaTarefaCSV() {
+  var el = document.getElementById('exp-name-input');
+  var n = (el && el.value || '').trim();
+  return n || (state.csvNomeArquivo || 'minha-tarefa');
+}
+
+async function validarTarefaNoServidor(spec) {
+  try {
+    var r = await fetch(API_URL + '/api/tarefas/validar', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spec: spec }),
+    });
+    var d = await r.json();
+    if (!r.ok) return { ok: false, erros: [d.detail || ('HTTP ' + r.status)] };
+    return d;
+  } catch (e) {
+    return { ok: false, erros: ['API fora do ar: ' + e.message] };
+  }
 }
 
 function splitCSVLine(line) {
@@ -4488,19 +4594,34 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
     return;
   }
 
+  // CSV importado vira uma TAREFA DECLARATIVA que viaja na requisição. Antes
+  // isto era uma trava: as linhas ficavam no navegador, o POST levava só a
+  // quantidade, e o servidor rodava as N primeiras instâncias da tarefa
+  // EMBUTIDA — a pessoa via um score e acreditava ser o da tarefa dela.
+  let tarefaSpec = null, tarefaResumo = null;
   if (state.instMode === 'csv') {
-    // Trava honesta, até a tarefa declarativa (tarefa_spec) entrar: as linhas do
-    // CSV nunca chegavam ao backend. O POST levava só a QUANTIDADE, e o servidor
-    // rodava as N primeiras instâncias da tarefa EMBUTIDA — a pessoa via um score
-    // e acreditava que era da tarefa dela.
-    showToast('⚠ O CSV importado ainda não é enviado ao servidor no modo Real.');
-    await termLine('<span class="t-warn">  ! No modo Real, as instâncias do CSV não são enviadas ao servidor —</span>', 0);
-    await termLine('<span class="t-warn">    rodar agora mediria a tarefa embutida, não a sua. Use as instâncias</span>', 0);
-    await termLine('<span class="t-warn">    da lista, ou o modo Mock. Tarefa própria entra em breve, declarativa.</span>', 0);
-    return;
+    const conv = csvParaTarefaSpec(state.customInstances, nomeDaTarefaCSV());
+    if (conv.erro) {
+      showToast('⚠ ' + conv.erro);
+      await termLine('<span class="t-warn">  ! Não dá para rodar este CSV: ' + escHtml(conv.erro) + '</span>', 0);
+      return;
+    }
+    const val = await validarTarefaNoServidor(conv.spec);
+    if (!val.ok) {
+      showToast('⚠ A tarefa do CSV não passou na validação.');
+      await termLine('<span class="t-error">  ✗ Tarefa inválida:</span>', 0);
+      for (const e of (val.erros || []).slice(0, 4)) {
+        await termLine('<span class="t-warn">    ' + escHtml(e) + '</span>', 0);
+      }
+      return;
+    }
+    tarefaSpec = conv.spec;
+    // O resumo é impresso depois do termClear(), mais abaixo — escrever aqui
+    // seria apagado antes de alguém ler.
+    tarefaResumo = { resumo: val.resumo || {}, problemas: conv.problemas || [] };
   }
 
-  const instCount = state.selectedIds.size;
+  const instCount = tarefaSpec ? tarefaSpec.casos.length : state.selectedIds.size;
   if (instCount === 0) { showToast('⚠ Selecione ao menos uma instância.'); return; }
 
   state.running = true;
@@ -4515,6 +4636,22 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
 
   termClear();
   setStatus('running');
+
+  if (tarefaResumo) {
+    const r = tarefaResumo.resumo;
+    const base = (r.linha_de_base != null) ? r.linha_de_base.toFixed(3) : '—';
+    await termLine('<span class="t-label">  Tarefa:       </span><span class="t-value">' +
+      escHtml(r.titulo || tarefaSpec.nome) + '</span> <span class="t-dim">(sua, importada do CSV)</span>', 0);
+    await termLine('<span class="t-dim">    ' + (r.casos || 0) + ' casos · ' +
+      ((r.rotulos || []).length) + ' rótulos · linha de base ' + base + '</span>', 0);
+    // A linha de base é o número que decide se o resultado quer dizer algo:
+    // score perto dela empata com quem responde sempre a mesma palavra.
+    await termLine('<span class="t-dim">    Responder sempre o rótulo mais comum já tira ' +
+      base + ' — score perto disso não é descoberta.</span>', 0);
+    for (const a of tarefaResumo.problemas.concat(r.avisos || [])) {
+      await termLine('<span class="t-warn">    ! ' + escHtml(a) + '</span>', 0);
+    }
+  }
 
   // Monta config
   const evaluator = state.task === 'finance_agent' ? 'llm_judge' : 'binary';
@@ -4538,6 +4675,8 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
     custom_prompts: customPrompts,
     // Envia IDs específicos quando o modo é preset (seleção manual)
     instance_ids: state.instMode === 'preset' ? [...state.selectedIds] : [],
+    // Presente só quando a pessoa importou um CSV: substitui `task` no servidor.
+    tarefa_spec: tarefaSpec,
   };
 
   // O compositor de topologias entra por aqui, sobrescrevendo architecture e
