@@ -4105,10 +4105,30 @@ document.querySelectorAll('.option-card').forEach(card => {
 // ── Instance Manager ────────────────────────────────────────────────
 
 function buildInstList() {
-  const catalog = INSTANCE_CATALOG[state.task];
+  // Tarefa vinda do backend (/api/tarefas) nao tem catalogo local de instancias
+  // — a lista delas vive no servidor. Sem esta guarda, escolher uma dessas
+  // quebrava a tela inteira num TypeError: INSTANCE_CATALOG[task] e undefined.
+  const catalog = INSTANCE_CATALOG[state.task] || [];
   const list = document.getElementById('inst-list');
   list.innerHTML = '';
   state.selectedIds = new Set(catalog.map(i => i.id)); // select all by default
+
+  if (!catalog.length) {
+    const info = TAREFAS_API[state.task] || {};
+    const n = info.casos || 0;
+    list.innerHTML =
+      '<div class="inst-group-header">Instâncias no servidor</div>' +
+      '<div style="padding:10px 12px;font-size:0.8rem;line-height:1.6">' +
+      'Esta tarefa vem do backend e roda <strong>todos os ' + n + ' casos</strong>. ' +
+      'A seleção instância a instância só existe para as tarefas embutidas nesta página.' +
+      (info.linha_de_base != null
+        ? '<br><span style="opacity:0.75">Linha de base ' + info.linha_de_base.toFixed(3) +
+          ' — responder sempre o rótulo mais comum já tira isso.</span>'
+        : '') +
+      '</div>';
+    updateInstCount();
+    return;
+  }
 
   let lastGroup = null;
   catalog.forEach(inst => {
@@ -4180,12 +4200,15 @@ function randomInst(n) {
 }
 
 function updateInstCount() {
-  const total = INSTANCE_CATALOG[state.task].length;
+  const catalog = INSTANCE_CATALOG[state.task] || [];
+  const total = catalog.length;
   const sel = state.selectedIds.size;
+  const info = TAREFAS_API[state.task] || {};
   document.getElementById('inst-count').textContent =
     state.instMode === 'csv'
       ? `${state.customInstances.length} instâncias do CSV`
-      : `${sel} de ${total} selecionadas`;
+      : (total ? `${sel} de ${total} selecionadas`
+               : `${info.casos || 0} casos (todos)`);
 }
 
 function switchInstTab(mode, btn) {
@@ -4567,6 +4590,58 @@ async function checkApiHealth() {
   return false;
 }
 
+// ── Tarefas vindas do backend ────────────────────────────────────────
+// A pagina trazia dois cartoes fixos no HTML. O backend registra mais — entre
+// elas triagem_cobranca, a unica desenhada para NAO saturar (as duas embutidas
+// aqui dao 1.0 com modelo de raciocinio, e ai o experimento nao separa nada).
+// Sem isto, a tarefa que faz a plataforma responder a propria pergunta era
+// alcancavel so pelo MCP.
+var TAREFAS_API = {};
+
+function selecionarTarefa(val, card) {
+  document.querySelectorAll('[data-group="task"]').forEach(function (c) {
+    c.classList.remove('selected');
+  });
+  card.classList.add('selected');
+  state.task = val;
+  state.customInstances = [];
+  var st = document.getElementById('csv-status');
+  if (st) { st.textContent = ''; st.className = 'csv-status'; }
+  buildInstList();
+  updateCliPreview();
+  setTimeout(updateAllPanels, 10);
+}
+
+async function carregarTarefasDoBackend() {
+  var grid = document.getElementById('task-options');
+  if (!grid) return;
+  try {
+    var r = await fetch(API_URL + '/api/tarefas', { signal: AbortSignal.timeout(4000) });
+    if (!r.ok) return;
+    var d = await r.json();
+  } catch (_) { return; }   // offline: os dois cartoes fixos seguem valendo
+
+  (d.tarefas || []).forEach(function (info) {
+    TAREFAS_API[info.nome] = info;
+    if (document.querySelector('[data-group="task"][data-val="' + CSS.escape(info.nome) + '"]')) return;
+
+    var card = document.createElement('div');
+    card.className = 'option-card';
+    card.dataset.group = 'task';
+    card.dataset.val = info.nome;
+    // escHtml tambem dentro do texto: nome e rotulos vem do servidor.
+    var det = info.casos ? (info.casos + ' casos') : 'do servidor';
+    if (info.linha_de_base != null) det += ' · base ' + info.linha_de_base.toFixed(2);
+    else if (info.nota) det += ' · resposta aberta';
+    card.innerHTML = '<div class="option-name">' + escHtml(info.nome) + '</div>' +
+                     '<div class="option-desc">' + escHtml(det) + '</div>';
+    card.addEventListener('click', function () { selecionarTarefa(info.nome, card); });
+    grid.appendChild(card);
+  });
+}
+
+carregarTarefasDoBackend();
+
 // ── Option cards: also update visual + code panels ───────────────────
 document.querySelectorAll('.option-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -4621,8 +4696,20 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
     tarefaResumo = { resumo: val.resumo || {}, problemas: conv.problemas || [] };
   }
 
-  const instCount = tarefaSpec ? tarefaSpec.casos.length : state.selectedIds.size;
-  if (instCount === 0) { showToast('⚠ Selecione ao menos uma instância.'); return; }
+  // Tres origens de contagem, nesta ordem: CSV convertido em tarefa propria,
+  // tarefa do backend (roda todos os casos, a selecao nao existe aqui) e a
+  // selecao manual das tarefas embutidas nesta pagina.
+  const semCatalogoLocal = !(INSTANCE_CATALOG[state.task] || []).length;
+  const instCount = tarefaSpec
+    ? tarefaSpec.casos.length
+    : (semCatalogoLocal ? ((TAREFAS_API[state.task] || {}).casos || 0)
+                        : state.selectedIds.size);
+  if (instCount === 0) {
+    showToast(semCatalogoLocal
+      ? '⚠ Não sei quantos casos esta tarefa tem — a API respondeu?'
+      : '⚠ Selecione ao menos uma instância.');
+    return;
+  }
 
   state.running = true;
   const btn = document.getElementById('run-btn');
@@ -4673,8 +4760,10 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
     meta_budget:   5,
     exp_name:      document.getElementById('exp-name-input')?.value || '',
     custom_prompts: customPrompts,
-    // Envia IDs específicos quando o modo é preset (seleção manual)
-    instance_ids: state.instMode === 'preset' ? [...state.selectedIds] : [],
+    // IDs específicos só quando há seleção manual de verdade. Numa tarefa do
+    // backend a lista vive lá, e mandar IDs daqui filtraria contra nada.
+    instance_ids: (state.instMode === 'preset' && !semCatalogoLocal)
+      ? [...state.selectedIds] : [],
     // Presente só quando a pessoa importou um CSV: substitui `task` no servidor.
     tarefa_spec: tarefaSpec,
   };
@@ -4858,7 +4947,7 @@ function showResults(ids, scores, mean, runId) {
   card.classList.add('visible');
 
   const evaluator = state.task === 'finance_agent' ? 'llm_judge' : 'binary';
-  const baselineScore = BASE_SCORES[state.task]['zero_shot']['sas'];
+  const baselineScore = BASE_SCORES[state.task]?.['zero_shot']?.['sas'] ?? 0.65;
   const delta = mean - baselineScore;
   const good = s => s >= 0.7 ? 'good' : s >= 0.4 ? 'med' : 'bad';
 
@@ -4974,7 +5063,7 @@ function showToast(msg, duration) {
 // Reference data from papers
 const LB_DATA = [];
 ['text_classification','finance_agent'].forEach(task => {
-  Object.entries(BASE_SCORES[task]).forEach(([harness, archMap]) => {
+  Object.entries(BASE_SCORES[task] || {}).forEach(([harness, archMap]) => {
     Object.entries(archMap).forEach(([arch, score]) => {
       LB_DATA.push({ arch, harness, task, score });
     });
@@ -6615,7 +6704,7 @@ async function startSimulation() {
 
   const evaluator = state.task === 'finance_agent' ? 'llm_judge' : 'binary';
   const runId = genRunId();
-  const baseScore = BASE_SCORES[state.task][state.harness][state.arch];
+  const baseScore = BASE_SCORES[state.task]?.[state.harness]?.[state.arch] ?? 0.5;
   const rand = seededRand(42);
 
   let ids;
