@@ -421,6 +421,71 @@ def r_referencias() -> str:
     return REFERENCIAS
 
 
+# Onde obter cada chave. A ordem dos provedores e a env var saem de
+# LLMFactory.ENV_VARS, e o header de server._KEY_HEADERS — nao repetidos a mao,
+# porque tres listas iguais escritas em lugares diferentes ja divergiram antes
+# (o modal do site oferecia 6 dos 9 que o backend aceita).
+_ONDE_OBTER = {
+    "google":     ("Gemini e Gemma",        "https://aistudio.google.com/apikey"),
+    "openai":     ("GPT",                   "https://platform.openai.com/api-keys"),
+    "anthropic":  ("Claude",                "https://console.anthropic.com/settings/keys"),
+    "moonshot":   ("Kimi (peso aberto)",    "https://platform.moonshot.ai/console/api-keys"),
+    "zai":        ("GLM (peso aberto)",     "https://z.ai/manage-apikey/apikey-list"),
+    "groq":       ("Llama/Gemma, inferência rápida", "https://console.groq.com/keys"),
+    "together":   ("agregador de peso aberto",       "https://api.together.ai/settings/api-keys"),
+    "openrouter": ("agregador multi-provedor",       "https://openrouter.ai/keys"),
+    "deepinfra":  ("agregador de peso aberto",       "https://deepinfra.com/dash/api_keys"),
+}
+
+
+@server.resource("otm://provedores", title="Provedores e onde obter as chaves",
+                 mime_type="text/markdown")
+def r_provedores() -> str:
+    """Quais provedores a plataforma aceita, a env var de cada um e o header BYOK."""
+    from src.llm_factory import LLMFactory as _F
+
+    linhas = [
+        "# Provedores aceitos",
+        "",
+        "A instância pública **não tem chave nenhuma**: quem roda traz a sua (BYOK).",
+        "Ela vale só para aquela requisição e não é gravada em lugar nenhum.",
+        "",
+        "| provedor | o que é | variável de ambiente | header HTTP | onde obter |",
+        "|---|---|---|---|---|",
+    ]
+    for prov in _PROVEDORES:
+        desc, url = _ONDE_OBTER.get(prov, ("", ""))
+        env = _F.ENV_VARS.get(prov, "")
+        linhas.append(f"| `{prov}` | {desc} | `{env}` | `X-{prov.capitalize()}-Key` | {url} |")
+
+    linhas += [
+        "",
+        "## Dois modos, e eles não se misturam",
+        "",
+        "- **MCP por HTTP** (instância hospedada): a chave vai no header, em cada",
+        "  requisição. É o único jeito de uma instância pública rodar sem ter chave.",
+        "- **MCP por stdio** (na sua máquina): a chave vem do ambiente, como de costume.",
+        "",
+        "## Peso aberto sem GPU",
+        "",
+        f"Estes provedores servem modelos de peso aberto por API: "
+        f"{', '.join('`' + p + '`' for p in _F.COMPATIBLE_PROVIDERS)}. "
+        "Gemma sai pela mesma chave do Gemini.",
+        "",
+        f"Para rodar localmente, sem chave nenhuma: "
+        f"{', '.join('`' + p + '`' for p in _F.LOCAL_PROVIDERS)} — só no modo local, "
+        "porque a instância hospedada não alcança a sua máquina.",
+        "",
+        "## Cota gratuita engana",
+        "",
+        "O nível gratuito do `gemini-2.5-flash` é de ~20 requisições/dia. Uma matriz",
+        "de 5 arquiteturas × 10 instâncias estoura isso antes da segunda célula. Os",
+        "Gemma usam a mesma chave, com cota separada. `groq` costuma ser a via mais",
+        "folgada para começar sem gastar.",
+    ]
+    return chr(10).join(linhas)
+
+
 # ── Ferramentas ───────────────────────────────────────────────────────────────
 
 @server.tool()

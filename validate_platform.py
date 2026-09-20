@@ -456,7 +456,8 @@ def val_mcp() -> None:
 
     uris = {str(r.uri) for r in res}
     check("mcp", "recursos de metodologia",
-          OK if {"otm://metodologia", "otm://referencias"} <= uris else FAIL,
+          OK if {"otm://metodologia", "otm://referencias",
+                 "otm://esquema-topologia", "otm://provedores"} <= uris else FAIL,
           ", ".join(sorted(uris)))
 
     # A metodologia precisa cobrir os princípios — é o que diferencia a plataforma

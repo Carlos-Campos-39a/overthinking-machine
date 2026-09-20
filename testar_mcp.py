@@ -128,7 +128,8 @@ def main() -> int:
 
     recursos = {str(x["uri"]) for x in c.rpc("resources/list")["result"]["resources"]}
     check("recursos de metodologia e esquema",
-          {"otm://metodologia", "otm://esquema-topologia"} <= recursos, ", ".join(sorted(recursos)))
+          {"otm://metodologia", "otm://esquema-topologia",
+           "otm://provedores"} <= recursos, ", ".join(sorted(recursos)))
 
     # 4. o recurso que ensina a compor — lido da API, então prova o loopback interno
     esquema = c.rpc("resources/read", {"uri": "otm://esquema-topologia"})["result"]["contents"][0]["text"]

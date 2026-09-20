@@ -217,6 +217,33 @@ def configuracao() -> None:
           str(s.get("aviso"))[:70])
 
 
+def provedores() -> None:
+    print()
+    print("5. PROVEDORES: as tres listas concordam?")
+    import mcp_server as M
+    from src.llm_factory import LLMFactory as F
+
+    provs = set(M._PROVEDORES)
+    check("MCP e API cobrem os mesmos provedores",
+          provs == set(server._KEY_HEADERS),
+          f"{len(provs)} no MCP · {len(server._KEY_HEADERS)} na API")
+    faltam_env = sorted(provs - set(F.ENV_VARS))
+    check("todo provedor tem variavel de ambiente", not faltam_env, str(faltam_env))
+
+    # O recurso otm://provedores DERIVA o header por regra. Se um provedor novo
+    # nao seguir a regra, a tabela publicada mentiria sem ninguem notar.
+    fora_da_regra = [p for p in provs
+                     if server._KEY_HEADERS[p] != f"x-{p}-key"]
+    check("o header segue a regra x-<provedor>-key", not fora_da_regra, str(fora_da_regra))
+
+    texto = M.r_provedores()
+    sem_link = [p for p in provs if p not in M._ONDE_OBTER]
+    check("todo provedor tem onde obter a chave", not sem_link, str(sem_link))
+    check("o recurso cita os 9 provedores",
+          all(f"`{p}`" in texto for p in provs), f"{len(texto)} chars")
+    check("o recurso avisa da cota gratuita", "20 requisi" in texto)
+
+
 def main() -> int:
     print("=" * 66)
     print("  testar_api.py — tetos de custo e honestidade do módulo 2")
@@ -225,6 +252,7 @@ def main() -> int:
     modulo2()
     tarefa_declarativa()
     configuracao()
+    provedores()
     print("\n" + ("tudo passou" if not _falhas else f"{_falhas} FALHA(S)"))
     return 1 if _falhas else 0
 
