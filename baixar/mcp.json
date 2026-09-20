@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "overthinking-machine": {
+      "url": "https://overthinking-machine-production.up.railway.app/mcp/",
+      "headers": {
+        "X-Google-Key": "a-sua-chave"
+      }
+    }
+  }
+}

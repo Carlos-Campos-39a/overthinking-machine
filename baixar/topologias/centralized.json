@@ -1,0 +1,58 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "centralized",
+  "titulo": "Centralized MAS",
+  "descricao": "Um orquestrador decompõe a tarefa, workers executam as partes e o orquestrador sintetiza. O gargalo de validação reduz a amplificação de erro de 17,2× para 4,4×.",
+  "autor": "Kim et al. (2025)",
+  "estagios": [
+    {
+      "id": "orchestrator",
+      "tipo": "unico",
+      "rotulo": "Orquestrador decompõe",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "Você é um orquestrador especialista. Decomponha a tarefa abaixo em exatamente {n:worker} subtarefas independentes e complementares.\n\nTAREFA PRINCIPAL:\n{task_content}\n\nResponda APENAS com as {n:worker} subtarefas, uma por linha, numeradas de 1 a {n:worker}. Cada subtarefa deve ser autocontida e contribuir para a resposta final.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "worker",
+      "tipo": "paralelo",
+      "rotulo": "Workers executam",
+      "n": 3,
+      "rodadas": 1,
+      "de": null,
+      "dividir": true,
+      "papeis": [],
+      "system": null,
+      "prompt": "TAREFA ORIGINAL:\n{task_content}\n\nSUA SUBTAREFA:\n{subtarefa}\n\nExecute sua subtarefa considerando o contexto da tarefa original acima.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "sintese",
+      "tipo": "reduzir",
+      "rotulo": "Orquestrador sintetiza",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "Você recebeu análises de {n:worker} especialistas para a tarefa abaixo.\n\nTAREFA ORIGINAL:\n{task_content}\n\nANÁLISES DOS WORKERS:\n{blocos}\n\nSintetize as análises em uma resposta final coesa, completa e sem redundâncias. Resolva contradições usando seu próprio julgamento. Responda diretamente sem mencionar os workers ou o processo de síntese.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Worker {j} ===\n{saida}",
+      "final": true
+    }
+  ]
+}

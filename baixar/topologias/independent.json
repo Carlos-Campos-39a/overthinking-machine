@@ -1,0 +1,42 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "independent",
+  "titulo": "Independent MAS",
+  "descricao": "N agentes respondem à mesma tarefa sem se comunicar; um agregador concatena. Sem validação cruzada, amplifica erros 17,2× (Kim et al.).",
+  "autor": "Kim et al. (2025)",
+  "estagios": [
+    {
+      "id": "agente",
+      "tipo": "paralelo",
+      "rotulo": "Agentes independentes",
+      "n": 3,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "",
+      "entrada_bruta": true,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "aggregator",
+      "tipo": "reduzir",
+      "rotulo": "Agregador",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "TAREFA:\n{task_content}\n\nAbaixo estão {n:agente} respostas independentes para esta tarefa. Combine-as em uma resposta unificada e coerente.\n\n{blocos}\n\nResposta combinada (sem mencionar que são múltiplas fontes):",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": true
+    }
+  ]
+}

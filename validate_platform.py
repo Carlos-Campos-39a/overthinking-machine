@@ -250,8 +250,61 @@ def val_comportamentos() -> None:
 # 5. Boilerplate
 # ══════════════════════════════════════════════════════════════════════════════
 
+def val_baixaveis() -> None:
+    """
+    baixar/ e GERADO de gerar_baixaveis.py. Se alguem muda a metodologia, um
+    prompt do MCP ou uma proposta e nao regenera, o material publicado passa a
+    ensinar o que a plataforma nao faz mais — e ninguem descobre, porque nada
+    quebra. Esta checagem regera em memoria e compara com o disco.
+    """
+    secao("5. BAIXÁVEIS")
+    try:
+        import gerar_baixaveis as G
+    except Exception as e:
+        check("baixaveis", "gerar_baixaveis importa", FAIL, f"{type(e).__name__}: {e}")
+        return
+
+    if not G.DESTINO.exists():
+        check("baixaveis", "diretório baixar/ existe", FAIL,
+              "rode: python gerar_baixaveis.py")
+        return
+
+    try:
+        fora = G.desatualizados()
+    except Exception as e:
+        check("baixaveis", "consegue regerar", FAIL, f"{type(e).__name__}: {e}")
+        return
+
+    check("baixaveis", "baixar/ em dia com as fontes",
+          OK if not fora else FAIL,
+          f"{len(list(G.gerar()))} arquivos" if not fora
+          else "rode gerar_baixaveis.py — " + "; ".join(fora[:4]))
+
+    # So .md e .json: o .vercelignore exclui *.py e boilerplate/ em QUALQUER
+    # profundidade, entao um .py aqui simplesmente nao chegaria ao ar.
+    intrusos = [p.relative_to(G.DESTINO).as_posix()
+                for p in G.DESTINO.rglob("*")
+                if p.is_file() and p.suffix not in (".md", ".json")]
+    check("baixaveis", "só .md e .json (o deploy ignora o resto)",
+          OK if not intrusos else FAIL, ", ".join(intrusos[:5]) if intrusos else "")
+
+    # O skill e o material que um agente le sozinho: se os numeros dele
+    # divergirem do servidor, ele orienta errado quem nunca conferiu.
+    skill = (G.DESTINO / "otm-agente.md")
+    if skill.exists():
+        texto = skill.read_text(encoding="utf-8")
+        import asyncio
+        import mcp_server as M
+        n_tools = len(asyncio.run(M.server.list_tools()))
+        check("baixaveis", "o skill declara a superfície certa",
+              OK if f"{n_tools} ferramentas" in texto else FAIL,
+              f"servidor tem {n_tools}")
+        check("baixaveis", "o skill traz a URL do MCP com barra final",
+              OK if G.MCP_URL in texto else FAIL, G.MCP_URL)
+
+
 def val_boilerplate() -> None:
-    secao("5. BOILERPLATE")
+    secao("6. BOILERPLATE")
 
     tmpl = PROJ / "boilerplate" / "minha_tarefa.py"
     readme = PROJ / "boilerplate" / "README.md"
@@ -891,6 +944,7 @@ def main() -> int:
     val_codigo()
     val_registros()
     val_comportamentos()
+    val_baixaveis()
     val_boilerplate()
     val_frontend()
     val_javascript()

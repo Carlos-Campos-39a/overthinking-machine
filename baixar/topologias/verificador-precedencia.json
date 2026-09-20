@@ -1,0 +1,42 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "verificador-precedencia",
+  "titulo": "Decisão + verificação de precedência",
+  "descricao": "Um agente decide; um segundo confere se alguma regra ANTERIOR à escolhida também casava. Ataca o erro de precedência sem refazer a análise. Custo: 2 chamadas por caso.",
+  "autor": "proposta operacional",
+  "estagios": [
+    {
+      "id": "decisor",
+      "tipo": "unico",
+      "rotulo": "Decide",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "",
+      "entrada_bruta": true,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "revisor",
+      "tipo": "unico",
+      "rotulo": "Confere a precedência",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "{task_content}\n\nUm analista respondeu: {resposta_anterior}\n\nConfira SÓ a precedência: existe alguma regra ANTERIOR à que ele usou que também casa com este caso? Percorra da regra 1 em diante e pare na primeira que casar.\n\nResponda apenas com o rótulo correto.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": true
+    }
+  ]
+}

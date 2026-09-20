@@ -1,0 +1,42 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "voto-triplo",
+  "titulo": "Três decisões independentes + voto",
+  "descricao": "Três agentes decidem sem se ver; um quarto reporta o rótulo majoritário. Só ajuda se os erros forem aleatórios. Custo: 4 chamadas por caso.",
+  "autor": "proposta operacional",
+  "estagios": [
+    {
+      "id": "analista",
+      "tipo": "paralelo",
+      "rotulo": "Três decisões",
+      "n": 3,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "",
+      "entrada_bruta": true,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "apurador",
+      "tipo": "reduzir",
+      "rotulo": "Voto majoritário",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "Três analistas classificaram o mesmo caso:\n\n{blocos}\n\nResponda apenas com o rótulo que apareceu mais vezes. Em caso de empate, escolha o do primeiro analista.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "Analista {j}: {saida}",
+      "final": true
+    }
+  ]
+}

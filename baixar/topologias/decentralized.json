@@ -1,0 +1,62 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "decentralized",
+  "titulo": "Decentralized MAS",
+  "descricao": "N pares com personas distintas debatem entre si por r rodadas antes de consolidar. Alta exploração, custo alto.\nEquivale à classe embutida para n>=2 e rodadas>=1: com n=1 ou 0 rodadas a classe pula a consolidação, e a especificação não.",
+  "autor": "Kim et al. (2025)",
+  "estagios": [
+    {
+      "id": "agente",
+      "tipo": "paralelo",
+      "rotulo": "Posições iniciais",
+      "n": 3,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [
+        "crítico e conservador",
+        "otimista e prospectivo",
+        "equilibrado e baseado em dados"
+      ],
+      "system": null,
+      "prompt": "{task_content}\n\n[Perspectiva {i}/{n}: analise a partir de um ângulo {papel}]",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "debate",
+      "tipo": "debate",
+      "rotulo": "Debate entre pares",
+      "n": 3,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "TAREFA ORIGINAL:\n{task_content}\n\nSUA RESPOSTA ANTERIOR (Round {rodada_anterior}):\n{resposta_anterior}\n\nRESPOSTAS DOS OUTROS AGENTES:\n{pares}\n\nRevise sua resposta incorporando insights válidos dos outros agentes. Mantenha seus pontos corretos e corrija erros identificados. Produza uma resposta revisada e aprimorada.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": false
+    },
+    {
+      "id": "consensus",
+      "tipo": "reduzir",
+      "rotulo": "Consenso",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "TAREFA:\n{task_content}\n\nApós {rodadas:debate} round(s) de debate entre {n:debate} agentes, estas são as respostas finais:\n\n{blocos}\n\nProduza a resposta de consenso final, representando o melhor entendimento coletivo após o debate.",
+      "entrada_bruta": false,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "--- Agente {j} ---\n{saida}",
+      "final": true
+    }
+  ]
+}

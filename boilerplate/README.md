@@ -79,7 +79,29 @@ junto**: as descrições das ferramentas e os prompts guiados levam o agente a
 congelar variáveis, validar barato antes de gastar caro e reportar custo junto
 com score.
 
-### Claude Code
+> **Comece pela instância pública.** Ela já está no ar e não exige clonar nada.
+> A instrução canônica de conexão vive em
+> <https://overthinking-machine-chi.vercel.app/baixar/mcp.json> — se algo aqui
+> divergir dela, ela vale. Junto dela há o guia completo (`otm-agente.md`) e a
+> lista de provedores com o header de cada chave.
+>
+> ```json
+> {
+>   "mcpServers": {
+>     "overthinking-machine": {
+>       "url": "https://overthinking-machine-production.up.railway.app/mcp/",
+>       "headers": { "X-Google-Key": "a-sua-chave" }
+>     }
+>   }
+> }
+> ```
+>
+> A instância pública **não tem chave de API**: a sua vai no header e vale só
+> para aquela requisição. A barra final em `/mcp/` importa.
+
+O resto desta seção é o caminho **local**, para quem clonou o repositório.
+
+### Claude Code (local, stdio)
 
 ```bash
 claude mcp add overthinking-machine -- python /caminho/para/Projeto/mcp_server.py
@@ -99,19 +121,22 @@ claude mcp add overthinking-machine -- python /caminho/para/Projeto/mcp_server.p
 }
 ```
 
-### Contra uma instância publicada
+### Contra a sua própria instância publicada
 
-Aponte `OTM_API_URL` para o seu domínio — o resto é igual:
+Se você publicou uma cópia, aponte `OTM_API_URL` para ela — o resto é igual:
 
 ```json
-"env": { "OTM_API_URL": "https://sua-plataforma.com" }
+"env": { "OTM_API_URL": "https://a-sua-copia.up.railway.app" }
 ```
 
-Ou sirva o próprio MCP por HTTP, para clientes que suportam transporte remoto:
+Ou sirva o próprio MCP por HTTP, para clientes de transporte remoto:
 
 ```bash
-python mcp_server.py --http        # http://127.0.0.1:8765/mcp
+python mcp_server.py --http        # http://127.0.0.1:8765/mcp/
 ```
+
+A barra final importa: sem ela o SDK responde com um redirecionamento que nem
+todo cliente segue.
 
 ### O que o agente ganha
 

@@ -1,0 +1,13 @@
+{
+  "versao": 1,
+  "tipo": "harness",
+  "nome": "few-shot",
+  "titulo": "Few-shot",
+  "descricao": "Injeta N exemplos estáticos vindos da tarefa. Exemplos fixos — não aprendem com execuções anteriores.",
+  "autor": "Lee et al. (2026)",
+  "system": null,
+  "humano": "{exemplos}Agora resolva:\n{input}\n\n{format_instructions}",
+  "exemplos": null,
+  "formato_exemplo": "\nExemplo {i}:\nEntrada: {entrada}\nResposta: {saida}\n",
+  "bloco_exemplos": "--- EXEMPLOS ---\n{exemplos}\n--- FIM DOS EXEMPLOS ---\n\n"
+}

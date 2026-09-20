@@ -1,0 +1,176 @@
+{
+  "nome": "triagem_cobranca",
+  "titulo": "Triagem de cobrança",
+  "descricao": "Aplicar uma política com precedência a casos de cobrança com sinal conflitante.",
+  "instrucao": "POLÍTICA DE TRIAGEM — aplique NA ORDEM. Vale a PRIMEIRA regra que casar.\n\n1. Acordo vigente e em dia                          -> manter_acordo\n2. Titular falecido ou processo de inventário       -> suspender\n3. Saldo devedor <= R$ 200,00                       -> digital\n4. Atraso > 720 dias                                -> baixa_contabil\n5. Promessa de pagamento quebrada nos últimos 30 dias\n   E saldo > R$ 5.000,00                            -> juridico\n6. Score de crédito >= 700                          -> digital\n7. Nenhuma das anteriores                           -> operador",
+  "tipo": "classification",
+  "formato_resposta": "single_label",
+  "criterios": [
+    "accuracy",
+    "policy_precedence"
+  ],
+  "rotulos_validos": [
+    "manter_acordo",
+    "suspender",
+    "digital",
+    "operador",
+    "juridico",
+    "baixa_contabil"
+  ],
+  "casos": [
+    {
+      "id": "tc_01",
+      "entrada": "CASO:\n  saldo devedor      : R$ 18.400,00\n  dias de atraso     : 430\n  score de crédito   : 380\n  acordo vigente     : sim, em dia (3ª parcela de 12)\n  promessa quebrada  : não\n  observação         : renegociado em 01/2026",
+      "esperado": "manter_acordo",
+      "nota": "atraso e saldo altos sugerem juridico; acordo tem precedencia"
+    },
+    {
+      "id": "tc_02",
+      "entrada": "CASO:\n  saldo devedor      : R$ 920,50\n  dias de atraso     : 95\n  score de crédito   : 610\n  acordo vigente     : sim, em dia (1ª de 6)\n  promessa quebrada  : não\n  observação         : acordo firmado no mes passado",
+      "esperado": "manter_acordo",
+      "nota": "caso limpo de regra 1"
+    },
+    {
+      "id": "tc_03",
+      "entrada": "CASO:\n  saldo devedor      : R$ 150,00\n  dias de atraso     : 800\n  score de crédito   : 720\n  acordo vigente     : sim, em dia\n  promessa quebrada  : sim, há 12 dias\n  observação         : acordo firmado apos negativacao",
+      "esperado": "manter_acordo",
+      "nota": "casaria com 3, 4 e 6; a 1 vem antes"
+    },
+    {
+      "id": "tc_04",
+      "entrada": "CASO:\n  saldo devedor      : R$ 7.300,00\n  dias de atraso     : 200\n  score de crédito   : 450\n  acordo vigente     : não\n  promessa quebrada  : sim, há 8 dias\n  observação         : titular falecido em 03/2026, espolio em inventario",
+      "esperado": "suspender",
+      "nota": "casaria com a regra 5"
+    },
+    {
+      "id": "tc_05",
+      "entrada": "CASO:\n  saldo devedor      : R$ 95,00\n  dias de atraso     : 1100\n  score de crédito   : 800\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : titular falecido, sem espolio localizado",
+      "esperado": "suspender",
+      "nota": "casaria com 3, 4 e 6"
+    },
+    {
+      "id": "tc_06",
+      "entrada": "CASO:\n  saldo devedor      : R$ 2.400,00\n  dias de atraso     : 60\n  score de crédito   : 500\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : processo de inventario aberto pela familia",
+      "esperado": "suspender",
+      "nota": "caso limpo de regra 2"
+    },
+    {
+      "id": "tc_07",
+      "entrada": "CASO:\n  saldo devedor      : R$ 180,00\n  dias de atraso     : 900\n  score de crédito   : 300\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : saldo residual de contrato encerrado",
+      "esperado": "digital",
+      "nota": "atraso > 720 sugere baixa; saldo baixo vem antes"
+    },
+    {
+      "id": "tc_08",
+      "entrada": "CASO:\n  saldo devedor      : R$ 45,90\n  dias de atraso     : 30\n  score de crédito   : 520\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : valor residual de fatura",
+      "esperado": "digital",
+      "nota": "caso limpo de regra 3"
+    },
+    {
+      "id": "tc_09",
+      "entrada": "CASO:\n  saldo devedor      : R$ 200,00\n  dias de atraso     : 150\n  score de crédito   : 410\n  acordo vigente     : não\n  promessa quebrada  : sim, há 5 dias\n  observação         : parcela unica em aberto",
+      "esperado": "digital",
+      "nota": "exatamente no limite de R$ 200; a regra e <=, entao casa"
+    },
+    {
+      "id": "tc_10",
+      "entrada": "CASO:\n  saldo devedor      : R$ 12.000,00\n  dias de atraso     : 1460\n  score de crédito   : 290\n  acordo vigente     : não\n  promessa quebrada  : sim, há 20 dias\n  observação         : contrato de 2022, sem contato desde entao",
+      "esperado": "baixa_contabil",
+      "nota": "promessa quebrada e saldo alto sugerem juridico; atraso vem antes"
+    },
+    {
+      "id": "tc_11",
+      "entrada": "CASO:\n  saldo devedor      : R$ 3.200,00\n  dias de atraso     : 730\n  score de crédito   : 750\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : cliente mudou de endereco em 2024",
+      "esperado": "baixa_contabil",
+      "nota": "score alto sugeriria digital; 730 > 720"
+    },
+    {
+      "id": "tc_12",
+      "entrada": "CASO:\n  saldo devedor      : R$ 880,00\n  dias de atraso     : 1900\n  score de crédito   : 350\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : carteira antiga",
+      "esperado": "baixa_contabil",
+      "nota": "caso limpo de regra 4"
+    },
+    {
+      "id": "tc_13",
+      "entrada": "CASO:\n  saldo devedor      : R$ 15.600,00\n  dias de atraso     : 180\n  score de crédito   : 420\n  acordo vigente     : não\n  promessa quebrada  : sim, há 11 dias\n  observação         : cliente confirmou pagamento e nao efetivou",
+      "esperado": "juridico",
+      "nota": "as duas condicoes da regra 5"
+    },
+    {
+      "id": "tc_14",
+      "entrada": "CASO:\n  saldo devedor      : R$ 5.000,01\n  dias de atraso     : 400\n  score de crédito   : 390\n  acordo vigente     : não\n  promessa quebrada  : sim, há 29 dias\n  observação         : boleto emitido e nao pago",
+      "esperado": "juridico",
+      "nota": "saldo um centavo acima do limite; promessa no 29o dia"
+    },
+    {
+      "id": "tc_15",
+      "entrada": "CASO:\n  saldo devedor      : R$ 48.000,00\n  dias de atraso     : 300\n  score de crédito   : 310\n  acordo vigente     : não\n  promessa quebrada  : sim, há 2 dias\n  observação         : divida de cartao consignado",
+      "esperado": "juridico",
+      "nota": "caso limpo de regra 5"
+    },
+    {
+      "id": "tc_16",
+      "entrada": "CASO:\n  saldo devedor      : R$ 9.000,00\n  dias de atraso     : 250\n  score de crédito   : 680\n  acordo vigente     : não\n  promessa quebrada  : sim, há 45 dias\n  observação         : ultimo contato produtivo em 07/2026",
+      "esperado": "operador",
+      "nota": "promessa quebrada mas fora da janela de 30 dias"
+    },
+    {
+      "id": "tc_17",
+      "entrada": "CASO:\n  saldo devedor      : R$ 4.800,00\n  dias de atraso     : 120\n  score de crédito   : 650\n  acordo vigente     : não\n  promessa quebrada  : sim, há 10 dias\n  observação         : cliente pediu novo boleto e nao pagou",
+      "esperado": "operador",
+      "nota": "promessa recente mas saldo abaixo de R$ 5.000"
+    },
+    {
+      "id": "tc_18",
+      "entrada": "CASO:\n  saldo devedor      : R$ 6.200,00\n  dias de atraso     : 90\n  score de crédito   : 710\n  acordo vigente     : não\n  promessa quebrada  : sim, há 40 dias\n  observação         : historico de atraso recorrente",
+      "esperado": "digital",
+      "nota": "promessa fora da janela; cai na regra 6 pelo score"
+    },
+    {
+      "id": "tc_19",
+      "entrada": "CASO:\n  saldo devedor      : R$ 2.200,00\n  dias de atraso     : 45\n  score de crédito   : 780\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : bom pagador em atraso pontual",
+      "esperado": "digital",
+      "nota": "caso limpo de regra 6"
+    },
+    {
+      "id": "tc_20",
+      "entrada": "CASO:\n  saldo devedor      : R$ 700,00\n  dias de atraso     : 700\n  score de crédito   : 700\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : sem contato registrado",
+      "esperado": "digital",
+      "nota": "score exatamente 700 (>=) e 700 dias nao passa de 720"
+    },
+    {
+      "id": "tc_21",
+      "entrada": "CASO:\n  saldo devedor      : R$ 3.400,00\n  dias de atraso     : 210\n  score de crédito   : 540\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : caso padrao da carteira",
+      "esperado": "operador",
+      "nota": "caso limpo de regra 7"
+    },
+    {
+      "id": "tc_22",
+      "entrada": "CASO:\n  saldo devedor      : R$ 1.100,00\n  dias de atraso     : 365\n  score de crédito   : 480\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : sem sinal especial",
+      "esperado": "operador",
+      "nota": "caso limpo de regra 7"
+    },
+    {
+      "id": "tc_23",
+      "entrada": "CASO:\n  saldo devedor      : R$ 8.700,00\n  dias de atraso     : 500\n  score de crédito   : 699\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : cliente atende mas nao negocia",
+      "esperado": "operador",
+      "nota": "score um ponto abaixo de 700"
+    },
+    {
+      "id": "tc_24",
+      "entrada": "CASO:\n  saldo devedor      : R$ 250,00\n  dias de atraso     : 100\n  score de crédito   : 600\n  acordo vigente     : não\n  promessa quebrada  : não\n  observação         : fatura parcial em aberto",
+      "esperado": "operador",
+      "nota": "saldo acima de R$ 200 por pouco, score abaixo de 700"
+    }
+  ],
+  "exemplos": [
+    {
+      "entrada": "saldo R$ 120,00 / atraso 40 dias / score 500 / sem acordo",
+      "saida": "digital"
+    },
+    {
+      "entrada": "saldo R$ 9.000,00 / atraso 150 dias / score 400 / promessa quebrada há 7 dias",
+      "saida": "juridico"
+    }
+  ]
+}

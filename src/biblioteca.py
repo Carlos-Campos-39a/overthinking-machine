@@ -172,10 +172,17 @@ class BibliotecaSQLite:
         vazio, mesmo tendo perdido o conteúdo de usuário.
         """
         from src.agents.propostas_iniciais import PROPOSTAS_INICIAIS
+        from src.agents.propostas_operacionais import PROPOSTAS_OPERACIONAIS
         from src.harnesses.harness_spec import PROPOSTAS_HARNESS
 
+        # As operacionais nasceram de um caso real (triagem de cobranca com
+        # politica de precedencia) e estavam importadas em lugar NENHUM — codigo
+        # morto desde que foram escritas. Semeadas, viram o que mais falta a quem
+        # chega: exemplo de topologia que nao e uma das cinco do paper.
         with self._con() as con:
-            for spec in list(PROPOSTAS_INICIAIS.values()) + list(PROPOSTAS_HARNESS.values()):
+            for spec in (list(PROPOSTAS_INICIAIS.values())
+                         + list(PROPOSTAS_OPERACIONAIS.values())
+                         + list(PROPOSTAS_HARNESS.values())):
                 try:
                     limpa, tipo, chamadas = normalizar(spec)
                 except ErroBiblioteca as e:

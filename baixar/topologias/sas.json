@@ -1,0 +1,26 @@
+{
+  "versao": 1,
+  "tipo": "topologia",
+  "nome": "sas",
+  "titulo": "Single Agent System",
+  "descricao": "Um único LLM recebe o contexto completo do harness e responde. Baseline de referência: overhead de coordenação zero.",
+  "autor": "Kim et al. (2025)",
+  "estagios": [
+    {
+      "id": "agente",
+      "tipo": "unico",
+      "rotulo": "Agente único",
+      "n": 1,
+      "rodadas": 1,
+      "de": null,
+      "dividir": false,
+      "papeis": [],
+      "system": null,
+      "prompt": "",
+      "entrada_bruta": true,
+      "formato_par": "--- Resposta do Agente {j} ---\n{saida}",
+      "formato_bloco": "=== Agente {j} ===\n{saida}",
+      "final": true
+    }
+  ]
+}
