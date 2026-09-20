@@ -4827,23 +4827,40 @@ async function startRealExperiment(extraCfg) {   // extraCfg: usado pelo composi
   setStatus(realResults ? 'done' : 'error');
   if (visStatus) { visStatus.className = 'term-status ' + (realResults ? 'done' : 'error'); visStatus.textContent = realResults ? 'DONE' : 'ERROR'; }
 
-  if (realResults) {
-    // Extrai dados do resultado real e renderiza
-    const realIds    = realResults.scores.map(s => s.instance_id);
-    const realVals   = realResults.scores.map(s => s.score);
-    const realMean   = realResults.mean_score;
-    showResults(realIds, realVals, realMean, realResults.run_id);
+  // try/finally: um erro ao IMPRIMIR o resultado nao pode deixar a interface
+  // travada. Era o que acontecia — a linha do score usava `avgScore`, que nao
+  // existe neste escopo (o valor esta em realMean), e o ReferenceError escapava
+  // do catch acima, que termina antes daqui. Resultado: depois de um
+  // experimento real BEM-SUCEDIDO, state.running ficava true e o botao Rodar
+  // ficava desabilitado para sempre, ate recarregar a pagina.
+  try {
+    if (realResults) {
+      const realIds  = realResults.scores.map(s => s.instance_id);
+      const realVals = realResults.scores.map(s => s.score);
+      const realMean = realResults.mean_score;
+      showResults(realIds, realVals, realMean, realResults.run_id, realResults);
 
-    await termLine('', 0);
-    await termLine(`<span class="t-separator">${'─'.repeat(60)}</span>`, 0);
-    await termLine(`<span class="t-ok">  ✓ Score médio real: ${avgScore.toFixed(4)}</span>`, 0);
-    await termLine(`<span class="t-ok">  ✓ Resultados salvos em: runs/${realResults.run_id}/</span>`, 0);
-    await termLine(`<span class="t-label">  Tempo total: </span><span class="t-value">${elapsed}s</span>`, 0);
+      await termLine('', 0);
+      await termLine(`<span class="t-separator">${'─'.repeat(60)}</span>`, 0);
+      await termLine(`<span class="t-ok">  ✓ Score médio real: ${realMean.toFixed(4)}</span>`, 0);
+      // Os arquivos ficam no disco de QUEM RODA A API. Na instancia publica
+      // isso e o contêiner do servidor, que voce nao alcanca — dizer
+      // "salvos em runs/" ali soava como se o arquivo fosse seu.
+      if (/railway\.app|vercel\.app/.test(API_URL)) {
+        await termLine(`<span class="t-dim">  run_id ${escHtml(realResults.run_id)} — o trace fica no servidor e não é baixável daqui.</span>`, 0);
+        await termLine(`<span class="t-dim">  Para ter os arquivos, rode a plataforma na sua máquina.</span>`, 0);
+      } else {
+        await termLine(`<span class="t-ok">  ✓ Resultados salvos em: runs/${escHtml(realResults.run_id)}/</span>`, 0);
+      }
+      await termLine(`<span class="t-label">  Tempo total: </span><span class="t-value">${elapsed}s</span>`, 0);
+    }
+  } catch (err) {
+    await termLine(`<span class="t-warn">  ! Falha ao exibir o resultado: ${escHtml(err.message)}</span>`, 0);
+  } finally {
+    state.running = false;
+    btn.disabled = false; btn.classList.remove('running');
+    renderVisualPanel({ animated: false, step: 0 });
   }
-
-  state.running = false;
-  btn.disabled = false; btn.classList.remove('running');
-  renderVisualPanel({ animated: false, step: 0 });
 }
 
 async function _handleApiEvent(msg, realScores) {
@@ -4942,7 +4959,11 @@ function scoreColor(s) {
   return 't-bad';
 }
 
-function showResults(ids, scores, mean, runId) {
+// `metricas` chega SO em execucao real, com os numeros que a API mediu
+// (mean_total_tokens, mean_elapsed_s, mean_llm_calls). Sem ela, os tokens sao
+// estimados por tabela — o que e legitimo no modo Mock e era MENTIRA no modo
+// Real: o leaderboard gravava numero sintetico em execucao marcada real=true.
+function showResults(ids, scores, mean, runId, metricas) {
   const card = document.getElementById('results-card');
   card.classList.add('visible');
 
@@ -5008,7 +5029,9 @@ function showResults(ids, scores, mean, runId) {
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
   // ── Captura o experimento no Leaderboard ─────────────────────────
-  const avgTok   = estimateAvgTokens(state.arch, state.harness, ids.length);
+  const tokensReais = !!(metricas && metricas.mean_total_tokens);
+  const avgTok   = tokensReais ? Math.round(metricas.mean_total_tokens)
+                               : estimateAvgTokens(state.arch, state.harness, ids.length);
   const accuracy = computeAccuracy(scores, state.task);
   const rawName  = (document.getElementById('exp-name-input')?.value || '').trim();
   const expName  = rawName || `${state.arch} + ${state.harness}`;
@@ -5025,6 +5048,9 @@ function showResults(ids, scores, mean, runId) {
     score:     mean,
     accuracy,
     avgTokens: avgTok,
+    tokensReais,
+    latenciaS:  metricas ? metricas.mean_elapsed_s : null,
+    chamadasLlm: metricas ? metricas.mean_llm_calls : null,
     timestamp: Date.now(),
     isLast:    true,
     real:      !mockMode,
@@ -6789,10 +6815,14 @@ async function startSimulation() {
   const cls = scoreColor(mean);
   await termLine('', 150);
   await termLine(`  <span class="t-good">✓</span> <span class="t-bold">Score médio: <span class="${cls}">${mean.toFixed(4)}</span></span>`, 200);
-  await termLine(`  <span class="t-good">✓</span> Resultados salvos em: <span class="t-info">runs/${runId}/</span>`, 300);
-  await termLine(`  <span class="t-dim">    ├── config.json</span>`, 100);
-  await termLine(`  <span class="t-dim">    ├── scores.json</span>`, 80);
-  await termLine(`  <span class="t-dim">    └── trace.jsonl</span>`, 80);
+  // O Mock nao chama modelo nenhum e nao grava arquivo nenhum. Ele imprimia
+  // "Resultados salvos em runs/<id>/" com a arvore de arquivos, e quem abrisse
+  // a pagina — que comeca em Mock — via um score plausivel com a prova de que
+  // ele foi gravado. Nao foi: os numeros saem de uma tabela fixa com ruido.
+  await termLine(`  <span class="t-warn">! SIMULAÇÃO — nenhum modelo foi chamado e nada foi gravado.</span>`, 200);
+  await termLine(`  <span class="t-dim">    Os números vêm de uma tabela de referência com ruído, para você ver o</span>`, 80);
+  await termLine(`  <span class="t-dim">    fluxo sem gastar chamada. Ligue o modo Real (topo da página) e informe</span>`, 80);
+  await termLine(`  <span class="t-dim">    a sua chave para medir de verdade.</span>`, 80);
   await termLine('', 100);
   await termLine(`<span class="cursor"></span>`);
 

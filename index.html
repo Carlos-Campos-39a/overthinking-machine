@@ -311,7 +311,7 @@
         <span class="ht-dot" style="background:#febc2e"></span>
         <span class="ht-dot" style="background:#28c840"></span>
       </div>
-      <div class="ht-body"><span class="t-dim">$ benchmark --task minha_tarefa --n 10</span>
+      <div class="ht-body"><span class="t-dim">$ benchmark --task text_classification --n 10</span>
 
 <span class="t-blue">arquitetura      score   tokens   latência</span>
 <span class="t-win">sas              1.000      261     1.31s</span>
@@ -320,7 +320,7 @@ centralized      1.000    3 338    14.30s
 decentralized    1.000    3 012    12.96s
 hybrid           0.900    6 387    25.54s
 
-<span class="t-warn">! todas empatam em score</span>
+<span class="t-warn">! quatro empatam em 1.000; hybrid fica atras</span>
 <span class="t-ok">→ sas resolve igual por 1/24 dos tokens</span>
 <span class="t-ok">→ multi-agente aqui é só custo</span></div>
     </div>
@@ -367,12 +367,18 @@ hybrid           0.900    6 387    25.54s
       por isso o primeiro passo é você trazer a tarefa.
     </p>
     <div class="fluxo-wrap">
-      <svg class="fluxo" viewBox="0 0 900 430" role="img"
-           aria-label="Fluxo da plataforma: a sua chave alimenta dois caminhos equivalentes — pelo site e pelo MCP. Ambos passam por escolher ou compor a topologia, escolher ou trazer a tarefa, rodar o experimento e comparar score, tokens, latência e custo. Da comparação sai, opcionalmente, publicar na biblioteca compartilhada.">
+      <svg class="fluxo" viewBox="0 0 900 430" role="group"
+           aria-labelledby="fluxo-titulo fluxo-desc">
+        <title id="fluxo-titulo">Como a plataforma se encaixa</title>
+        <desc id="fluxo-desc">A sua chave alimenta duas trilhas equivalentes — pelo site e
+        pelo MCP. As duas passam por compor a topologia, trazer a tarefa e rodar, e convergem
+        no mesmo resultado: score, tokens, latência e custo, sempre contra a linha de base.
+        A topologia que você compôs pode, opcionalmente, ser publicada na biblioteca
+        compartilhada. Os rótulos de cada etapa estão no texto a seguir.</desc>
         <defs>
           <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5"
                   markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--card-border)"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#8C86A8"/>
           </marker>
         </defs>
 
@@ -385,8 +391,8 @@ hybrid           0.900    6 387    25.54s
         <text x="67" y="215" class="f-s" text-anchor="middle">navegador ou</text>
         <text x="67" y="230" class="f-s" text-anchor="middle">no header</text>
 
-        <path d="M 130 150 L 160 150" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
-        <path d="M 130 214 L 160 214" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 130 150 L 160 150" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 130 214 L 160 214" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
 
         <!-- trilha 1: no site -->
         <text x="164" y="108" class="f-lane" fill="var(--m1)">NO SITE</text>
@@ -423,15 +429,15 @@ hybrid           0.900    6 387    25.54s
         </g>
 
         <!-- setas entre etapas -->
-        <path d="M 332 151 L 352 151" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
-        <path d="M 524 151 L 544 151" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
-        <path d="M 332 243 L 352 243" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
-        <path d="M 524 243 L 544 243" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 332 151 L 352 151" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 524 151 L 544 151" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 332 243 L 352 243" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 524 243 L 544 243" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
 
         <!-- as duas trilhas convergem no mesmo resultado -->
-        <path d="M 672 151 L 700 151 L 700 178" stroke="var(--card-border)" stroke-width="2" fill="none"/>
-        <path d="M 672 243 L 700 243 L 700 216" stroke="var(--card-border)" stroke-width="2" fill="none"/>
-        <path d="M 700 190 L 724 190" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 672 151 L 700 151 L 700 178" stroke="#8C86A8" stroke-width="2" fill="none"/>
+        <path d="M 672 243 L 700 243 L 700 216" stroke="#8C86A8" stroke-width="2" fill="none"/>
+        <path d="M 700 190 L 724 190" stroke="#8C86A8" stroke-width="2" marker-end="url(#seta)"/>
 
         <rect x="728" y="120" width="164" height="150" rx="10"
               fill="#F3FBF8" stroke="#BFE3D6" stroke-width="1.5"/>
@@ -443,11 +449,12 @@ hybrid           0.900    6 387    25.54s
         <text x="810" y="256" class="f-s" text-anchor="middle" font-style="italic">vs. linha de base</text>
 
         <!-- publicar, opcional -->
-        <path d="M 810 274 L 810 300" stroke="var(--card-border)" stroke-width="2"
-              stroke-dasharray="4 4" marker-end="url(#seta)"/>
+        <path d="M 246 182 L 246 292 L 700 292 L 700 306" stroke="#8C86A8" stroke-width="2"
+              stroke-dasharray="4 4" fill="none" marker-end="url(#seta)"/>
         <g class="f-box f-opt">
           <rect x="716" y="306" width="188" height="46" rx="10"/>
-          <text x="810" y="334" class="f-s" text-anchor="middle">publicar na biblioteca</text>
+          <text x="810" y="328" class="f-s" text-anchor="middle">publicar a TOPOLOGIA</text>
+          <text x="810" y="344" class="f-s" text-anchor="middle" font-size="11">(o método, não o resultado)</text>
         </g>
 
         <!-- as 4 lentes: portas de entrada -->
@@ -481,17 +488,21 @@ hybrid           0.900    6 387    25.54s
         <div class="step-n">02</div>
         <div class="step-h">Rode o experimento</div>
         <div class="step-p">
-          Escolha o que quer descobrir e a plataforma congela todo o resto. O custo em chamadas
-          aparece <em>antes</em> de você gastar, e o protocolo valida barato (25 chamadas) antes de
-          liberar a matriz cara.
+          Escolha o que quer descobrir e a plataforma congela todo o resto. Os módulos abrem em
+          <strong>modo Mock</strong>: o fluxo roda inteiro sem chamar modelo nenhum, com números de
+          uma tabela de referência — é para conhecer a interface sem gastar. Para medir de verdade,
+          ligue o <strong>modo Real</strong> e informe a sua chave. O protocolo sugere validar barato
+          (25 chamadas, uma instância por arquitetura) antes da matriz cara.
         </div>
       </div>
       <div class="step">
         <div class="step-n">03</div>
         <div class="step-h">Decida com o dado</div>
         <div class="step-p">
-          Score, tokens, latência e custo por configuração — mais o trace completo de cada execução,
-          para você ver <em>por que</em> deu certo ou errado, em vez de teorizar.
+          Score, tokens, latência e custo por configuração, sempre contra a linha de base.
+          O trace de cada execução — o que cada agente viu e respondeu — é gravado em
+          <code>runs/</code> na máquina que roda a API: rodando local, os arquivos são seus;
+          na instância pública eles ficam no servidor e não são baixáveis.
         </div>
       </div>
     </div>
@@ -573,7 +584,7 @@ hybrid           0.900    6 387    25.54s
       <div class="princ-c">
         <div class="princ-n">05</div>
         <div class="princ-h">Cuidado com o efeito teto</div>
-        <div class="princ-p">Se tudo empata em 1.0, a conclusão não é "não importa" — é "esta tarefa não mede isso". A plataforma avisa quando isso acontece.</div>
+        <div class="princ-p">Se tudo empata em 1.0, a conclusão não é "não importa" — é "esta tarefa não mede isso". O MCP avisa ao comparar modelos, e a ablação de prompt também; no módulo 1 quem tem de ler o sinal é você — a <strong>linha de base</strong> de cada tarefa aparece antes de rodar justamente para isso.</div>
       </div>
     </div>
   </div>
@@ -668,7 +679,7 @@ hybrid           0.900    6 387    25.54s
       <a class="mod" style="--c:var(--m1)" href="curiosidades.html#mcp-api">
         <div class="mod-top"><span class="mod-n">01</span><span class="mod-q">"Meu agente precisa de MCP ou uma API resolve?"</span></div>
         <div class="mod-h">MCP não é necessário. É que sai bem mais barato.</div>
-        <div class="mod-p">144 agentes headless, 8 tarefas, o mesmo backend por três interfaces. A taxa de sucesso empata; a diferença aparece no custo (1,9×), em tokens (3 a 5×) e em chamadas falhadas — zero no MCP.</div>
+        <div class="mod-p">144 agentes headless, 8 tarefas, o mesmo backend por três interfaces. A taxa de sucesso empata; a diferença aparece em custo, tokens e chamadas falhadas — zero no MCP. Contra REST descoberto por OpenAPI o custo é ~1,9×; contra REST com documentação no prompt, ~1,25×.</div>
         <div class="mod-tags"><span class="mod-tag">144 execuções</span><span class="mod-tag">Sonnet 5 · Haiku 4.5</span></div>
         <span class="mod-go">Ver o experimento →</span>
       </a>
@@ -721,13 +732,13 @@ hybrid           0.900    6 387    25.54s
         </div>
         <span class="dl-go">Baixar ↓</span>
       </a>
-      <a class="dl" href="baixar/" >
+      <a class="dl" href="baixar/README.md" download>
         <div class="dl-h">topologias &amp; harnesses</div>
         <div class="dl-p">
           As cinco arquiteturas do paper, três nascidas de um caso de operação real e dois
           harnesses — em JSON, prontos para editar e rodar.
         </div>
-        <span class="dl-go">Ver tudo →</span>
+        <span class="dl-go">Baixar o índice ↓</span>
       </a>
     </div>
     <p class="dl-nota">
