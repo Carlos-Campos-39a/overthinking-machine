@@ -15,6 +15,10 @@ Procfile
 *.docx
 *.pdf
 *.skill
+
+# Pagina orfa: nenhuma outra a referencia e ela nao carrega config.js,
+# entao no ar ela aponta para localhost. Fica no disco, fora do deploy.
+long-doc-benchmark.html
 config.yaml
 library.json
 model_pricing.json

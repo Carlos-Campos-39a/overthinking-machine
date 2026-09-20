@@ -234,6 +234,41 @@
       .hero-inner,.prob-grid,.mcp-grid { grid-template-columns:1fr; gap:36px; }
       .steps { grid-template-columns:1fr; gap:28px; }
     }
+
+    /* ── Diagrama do fluxo ─────────────────────────────────────── */
+    /* Rolagem horizontal em tela estreita em vez de encolher o texto
+       ate ficar ilegivel — mesmo padrao do terminal do hero (.ht-body). */
+    .fluxo-wrap { overflow-x:auto; margin:0 0 44px; padding-bottom:6px; }
+    .fluxo { display:block; width:100%; min-width:720px; height:auto; }
+    .fluxo .f-box rect, .fluxo .f-lente rect {
+      fill:#fff; stroke:var(--c,var(--card-border)); stroke-width:1.5;
+    }
+    .fluxo .f-lente rect { fill:color-mix(in srgb, var(--c) 7%, #fff); }
+    .fluxo .f-opt rect { fill:#FAFAFE; stroke:var(--card-border); stroke-dasharray:5 4; }
+    .fluxo .f-t { font:600 14px Inter,sans-serif; fill:var(--texto-principal); }
+    .fluxo .f-s { font:400 12.5px Inter,sans-serif; fill:var(--texto-secundario); }
+    .fluxo .f-m { font:500 12.5px 'JetBrains Mono',monospace; fill:var(--m4); }
+    .fluxo .f-ico { font-size:22px; }
+    .fluxo .f-lane {
+      font:700 10.5px Inter,sans-serif; letter-spacing:1.2px;
+      fill:var(--texto-secundario); text-transform:uppercase;
+    }
+
+    /* ── Baixar ────────────────────────────────────────────────── */
+    .dl-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .dl {
+      display:flex; flex-direction:column; gap:8px; text-decoration:none;
+      background:#fff; border:1.5px solid var(--card-border); border-radius:16px;
+      padding:22px 24px; transition:border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .dl:hover { border-color:var(--roxo-profundo); transform:translateY(-2px); box-shadow:var(--shadow-card); }
+    .dl-h { font-family:'JetBrains Mono',monospace; font-weight:500; font-size:0.92rem; color:var(--roxo-profundo); }
+    .dl-p { font-size:0.83rem; line-height:1.65; color:var(--texto-secundario); }
+    .dl-p code { font-family:'JetBrains Mono',monospace; font-size:0.9em; }
+    .dl-go { font-size:0.8rem; font-weight:700; color:var(--roxo-profundo); margin-top:auto; }
+    .dl-nota { font-size:0.82rem; line-height:1.7; color:var(--texto-secundario); margin-top:20px; }
+    .dl-nota a { color:var(--roxo-profundo); font-weight:600; }
+    @media(max-width:760px){ .dl-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -248,6 +283,7 @@
     <a href="#metodo">Método</a>
     <a href="#agentes">Para agentes</a>
     <a href="curiosidades.html">Curiosidades</a>
+    <a href="#baixar">Baixar</a>
     <a href="overthinking-machine.html" class="nav-btn">Começar um teste</a>
   </nav>
 </header>
@@ -330,14 +366,115 @@ hybrid           0.900    6 387    25.54s
       A plataforma não testa "agentes em geral". Ela testa <strong>o seu agente na sua tarefa</strong> —
       por isso o primeiro passo é você trazer a tarefa.
     </p>
+    <div class="fluxo-wrap">
+      <svg class="fluxo" viewBox="0 0 900 430" role="img"
+           aria-label="Fluxo da plataforma: a sua chave alimenta dois caminhos equivalentes — pelo site e pelo MCP. Ambos passam por escolher ou compor a topologia, escolher ou trazer a tarefa, rodar o experimento e comparar score, tokens, latência e custo. Da comparação sai, opcionalmente, publicar na biblioteca compartilhada.">
+        <defs>
+          <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--card-border)"/>
+          </marker>
+        </defs>
+
+        <!-- a chave, que alimenta os dois caminhos -->
+        <rect x="8" y="118" width="118" height="128" rx="12"
+              fill="#FFF8E6" stroke="#E8D9A8" stroke-width="1.5"/>
+        <text x="67" y="152" class="f-ico" text-anchor="middle">🔑</text>
+        <text x="67" y="180" class="f-t" text-anchor="middle">a sua chave</text>
+        <text x="67" y="200" class="f-s" text-anchor="middle">fica no seu</text>
+        <text x="67" y="215" class="f-s" text-anchor="middle">navegador ou</text>
+        <text x="67" y="230" class="f-s" text-anchor="middle">no header</text>
+
+        <path d="M 130 150 L 160 150" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 130 214 L 160 214" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+
+        <!-- trilha 1: no site -->
+        <text x="164" y="108" class="f-lane" fill="var(--m1)">NO SITE</text>
+        <g class="f-box" style="--c:var(--m1)">
+          <rect x="164" y="120" width="164" height="62" rx="10"/>
+          <text x="246" y="145" class="f-t" text-anchor="middle">escolher ou</text>
+          <text x="246" y="165" class="f-t" text-anchor="middle">compor topologia</text>
+        </g>
+        <g class="f-box" style="--c:var(--m1)">
+          <rect x="356" y="120" width="164" height="62" rx="10"/>
+          <text x="438" y="145" class="f-t" text-anchor="middle">escolher ou</text>
+          <text x="438" y="165" class="f-t" text-anchor="middle">trazer a tarefa</text>
+        </g>
+        <g class="f-box" style="--c:var(--m1)">
+          <rect x="548" y="120" width="120" height="62" rx="10"/>
+          <text x="608" y="157" class="f-t" text-anchor="middle">rodar</text>
+        </g>
+
+        <!-- trilha 2: pelo MCP -->
+        <text x="164" y="200" class="f-lane" fill="var(--m4)">PELO MCP — MESMA PLATAFORMA</text>
+        <g class="f-box f-mcp" style="--c:var(--m4)">
+          <rect x="164" y="212" width="164" height="62" rx="10"/>
+          <text x="246" y="237" class="f-m" text-anchor="middle">validar_topologia</text>
+          <text x="246" y="257" class="f-m" text-anchor="middle">previa_topologia</text>
+        </g>
+        <g class="f-box f-mcp" style="--c:var(--m4)">
+          <rect x="356" y="212" width="164" height="62" rx="10"/>
+          <text x="438" y="237" class="f-m" text-anchor="middle">listar_tarefas</text>
+          <text x="438" y="257" class="f-m" text-anchor="middle">validar_tarefa</text>
+        </g>
+        <g class="f-box f-mcp" style="--c:var(--m4)">
+          <rect x="548" y="212" width="120" height="62" rx="10"/>
+          <text x="608" y="249" class="f-m" text-anchor="middle">rodar_*</text>
+        </g>
+
+        <!-- setas entre etapas -->
+        <path d="M 332 151 L 352 151" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 524 151 L 544 151" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 332 243 L 352 243" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+        <path d="M 524 243 L 544 243" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+
+        <!-- as duas trilhas convergem no mesmo resultado -->
+        <path d="M 672 151 L 700 151 L 700 178" stroke="var(--card-border)" stroke-width="2" fill="none"/>
+        <path d="M 672 243 L 700 243 L 700 216" stroke="var(--card-border)" stroke-width="2" fill="none"/>
+        <path d="M 700 190 L 724 190" stroke="var(--card-border)" stroke-width="2" marker-end="url(#seta)"/>
+
+        <rect x="728" y="120" width="164" height="150" rx="10"
+              fill="#F3FBF8" stroke="#BFE3D6" stroke-width="1.5"/>
+        <text x="810" y="146" class="f-t" text-anchor="middle" fill="var(--m4)">comparar</text>
+        <text x="810" y="172" class="f-s" text-anchor="middle">score</text>
+        <text x="810" y="192" class="f-s" text-anchor="middle">tokens</text>
+        <text x="810" y="212" class="f-s" text-anchor="middle">latência</text>
+        <text x="810" y="232" class="f-s" text-anchor="middle">custo</text>
+        <text x="810" y="256" class="f-s" text-anchor="middle" font-style="italic">vs. linha de base</text>
+
+        <!-- publicar, opcional -->
+        <path d="M 810 274 L 810 300" stroke="var(--card-border)" stroke-width="2"
+              stroke-dasharray="4 4" marker-end="url(#seta)"/>
+        <g class="f-box f-opt">
+          <rect x="716" y="306" width="188" height="46" rx="10"/>
+          <text x="810" y="334" class="f-s" text-anchor="middle">publicar na biblioteca</text>
+        </g>
+
+        <!-- as 4 lentes: portas de entrada -->
+        <text x="8" y="304" class="f-lane">QUATRO PERGUNTAS, MESMO ESQUELETO</text>
+        <g class="f-lente" style="--c:var(--m1)"><rect x="8" y="314" width="160" height="38" rx="8"/>
+          <text x="88" y="338" class="f-s" text-anchor="middle">1 · arquitetura</text></g>
+        <g class="f-lente" style="--c:var(--m2)"><rect x="180" y="314" width="160" height="38" rx="8"/>
+          <text x="260" y="338" class="f-s" text-anchor="middle">2 · ativações</text></g>
+        <g class="f-lente" style="--c:var(--m3)"><rect x="352" y="314" width="160" height="38" rx="8"/>
+          <text x="432" y="338" class="f-s" text-anchor="middle">3 · prompt</text></g>
+        <g class="f-lente" style="--c:var(--m4)"><rect x="524" y="314" width="160" height="38" rx="8"/>
+          <text x="604" y="338" class="f-s" text-anchor="middle">4 · modelo</text></g>
+
+        <text x="8" y="390" class="f-s">A instância pública não guarda chave nenhuma. Os dois caminhos usam o mesmo motor de medição —</text>
+        <text x="8" y="410" class="f-s">o que muda é quem dirige: você, ou o seu agente.</text>
+      </svg>
+    </div>
     <div class="steps">
       <div class="step">
         <div class="step-n">01</div>
         <div class="step-h">Defina a sua tarefa</div>
         <div class="step-p">
-          Use uma das tarefas prontas (classificação de texto, análise financeira) ou traga a sua:
-          exemplos de entrada, saída esperada e o critério de acerto. O boilerplate tem um template
-          <code>TaskBase</code> comentado — é um arquivo só.
+          Use uma das tarefas prontas ou traga a sua: instrução comum, casos e o gabarito de cada um.
+          Dá para colar um CSV na própria página, ou enviar um JSON pelo MCP — <strong>sem escrever
+          código</strong>. A plataforma valida de graça antes e mostra a <strong>linha de base</strong>:
+          o score de quem responde sempre o rótulo mais comum. Se o seu resultado não passar dela,
+          não houve descoberta.
         </div>
       </div>
       <div class="step">
@@ -546,6 +683,59 @@ hybrid           0.900    6 387    25.54s
     <div style="margin-top:22px">
       <a href="curiosidades.html" class="cta cta-ghost">Ver todos os achados →</a>
     </div>
+  </div>
+</section>
+
+<!-- ── BAIXAR ───────────────────────────────────────────────────── -->
+<section class="blk" id="baixar" style="background:var(--card-bg);border-top:1px solid var(--card-border)">
+  <div class="wrap">
+    <div class="sec-label">Baixar</div>
+    <h2 class="sec-title">Leve a plataforma para o seu agente</h2>
+    <p class="sec-desc">
+      Markdown e JSON puros, gerados do próprio código — se um número aqui divergir da
+      plataforma, é a plataforma que vale. Nada para instalar, nada para descompactar.
+    </p>
+    <div class="dl-grid">
+      <a class="dl" href="baixar/otm-agente.md" download>
+        <div class="dl-h">otm-agente.md</div>
+        <div class="dl-p">
+          O guia completo para um agente: como conectar, o que ler antes de gastar, os princípios
+          e como trazer a sua tarefa. Markdown puro — serve como Agent Skill, regra do Cursor,
+          <code>AGENTS.md</code> ou system prompt.
+        </div>
+        <span class="dl-go">Baixar ↓</span>
+      </a>
+      <a class="dl" href="baixar/mcp.json" download>
+        <div class="dl-h">mcp.json</div>
+        <div class="dl-p">
+          A conexão canônica, pronta para colar no cliente. É esta a fonte: se outro lugar
+          mostrar diferente, siga este arquivo.
+        </div>
+        <span class="dl-go">Baixar ↓</span>
+      </a>
+      <a class="dl" href="baixar/tarefa-exemplo.json" download>
+        <div class="dl-h">tarefa-exemplo.json</div>
+        <div class="dl-p">
+          Uma tarefa declarativa completa — 24 casos com política de precedência e sinal
+          conflitante. Copie, troque os casos pelos seus e rode. Sem escrever Python.
+        </div>
+        <span class="dl-go">Baixar ↓</span>
+      </a>
+      <a class="dl" href="baixar/" >
+        <div class="dl-h">topologias &amp; harnesses</div>
+        <div class="dl-p">
+          As cinco arquiteturas do paper, três nascidas de um caso de operação real e dois
+          harnesses — em JSON, prontos para editar e rodar.
+        </div>
+        <span class="dl-go">Ver tudo →</span>
+      </a>
+    </div>
+    <p class="dl-nota">
+      Também no pacote: <a href="baixar/PROVEDORES.md">PROVEDORES.md</a> (os 9 provedores, a
+      variável de ambiente e o header de cada um) e
+      <a href="baixar/ativacoes/README.md">ativacoes/README.md</a> (como rodar o hook de verdade
+      na sua máquina, já que a leitura de ativações do site é simulação didática).
+    </p>
   </div>
 </section>
 

@@ -904,11 +904,29 @@ def val_producao() -> None:
         check("producao", "páginas ainda não commitadas", SKIP,
               f"fora da conferência: {', '.join(nao_commitadas)}")
 
+    # Página rastreada mas excluída do deploy não é falha: é decisão. A página
+    # órfã long-doc-benchmark fica no disco e fora do ar de propósito.
+    vign = PROJ / ".vercelignore"
+    ignoradas = set()
+    if vign.exists():
+        ignoradas = {l.strip() for l in vign.read_text(encoding="utf-8").splitlines()
+                     if l.strip().endswith(".html") and not l.startswith("#")}
+    fora_do_deploy = sorted(set(nomes) & ignoradas)
+    if fora_do_deploy:
+        check("producao", "páginas fora do deploy por escolha", SKIP,
+              ", ".join(fora_do_deploy))
+
     # index.html é servido na raiz; as outras pelo nome sem .html (cleanUrls)
-    urls = [""] + [n[:-5] for n in sorted(nomes) if n != "index.html"] + ["config.js"]
+    servidas = [n for n in sorted(nomes) if n not in ignoradas]
+    urls = [""] + [n[:-5] for n in servidas if n != "index.html"] + ["config.js"]
     for pagina in urls:
         st, _ = _prod(f"{PROD_SITE}/{pagina}")
         check("producao", f"site /{pagina}", OK if st == 200 else FAIL, f"HTTP {st}")
+
+    # E o material da Fase 4 tem de estar servido, não só existir no repositório.
+    for alvo in ("baixar/otm-agente.md", "baixar/mcp.json", "baixar/tarefa-exemplo.json"):
+        st, _ = _prod(f"{PROD_SITE}/{alvo}")
+        check("producao", f"site /{alvo}", OK if st == 200 else FAIL, f"HTTP {st}")
 
     # ── o que o frontend NO AR chama existe no backend NO AR? ───────────────
     import re
