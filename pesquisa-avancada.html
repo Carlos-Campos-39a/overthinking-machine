@@ -857,11 +857,29 @@
       <div class="import-divider">hook real: rode na sua máquina e importe</div>
       <div class="hook-real-nota">
         Esta instância pública <strong>não lê ativações de modelo nenhum</strong> — ler o
-        residual stream exige os pesos na máquina. O experimento de verdade
-        (TransformerLens, <code>blocks.N.hook_resid_post</code>, validação cruzada) é o script
-        <a href="https://github.com/Carlos-Campos-39a/overthinking-machine/blob/main/geometry-of-truth/experiments/sas_classifier/experimento_multi.py"
-           target="_blank" rel="noopener">experimento_multi.py</a>.
-        Ele grava um <code>otm_results_*.json</code>; importe-o abaixo.
+        residual stream exige os pesos na máquina. O experimento de verdade usa
+        TransformerLens em <code>blocks.N.hook_resid_post</code>, com validação cruzada:
+        <pre style="margin:8px 0;padding:8px 10px;background:#0F0F22;color:#C8C8E8;border-radius:8px;overflow-x:auto;font-size:0.95em"><code>git clone https://github.com/Carlos-Campos-39a/overthinking-machine.git
+cd overthinking-machine/geometry-of-truth/experiments/sas_classifier
+pip install -r requirements.txt
+python experimento_multi.py</code></pre>
+        Roda em <strong>CPU</strong> (não precisa de GPU) e baixa os datasets do HuggingFace
+        em tempo de execução. O modelo padrão é <em>gated</em>: ou você aceita os termos do
+        <code>meta-llama/Llama-3.2-1B</code> e autentica, ou troca por um aberto —
+        <code>gpt2-small</code> roda sem autenticação nenhuma.
+        Ele grava <code>otm_results_&lt;dataset&gt;_&lt;arquitetura&gt;.json</code>; importe abaixo.
+        <a href="baixar/ativacoes/README.md" style="display:inline-block;margin-top:6px">
+          Instruções completas ↓</a>
+      </div>
+      <div class="hook-real-nota" style="border-color:#E8D9A8;background:#FFF8E6">
+        <strong>O que uma probe linear mostra — e o que não mostra.</strong>
+        Acerto alto indica que a informação está <em>linearmente legível</em> naquela camada.
+        Não indica que o modelo a <em>usa</em> para decidir, nem estabelece causalidade.
+        E leia sempre contra a linha de base: com poucas amostras e muitas dimensões, uma
+        probe pontuada no próprio treino dá ~100% até em ruído puro — era o que acontecia
+        aqui antes da validação cruzada.
+        <span style="opacity:.8">Marks &amp; Tegmark, <em>The Geometry of Truth</em>
+        (arXiv:2310.06824).</span>
       </div>
 
       <input type="file" id="import-file" accept=".json" multiple style="display:none" onchange="importResults(this)">

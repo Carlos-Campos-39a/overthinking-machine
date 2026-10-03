@@ -487,7 +487,10 @@ def val_mcp() -> None:
                  "rodar_com_topologia",
                  # Tarefa declarativa: sem elas, quem conecta só consegue rodar
                  # as tarefas embutidas — que saturam.
-                 "listar_tarefas", "validar_tarefa"}
+                 "listar_tarefas", "validar_tarefa",
+                 # Modulo 2: o unico jeito de um agente saber que a simulacao
+                 # da API nao e hook de verdade.
+                 "listar_datasets_ativacao"}
     nomes = {t.name for t in tools}
     faltando = esperadas - nomes
     check("mcp", f"{len(esperadas)} ferramentas", OK if not faltando else FAIL,

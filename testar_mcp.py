@@ -115,10 +115,10 @@ def main() -> int:
 
     # 3. superfície
     ferramentas = {t["name"] for t in c.rpc("tools/list")["result"]["tools"]}
-    check("ferramentas", len(ferramentas) >= 16, f"{len(ferramentas)}")
+    check("ferramentas", len(ferramentas) >= 17, f"{len(ferramentas)}")
     essenciais = {"listar_capacidades", "validar_topologia", "previa_topologia",
                   "rodar_com_topologia", "rodar_experimento", "estimar_custo",
-                  "listar_tarefas", "validar_tarefa"}
+                  "listar_tarefas", "validar_tarefa", "listar_datasets_ativacao"}
     falt = essenciais - ferramentas
     check("ferramentas essenciais presentes", not falt, f"faltam: {sorted(falt)}" if falt else "")
 
@@ -129,7 +129,8 @@ def main() -> int:
     recursos = {str(x["uri"]) for x in c.rpc("resources/list")["result"]["resources"]}
     check("recursos de metodologia e esquema",
           {"otm://metodologia", "otm://esquema-topologia",
-           "otm://provedores"} <= recursos, ", ".join(sorted(recursos)))
+           "otm://provedores", "otm://ativacoes"} <= recursos,
+          ", ".join(sorted(recursos)))
 
     # 4. o recurso que ensina a compor — lido da API, então prova o loopback interno
     esquema = c.rpc("resources/read", {"uri": "otm://esquema-topologia"})["result"]["contents"][0]["text"]
