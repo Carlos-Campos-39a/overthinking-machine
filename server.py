@@ -161,6 +161,38 @@ async def health():
     }
 
 
+# ── Execuções simultâneas ─────────────────────────────────────────────────────
+#
+# Cada experimento abre uma thread sem teto nenhum: numa instância pública
+# bastava abrir N abas (ou um laço de curl) para encher o contêiner de threads,
+# cada uma segurando memória e consumindo a cota de quem quer que seja. Não é
+# preciso má intenção — basta alguém clicar Rodar várias vezes porque achou que
+# travou. O teto é por processo; ultrapassou, a API recusa com mensagem clara
+# ANTES de abrir a thread, em vez de aceitar e degradar em silêncio.
+MAX_EXECUCOES_SIMULTANEAS = int(os.getenv("OTM_MAX_EXECUCOES", "3"))
+
+_vagas = threading.Semaphore(MAX_EXECUCOES_SIMULTANEAS)
+
+
+def _ocupar_vaga() -> None:
+    """Reserva uma vaga ou recusa. Chamado ANTES de criar a thread."""
+    if not _vagas.acquire(blocking=False):
+        raise HTTPException(
+            429,
+            f"Já há {MAX_EXECUCOES_SIMULTANEAS} experimentos rodando nesta "
+            f"instância. Espere um terminar — ou rode a plataforma na sua "
+            f"máquina, onde o único limite é o seu.",
+        )
+
+
+def _liberar_vaga() -> None:
+    """Devolve a vaga. Precisa rodar em finally, inclusive se a thread morrer."""
+    try:
+        _vagas.release()
+    except ValueError:
+        pass   # release a mais: melhor ignorar do que derrubar a thread
+
+
 # ── Run (POST + SSE stream) ────────────────────────────────────────────────────
 
 def _validar_orcamento(cfg) -> None:
@@ -1041,9 +1073,11 @@ async def _stream_experiment(
         except Exception as exc:
             loop.call_soon_threadsafe(queue.put_nowait, _evento_de_erro(exc))
         finally:
+            _liberar_vaga()
             loop.call_soon_threadsafe(queue.put_nowait, None)  # sentinel
 
     # Lança thread
+    _ocupar_vaga()
     thread = threading.Thread(target=_run_sync, daemon=True)
     active_runs[run_id]["thread"] = thread
     active_runs[run_id]["status"] = "running"
@@ -1913,7 +1947,16 @@ async def _stream_benchmark(
         })
         loop.call_soon_threadsafe(queue.put_nowait, None)
 
-    thread = threading.Thread(target=_run_sync, daemon=True)
+    def _run_sync_guardado():
+        # Sem este envelope a vaga vazava quando a thread morria de exceção:
+        # três falhas e a instância recusaria todo mundo até reiniciar.
+        try:
+            _run_sync()
+        finally:
+            _liberar_vaga()
+
+    _ocupar_vaga()
+    thread = threading.Thread(target=_run_sync_guardado, daemon=True)
     active_runs[bench_id]["thread"] = thread
     active_runs[bench_id]["status"] = "running"
     thread.start()
@@ -2237,8 +2280,10 @@ async def _stream_prompt_sensitivity(
         except Exception as exc:
             loop.call_soon_threadsafe(queue.put_nowait, _evento_de_erro(exc))
         finally:
+            _liberar_vaga()
             loop.call_soon_threadsafe(queue.put_nowait, None)
 
+    _ocupar_vaga()
     thread = threading.Thread(target=_run_sync, daemon=True)
     active_runs[ps_id]["thread"] = thread
     active_runs[ps_id]["status"] = "running"

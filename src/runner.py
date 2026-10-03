@@ -220,21 +220,38 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
 
         t0 = time.time()
 
-        # Harness constrói as mensagens
-        harness_output = harness.build_messages(instance)
-
-        # Agente executa
-        output = agent.run(harness_output.messages)
-
-        # Avaliação
-        result: EvalResult = evaluator.evaluate(output, instance, task)
+        # Uma instância que falha NÃO pode levar a execução inteira junto. Um
+        # 429 na instância 7 de 24 descartava as 6 já pagas e devolvia um erro
+        # só — a pessoa perdia os tokens e o resultado parcial. Agora a falha é
+        # registrada como instância falha, com score 0, e o loop continua; o
+        # payload final diz quantas falharam e por quê, para ninguém ler uma
+        # média como se fosse execução completa.
+        falhou = None
+        try:
+            harness_output = harness.build_messages(instance)
+            output = agent.run(harness_output.messages)
+            result: EvalResult = evaluator.evaluate(output, instance, task)
+            agent_trace = agent.trace_dicts()
+            tokens = _sum_tokens(agent_trace)
+        except Exception as exc:                      # noqa: BLE001 — qualquer falha do provedor
+            falhou = f"{type(exc).__name__}: {exc}"[:300]
+            output = ""
+            result = EvalResult(score=0.0, feedback=f"instância falhou — {falhou}")
+            agent_trace = []
+            try:
+                agent_trace = agent.trace_dicts()     # o que deu tempo de registrar
+            except Exception:
+                pass
+            tokens = _sum_tokens(agent_trace)
+            harness_output = type("_Vazio", (), {"metadata": {}})()
 
         elapsed = time.time() - t0
-        agent_trace = agent.trace_dicts()
-        tokens = _sum_tokens(agent_trace)
 
         if verbose:
-            print(f" -> score={result.score:.3f} ({elapsed:.1f}s, {tokens['total_tokens']} tokens, {tokens['llm_calls']} chamadas)")
+            if falhou:
+                print(f" -> FALHOU ({elapsed:.1f}s): {falhou[:90]}")
+            else:
+                print(f" -> score={result.score:.3f} ({elapsed:.1f}s, {tokens['total_tokens']} tokens, {tokens['llm_calls']} chamadas)")
 
         # Registro no trace
         trace_record = {
@@ -248,6 +265,7 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
             "harness": harness_used,
             "harness_metadata": harness_output.metadata,
             "agent_trace": agent_trace,
+            "falhou": falhou,
         }
         _append_jsonl(trace_path, trace_record)
 
@@ -256,6 +274,7 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
             "score": result.score,
             "elapsed_s": round(elapsed, 2),
             "tokens": tokens,
+            "falhou": falhou,
         })
 
         # Atualiza a memória do harness, se ele tiver alguma.
@@ -265,7 +284,9 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
         # em SILÊNCIO qualquer harness com estado que não fosse um dos dois:
         # nenhum erro, apenas uma memória que nunca atualiza — o tipo de falha
         # que a plataforma existe para detectar, não para produzir.
-        if hasattr(harness, "record_result"):
+        # Memória de harness não aprende com instância que falhou: guardar um
+        # score 0 vindo de um 429 ensinaria o harness a evitar a resposta certa.
+        if falhou is None and hasattr(harness, "record_result"):
             harness.record_result(
                 instance=instance,
                 output=output,
@@ -279,12 +300,28 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
 
     # ── Salva resultados ──────────────────────────────────────────────
     n = len(scores)
-    mean_score = sum(s["score"] for s in scores) / n if n else 0.0
-    mean_elapsed_s = sum(s["elapsed_s"] for s in scores) / n if n else 0.0
-    mean_input_tokens = sum(s["tokens"]["input_tokens"] for s in scores) / n if n else 0.0
-    mean_output_tokens = sum(s["tokens"]["output_tokens"] for s in scores) / n if n else 0.0
-    mean_total_tokens = sum(s["tokens"]["total_tokens"] for s in scores) / n if n else 0.0
-    mean_llm_calls = sum(s["tokens"]["llm_calls"] for s in scores) / n if n else 0.0
+    falhas = [s for s in scores if s.get("falhou")]
+    ok = [s for s in scores if not s.get("falhou")]
+    # Média sobre o que de fato rodou. Incluir as falhas puxaria o score para
+    # baixo por causa da rede, não do método — e a comparação mediria conexão.
+    mean_score = sum(s["score"] for s in ok) / len(ok) if ok else 0.0
+    # Todas as médias são sobre as instâncias que ROTARAM. Uma falha consome
+    # ~0 token e ~0 tempo; incluí-la faria a configuração parecer mais barata e
+    # mais rápida justamente quando ela falhou.
+    k = len(ok) or 1
+    mean_elapsed_s = sum(s["elapsed_s"] for s in ok) / k
+    mean_input_tokens = sum(s["tokens"]["input_tokens"] for s in ok) / k
+    mean_output_tokens = sum(s["tokens"]["output_tokens"] for s in ok) / k
+    mean_total_tokens = sum(s["tokens"]["total_tokens"] for s in ok) / k
+    mean_llm_calls = sum(s["tokens"]["llm_calls"] for s in ok) / k
+
+    # Desvio-padrão do score entre instâncias. Sem ele, duas configurações com
+    # a mesma média parecem equivalentes mesmo quando uma é consistente e a
+    # outra acerta metade e erra metade.
+    sd_score = 0.0
+    if len(ok) > 1:
+        _m = mean_score
+        sd_score = (sum((s["score"] - _m) ** 2 for s in ok) / len(ok)) ** 0.5
 
     results = {
         "run_id": run_id,
@@ -296,7 +333,13 @@ def run_experiment(config: dict, verbose: bool = True) -> dict:
         "harness_used": harness_used,
         "task_used": task_used,
         "num_instances": len(instances),
+        "num_ok": len(ok),
+        "num_falhas": len(falhas),
+        # Quem lê a média precisa saber sobre quantas instâncias ela foi tirada.
+        "falhas": [{"instance_id": s["instance_id"], "erro": s["falhou"]}
+                   for s in falhas[:10]],
         "mean_score": round(mean_score, 4),
+        "sd_score": round(sd_score, 4),
         "mean_elapsed_s": round(mean_elapsed_s, 3),
         "mean_input_tokens": round(mean_input_tokens, 1),
         "mean_output_tokens": round(mean_output_tokens, 1),

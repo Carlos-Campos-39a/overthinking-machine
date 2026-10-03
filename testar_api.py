@@ -280,6 +280,51 @@ def ambiente() -> None:
           all(c in exemplo for c in chaves), f"{len(chaves)} provedores")
 
 
+def resiliencia() -> None:
+    print()
+    print("7. RESILIENCIA")
+    import os as _os
+    from src.llm_factory import LLMFactory as F
+
+    check("ha timeout e retry padrao", F.TIMEOUT_S > 0 and F.MAX_RETRIES >= 1,
+          f"{F.TIMEOUT_S}s, {F.MAX_RETRIES} tentativas")
+    # Provedor local carrega o modelo na primeira chamada: timeout de rede
+    # mataria um modelo grande subindo.
+    check("provedor local ganha folga", F._resiliencia("ollama")["timeout"]
+          > F._resiliencia("google")["timeout"])
+
+    # O valor precisa CHEGAR ao cliente. Cada biblioteca guarda sob um nome:
+    # ChatOpenAI usa request_timeout (aceita timeout por alias), o do Google usa
+    # timeout. Se um alias mudar numa atualizacao, o valor seria aceito como
+    # kwarg desconhecido e descartado em silencio — e so se descobriria com uma
+    # chamada pendurada em producao.
+    antes = {k: _os.environ.get(k) for k in ("GOOGLE_API_KEY", "GROQ_API_KEY")}
+    _os.environ.setdefault("GOOGLE_API_KEY", "x" * 30)
+    _os.environ.setdefault("GROQ_API_KEY", "x" * 30)
+    try:
+        for modelo in ("google/gemini-2.5-flash", "groq/llama-3.3-70b-versatile"):
+            llm = F.create(modelo)
+            tmo = getattr(llm, "timeout", None)
+            if tmo is None:
+                tmo = getattr(llm, "request_timeout", None)
+            check(f"timeout chega em {modelo.split('/')[0]}",
+                  tmo == F.TIMEOUT_S, f"{tmo}")
+            check(f"retry chega em {modelo.split('/')[0]}",
+                  getattr(llm, "max_retries", None) == F.MAX_RETRIES,
+                  f"{getattr(llm, 'max_retries', None)}")
+    finally:
+        for k, v in antes.items():
+            if v is None:
+                _os.environ.pop(k, None)
+            else:
+                _os.environ[k] = v
+
+    # Quem chama pode querer outro teto; o padrao nao pode sobrescrever a escolha.
+    r = F._resiliencia("google")
+    combinado = {**r, "timeout": 5}
+    check("kwargs de quem chama vencem o padrao", combinado["timeout"] == 5)
+
+
 def main() -> int:
     print("=" * 66)
     print("  testar_api.py — tetos de custo e honestidade do módulo 2")
@@ -290,6 +335,7 @@ def main() -> int:
     configuracao()
     provedores()
     ambiente()
+    resiliencia()
     print("\n" + ("tudo passou" if not _falhas else f"{_falhas} FALHA(S)"))
     return 1 if _falhas else 0
 

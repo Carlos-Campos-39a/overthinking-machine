@@ -147,11 +147,30 @@ class LLMFactory:
         return (provider in LLMFactory.LOCAL_PROVIDERS
                 or provider in LLMFactory.COMPATIBLE_PROVIDERS)
 
+    # Sem timeout, uma chamada que o provedor nunca responde pendura a thread do
+    # experimento para sempre: a pessoa vê "rodando" indefinidamente e os tokens
+    # já gastos ficam presos. Sem retry, um 429 ou um 503 momentâneo — comuns em
+    # cota gratuita — derruba a instância. Os dois valores são ajustáveis por
+    # ambiente porque modelo de raciocínio legitimamente demora mais.
+    TIMEOUT_S = float(os.getenv("OTM_LLM_TIMEOUT", "120"))
+    MAX_RETRIES = int(os.getenv("OTM_LLM_RETRIES", "2"))
+
+    @staticmethod
+    def _resiliencia(provider: str) -> dict:
+        """Timeout e retry, a menos que quem chama já tenha escolhido os seus."""
+        # Provedor local não passa pela rede: timeout curto demais mataria um
+        # modelo grande carregando na primeira chamada.
+        mult = 4 if provider in LLMFactory.LOCAL_PROVIDERS else 1
+        return {"timeout": LLMFactory.TIMEOUT_S * mult,
+                "max_retries": LLMFactory.MAX_RETRIES}
+
     @staticmethod
     def _build(provider: str, model_name: str, temperature: float, **kwargs: Any) -> BaseChatModel:
         # A chave é passada explicitamente (e não lida do ambiente pelo próprio
         # cliente) para que a chave do usuário no modo BYOK tenha precedência.
         chave = LLMFactory.api_key_for(provider)
+        # kwargs de quem chama vence: um experimento pode querer outro teto.
+        kwargs = {**LLMFactory._resiliencia(provider), **kwargs}
 
         if provider == "openai":
             from langchain_openai import ChatOpenAI
