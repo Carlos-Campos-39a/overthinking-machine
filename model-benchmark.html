@@ -834,7 +834,8 @@ async function runBenchmarkReal() {
             cost: e.cost_usd, calls: e.llm_calls,
           });
           done += e.reps;
-          term(`&nbsp;&nbsp;score=${e.score.toFixed(4)} ±${e.sd.toFixed(3)}  lat=${e.elapsed_s}s  tok=${e.total_tokens}  custo=$${e.cost_usd}`, 'tl-ok');
+          const custoTxt = e.cost_usd == null ? 'preço não publicado' : '$' + e.cost_usd;
+          term(`&nbsp;&nbsp;score=${e.score.toFixed(4)} ±${e.sd.toFixed(3)}  lat=${e.elapsed_s}s  tok=${e.total_tokens}  custo=${custoTxt}`, 'tl-ok');
           document.getElementById('ps-fill').style.width = (done / total * 100) + '%';
           document.getElementById('ps-count').textContent = `${done}/${total}`;
           renderLeaderboard(e.model);
@@ -1058,8 +1059,17 @@ function sortedResults() {
   const r = [...state.results];
   if (state.sort === 'score') r.sort((a, b) => b.score - a.score);
   if (state.sort === 'latency') r.sort((a, b) => a.latency - b.latency);
-  if (state.sort === 'cost') r.sort((a, b) => a.cost - b.cost);
-  if (state.sort === 'efficiency') r.sort((a, b) => (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)));
+  // Modelo sem preco publicado (cost == null) nao pode participar de ranking
+  // por custo: tratado como 0 ele venceria por nao ter numero, que e o
+  // contrario do que o dado diz. Vai para o fim da lista, visivel e sem premio.
+  const semPreco = x => x.cost == null;
+  if (state.sort === 'cost') {
+    r.sort((a, b) => semPreco(a) - semPreco(b) || a.cost - b.cost);
+  }
+  if (state.sort === 'efficiency') {
+    r.sort((a, b) => semPreco(a) - semPreco(b) ||
+                     (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)));
+  }
   return r;
 }
 
@@ -1089,7 +1099,7 @@ function renderLeaderboard(newId) {
       <div class="lb-metrics">
         <div class="lb-metric"><div class="lb-mv">${r.score.toFixed(3)}</div><div class="lb-ml">score</div></div>
         <div class="lb-metric"><div class="lb-mv">${r.latency}s</div><div class="lb-ml">lat</div></div>
-        <div class="lb-metric"><div class="lb-mv">$${r.cost}</div><div class="lb-ml">custo</div></div>
+        <div class="lb-metric"><div class="lb-mv">${r.cost == null ? '—' : '$' + r.cost}</div><div class="lb-ml">${r.cost == null ? 'sem preço' : 'custo'}</div></div>
       </div>`;
     body.appendChild(d);
   });
@@ -1100,7 +1110,8 @@ function renderSummary() {
   if (!r.length) return;
   document.getElementById('result-summary').style.display = 'grid';
   const best = [...r].sort((a, b) => b.score - a.score)[0];
-  const eff = [...r].sort((a, b) => (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)))[0];
+  const comPreco = r.filter(x => x.cost != null);
+  const eff = [...comPreco].sort((a, b) => (b.score / (b.cost || 1e-6)) - (a.score / (a.cost || 1e-6)))[0];
   const oss = r.filter(x => x.oss), api = r.filter(x => !x.oss);
   const totalCalls = r.reduce((a, x) => a + x.calls, 0);
 
@@ -1128,7 +1139,8 @@ function renderReco() {
   const best = [...r].sort((a, b) => b.score - a.score)[0];
   const tol = 0.02;
   // candidato mais barato dentro da margem de tolerância do melhor score
-  const good = r.filter(x => x.score >= best.score - tol).sort((a, b) => a.cost - b.cost);
+  const good = r.filter(x => x.score >= best.score - tol && x.cost != null)
+                .sort((a, b) => a.cost - b.cost);
   const pick = good[0];
 
   document.getElementById('reco-panel').classList.add('visible');
@@ -1176,6 +1188,8 @@ function drawPareto() {
   const r = state.results;
   if (!r.length) return;
 
+  r = r.filter(x => x.cost != null);   // sem custo nao ha eixo x para plotar
+  if (!r.length) return;
   const maxCost = Math.max(...r.map(x => x.cost)) * 1.15 || 1;
   const minS = Math.min(...r.map(x => x.score)) - 0.05;
   const maxS = Math.max(...r.map(x => x.score)) + 0.05;

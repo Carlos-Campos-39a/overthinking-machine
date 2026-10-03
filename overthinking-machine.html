@@ -3249,8 +3249,15 @@
       <div class="cli-preview" id="cli-preview">python run.py</div>
 
       <!-- API Keys -->
-      <div class="config-group apikey-section">
+      <div class="config-group apikey-section" id="apikey-section">
         <div class="config-group-label">Chaves de API</div>
+        <!-- Na instancia publica este painel e escondido por JS: ele grava a
+             chave no DISCO DO SERVIDOR (POST /api/keys), que la devolve 403 de
+             proposito, e cobre so 3 provedores. O caminho certo e o botao
+             "Chaves" do topo (config.js), que guarda no seu navegador e cobre
+             os 9. Dois paineis na mesma tela, guardando em lugares diferentes,
+             e so confusao. -->
+        <div id="apikey-aviso-hospedado" hidden></div>
 
         <div class="apikey-row" id="apikey-row-anthropic">
           <span class="apikey-provider">
@@ -4579,6 +4586,28 @@ function toggleMockMode() {
   label.textContent = mockMode ? 'Mock' : 'Real';
   if (!mockMode) { checkApiHealth(); loadSavedKeys(); loadLibrary(); }
 }
+
+// Painel legado de chaves: util so na instancia local, onde gravar no
+// servidor e gravar na SUA maquina. Hospedado, ele confunde e nao funciona.
+(function ajustarPainelDeChaves() {
+  function aplicar() {
+    var sec = document.getElementById('apikey-section');
+    if (!sec) return;
+    if (!/railway\.app|vercel\.app/.test(API_URL)) return;   // local: deixa como esta
+    sec.querySelectorAll('.apikey-row').forEach(function (r) { r.hidden = true; });
+    var aviso = document.getElementById('apikey-aviso-hospedado');
+    if (aviso) {
+      aviso.hidden = false;
+      aviso.style.cssText = 'font-size:.78rem;line-height:1.6;color:#6B7280;padding:4px 0';
+      aviso.innerHTML = 'Nesta instância pública a chave fica <strong>no seu navegador</strong>, ' +
+        'nunca no servidor. Use o botão <strong>Chaves</strong> no topo da página — ' +
+        'ele cobre os 9 provedores, incluindo Kimi, GLM e Groq.';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', aplicar);
+  } else { aplicar(); }
+})();
 
 async function checkApiHealth() {
   const dot = document.getElementById('api-dot');

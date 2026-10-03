@@ -27,17 +27,23 @@
   var STORE = "otm_api_keys";
   var PROVIDERS = [
     { id: "google",    rotulo: "Google — Gemini e Gemma", header: "X-Google-Key",
-      ajuda: "aistudio.google.com/apikey", oss: true },
+      ajuda: "https://aistudio.google.com/apikey", oss: true },
     { id: "moonshot",  rotulo: "Moonshot — Kimi",  header: "X-Moonshot-Key",
-      ajuda: "platform.moonshot.ai", oss: true },
+      ajuda: "https://platform.moonshot.ai/console/api-keys", oss: true },
     { id: "zai",       rotulo: "Z.ai — GLM",       header: "X-Zai-Key",
-      ajuda: "z.ai/model-api", oss: true },
+      ajuda: "https://z.ai/manage-apikey/apikey-list", oss: true },
     { id: "groq",      rotulo: "Groq — Llama e outros abertos", header: "X-Groq-Key",
-      ajuda: "console.groq.com/keys", oss: true },
+      ajuda: "https://console.groq.com/keys", oss: true },
+    { id: "together",  rotulo: "Together — agregador de peso aberto", header: "X-Together-Key",
+      ajuda: "https://api.together.ai/settings/api-keys", oss: true },
+    { id: "openrouter", rotulo: "OpenRouter — agregador multi-provedor", header: "X-Openrouter-Key",
+      ajuda: "https://openrouter.ai/keys", oss: true },
+    { id: "deepinfra", rotulo: "DeepInfra — agregador de peso aberto", header: "X-Deepinfra-Key",
+      ajuda: "https://deepinfra.com/dash/api_keys", oss: true },
     { id: "openai",    rotulo: "OpenAI",           header: "X-OpenAI-Key",
-      ajuda: "platform.openai.com/api-keys" },
+      ajuda: "https://platform.openai.com/api-keys" },
     { id: "anthropic", rotulo: "Anthropic",        header: "X-Anthropic-Key",
-      ajuda: "console.anthropic.com" },
+      ajuda: "https://console.anthropic.com/settings/keys" },
   ];
 
   function lerChaves() {
@@ -133,7 +139,9 @@
             (p.oss ? ' <span style="color:#0a7a5c;font-weight:700;font-size:.85em">· peso aberto</span>' : '') +
             "</label>" +
             '<input type="password" id="otm-k-' + p.id + '" placeholder="deixe vazio se não for usar">' +
-            '<div class="hint">obtenha em ' + p.ajuda + "</div>";
+            '<div class="hint">obtenha em <a href="' + p.ajuda +
+            '" target="_blank" rel="noopener">' +
+            p.ajuda.replace(/^https:\/\//, "") + "</a></div>";
         }).join("") +
         '<div class="aviso">Nada é enviado ao servidor da plataforma para armazenamento. ' +
         "Você paga apenas o que consumir no seu próprio provedor.</div>" +

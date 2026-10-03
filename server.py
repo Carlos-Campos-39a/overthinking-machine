@@ -371,16 +371,29 @@ KEYS_FILE    = PROJECT_DIR / ".api_keys.json"
 
 # ── API Keys ───────────────────────────────────────────────────────────────────
 
-_ENV_VARS = {
-    "anthropic": "ANTHROPIC_API_KEY",
-    "openai":    "OPENAI_API_KEY",
-    "gemini":    "GOOGLE_API_KEY",
-}
+# Testar chave cobria 3 provedores enquanto o modal oferece 9 e o backend
+# aceita 9: quem colasse uma chave de Kimi, GLM ou Groq recebia "Provider
+# inválido" e nao tinha como saber se a chave dele presta. Deriva de
+# LLMFactory.ENV_VARS para nao virar uma quarta lista que diverge.
+def _env_vars() -> dict:
+    from src.llm_factory import LLMFactory
+    # "gemini" e apelido historico de "google", usado pelo front antigo.
+    return {**LLMFactory.ENV_VARS, "gemini": LLMFactory.ENV_VARS["google"]}
 
+
+# Modelo barato por provedor, so para gastar um token e confirmar que a chave
+# autentica. Nao e o catalogo: e o menor que cada um oferece.
 _TEST_MODELS = {
-    "anthropic": "anthropic/claude-haiku-4-5-20251001",
-    "openai":    "openai/gpt-4o-mini",
-    "gemini":    "google/gemini-2.0-flash",
+    "anthropic":  "anthropic/claude-haiku-4-5-20251001",
+    "openai":     "openai/gpt-4o-mini",
+    "gemini":     "google/gemini-2.0-flash",
+    "google":     "google/gemini-2.0-flash",
+    "moonshot":   "moonshot/kimi-k2.6",
+    "zai":        "zai/glm-4.6",
+    "groq":       "groq/llama-3.3-70b-versatile",
+    "together":   "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    "openrouter": "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "deepinfra":  "deepinfra/meta-llama/Llama-3.3-70B-Instruct",
 }
 
 
@@ -437,20 +450,25 @@ async def get_keys():
 async def save_key(provider: str, body: KeyBody):
     if HOSTED:
         raise HTTPException(403, _HOSTED_KEYS_MSG)
-    if provider not in _ENV_VARS:
+    if provider not in _env_vars():
         raise HTTPException(400, f"Provider inválido: {provider}")
     keys = _read_keys()
     keys[provider] = body.key
     _write_keys(keys)
     # Aplica imediatamente no ambiente
-    _os.environ[_ENV_VARS[provider]] = body.key
+    _os.environ[_env_vars()[provider]] = body.key
     return {"ok": True, "provider": provider}
 
 
 @app.post("/api/keys/test/{provider}")
 async def test_key(provider: str, body: KeyBody):
-    if provider not in _ENV_VARS:
+    if provider not in _env_vars():
         raise HTTPException(400, f"Provider inválido: {provider}")
+
+    if provider not in _TEST_MODELS:
+        raise HTTPException(
+            400, f"Não há modelo de teste para '{provider}'. A chave ainda funciona "
+                 f"nos experimentos; só a verificação rápida é que não cobre este provedor.")
 
     from src.llm_factory import LLMFactory, set_request_keys
     from langchain_core.messages import HumanMessage
@@ -470,7 +488,7 @@ async def test_key(provider: str, body: KeyBody):
         finally:
             set_request_keys({})
 
-    env_var = _ENV_VARS[provider]
+    env_var = _env_vars()[provider]
     old_val = _os.environ.get(env_var)
     _os.environ[env_var] = body.key
     try:
@@ -1538,13 +1556,23 @@ def _load_pricing() -> dict:
         return {}
 
 
-def _price_of(model_id: str) -> dict:
-    """Preço por 1M tokens. Providers locais custam 0 de API."""
+def _price_of(model_id: str) -> dict | None:
+    """
+    Preço por 1M tokens, ou None quando não há preço publicado.
+
+    Antes o default era {"in": 0.0, "out": 0.0}, e isso tinha consequência: um
+    modelo sem preço cadastrado virava o MAIS BARATO da comparação e ganhava a
+    recomendação de custo-benefício e a fronteira de Pareto. "Não sei quanto
+    custa" virava "é de graça" em silêncio, justamente no módulo que existe para
+    decidir por custo.
+
+    Provedor local é zero de verdade — ninguém cobra por rodar na sua máquina.
+    """
     provider = model_id.split("/", 1)[0].lower()
     from src.llm_factory import LLMFactory
     if provider in LLMFactory.LOCAL_PROVIDERS:
         return {"in": 0.0, "out": 0.0}
-    return _load_pricing().get(model_id, {"in": 0.0, "out": 0.0})
+    return _load_pricing().get(model_id)
 
 
 def _ollama_installed() -> tuple[list[dict], Optional[str]]:
@@ -1610,7 +1638,7 @@ async def list_models(request: Request):
             **m,
             "installed": True,
             "available": key_present.get(provider, False),
-            "price": pricing.get(m["id"], {"in": 0.0, "out": 0.0}),
+            "price": pricing.get(m["id"]),   # None = preço não publicado
         })
 
     # Peso aberto hospedado: disponível se houver chave do provedor (BYOK ou env)
@@ -1623,7 +1651,7 @@ async def list_models(request: Request):
             **m,
             "installed": True,
             "available": tem_chave,
-            "price": pricing.get(m["id"], {"in": 0.0, "out": 0.0}),
+            "price": pricing.get(m["id"]),   # None = preço não publicado
             "hint": None if tem_chave else f"informe a chave de {provider} em 🔑 Chaves",
         })
 
@@ -1792,7 +1820,10 @@ async def _stream_benchmark(
             price = _price_of(model_id)
             # custo total da tarefa = tokens por instância × nº instâncias × preço/1M
             total_inst = cfg.num_instances * cfg.reps
-            cost = ((in_tok * price["in"]) + (out_tok * price["out"])) / 1e6 * total_inst
+            # None = preço não publicado. Fica None até o fim, para o cliente
+            # poder dizer "sem preço" em vez de desenhar um ponto em zero.
+            cost = (None if price is None else
+                    ((in_tok * price["in"]) + (out_tok * price["out"])) / 1e6 * total_inst)
 
             scores = [r.get("mean_score", 0) for r in reps_data]
             sd = (sum((s - score) ** 2 for s in scores) / n) ** 0.5 if n > 1 else 0.0
@@ -1807,7 +1838,7 @@ async def _stream_benchmark(
                 "output_tokens": round(out_tok, 1),
                 "total_tokens": round(mean("mean_total_tokens"), 1),
                 "llm_calls": round(mean("mean_llm_calls"), 2),
-                "cost_usd": round(cost, 6),
+                "cost_usd": None if cost is None else round(cost, 6),
                 "price": price,
                 "run_ids": [r.get("run_id") for r in reps_data],
             }
