@@ -4619,6 +4619,84 @@ async function checkApiHealth() {
   return false;
 }
 
+// ── Modelos vindos do backend ────────────────────────────────────────
+// Os cartoes de modelo eram 6, fixos no HTML, e todos de peso fechado. Quem
+// trouxesse chave de Kimi, GLM ou Groq via o provedor aceito no modal e nao
+// tinha onde escolher o modelo — justamente na aba em que se compoe topologia.
+// Alem disso os 6 ignoravam se a chave existe: dava para selecionar um modelo
+// que ia falhar com 401 so depois de a pessoa clicar em Rodar.
+var MODELOS_API = {};
+
+function cartaoDeModelo(m) {
+  var card = document.createElement('div');
+  card.className = 'option-card' + (m.available ? '' : ' option-card-off');
+  card.dataset.group = 'model';
+  card.dataset.val = m.id;
+  if (!m.available) {
+    card.title = m.hint || 'sem chave para este provedor';
+    card.style.opacity = '0.45';
+  }
+  var nome = (m.label || m.id.split('/').pop());
+  var det = [m.org, m.oss ? 'peso aberto' : null,
+             m.available ? null : 'sem chave'].filter(Boolean).join(' · ');
+  card.innerHTML = '<div class="option-name">' + escHtml(nome) + '</div>' +
+                   '<div class="option-desc">' + escHtml(det) + '</div>';
+  card.addEventListener('click', function () {
+    if (!m.available) {
+      showToast('⚠ ' + (m.hint || 'Sem chave para ' + m.id.split('/')[0] + '. Use o botão Chaves.'));
+      return;
+    }
+    selecionarModelo(m.id, card);
+  });
+  return card;
+}
+
+function selecionarModelo(val, card) {
+  document.querySelectorAll('[data-group="model"]').forEach(function (c) {
+    c.classList.remove('selected');
+  });
+  card.classList.add('selected');
+  state.model = val;
+  updateCliPreview();
+  setTimeout(updateAllPanels, 10);
+}
+
+async function carregarModelosDoBackend() {
+  var grid = document.getElementById('model-options');
+  if (!grid) return;
+  try {
+    var r = await fetch(API_URL + '/api/models', { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return;
+    var d = await r.json();
+  } catch (_) { return; }   // offline: os 6 cartoes fixos seguem valendo
+
+  var todos = (d.models || []);
+  if (!todos.length) return;
+  todos.forEach(function (m) { MODELOS_API[m.id] = m; });
+
+  // Disponiveis primeiro: o que a pessoa pode usar agora fica a vista.
+  todos.sort(function (a, b) { return (b.available ? 1 : 0) - (a.available ? 1 : 0); });
+
+  grid.innerHTML = '';
+  todos.forEach(function (m) { grid.appendChild(cartaoDeModelo(m)); });
+
+  // Se o modelo selecionado nao esta disponivel, cai no primeiro que esta —
+  // melhor trocar em silencio do que deixar a pessoa clicar em Rodar e levar 401.
+  var atual = MODELOS_API[state.model];
+  if (!atual || !atual.available) {
+    var primeiro = todos.filter(function (m) { return m.available; })[0];
+    if (primeiro) {
+      var card = grid.querySelector('[data-val="' + CSS.escape(primeiro.id) + '"]');
+      if (card) selecionarModelo(primeiro.id, card);
+    }
+  } else {
+    var sel = grid.querySelector('[data-val="' + CSS.escape(state.model) + '"]');
+    if (sel) sel.classList.add('selected');
+  }
+}
+
+carregarModelosDoBackend();
+
 // ── Tarefas vindas do backend ────────────────────────────────────────
 // A pagina trazia dois cartoes fixos no HTML. O backend registra mais — entre
 // elas triagem_cobranca, a unica desenhada para NAO saturar (as duas embutidas

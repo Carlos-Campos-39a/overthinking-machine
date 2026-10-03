@@ -39,6 +39,11 @@ import server  # noqa: E402
 if hasattr(sys.stdout, "buffer"):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
+# Regexes montadas por concatenacao: escape literal em patch via shell
+# ja colapsou tres vezes nesta sessao.
+PADRAO_GETENV = r'getenv\(\s*["\']([A-Z][A-Z0-9_]+)["\']'
+PADRAO_ENVIRON = r'environ\[\s*["\']([A-Z][A-Z0-9_]+)["\']'
+
 c = TestClient(server.app)
 _falhas = 0
 
@@ -244,6 +249,37 @@ def provedores() -> None:
     check("o recurso avisa da cota gratuita", "20 requisi" in texto)
 
 
+def ambiente() -> None:
+    print()
+    print("6. VARIAVEIS DE AMBIENTE DOCUMENTADAS")
+    import re
+    from src.llm_factory import LLMFactory as F
+
+    usadas = set()
+    for f in list(PROJ.glob("*.py")) + list((PROJ / "src").rglob("*.py")):
+        if "__pycache__" in str(f):
+            continue
+        txt = f.read_text(encoding="utf-8", errors="replace")
+        usadas |= set(re.findall(PADRAO_GETENV, txt))
+        usadas |= set(re.findall(PADRAO_ENVIRON, txt))
+    usadas |= set(F.ENV_VARS.values())
+
+    # Injetadas pela plataforma de deploy ou pelo interpretador: nao sao do usuario.
+    ignorar = {"RAILWAY_GIT_COMMIT_SHA", "PORT", "PYTHONUTF8", "PYTHONIOENCODING", "PATH"}
+    alvo = usadas - ignorar
+    exemplo = (PROJ / ".env.example").read_text(encoding="utf-8")
+    faltam = sorted(v for v in alvo if v not in exemplo)
+    # Variavel lida pelo codigo e ausente do .env.example e configuracao que so
+    # existe na cabeca de quem escreveu — foi assim que OTM_DATA_DIR e
+    # OTM_ADMIN_TOKEN ficaram sem documentacao ate alguem precisar deles.
+    check(f".env.example cobre as {len(alvo)} variaveis lidas pelo codigo",
+          not faltam, ", ".join(faltam) if faltam else "nenhuma faltando")
+
+    chaves = list(F.ENV_VARS.values())
+    check("as 9 chaves de provedor estao no .env.example",
+          all(c in exemplo for c in chaves), f"{len(chaves)} provedores")
+
+
 def main() -> int:
     print("=" * 66)
     print("  testar_api.py — tetos de custo e honestidade do módulo 2")
@@ -253,6 +289,7 @@ def main() -> int:
     tarefa_declarativa()
     configuracao()
     provedores()
+    ambiente()
     print("\n" + ("tudo passou" if not _falhas else f"{_falhas} FALHA(S)"))
     return 1 if _falhas else 0
 

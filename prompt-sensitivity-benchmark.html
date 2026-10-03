@@ -393,6 +393,11 @@
     <a href="index.html#modulos">Módulos</a>
     <a href="pesquisa-avancada.html">Rede Neural</a>
     <a href="model-benchmark.html">Modelos</a>
+    <select id="modelo-sel" title="Modelo usado na ablação real"
+      style="font:inherit;font-size:.8rem;padding:6px 10px;border-radius:8px;
+             border:1px solid var(--card-border,#E8E8F5);background:#fff;max-width:230px">
+      <option value="google/gemini-2.5-flash">gemini-2.5-flash</option>
+    </select>
     <button class="mock-toggle mock-on" id="mock-toggle" onclick="toggleMock()"
       title="Mock: dados simulados. Real: roda a ablação de verdade via API em localhost:8000.">
       <span class="mock-pip"></span>
@@ -710,13 +715,42 @@ const MODE_DESCS = {
 // STATE
 // ═══════════════════════════════════════════════════════════════════
 
-const state = { promptIdx:0, mode:'ablation', seeds:5, running:false, mock:true };
+const state = { promptIdx:0, mode:'ablation', seeds:5, running:false, mock:true,
+                modelo:'google/gemini-2.5-flash' };
 
 const API_URL = window.OTM_API_URL || 'http://localhost:8000';
 
 // ═══════════════════════════════════════════════════════════════════
 // MODO REAL — ablação de verdade via backend (server.py)
 // ═══════════════════════════════════════════════════════════════════
+// O modelo era cravado em google/gemini-2.5-flash: quem trouxesse chave de
+// outro provedor rodava a ablacao no modelo errado — ou, sem chave do Google,
+// nao rodava. Agora vem do catalogo, so com o que a chave da pessoa alcanca.
+async function carregarModelos() {
+  var sel = document.getElementById('modelo-sel');
+  if (!sel) return;
+  try {
+    var r = await fetch(API_URL + '/api/models', { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return;
+    var d = await r.json();
+  } catch (_) { return; }   // offline: fica o padrao do HTML
+
+  var usaveis = (d.models || []).filter(function (m) { return m.available; });
+  if (!usaveis.length) return;
+  sel.innerHTML = usaveis.map(function (m) {
+    var rot = (m.label || m.id.split('/').pop()) + (m.oss ? ' · peso aberto' : '');
+    return '<option value="' + m.id.replace(/"/g, '&quot;') + '">' + rot + '</option>';
+  }).join('');
+  if (usaveis.some(function (m) { return m.id === state.modelo; })) {
+    sel.value = state.modelo;
+  } else {
+    state.modelo = usaveis[0].id;
+    sel.value = state.modelo;
+  }
+  sel.onchange = function () { state.modelo = sel.value; };
+}
+carregarModelos();
+
 function apiNote(kind, html) {
   let el = document.getElementById('api-note');
   if (!el) {
@@ -767,7 +801,7 @@ async function runAblationReal(prompt) {
   const text = prompt.clauses.map(c => c.text).join('\n');
   const cfg = {
     system_prompt: text,
-    model: 'google/gemini-2.5-flash',
+    model: state.modelo,
     architecture: 'sas',
     harness: 'zero_shot',
     task: 'text_classification',
