@@ -9303,6 +9303,7 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
     titulo: '',
     descricao: '',
     limites: null,
+    naoExpressaveis: {},
     biblioteca: [],
     arrastando: null,
   };
@@ -9320,6 +9321,12 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
+
+  // Fallback nos mesmos numeros do Python, para a aba funcionar offline —
+  // mas quando a API responde, quem manda e ela.
+  function maxN()       { return (esp.limites && esp.limites.max_n_por_estagio) || 8; }
+  function maxRodadas() { return (esp.limites && esp.limites.max_rodadas) || 3; }
+  function maxEstagios(){ return (esp.limites && esp.limites.max_estagios) || 8; }
 
   function chamadasDe(e) {
     if (e.tipo === 'paralelo') return e.n;
@@ -9401,10 +9408,10 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
           '</div>' +
           (e.tipo === 'paralelo' || e.tipo === 'debate'
             ? '<div class="esp-params">' +
-                '<label>agentes <input type="number" min="2" max="8" value="' + e.n +
+                '<label>agentes <input type="number" min="2" max="' + maxN() + '" value="' + e.n +
                   '" onchange="espSet(' + i + ',\'n\',+this.value)"></label>' +
                 (e.tipo === 'debate'
-                  ? '<label>rodadas <input type="number" min="1" max="3" value="' + e.rodadas +
+                  ? '<label>rodadas <input type="number" min="1" max="' + maxRodadas() + '" value="' + e.rodadas +
                     '" onchange="espSet(' + i + ',\'rodadas\',+this.value)"></label>' : '') +
                 (e.tipo === 'paralelo'
                   ? '<label class="esp-check"><input type="checkbox"' + (e.dividir ? ' checked' : '') +
@@ -9753,6 +9760,50 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
     }
   };
 
+  // Os tetos estavam repetidos a mao no HTML (min/max dos inputs). `esp.limites`
+  // existia e nunca era preenchido: mudar MAX_N_POR_ESTAGIO no Python nao tinha
+  // efeito nenhum aqui, e a interface deixava montar algo que a API recusaria.
+  async function carregarLimites() {
+    try {
+      var r = await fetch(API + '/api/limites', { signal: AbortSignal.timeout(5000) });
+      if (!r.ok) return;
+      esp.limites = (await r.json()).limites || null;
+      render();
+    } catch (_) { /* offline: ficam os padroes do HTML */ }
+  }
+
+  // ace, mce e meta_harness nao sao expressaveis declarativamente (dependem de
+  // memoria em disco entre execucoes ou geram codigo). A interface mostrava os
+  // tres como opcoes normais e selecionaveis — o dado do motivo ja vinha do
+  // endpoint e ninguem exibia.
+  async function carregarHarnesses() {
+    try {
+      var r = await fetch(API + '/api/harnesses', { signal: AbortSignal.timeout(5000) });
+      if (!r.ok) return;
+      var d = await r.json();
+      esp.naoExpressaveis = d.nao_expressaveis || {};
+      marcarHarnessesTravados();
+    } catch (_) { /* offline: nada muda */ }
+  }
+
+  function marcarHarnessesTravados() {
+    var motivos = esp.naoExpressaveis || {};
+    document.querySelectorAll('[data-group="harness"]').forEach(function (card) {
+      var motivo = motivos[card.dataset.val];
+      if (!motivo || card.dataset.travado) return;
+      card.dataset.travado = '1';
+      var sel = card.querySelector('.option-name');
+      if (sel) sel.textContent = '\u{1F512} ' + sel.textContent;
+      var d = card.querySelector('.option-desc');
+      if (d) {
+        d.textContent = 'não compõe — ' + motivo;
+        d.style.fontStyle = 'italic';
+      }
+      card.title = 'Harness embutido: ' + motivo;
+      card.style.opacity = '0.6';
+    });
+  }
+
   async function carregarBiblioteca() {
     try {
       var d = await (await fetch(API + '/api/biblioteca?tipo=topologia')).json();
@@ -9912,6 +9963,8 @@ function renderCompMatrix(archs, harnesses, status, done, total) {
       wrap.innerHTML = MARCACAO;
       prepararZona();
       carregarBiblioteca();
+      carregarLimites();
+      carregarHarnesses();
       espMinhas();          // tokens guardados sobrevivem ao refresh
       if (!esp.estagios.length) espCarregar('centralized');
       render();

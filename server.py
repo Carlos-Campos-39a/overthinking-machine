@@ -711,6 +711,59 @@ async def validar_especificacao(body: EspecBody):
     }
 
 
+def _previa_de_harness(spec: dict) -> dict:
+    """
+    Mostra as mensagens que o harness montaria para uma instância de exemplo.
+
+    Mesma promessa da prévia de topologia: ler literalmente o que iria ao modelo
+    antes de gastar a própria chave num harness publicado por terceiro.
+    """
+    from src.harnesses.harness_declarativo import HarnessDeclarativo
+    from src.task_base import TaskInstance
+
+    errs = erros_de_harness(spec)
+    if errs:
+        raise HTTPException(400, "; ".join(errs[:3]))
+
+    modelo = validar_harness(spec)
+    harness = HarnessDeclarativo(modelo)
+    exemplo = TaskInstance(
+        id="exemplo",
+        input="[a entrada da sua tarefa entra aqui]",
+        ground_truth="[o gabarito]",
+        task_type="classification",
+        response_format="single_label",
+        eval_criteria=["accuracy"],
+        metadata={
+            "valid_labels": ["rotulo_a", "rotulo_b"],
+            "examples": [
+                {"input": "[exemplo 1]", "output": "rotulo_a"},
+                {"input": "[exemplo 2]", "output": "rotulo_b"},
+            ],
+        },
+    )
+    saida = harness.build_messages(exemplo)
+    return {
+        "nome": modelo.nome,
+        "tipo": "harness",
+        "chamadas_por_instancia": 1,
+        "custo_llm": 0,
+        "chamadas": [{
+            "ordem": 1,
+            "estagio": "harness",
+            "agente": modelo.nome,
+            "mensagens": [
+                {"papel": "system" if type(m).__name__.startswith("System") else "human",
+                 "conteudo": m.content}
+                for m in saida.messages
+            ],
+        }],
+        "aviso": ("Nenhuma chamada real foi feita. A entrada, os rótulos e os "
+                  "exemplos acima são placeholders — o que importa aqui é a "
+                  "ESTRUTURA das mensagens que este harness montaria."),
+    }
+
+
 @app.post("/api/especificacoes/previa")
 async def previa_especificacao(body: EspecBody):
     """
@@ -724,6 +777,13 @@ async def previa_especificacao(body: EspecBody):
 
     from src.agents.agente_declarativo import AgenteDeclarativo
     from src.agents.equivalencia import ROTEIRO_PADRAO, LLMFalso
+
+    # Harness tem prévia própria: ele não roda estágios, monta as mensagens de
+    # UMA instância. Antes isto caía no validador de topologia e todo harness
+    # recebia "estagios: Field required" — a peça de segurança do acervo não
+    # cobria metade do que o acervo publica.
+    if body.spec.get("tipo") == "harness":
+        return _previa_de_harness(body.spec)
 
     errs = erros_de(body.spec)
     if errs:
